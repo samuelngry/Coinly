@@ -1,0 +1,22 @@
+const User = require("../models/User");
+
+const updateUsername = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const { username } = req.body;
+
+        const existingUser = await User.findOne({ where: { username } });
+        if (existingUser) {
+            return res.status(400).json({ error: "Username taken. "});
+        }
+
+        await User.update({ username }, { where: { id: userId } });
+        res.status(201).json({ message: "Username changed successfully" });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
+module.exports = {
+    updateUsername,
+};
