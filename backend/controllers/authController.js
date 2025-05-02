@@ -25,6 +25,24 @@ const register = async (req, res) => {
     }
 };
 
+const login = async (req, res) => {
+    try {
+        const { username, password } = req.body;
+
+        const user = await User.findOne({ where: { username } });
+        if (!user) return res.status(401).json({ error: "Authentication failed." });
+
+        const passwordMatch = await bcrypt.compare(password, user.password);
+        if (!passwordMatch) return res.status(401).json({ error: "Authentication failed." });
+
+        const token = createToken(user.id);
+        res.status(200).json({ token, user: { id: user.id, username: user.username } });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
 module.exports = { 
     register,
+    login,
 };
