@@ -10,16 +10,26 @@ const createToken = (userId) => {
 
 const register = async (req, res) => {
     try {
-        const { username, password } = req.body;
+        const { username, password, avatar_url } = req.body;
 
         const existingUser = await User.findOne({ where: { username } });
         if (existingUser) return res.status(400).json({ error: "Username taken." });
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = await User.create({ username, password: hashedPassword });
+        const user = await User.create({ 
+            username, 
+            password: hashedPassword,
+            avatar_url: avatar_url || null
+         });
 
         const token = createToken(user.id);
-        res.status(201).json({ token, user: { id: user.id, username: user.username } });
+        res.status(201).json({ token,
+            user: { 
+                id: user.id, 
+                username: user.username,
+                avatar_url: user.avatar_url
+             } 
+        });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
