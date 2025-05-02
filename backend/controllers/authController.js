@@ -13,7 +13,7 @@ const register = async (req, res) => {
         const { username, password } = req.body;
 
         const existingUser = await User.findOne({ where: { username } });
-        if (existingUser) return res.status(400).json({ message: "Username taken." });
+        if (existingUser) return res.status(400).json({ error: "Username taken." });
 
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = await User.create({ username, password: hashedPassword });
