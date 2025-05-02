@@ -12,7 +12,7 @@ const register = async (req, res) => {
     try {
         const { username, password } = req.body;
 
-        const existingUser = await User.findUnique({ where: { username } });
+        const existingUser = await User.findOne({ where: { username } });
         if (existingUser) return res.status(400).json({ message: "Username taken." });
 
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -26,5 +26,5 @@ const register = async (req, res) => {
 };
 
 module.exports = { 
-    register, 
+    register,
 };
