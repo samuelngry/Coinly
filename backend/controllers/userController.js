@@ -17,6 +17,19 @@ const updateUsername = async (req, res) => {
     }
 };
 
+const updateAvatar = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const { avatar_url } = req.body;
+
+        await User.update({ avatar_url }, { where: { id: userId } });
+        res.status(201).json({ message: "Avatar changed successfully" });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
 module.exports = {
     updateUsername,
+    updateAvatar,
 };
