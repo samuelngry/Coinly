@@ -30,3 +30,5 @@ const UserPreference = db.define('user_preferences', {
         type: Sequelize.STRING(50),
     },
 });
+
+module.exports = UserPreference;
