@@ -27,3 +27,27 @@ async function generateDynamicQuests(userId) {
             item => !relevantItems.includes(item)  
         ).concat(relevantItems).slice(0, 5);
     }
+
+    const generatedQuests = [];
+
+    await generateSkipQuests(user, relevantItems, generatedQuests);
+}
+
+async function generateSkipQuests(user, relevantItems, generatedQuests) {
+    const timeframe = questComponents.timeframes[Math.floor(Math.random() * questComponents.timeframes.length)];
+    const item = relevantItems[Math.floor(Math.random() * relevantItems.length)];
+
+    const savingsAmount = calculateSavingsAmount(item, timeframe);
+
+    const quest = await UserQuest.create({
+        user_id: user.id,
+        quest_text: `Skip ${item} ${timeframe}`,
+        xp: calculateXpReward(savingsAmount),
+        source_template_id: null,
+        status: 'Pending',
+        instance_date: new Date(),
+        accepted_at: null
+    });
+
+    generatedQuests.push(quest);
+}
