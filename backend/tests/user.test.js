@@ -30,4 +30,15 @@ describe('User Routes', () => {
         await User.destroy({ where: { id: testUserId } });
         await db.close();
     });
+
+    it('should update the username', async () => {
+        const res = await supertest(app)
+            .put('/api/users/update-username')
+            .set('Authorization', `Bearer ${authToken}`)
+            .send({ username: 'newUsername' });
+        
+        expect(res.status).to.equal(200);
+        expect(res.status).to.have.property('username').that.equals('newUsername');
+        expect(res.status).to.have.property('message').that.equals('Username changed successfully');
+    });
 })
