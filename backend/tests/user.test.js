@@ -41,4 +41,15 @@ describe('User Routes', () => {
         expect(res.status).to.have.property('username').that.equals('newUsername');
         expect(res.status).to.have.property('message').that.equals('Username changed successfully');
     });
+
+    it('should update the avatar', async () => {
+        const res = await supertest(app)
+            .put('/api/users/update-avatar')
+            .set('Authorization', `Bearer ${authToken}`)
+            .send({ avatar_url: 'http://example.com/new-avatar.png'});
+
+        expect(res.status).to.equal(200);
+        expect(res.status).to.have.property('avatar_url').that.equals('http://example.com/new-avatar.png')
+        expect(res.status).to.have.property('message').that.equals('Avatar changed successfully');
+    });
 })
