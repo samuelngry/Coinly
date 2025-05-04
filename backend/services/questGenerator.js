@@ -59,3 +59,7 @@ function calculateSavingsAmount(item, timeframe) {
 
     return Math.round(baseCosts * timeMultiplier);
 }
+
+function calculateXpReward(savingsAmount) {
+    return Math.max(20, Math.min(100, savingsAmount * 5));
+}
