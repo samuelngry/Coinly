@@ -52,7 +52,6 @@ async function generateSkipQuests(user, relevantItems, generatedQuests) {
     generatedQuests.push(quest);
 }
 
-
 function calculateSavingsAmount(item, timeframe) {
     const baseCosts = questComponents.baseCosts[item] || 10;
     const timeMultiplier = questComponents.timeMultipliers[timeframe] || 1;
