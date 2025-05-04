@@ -43,4 +43,13 @@ describe('Auth Routes', () => {
 
         authToken = response.body.token;
     });
+
+    it('should fail login with invalid credentials', async () => {
+        const response = await supertest(app)
+            .post('/api/auth/login')
+            .send({ username: 'invalidUser', password: 'invalidPass' });
+
+        expect(response.status).to.equal(401);
+        expect(response.body).to.have.property('error').that.equals('Authentication failed.');
+    });
 })
