@@ -52,4 +52,12 @@ describe('User Routes', () => {
         expect(res.status).to.have.property('avatar_url').that.equals('http://example.com/new-avatar.png')
         expect(res.status).to.have.property('message').that.equals('Avatar changed successfully');
     });
+
+    it('should reject update without token', async () => {
+        const res = await supertest(app)
+            .put('/api/users/update-username')
+            .send({ avatar_url: 'http://example.com/ava.png'});
+
+        expect(res.status).to.equal(401);
+    });
 })
