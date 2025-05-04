@@ -2,7 +2,7 @@ const supertest = require('supertest');
 const { expect } = require('chai');
 const app = require('../server');
 const db = require('../config/db');
-const { User } = require("../models");
+const User = require("../models/User");
 
 describe('User Routes', () => {
     let authToken;
@@ -38,8 +38,8 @@ describe('User Routes', () => {
             .send({ username: 'newUsername' });
         
         expect(res.status).to.equal(200);
-        expect(res.status).to.have.property('username').that.equals('newUsername');
-        expect(res.status).to.have.property('message').that.equals('Username changed successfully');
+        expect(res.body).to.have.property('username').that.equals('newUsername');
+        expect(res.body).to.have.property('message').that.equals('Username changed successfully');
     });
 
     it('should update the avatar', async () => {
@@ -49,8 +49,8 @@ describe('User Routes', () => {
             .send({ avatar_url: 'http://example.com/new-avatar.png'});
 
         expect(res.status).to.equal(200);
-        expect(res.status).to.have.property('avatar_url').that.equals('http://example.com/new-avatar.png')
-        expect(res.status).to.have.property('message').that.equals('Avatar changed successfully');
+        expect(res.body).to.have.property('avatar_url').that.equals('http://example.com/new-avatar.png')
+        expect(res.body).to.have.property('message').that.equals('Avatar changed successfully');
     });
 
     it('should reject update without token', async () => {
