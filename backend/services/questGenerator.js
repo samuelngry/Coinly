@@ -27,4 +27,3 @@ async function generateDynamicQuests(userId) {
             item => !relevantItems.includes(item)  
         ).concat(relevantItems).slice(0, 5);
     }
-}

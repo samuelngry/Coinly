@@ -16,6 +16,19 @@ module.exports = {
         "at work", "while commuting", "at home", "when going out", "on weekends"
     ],
 
+    baseCosts: {
+        "coffee": 5,
+        "lunch": 5,
+        "dinner": 6,
+        "snacks": 4,
+        "rideshare": 20,
+        "subscription": 15,
+        "entertainment": 20,
+        "shopping": 60,
+        "takeout food": 12,
+        "drinks": 8 
+    },
+
     timeMultipliers: {
         "today": 1,
         "this week": 7,
