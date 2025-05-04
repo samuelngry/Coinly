@@ -2,11 +2,10 @@ const supertest = require('supertest');
 const { expect } = require('chai');
 const app = require('../server');
 const db = require('../config/db');
-const { User } = require('../backend/models');
 
 describe('Auth Routes', () => {
     before(async () => {
-        await db.authenticate();
+        await db.sync({ force: true });
     });
 
     after(async () => {
@@ -17,8 +16,6 @@ describe('Auth Routes', () => {
         username: 'testUser',
         password: '12345678'
     };
-
-    let authToken;
 
     it('should register a new user', async () => {
         const response = await supertest(app)
@@ -40,8 +37,6 @@ describe('Auth Routes', () => {
         expect(response.body).to.have.property('token');
         expect(response.body).to.have.property('user');
         expect(response.body.user).to.have.property('username', userCredentials.username);
-
-        authToken = response.body.token;
     });
 
     it('should fail login with invalid credentials', async () => {
