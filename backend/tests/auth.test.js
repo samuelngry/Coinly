@@ -1,7 +1,7 @@
 const supertest = require('supertest');
 const { expect } = require('chai');
-const app = require('../backend/server');
-const db = require('../backend/config/db');
+const app = require('../server');
+const db = require('../config/db');
 const { User } = require('../backend/models');
 
 describe('Auth Routes', () => {
@@ -26,6 +26,17 @@ describe('Auth Routes', () => {
             .send(userCredentials);
 
         expect(response.status).to.equal(201);
+        expect(response.body).to.have.property('token');
+        expect(response.body).to.have.property('user');
+        expect(response.body.user).to.have.property('username', userCredentials.username);
+    });
+
+    it('should log in and return a JWT', async () => {
+        const response = await supertest(app)
+            .post('/api/auth/login')
+            .send(userCredentials);
+
+        expect(response.status).to.equal(200);
         expect(response.body).to.have.property('token');
         expect(response.body).to.have.property('user');
         expect(response.body.user).to.have.property('username', userCredentials.username);
