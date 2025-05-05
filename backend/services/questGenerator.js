@@ -45,28 +45,6 @@ async function generateBatchQuests(user, relevantItems, actions, timeframe="toda
         );
     }
     
-    for (const item of compatibleItems) {
-        const savingsAmount = calculateSavingsAmount(item, timeframe);
-
-        let questText;
-        switch(action) {
-            case 'Skip':
-                questText = `Skip ${item} ${timeframe}`;
-                break;
-            case 'Make your own':
-                questText = `Make your own ${item} ${timeframe}`;
-                break;
-            case 'Find a cheaper alternative to':
-                questText = `Find a cheaper alternative to ${item} ${timeframe}`;
-                break;
-            case 'Reduce spending on':
-                questText = `Reduce spending on ${item} ${timeframe}`;
-                break;
-            case 'Try a free alternative to'
-        }
-
-    }
-    
 }
 
 async function generateSkipQuests(user, relevantItems, generatedQuests) {
