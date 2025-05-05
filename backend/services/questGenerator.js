@@ -34,7 +34,7 @@ async function generateDynamicQuests(userId) {
 }
 
 async function generateSkipQuests(user, relevantItems, generatedQuests) {
-    const timeframe = questComponents.timeframes[Math.floor(Math.random() * questComponents.timeframes.length)];
+    const timeframe = "today";
     const item = relevantItems[Math.floor(Math.random() * relevantItems.length)];
 
     const savingsAmount = calculateSavingsAmount(item, timeframe);
