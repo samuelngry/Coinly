@@ -29,8 +29,12 @@ async function generateDynamicQuests(userId) {
     }
 
     const generatedQuests = [];
+    const actions = questComponents.actions;
 
-    await generateSkipQuests(user, relevantItems, generatedQuests);
+    const quests = await generateBatchQuests(user, relevantItems, actions);
+    generateQuests.push(...quests);
+
+    return generatedQuests;
 }
 
 async function generateSkipQuests(user, relevantItems, generatedQuests) {
