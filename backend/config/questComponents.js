@@ -48,5 +48,19 @@ module.exports = {
         "Use public transit instead of": ["rideshare"],
         "Cook at home instead of": ["takeout food", "dinner"],
         "Share with friends instead of individual": ["subscription", "entertainment"],
+    },
+
+    questTextTemplates: {
+        "Skip": (item, timeframe) => `Skip ${item} ${timeframe}`,
+        "Make your own": (item, timeframe) => `Make your own ${item} ${timeframe}`,
+        "Find a cheaper alternative to": (item, timeframe) => `Find a cheaper alternative to ${item} ${timeframe}`,
+        "Reduce spending on": (item, timeframe) => `Reduce spending on ${item} ${timeframe}`,
+        "Go one day without": (item) => `Go one day without ${item}`,
+        "Try a free alternative to": (item) => `Try a free alternative to ${item}`,
+        "Borrow instead of buying": (item) => `Borrow ${item} instead of buying`,
+        "Pack your own": (item, timeframe) => `Pack your own ${item} ${timeframe}`,
+        "Use public transit instead of": (item, timeframe) => `Use public transit instead of ${item} ${timeframe}`,
+        "Cook at home instead of": (item, timeframe) => `Cook at home instead of getting ${item} ${timeframe}`,
+        "Share with friends instead of individual": (item, timeframe) => `Share ${item} with friends instead of paying individually ${timeframe}`,
     }
 };
