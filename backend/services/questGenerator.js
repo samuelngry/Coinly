@@ -36,6 +36,17 @@ async function generateDynamicQuests(userId) {
     return generatedQuests;
 }
 
+async function generateBatchQuests(user, relevantItems, actions, timeframe="today") {
+    const questPromises = [];
+
+    for (const action of actions) {
+        const compatibleItems = relevantItems.filter(item => 
+            questComponents.actionItemMap[action] && questComponents.actionItemMap[action].includes(item)
+        );
+    }
+    
+}
+
 async function generateSkipQuests(user, relevantItems, generatedQuests) {
     const timeframe = "today";
     const item = relevantItems[Math.floor(Math.random() * relevantItems.length)];
