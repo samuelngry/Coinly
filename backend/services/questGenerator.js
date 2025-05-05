@@ -36,15 +36,37 @@ async function generateDynamicQuests(userId) {
     return generatedQuests;
 }
 
-async function generateBatchQuests(user, relevantItems, actions, timeframe="today") {
+async function generateBatchQuests(user, relevantItems, actions, generatedQuests, timeframe="today") {
     const questPromises = [];
 
     for (const action of actions) {
         const compatibleItems = relevantItems.filter(item => 
             questComponents.actionItemMap[action] && questComponents.actionItemMap[action].includes(item)
         );
+
+        for (const item of compatibleItems) {
+            const savingsAmount = calculateSavingsAmount(item, timeframe);
+
+            const questText = questComponents.questTextTemplates[action]
+                ? questComponents.questTextTemplates[action](item, timeframe)
+                : `${action} ${item} ${timeframe}`;
+
+            const questPromise = UserQuest.create({
+                user_id: user.id,
+                quest_text: questText,
+                xp: calculateXpReward(savingsAmount),
+                source_template_id: null,
+                status: 'Pending',
+                instance_date: new Date(),
+                accepted_at: null
+            });
+
+            questPromises.push(questPromise);
+        }
     }
-    
+
+    const quests = await Promise.all(questPromises);
+    generatedQuests.push(...quests);
 }
 
 async function generateSkipQuests(user, relevantItems, generatedQuests) {
