@@ -1,7 +1,7 @@
 module.exports = {
     actions: [
-        "Skip", "Make your own", "Find a cheaper alternative to", "Reduce spending on", "Go one day without",
-        "Try a free alternative to", "Borrow instead of buying"
+        "Skip", "Make your own", "Find a cheaper alternative to", "Reduce spending on", "Try a free alternative to", "Borrow instead of buying", 
+        "Pack your own", "User public transit instead of", "Cook at home instead of", "Share with friends instead of individual"
     ],
 
     items: [
@@ -42,13 +42,11 @@ module.exports = {
         "Make your own": ["coffee", "lunch", "dinner", "snacks", "takeout food", "drinks"],
         "Find a cheaper alternative to": ["coffee", "lunch", "dinner", "rideshare", "subscription", "entertainment", "shopping", "takeout food", "drinks"],
         "Reduce spending on": ["coffee", "lunch", "dinner", "snacks", "rideshare", "subscription", "entertainment", "shopping", "takeout food", "drinks"],
-        "Go one day without": ["coffee", "lunch", "dinner", "snacks", "rideshare", "subscription", "entertainment", "shopping", "takeout food", "drinks"],
         "Try a free alternative to": ["rideshare", "subscription", "entertainment", "shopping"],
         "Borrow instead of buying": ["shopping", "entertainment"],
         "Pack your own": ["lunch", "snacks"],
         "Use public transit instead of": ["rideshare"],
         "Cook at home instead of": ["takeout food", "dinner"],
         "Share with friends instead of individual": ["subscription", "entertainment"],
-        "Use library resources instead of": ["subscription", "shopping", "entertainment"]
     }
 };

@@ -44,7 +44,6 @@ async function generateBatchQuests(user, relevantItems, actions, timeframe="toda
             questComponents.actionItemMap[action] && questComponents.actionItemMap[action].includes(item)
         );
     }
-    
 }
 
 async function generateSkipQuests(user, relevantItems, generatedQuests) {
