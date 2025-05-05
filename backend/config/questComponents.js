@@ -35,7 +35,7 @@ module.exports = {
         "for two days": 2,
         "for the weekend": 2,
         "for three days": 3
-    }
+    },
 
     actionItemMap: {
         "Skip": ["coffee", "lunch", "dinner", "snacks", "rideshare", "subscription", "entertainment", "shopping", "takeout food", "drinks"],
