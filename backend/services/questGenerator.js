@@ -69,25 +69,6 @@ async function generateBatchQuests(user, relevantItems, actions, generatedQuests
     generatedQuests.push(...quests);
 }
 
-async function generateSkipQuests(user, relevantItems, generatedQuests) {
-    const timeframe = "today";
-    const item = relevantItems[Math.floor(Math.random() * relevantItems.length)];
-
-    const savingsAmount = calculateSavingsAmount(item, timeframe);
-
-    const quest = await UserQuest.create({
-        user_id: user.id,
-        quest_text: `Skip ${item} ${timeframe}`,
-        xp: calculateXpReward(savingsAmount),
-        source_template_id: null,
-        status: 'Pending',
-        instance_date: new Date(),
-        accepted_at: null
-    });
-
-    generatedQuests.push(quest);
-}
-
 function calculateSavingsAmount(item, timeframe) {
     const baseCosts = questComponents.baseCosts[item] || 10;
     const timeMultiplier = questComponents.timeMultipliers[timeframe] || 1;
@@ -98,3 +79,7 @@ function calculateSavingsAmount(item, timeframe) {
 function calculateXpReward(savingsAmount) {
     return Math.max(20, Math.min(100, savingsAmount * 5));
 }
+
+module.exports = {
+    generateDynamicQuests
+};
