@@ -3,6 +3,8 @@ const User = require("../models/User");
 const UserPreference = require("../models/UserPreference");
 const UserQuest = require("../models/UserQuest");
 
+// Respect daily generation limits (max 5 per day)
+
 async function generateDynamicQuests(userId) {
     const user = await User.findByPk(userId);
     const userPreference = await UserPreference.findByPk(userId);

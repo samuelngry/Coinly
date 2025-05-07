@@ -26,7 +26,8 @@ const UserQuest = db.define('user_quests', {
         type: Sequelize.INTEGER,
     },
     status: {
-        type: Sequelize.STRING(20),
+        type: Sequelize.ENUM('Pending', 'Active', 'Completed', 'Expired'),
+        defaultValue: 'Pending',
     },
     accepted_at: {
         type: Sequelize.DATE,
