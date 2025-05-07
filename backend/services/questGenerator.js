@@ -2,12 +2,24 @@ const questComponents = require("../config/questComponents");
 const User = require("../models/User");
 const UserPreference = require("../models/UserPreference");
 const UserQuest = require("../models/UserQuest");
-
-// Respect daily generation limits (max 5 per day)
+const { Op } = require('sequelize');
 
 async function generateDynamicQuests(userId) {
     const user = await User.findByPk(userId);
     const userPreference = await UserPreference.findByPk(userId);
+    const cutoffDate = new Date();
+    cutoffDate.setDate(cutoffDate.getDate() - 3);
+
+    await UserQuest.update(
+        { status: 'Expired'},
+        {
+            where: {
+                user_id: userId,
+                status: 'Pending',
+                instance_date: {[Op.lt]: cutoffDate},
+            },
+        },
+    );
     
     if (!user || !userPreference) {
         throw new Error('User or user preferences not found');
