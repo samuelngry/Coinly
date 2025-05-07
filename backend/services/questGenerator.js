@@ -4,6 +4,8 @@ const UserPreference = require("../models/UserPreference");
 const UserQuest = require("../models/UserQuest");
 const { Op } = require('sequelize');
 
+// TODO: Max 5 quests/day logic
+
 async function generateDynamicQuests(userId) {
     const user = await User.findByPk(userId);
     const userPreference = await UserPreference.findByPk(userId);
@@ -19,7 +21,7 @@ async function generateDynamicQuests(userId) {
                 instance_date: {[Op.lt]: cutoffDate},
             },
         },
-    );
+    )
     
     if (!user || !userPreference) {
         throw new Error('User or user preferences not found');
@@ -45,13 +47,26 @@ async function generateDynamicQuests(userId) {
     const generatedQuests = [];
     const actions = questComponents.actions;
 
-    await generateBatchQuests(user, relevantItems, actions, generatedQuests);
+    await generateQuest(user, relevantItems, actions, generatedQuests);
 
     return generatedQuests;
 }
 
-async function generateBatchQuests(user, relevantItems, actions, generatedQuests, timeframe="today") {
+async function generateQuest(user, relevantItems, actions, generatedQuests) {
+    const availableCount = await UserQuest.count({
+        where: { user_id: user.id, status: 'Pending' }
+    });
+
+    const questToGenerate = 5 - availableCount; 
+
+    if (questToGenerate > 0) {
+        await generateBatchQuests(user, relevantItems, actions, generatedQuests, questToGenerate);
+    }
+}
+
+async function generateBatchQuests(user, relevantItems, actions, generatedQuests, questToGenerate, timeframe="today") {
     const questPromises = [];
+    let count = 0;
 
     for (const action of actions) {
         const compatibleItems = relevantItems.filter(item => 
@@ -59,8 +74,9 @@ async function generateBatchQuests(user, relevantItems, actions, generatedQuests
         );
 
         for (const item of compatibleItems) {
-            const savingsAmount = calculateSavingsAmount(item, timeframe);
+            if (count >= questToGenerate) break;
 
+            const savingsAmount = calculateSavingsAmount(item, timeframe);
             const questText = questComponents.questTextTemplates[action]
                 ? questComponents.questTextTemplates[action](item, timeframe)
                 : `${action} ${item} ${timeframe}`;
@@ -76,7 +92,10 @@ async function generateBatchQuests(user, relevantItems, actions, generatedQuests
             });
 
             questPromises.push(questPromise);
+            count++;
         }
+
+        if (count >= questToGenerate) break;
     }
 
     const quests = await Promise.all(questPromises);
