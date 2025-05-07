@@ -53,8 +53,15 @@ async function generateDynamicQuests(userId) {
 }
 
 async function generateQuest(user, relevantItems, actions, generatedQuests) {
+    const startOfToday = new Date();
+    startOfToday.setHours(0, 0, 0, 0);
+    
     const availableCount = await UserQuest.count({
-        where: { user_id: user.id, status: 'Pending' }
+        where: { 
+            user_id: user.id, 
+            status: 'Pending',
+            instance_date: {[Op.gte]: startOfToday }
+        }
     });
 
     const questToGenerate = 5 - availableCount; 
