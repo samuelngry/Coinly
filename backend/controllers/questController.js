@@ -1,5 +1,6 @@
 const { generateDynamicQuests } = require("../services/questGenerator");
 const UserQuest = require("../models/UserQuest");
+const Pets = require("../models/Pets");
 
 const generateQuests = async (req, res) => {
     try {
@@ -76,7 +77,34 @@ const completeQuests = async (req, res) => {
             return res.status(404).json({ error: 'Quest not found or already completed.' });
         }
 
-        res.status(200).json({ message: 'Quest completed successfully' });
+        const completedQuest = await UserQuest.findOne({
+            where: { id: questId, user_id: userId }
+        });
+
+        const xpReward = completedQuest.xp || 0;
+
+        const pet = await Pets.findOne({ where: { user_id: userId } });
+
+        if(!pet) {
+            return res.status(404).json({ error: 'Pet not found.' });
+        }
+
+        let levelUpXp = 100 + (pet.level - 1) * 50;
+        let petXp = pet.xp + xpReward;
+        let petLevel = pet.level;
+
+        while (petXp >= levelUpXp) {
+            petLevel += 1;
+            petXp -= levelUpXp;
+            levelUpXp = 100 + (petLevel - 1) * 50;
+        }
+
+        await pet.update({
+            xp: petXp,
+            level: petLevel,
+        });
+
+        res.status(200).json({ message: 'Quest completed successfully', petUpdate: { petXp, petLevel } });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
