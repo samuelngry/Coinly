@@ -15,7 +15,7 @@ const generateQuests = async (req, res) => {
 
 const acceptQuests = async (req, res) => {
     try {
-        const questId = parseInt(req.params.questId);
+        const questId = parseInt(req.params.id);
         const userId = req.user.id;
 
         const acceptedQuest = await UserQuest.count({
