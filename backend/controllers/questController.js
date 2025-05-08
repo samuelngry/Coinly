@@ -105,6 +105,9 @@ const completeQuests = async (req, res) => {
             last_fed: new Date(),
         });
 
+        // TODO: update pet's mood based on last fed
+        // 
+
         res.status(200).json({ message: 'Quest completed successfully', petUpdate: { petXp, petLevel } });
     } catch (err) {
         res.status(500).json({ error: err.message });

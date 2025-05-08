@@ -20,8 +20,9 @@ const Pets = db.define('pets', {
         allowNull: false
     },
     mood: {
-        type: Sequelize.STRING(50),
-        allowNull: false
+        type: Sequelize.ENUM('Happy', 'Neutral', 'Sad', 'Hungry', 'Angry', 'Sleepy', 'Excited'),
+        allowNull: false,
+        defaultValue: 'Neutral',
     },
     xp: {
         type: Sequelize.INTEGER,
