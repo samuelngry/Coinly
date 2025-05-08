@@ -32,6 +32,9 @@ const UserQuest = db.define('user_quests', {
     accepted_at: {
         type: Sequelize.DATE,
     },
+    completed_at: {
+        type: Sequelize.DATE,
+    },
     instance_date: {
         type: Sequelize.DATE,
         allowNull: false,
