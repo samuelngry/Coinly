@@ -4,5 +4,5 @@ const { generateQuests, acceptQuests, completeQuests } = require("../controllers
 const verifyToken = require("../middleware/authMiddleware");
 
 router.post("/generate", verifyToken, generateQuests);
-router.post("/accept/:id", verifyToken, acceptQuests);
-router.post("/complete/:id", verifyToken, completeQuests);
+router.post("/:id/accept", verifyToken, acceptQuests);
+router.post("/:id/complete", verifyToken, completeQuests);
