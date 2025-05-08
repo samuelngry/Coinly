@@ -3,7 +3,7 @@ const UserQuest = require("../models/UserQuest");
 
 const generateQuests = async (req, res) => {
     try {
-        const userId = parseInt(req.params.id);
+        const userId = req.user.id;
 
         const quest = await generateDynamicQuests(userId);
 
@@ -16,7 +16,7 @@ const generateQuests = async (req, res) => {
 const acceptQuests = async (req, res) => {
     try {
         const questId = parseInt(req.params.questId);
-        const userId = parseInt(req.params.userId);
+        const userId = req.user.id;
 
         const acceptedQuest = await UserQuest.count({
             where: {
@@ -48,7 +48,6 @@ const acceptQuests = async (req, res) => {
         }
 
         res.status(200).json({ message: 'Quest accepted successfully' });
-
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
