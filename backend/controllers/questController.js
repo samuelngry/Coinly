@@ -92,23 +92,42 @@ const completeQuests = async (req, res) => {
         let levelUpXp = 100 + (pet.level - 1) * 50;
         let petXp = pet.xp + xpReward;
         let petLevel = pet.level;
+        let leveledUp = false;
 
         while (petXp >= levelUpXp) {
             petLevel += 1;
             petXp -= levelUpXp;
             levelUpXp = 100 + (petLevel - 1) * 50;
+            leveledUp = true;
         }
+
+        const today = new Date();
+        const petLastFed = new Date(pet.last_fed);
+        const diffTime = today - petLastFed;
+        const dayLastFed = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        
+        let petMood = pet.mood;
+
+        if (leveledUp) {
+            petMood = 'Excited';
+        } else if (dayLastFed === 0) {
+            petMood = 'Happy';
+        } else if (dayLastFed === 1) {
+            petMood = 'Neutral';
+        } else if (dayLastFed === 2) {
+            petMood = 'Sad';
+        } else if (dayLastFed >= 3) {
+            petMood = 'Angry';
+        } 
 
         await pet.update({
             xp: petXp,
             level: petLevel,
             last_fed: new Date(),
+            mood: petMood,
         });
 
-        // TODO: update pet's mood based on last fed
-        // 
-
-        res.status(200).json({ message: 'Quest completed successfully', petUpdate: { petXp, petLevel } });
+        res.status(200).json({ xp: petXp, level: petLevel, mood: petMood });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
