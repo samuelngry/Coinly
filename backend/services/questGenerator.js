@@ -7,19 +7,8 @@ const { Op } = require('sequelize');
 async function generateDynamicQuests(userId) {
     const user = await User.findByPk(userId);
     const userPreference = await UserPreference.findByPk(userId);
-    const cutoffDate = new Date();
-    cutoffDate.setDate(cutoffDate.getDate() - 3);
 
-    await UserQuest.update(
-        { status: 'Expired'},
-        {
-            where: {
-                user_id: userId,
-                status: 'Pending',
-                instance_date: {[Op.lt]: cutoffDate},
-            },
-        },
-    )
+    await expireOldQuests(userId);
     
     if (!user || !userPreference) {
         throw new Error('User or user preferences not found');
@@ -105,6 +94,22 @@ async function generateBatchQuests(user, relevantItems, actions, generatedQuests
 
     const quests = await Promise.all(questPromises);
     generatedQuests.push(...quests);
+}
+
+async function expireOldQuests(userId) {
+    const cutoffDate = new Date();
+    cutoffDate.setDate(cutoffDate.getDate() - 3);
+
+    await UserQuest.update(
+        { status: 'Expired'},
+        {
+            where: {
+                user_id: userId,
+                status: 'Pending',
+                instance_date: {[Op.lt]: cutoffDate},
+            },
+        },
+    );
 }
 
 function calculateSavingsAmount(item, timeframe) {
