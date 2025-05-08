@@ -4,8 +4,6 @@ const UserPreference = require("../models/UserPreference");
 const UserQuest = require("../models/UserQuest");
 const { Op } = require('sequelize');
 
-// TODO: Max 5 quests/day logic
-
 async function generateDynamicQuests(userId) {
     const user = await User.findByPk(userId);
     const userPreference = await UserPreference.findByPk(userId);
@@ -55,7 +53,7 @@ async function generateDynamicQuests(userId) {
 async function generateQuest(user, relevantItems, actions, generatedQuests) {
     const startOfToday = new Date();
     startOfToday.setHours(0, 0, 0, 0);
-    
+
     const availableCount = await UserQuest.count({
         where: { 
             user_id: user.id, 
