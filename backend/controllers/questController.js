@@ -102,6 +102,7 @@ const completeQuests = async (req, res) => {
         await pet.update({
             xp: petXp,
             level: petLevel,
+            last_fed: new Date(),
         });
 
         res.status(200).json({ message: 'Quest completed successfully', petUpdate: { petXp, petLevel } });
