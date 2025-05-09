@@ -7,36 +7,50 @@ const { Op } = require('sequelize');
 async function generateDynamicQuests(userId) {
     const user = await User.findByPk(userId);
     const userPreference = await UserPreference.findByPk(userId);
-
-    await expireOldQuests(userId);
     
     if (!user || !userPreference) {
         throw new Error('User or user preferences not found');
     }
 
-    let relevantItems = [];
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-    const spendingCategories = Array.isArray(userPreference.spending_categories)
-        ? userPreference.spending_categories
-        : JSON.parse(userPreference.spending_categories || '[]' );
+    const lastGenerated = user.last_generated_at;
+    const lastGeneratedDate = lastGenerated ? new Date(lastGenerated.setHours(0, 0, 0, 0)) : null;
 
-    relevantItems = questComponents.items.filter(item =>
-        spendingCategories.includes(item)
-    );
+    // Generate new quests if it's a new day
+    if (!lastGeneratedDate || lastGeneratedDate < today) {
+        await expireOldQuests(userId);
 
-    // If user does not have enough spending categories, add some defaults
-    if (relevantItems.length < 3) {
-        relevantItems = ["coffee", "lunch", "entertainment", "snacks", "takeout food"].filter(
-            item => !relevantItems.includes(item)  
-        ).concat(relevantItems).slice(0, 5);
+        let relevantItems = [];
+
+        const spendingCategories = Array.isArray(userPreference.spending_categories)
+            ? userPreference.spending_categories
+            : JSON.parse(userPreference.spending_categories || '[]' );
+    
+        relevantItems = questComponents.items.filter(item =>
+            spendingCategories.includes(item)
+        );
+    
+        // If user does not have enough spending categories, add some defaults
+        if (relevantItems.length < 3) {
+            relevantItems = ["coffee", "lunch", "entertainment", "snacks", "takeout food"].filter(
+                item => !relevantItems.includes(item)  
+            ).concat(relevantItems).slice(0, 5);
+        }
+
+        const generatedQuests = [];
+        const actions = questComponents.actions;
+
+        await generateQuest(user, relevantItems, actions, generatedQuests);
+
+        user.last_generated_at = new Date();
+        await user.save();
+
+        return generatedQuests;
     }
 
-    const generatedQuests = [];
-    const actions = questComponents.actions;
-
-    await generateQuest(user, relevantItems, actions, generatedQuests);
-
-    return generatedQuests;
+    return []; // Already generated today
 }
 
 async function generateQuest(user, relevantItems, actions, generatedQuests) {
