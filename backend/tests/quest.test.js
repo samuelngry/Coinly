@@ -9,7 +9,7 @@ const jwt = require("jsonwebtoken");
 
 let token, user;
 
-beforeAll(async () => {
+before(async () => {
     await db.sync({ force: true });
 
     user = await User.create({
@@ -31,7 +31,7 @@ beforeAll(async () => {
     token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
 });
 
-afterAll(async () => {
+after(async () => {
     await db.close();
 });
 
