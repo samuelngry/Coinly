@@ -55,6 +55,61 @@ describe("Quest API", () => {
 
             expect(res.status).to.equal(200);
             expect(res.body.quest).to.equal([]);
-        })
-    })
+        });
+    });
+
+    describe("POST /api/quests/:id/accept", () => {
+        let quest;
+
+        beforeEach(async () => {
+            await UserQuest.destroy({ where: { user_id: user.id } });
+
+            quest = await UserQuest.create({
+                user_id: user.id,
+                quest_text: "Buy no coffee today",
+                xp: 50,
+                status: "Pending",
+                instance_date: new Date()
+            });
+        });
+
+        it('should accept a quest', async () => {
+            const res = await supertest(app)
+                .post(`/api/quests/${quest.id}/accept`)
+                .set("Authorization", `Bearer ${token}`);
+
+            const updatedQuest = await UserQuest.findByPk(quest.id);
+            expect(res.status).to.equal(200);
+            expect(res.body).to.have.property('message').that.equals('Quest accepted successfully');
+            expect(updatedQuest.status).to.equal('Accepted');
+        });
+
+        it('should prevent accepting more than 4 quests', async () => {
+            for (let i = 0; i < 4; i++) {
+                await UserQuest.create({
+                    user_id: user.id,
+                    quest_text: `Dummy quest ${i}`,
+                    xp: 10,
+                    status: "Accepted",
+                    accepted_at: new Date(),
+                    instance_date: new Date()
+                });
+            }
+
+            const newQuest = await UserQuest.create({
+                user_id: user.id,
+                quest_text: "Another pending quest",
+                xp: 20,
+                status: "Pending",
+                instance_date: new Date()
+            });
+
+            const res = await supertest(app)
+                .post(`/api/quests/${newQuest.id}/accept`)
+                .set("Authorization", `Bearer ${token}`);
+            
+            expect(res.status).to.equal(400);
+            expect(res.body).to.have.property('error').that.equals('You can only have up to 4 accepted quests at a time.');
+        });
+    });
 })
