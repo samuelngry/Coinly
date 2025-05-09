@@ -112,4 +112,45 @@ describe("Quest API", () => {
             expect(res.body).to.have.property('error').that.equals('You can only have up to 4 accepted quests at a time.');
         });
     });
-})
+
+    describe("POST /api/quests/:id/complete", () => {
+        let quest;
+
+        beforeEach(async () => {
+            await UserQuest.destroy({ where: { user_id: user.id } });
+
+            quest = await UserQuest.create({
+                user_id: user.id,
+                quest_text: "Finish this quest",
+                xp: 50,
+                status: "Accepted",
+                accepted_at: new Date(),
+                instance_date: new Date()
+            });
+        });
+
+        it('should complete the quest and update pet', async () => {
+            const res = await supertest(app)
+                .post(`/api/quests/${quest.id}/complete`)
+                .set("Authorization", `Bearer ${token}`);
+
+            expect(res.status).to.equal(200);
+            expect(res.body).to.have.property("xp");
+            expect(res.body).to.have.property("level");
+            expect(res.body).to.have.property("mood");
+        });
+
+        it('should return error if quest is already completed', async () => {
+            await supertest(app)
+                .post(`/api/quests/${quest.id}/complete`)
+                .set("Authorization", `Bearer ${token}`);
+
+            const res = await supertest(app)
+                .post(`/api/quests/${quest.id}/complete`)
+                .set("Authorization", `Bearer ${token}`)
+
+            expect(res.status).to.equal(404);
+            expect(res.body).to.have.property('error').that.equals('Quest not found or already completed.');
+        });
+    });
+});
