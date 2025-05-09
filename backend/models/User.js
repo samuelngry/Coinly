@@ -20,6 +20,10 @@ const User = db.define('users', {
         type: Sequelize.STRING(255),
         allowNull: true,
     },
+    last_generated_at: {
+        type: Sequelize.DATE,
+        allowNull: true,
+    },
 });
 
 module.exports = User;
