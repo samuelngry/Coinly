@@ -24,6 +24,10 @@ const User = db.define('users', {
         type: Sequelize.DATE,
         allowNull: true,
     },
+    streak_count: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+    },
 });
 
 module.exports = User;
