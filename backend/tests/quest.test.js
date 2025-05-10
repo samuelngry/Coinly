@@ -65,7 +65,7 @@ describe("Quest API", () => {
                 .set('Authorization', `Bearer ${token}`);
 
             expect(res.status).to.equal(200);
-            expect(res.body.quest).to.equal([]);
+            expect(res.body.quest).to.deep.equal([]);
         });
     });
 
