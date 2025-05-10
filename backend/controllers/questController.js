@@ -10,6 +10,7 @@ const generateQuests = async (req, res) => {
 
         res.status(200).json({ message: "Quest generated successfully", quest });
     } catch (err) {
+        console.error("Error in generateQuests:", err);
         res.status(500).json({ error: err.message });
     }
 };

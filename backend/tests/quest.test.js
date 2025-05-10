@@ -3,6 +3,7 @@ const { expect } = require('chai');
 const app = require('../server');
 const db = require('../config/db');
 const User = require("../models/User");
+const UserPreference = require("../models/UserPreference");
 const UserQuest = require("../models/UserQuest");
 const Pets = require("../models/Pets");
 const jwt = require("jsonwebtoken");
@@ -17,6 +18,16 @@ before(async () => {
         username: "testuser",
         password: "hashedpassword",
         last_generated_at: null 
+    });
+
+    await UserPreference.create({
+        user_id: 1,
+        goal_focus: 'savings',
+        spending_habits: 'moderate',
+        spending_categories: ['coffee', 'lunch', 'entertainment'],
+        eats_out_frequency: 'often',
+        makes_own_coffee: 'no',
+        transport_mode: 'car'
     });
 
     await Pets.create({
