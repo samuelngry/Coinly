@@ -1,6 +1,8 @@
 const { generateDynamicQuests } = require("../services/questGenerator");
 const UserQuest = require("../models/UserQuest");
 const Pets = require("../models/Pets");
+const User = require("../models/User");
+const { Op } = require('sequelize');
 
 const generateQuests = async (req, res) => {
     try {
@@ -77,6 +79,34 @@ const completeQuests = async (req, res) => {
         if (updatedRows === 0) {
             return res.status(404).json({ error: 'Quest not found or already completed.' });
         }
+
+        const now = new Date();
+        const user = await User.findOne({ where: { user_id: userId } });
+        let newStreak = 0;
+
+        const lastCompletedQuest = await UserQuest.findOne({
+            where: {
+                user_id: userId,
+                status: 'Completed',
+                id: { [Op.ne]: questId }, // Exclude current quest
+            },
+            order: [['completed_at', 'DESC']],
+        });
+
+        if (lastCompletedQuest) {
+            const lastCompletedDate = new Date(lastCompletedQuest.completed_at);
+            const diffDays = Math.floor((now - lastCompletedDate) / (1000 * 60 * 60 * 24));
+
+            if (diffDays === 1) {
+                newStreak = user.streak_count + 1;
+            } else if (diffDays === 0) {
+                newStreak = user.streak_count;
+            } else {
+                newStreak = 0;
+            }
+        }
+
+        await user.update({ streak_count: newStreak });
 
         const completedQuest = await UserQuest.findOne({
             where: { id: questId, user_id: userId }
