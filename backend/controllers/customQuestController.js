@@ -81,8 +81,33 @@ const updateCustomQuest = async (req, res) => {
     }
 };
 
+const deleteCustomQuest = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const questId = parseInt(req.params.id);
+
+        const deletedCount = await UserQuest.destroy({
+            where: {
+                id: questId,
+                user_id: userId,
+                type: 'Custom',
+            },
+        });
+
+        if (deletedCount === 0) {
+            return res.status(404).json({ error: 'Custom quest not found or already deleted' });
+        }
+
+        res.status(200).json({ message: 'Custom quest deleted successfully' });
+    } catch (err) {
+        console.error('Error in deleteCustomQuest:', err);
+        res.status(500).json({ error: err.message });
+    }
+};
+
 module.exports = {
     getCustomQuests,
     addCustomQuest,
-    updateCustomQuest
+    updateCustomQuest,
+    deleteCustomQuest
 };
