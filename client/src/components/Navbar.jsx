@@ -11,7 +11,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="sticky top-0 z-50 py-3 backdrop-blur-lg border-b border-neutral-100">
+        <nav className="sticky top-0 z-50 py-3 backdrop-blur-lg border-b border-neutral-200">
             <div className="container px-4 mx-auto relative text-sm">
                 <div className="flex justify-between items-center">
                     <div className="flex items-center flex-shrink-0">
@@ -29,7 +29,7 @@ const Navbar = () => {
                         <a href="#" className="py-2 px-3 border rounded-md">
                             Sign In
                         </a>
-                        <a href="#" className="bg-gradient-to-r from-orange-500 to-orange-800 py-2 px-3 rounded-md">
+                        <a href="#" className="bg-gradient-to-r from-orange-500 to-orange-800 py-2 px-3 rounded-md text-white">
                             Create Account
                         </a>
                     </div>
