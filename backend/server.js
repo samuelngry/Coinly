@@ -5,6 +5,7 @@ require('dotenv').config();
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const questRoutes = require("./routes/questRoutes");
+const customQuestRoutes = require("./routes/customQuestRoutes");
 const db = require("./config/db");
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/quests", questRoutes);
+app.use("/api/custom-quests", customQuestRoutes);
 
 const PORT = process.env.PORT || 5000;
 
