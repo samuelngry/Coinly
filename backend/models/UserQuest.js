@@ -40,6 +40,11 @@ const UserQuest = db.define('user_quests', {
         allowNull: false,
         defaultValue: Sequelize.NOW,
     },
+    type: {
+        type: Sequelize.ENUM('Dynamic', 'Custom'),
+        allowNull: false,
+        defaultValue: 'Dynamic',
+    },
 });
 
 module.exports = UserQuest;
