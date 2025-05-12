@@ -11,6 +11,6 @@ h1, h2, h3, h4, h5, h6, strong {
   font-family: "Feather Bold", sans-serif;
 }
 
-.subheader, p, span {
+.subheader, p, span, a, li{
   font-family: "DIN Next Rounded LT W01 Regular", sans-serif;
 }
