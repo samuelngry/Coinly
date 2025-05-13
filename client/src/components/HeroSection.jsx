@@ -11,7 +11,7 @@ const HeroSection = () => {
                 Coin Pet
             </strong>
         </h1>
-        <p className="text-sm sm:text-md lg:text-lg text-center mt-6 text-neutral-400 max-w-4xl">
+        <p className="text-sm sm:text-md lg:text-lg text-center mt-6 text-neutral-500 max-w-4xl">
             Turn saving into a fun, rewarding game — complete quests, watch your savings grow, and care for your coin buddy.
         </p>
         <div className="flex justify-center my-10">

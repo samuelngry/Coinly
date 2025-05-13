@@ -5,6 +5,7 @@
 
 :root {
   font-family: "Feather Bold", "DIN Next Rounded LT W01 Regular", sans-serif;
+  --old-lace: #f0ece0;
 }
 
 h1, h2, h3, h4, h5, h6, strong {

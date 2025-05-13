@@ -5,7 +5,7 @@ import FeatureSection from './components/FeatureSection';
 
 const App = () => {
   return (
-    <div className='bg-neutral-100'>
+    <div style={{ backgroundColor: 'var(--old-lace)' }}>
       <>
         <Navbar />
         <div className="max-w-7xl mx-auto pt-20 px-6">
