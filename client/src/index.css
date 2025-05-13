@@ -1,17 +1,19 @@
 @import url(https://db.onlinewebfonts.com/c/14936bb7a4b6575fd2eee80a3ab52cc2?family=Feather+Bold);
 @import url(https://db.onlinewebfonts.com/c/ab596f21664c5582567537d241e2a53e?family=DIN+Next+Rounded+LT+W01+Regular);
+@import url(https://db.onlinewebfonts.com/c/351166aedb6763a9771aa6ad49a5dfaf?family=Ginka+TRIAL+Medium);
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&display=swap');
 
 @import "tailwindcss";
 
 :root {
-  font-family: "Feather Bold", "DIN Next Rounded LT W01 Regular", sans-serif;
+  font-family: "Ginka TRIAL Medium", "Instrument Sans", "Feather Bold", "DIN Next Rounded LT W01 Regular", sans-serif;
   --old-lace: #f0ece0;
 }
 
 h1, h2, h3, h4, h5, h6, strong {
-  font-family: "Feather Bold", sans-serif;
+  font-family: "Ginka TRIAL Medium", sans-serif;
 }
 
-.subheader, p, span, a, li{
-  font-family: "DIN Next Rounded LT W01 Regular", sans-serif;
+.subheader, p, span, a{
+  font-family: "Instrument Sans", "DIN Next Rounded LT W01 Regular", sans-serif;
 }
