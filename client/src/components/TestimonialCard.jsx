@@ -4,6 +4,13 @@ const TestimonialCard = ( {icon, name, description} ) => {
         <img src={icon} alt={name} className="w-30 h-30 mb-4 rounded-full absolute -top-15" />
         <p className="text-neutral-400 text-sm mb-4 mt-10">{description}</p>
         <h3 className="text-md font-bold">{name}</h3>
+        <div className="flex mt-2">
+            <span className="text-yellow-500 text-lg">★</span>
+            <span className="text-yellow-500 text-lg">★</span>
+            <span className="text-yellow-500 text-lg">★</span>
+            <span className="text-yellow-500 text-lg">★</span>
+            <span className="text-yellow-500 text-lg">★</span>
+        </div>
     </div>
   );
 };
