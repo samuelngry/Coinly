@@ -5,13 +5,13 @@ import { playBookItems } from '../constants';
 const Playbook = () => {
   return (
     <div className='mt-35'>
-      <h2 className='text-3xl sm:text-5xl lg:text-6xl text-center mt-6 tracking-wide mb-10'>
+      <h1 className='text-3xl sm:text-5xl lg:text-6xl text-center mt-6 tracking-wide mb-10'>
         Your
         <strong className="bg-gradient-to-r from-orange-500 to-orange-800 text-transparent bg-clip-text">
             {" "}
             PlayBook
         </strong>
-        </h2>
+        </h1>
         <div className='flex flex-wrap justify-center'>
             <div className='p-2 w-full lg:w-1/2'>
                 <img src={codeImg} alt="Code" className='rounded-lg shadow-lg' />
