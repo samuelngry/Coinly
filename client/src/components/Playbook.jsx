@@ -24,7 +24,7 @@ const Playbook = () => {
                         </div>
                         <div>
                             <h5 className='text-xl mt-1 mb-2'>{item.title}</h5>
-                            <p className='text-md text-neutral-400'>{item.description}</p>
+                            <p className='text-md text-neutral-500'>{item.description}</p>
                         </div>                            
                     </div>
                 ))}

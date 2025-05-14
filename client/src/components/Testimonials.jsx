@@ -19,7 +19,7 @@ const Testimonials = () => {
             <TestimonialCard 
                 icon={personImage2}
                 name="Gwyn Heidi"
-                description="Saving used to feel like a chore, but now it's the most fun part of my day. The quests are weirdly satisfying and my coin pet? Adorable. I love it!"
+                description="Saving used to feel like a chore, but now it's the most fun part of my day. The quests are weirdly satisfying and my coin pet? Adorable. 10/10 would recommend to anyone!"
             />
             <TestimonialCard 
                 icon={personImage3}
