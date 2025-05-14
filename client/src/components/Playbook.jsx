@@ -1,4 +1,4 @@
-import { CheckCircle2 } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
 import codeImg from '../assets/code.jpg';
 import { checklistItems } from '../constants';
 
@@ -19,8 +19,8 @@ const Playbook = () => {
             <div className='pt-12 w-full lg:w-1/2'>
                 {checklistItems.map((item, index) => (
                     <div key={index} className='flex mb-12'>
-                        <div className='text-green-600 mx-6 h-10 w-10 p-2 justify-center items-center rounded-full'>
-                            <CheckCircle2 />
+                        <div className='text-orange-500 mx-6 h-10 w-10 p-2 justify-center items-center rounded-full'>
+                            <BookOpen />
                         </div>
                     </div>
                 ))}
