@@ -22,6 +22,10 @@ const Playbook = () => {
                         <div className='text-orange-500 mx-6 h-10 w-10 p-2 justify-center items-center rounded-full'>
                             <BookOpen />
                         </div>
+                        <div>
+                            <h5 className='text-xl mt-1 mb-2'>{item.title}</h5>
+                            <p className='text-md text-neutral-400'>{item.description}</p>
+                        </div>                            
                     </div>
                 ))}
             </div>
