@@ -6,26 +6,26 @@ import featureImage3 from "../assets/feature3.png"
 const FeatureSection = () => {
   return (
     <div className="flex flex-col mt-35 items-center">
-      <h1 className="text-2xl sm:text-3xl lg:text-6xl tracking-wide text-center">So simple, it's fun.</h1>
+      <h1 className="text-2xl sm:text-3xl lg:text-6xl tracking-wide text-center">Your money’s new favorite game.</h1>
       <p className="text-sm sm:text-md lg:text-lg mt-3 text-center mb-10">
-        It's just how you've always wanted saving to work.
+         Save with quests, pets, and progress that feels good.
       </p>
 
       <div className="flex flex-col lg:flex-row justify-center items-center gap-6">
         <FeatureCard
             image={featureImage1}
             title="Quests, Not Budgets"
-            description="Saving goals feel like mini-games — simple, doable, and kind of addictive."
+            description="Forget spreadsheets. Save with fun, bite-sized quests that actually feel doable — and even a little addictive."
         />
         <FeatureCard
             image={featureImage2}
-            title="Your Coin Pet"
-            description="Every quest feeds your pet. Save more, grow more, love more!"
+            title="Meet Your Coin Pet"
+            description="Your savings buddy! Every completed quest keeps it growing strong. It’s cute. It’s needy. It’s yours."
         />
         <FeatureCard
             image={featureImage3}
-            title="Level Up"
-            description="Track your streaks, earn XP, and hit new highs - without even noticing."
+            title="XP & Streaks"
+            description="Earn XP, build streaks, and unlock rewards — all without stressing about the numbers. Progress has never felt this good."
         />
 
       </div>
