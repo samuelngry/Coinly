@@ -97,26 +97,26 @@ export const features = [
   },
 ];
 
-export const checklistItems = [
+export const playBookItems = [
   {
-    title: "Code merge made easy",
+    title: "Pick Your Quest",
     description:
-      "Track the performance of your VR apps and gain insights into user behavior.",
+      "Pick from a list of fun, personalized challenges. Each one helps you save in small, meaningful ways.",
   },
   {
-    title: "Review code without worry",
+    title: "Feed Your Coin Pet",
     description:
-      "Track the performance of your VR apps and gain insights into user behavior.",
+      "Completing quests earns you XP. The more XP you collect, the happier and bigger your coin pet grows — don’t let it go hungry!",
   },
   {
-    title: "AI Assistance to reduce time",
+    title: "Watch Your Progress",
     description:
-      "Track the performance of your VR apps and gain insights into user behavior.",
+      "Visualize every win with colorful charts, streaks, and your coin pet level. Small steps turn into big results over time.",
   },
   {
-    title: "Share work in minutes",
+    title: "Climb the Leaderboard",
     description:
-      "Track the performance of your VR apps and gain insights into user behavior.",
+      "Every quest you complete earns XP — stack enough and you’ll rise through the ranks. Compete with friends, flex your streaks, and become a top saver.",
   },
 ];
 

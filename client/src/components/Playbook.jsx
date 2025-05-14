@@ -1,6 +1,6 @@
 import { BookOpen } from 'lucide-react';
 import codeImg from '../assets/code.jpg';
-import { checklistItems } from '../constants';
+import { playBookItems } from '../constants';
 
 const Playbook = () => {
   return (
@@ -9,7 +9,7 @@ const Playbook = () => {
         Your             
         <strong className="bg-gradient-to-r from-orange-500 to-orange-800 text-transparent bg-clip-text">
             {" "}
-            Game Plan
+            PlayBook
         </strong>
         </h2>
         <div className='flex flex-wrap justify-center'>
@@ -17,7 +17,7 @@ const Playbook = () => {
                 <img src={codeImg} alt="Code" className='rounded-lg shadow-lg' />
             </div>
             <div className='pt-12 w-full lg:w-1/2'>
-                {checklistItems.map((item, index) => (
+                {playBookItems.map((item, index) => (
                     <div key={index} className='flex mb-12'>
                         <div className='text-orange-500 mx-6 h-10 w-10 p-2 justify-center items-center rounded-full'>
                             <BookOpen />
