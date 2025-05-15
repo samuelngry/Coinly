@@ -10,7 +10,7 @@ const Testimonials = () => {
             What Our Users Are Saying
         </h1>
         
-        <div className="flex flex-col lg:flex-row justify-center items-center gap-6 mt-30">
+        <div className="flex flex-col lg:flex-row justify-center items-center gap-6">
             <TestimonialCard 
                 icon={personImage1}
                 name="Jean Ng"
