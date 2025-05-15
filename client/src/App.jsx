@@ -4,6 +4,7 @@ import HeroSection from './components/HeroSection';
 import FeatureSection from './components/FeatureSection';
 import Playbook from './components/Playbook';
 import Testimonials from './components/Testimonials';
+import Cta from './components/Cta';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Playbook />
           <Testimonials />
         </div>
+        <Cta />
       </>
     </div>
   );
