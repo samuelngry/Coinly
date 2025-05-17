@@ -1,7 +1,7 @@
 import TestimonialCard from "./TestimonialCard"
-import personImage1 from "../assets/jean.jpeg"
-import personImage2 from "../assets/heidi.jpg"
-import personImage3 from "../assets/timothy.jpeg"
+import personImage1 from "../../assets/jean.jpeg"
+import personImage2 from "../../assets/heidi.jpg"
+import personImage3 from "../../assets/timothy.jpeg"
 
 const Testimonials = () => {
   return (

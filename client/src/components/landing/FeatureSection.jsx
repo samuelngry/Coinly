@@ -1,7 +1,7 @@
 import FeatureCard from "./FeatureCard"
-import featureImage1 from "../assets/feature1.png"
-import featureImage2 from "../assets/feature2.png"
-import featureImage3 from "../assets/feature3.png"
+import featureImage1 from "../../assets/feature1.png"
+import featureImage2 from "../../assets/feature2.png"
+import featureImage3 from "../../assets/feature3.png"
 
 const FeatureSection = () => {
   return (

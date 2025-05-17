@@ -1,11 +1,11 @@
 import React from 'react'
-import Navbar from './components/landing/Navbar';
-import HeroSection from './components/landing/HeroSection';
-import FeatureSection from './components/landing/FeatureSection';
-import Playbook from './components/landing/Playbook';
-import Testimonials from './components/landing/Testimonials';
-import Cta from './components/landing/Cta';
-import Footer from './components/landing/Footer';
+import Navbar from '../landing/Navbar';
+import HeroSection from '../landing/HeroSection';
+import FeatureSection from '../landing/FeatureSection';
+import Playbook from '../landing/Playbook';
+import Testimonials from '../landing/Testimonials';
+import Cta from '../landing/Cta';
+import Footer from '../landing/Footer';
 
 const LandingPage = () => {
   return (
