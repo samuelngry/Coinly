@@ -5,6 +5,7 @@ import FeatureSection from './components/FeatureSection';
 import Playbook from './components/Playbook';
 import Testimonials from './components/Testimonials';
 import Cta from './components/Cta';
+import Footer from './components/Footer';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Testimonials />
         </div>
         <Cta />
+        <Footer />
       </>
     </div>
   );
