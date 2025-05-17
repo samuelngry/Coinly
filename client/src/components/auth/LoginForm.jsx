@@ -1,11 +1,17 @@
 import React from 'react'
 import loginImage from '../../assets/pets.jpeg'
+import logo from "../../assets/logo.png"
 
 const LoginForm = () => {
   return (
     <div>
-      <div className='flex flex-col lg:flex-row h-screen'>
-        <div className='flex flex-col justify-center items-center w-full lg:w-1/2 px-4'>
+      <div className='flex flex-col lg:flex-row'>
+
+        <div className='absolute top-4 left-4'>
+          <img className='h-15 w-15' src={logo} alt='logo' />
+        </div>
+       
+        <div className='flex flex-col justify-center items-center w-full lg:w-1/2 min-h-screen'>
           <div className='w-3/4 lg:w-2/3 max-w-md rounded-lg'>
             <h1 className='text-3xl mb-6 text-center'>Log In</h1>
             <form>
