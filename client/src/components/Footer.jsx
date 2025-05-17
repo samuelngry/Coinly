@@ -5,9 +5,9 @@ const Footer = () => {
   return (
     <div className='bg-neutral-100 py-20'>
         <div className='container mx-auto text-sm relative'>
-            <div className='flex justify-between items-center'>
+            <div className='flex flex-col lg:flex-row justify-between items-center'>
                 <img className='w-15 h-15' src={logo} alt="logo" />
-                <ul className='flex space-x-6'>
+                <ul className='flex space-x-6 mt-6'>
                     {resourcesLinks.map((item,index) => (
                         <li key={index}>
                             <a href={item.href}>
