@@ -1,27 +1,14 @@
-import React from 'react'
-import Navbar from './components/landing/Navbar';
-import HeroSection from './components/landing/HeroSection';
-import FeatureSection from './components/landing/FeatureSection';
-import Playbook from './components/landing/Playbook';
-import Testimonials from './components/landing/Testimonials';
-import Cta from './components/landing/Cta';
-import Footer from './components/landing/Footer';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LandingPage from "./components/pages/LandingPage";
 
 const App = () => {
   return (
-    <div style={{ backgroundColor: 'var(--old-lace)' }}>
-      <>
-        <Navbar />
-        <div className="max-w-7xl mx-auto pt-20 px-6">
-          <HeroSection />
-          <FeatureSection />
-          <Playbook />
-          <Testimonials />
-        </div>
-        <Cta />
-        <Footer />
-      </>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+      </Routes>
+    </Router>
   );
 };
 
