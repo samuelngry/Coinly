@@ -1,6 +1,6 @@
 import { BookOpen } from 'lucide-react';
 import codeImg from '../assets/code.jpg';
-import { playBookItems } from '../constants';
+import { playBookItems } from '../../constants';
 
 const Playbook = () => {
   return (

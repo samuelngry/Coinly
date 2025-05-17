@@ -1,5 +1,5 @@
 import logo from '../assets/logo.png'
-import { resourcesLinks } from '../constants'
+import { resourcesLinks } from '../../constants'
 
 const Footer = () => {
   return (

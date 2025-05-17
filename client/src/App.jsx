@@ -1,11 +1,11 @@
 import React from 'react'
-import Navbar from './components/Navbar';
-import HeroSection from './components/HeroSection';
-import FeatureSection from './components/FeatureSection';
-import Playbook from './components/Playbook';
-import Testimonials from './components/Testimonials';
-import Cta from './components/Cta';
-import Footer from './components/Footer';
+import Navbar from './components/landing/Navbar';
+import HeroSection from './components/landing/HeroSection';
+import FeatureSection from './components/landing/FeatureSection';
+import Playbook from './components/landing/Playbook';
+import Testimonials from './components/landing/Testimonials';
+import Cta from './components/landing/Cta';
+import Footer from './components/landing/Footer';
 
 const App = () => {
   return (
