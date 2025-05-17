@@ -43,6 +43,11 @@ const LoginForm = () => {
               <p className='mt-4 text-center'>
                 Don't have an account? <a href='/signup' className='underline text-orange-500 hover:text-orange-800'>Sign up</a>
               </p>
+              <div className='absolute bottom-4 left-4'>
+                <p className='text-xs'>
+                  &copy; {new Date().getFullYear()} Coinly. All rights reserved.
+                </p>
+              </div>
             </form>
           </div>
         </div>
