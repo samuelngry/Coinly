@@ -10,7 +10,8 @@ const createToken = (userId) => {
 
 const register = async (req, res) => {
     try {
-        const { username, password, avatar_url } = req.body;
+        const { username, password } = req.body;
+        const avatar_url = req.file ? `/uploads/${req.file.filename}` : null;
 
         const existingUser = await User.findOne({ where: { username } });
         if (existingUser) return res.status(400).json({ error: "Username taken." });
@@ -19,7 +20,7 @@ const register = async (req, res) => {
         const user = await User.create({ 
             username, 
             password: hashedPassword,
-            avatar_url: avatar_url || null
+            avatar_url
          });
 
         const token = createToken(user.id);
