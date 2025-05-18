@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import logo from '../../assets/logo.png'
 import { useNavigate } from 'react-router-dom'
+import signupImage from '../../assets/pet.jpg'
 
 const SignupForm = () => {
     const [username, setUsername] = React.useState('');
@@ -26,7 +27,7 @@ const SignupForm = () => {
                 formData.append('avatar', avatar);
             }
 
-            const res = await axios.post('http://localhost:5000/api/auth/register', formData);``
+            const res = await axios.post('http://localhost:5000/api/auth/register', formData);
 
             const { token, user } = res.data;
 
@@ -42,7 +43,60 @@ const SignupForm = () => {
 
   return (
     <div>
-      
+        <div className='flex flex-col lg:flex-row'>
+
+            <div className='absolute top-4 left-4'>
+                <img className='h-15 w-15' src={logo} alt='logo' />
+            </div>
+
+            <div className='flex flex-col justify-center items-center w-full lg:w-1/2 min-h-screen'>
+                <div className='w-3/4 lg:w-2/3 max-w-md rounded-lg'>
+                    <h1 className='text-3xl mb-6 text-center'>Get Started Now</h1>
+                    <form onSubmit={handleSignup}>
+                        <div>
+                            <label htmlFor='username' className='block mb-2'>
+                                Username
+                            </label>
+                            <input
+                                className='border border-gray-300 rounded-md p-2 w-full'
+                                id='username'
+                                type='text'
+                                onChange={(e) => setUsername(e.target.value)}
+                                placeholder='Enter your username'
+                            />
+                            <label htmlFor='password' className='block mb-2 mt-4'>
+                                Password
+                            </label>
+                            <input 
+                                className='border border-gray-300 rounded-md p-2 w-full'
+                                id='password'
+                                type='password'
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder='Enter your password'
+                            />
+                        </div>
+                        {errorMsg && (
+                            <p className='text-red-500 mt-2 text-sm'>{errorMsg}</p>
+                        )}
+                        <button className='bg-orange-500 text-white hover:bg-orange-800 rounded-md p-2 mt-4 w-full'>
+                            Sign Up
+                        </button>
+                        <p className='text-center mt-4'>
+                            Already have an account? <a href='/login' className='text-orange-500 underline hover:text-orange-800'>Log in</a>
+                        </p>
+                        <div className='absolute bottom-4 left-4'>
+                            <p className='text-xs'>
+                                &copy; {new Date().getFullYear} Coinly. All rights reserved.
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div className='hidden lg:flex w-full lg:w-1/2'>
+                <img className='w-full h-full object-cover object-center' src={signupImage} alt='Pet'/>
+            </div>
+        </div>
     </div>
   )
 }

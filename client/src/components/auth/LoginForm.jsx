@@ -74,11 +74,11 @@ const LoginForm = () => {
                 Log in
               </button>
               <p className='mt-4 text-center'>
-                Don't have an account? <a href='/signup' className='underline text-orange-500 hover:text-orange-800'>Sign up</a>
+                Don't have an account? <a href='/register' className='underline text-orange-500 hover:text-orange-800'>Sign up</a>
               </p>
-              <div className='hidden absolute bottom-4 left-4'>
+              <div className='absolute bottom-4 left-4'>
                 <p className='text-xs'>
-                  &copy; {new Date().getFullYear)} Coinly. All rights reserved.
+                  &copy; {new Date().getFullYear} Coinly. All rights reserved.
                 </p>
               </div>
             </form>
