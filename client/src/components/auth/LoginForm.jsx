@@ -65,6 +65,9 @@ const LoginForm = () => {
                   placeholder='Enter your password'>
                 </input>
               </div>
+              {errorMsg && (
+                <p className='text-red-500 mt-2 text-sm'>{errorMsg}</p>
+              )}
               <button className='bg-orange-500 text-white hover:bg-orange-800 rounded-md p-2 mt-4 w-full'>
                 Log in
               </button>
