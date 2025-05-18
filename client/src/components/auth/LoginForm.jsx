@@ -1,8 +1,34 @@
 import React from 'react'
+import axios from 'axios'
 import loginImage from '../../assets/pets.jpeg'
 import logo from "../../assets/logo.png"
 
 const LoginForm = () => {
+  const [username, setUsername] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [errorMsg, setErrorMsg] = React.useState('');
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await axios.post('http://localhost:5000/api/auth/login', {
+        username,
+        password
+      });
+
+      const { token, user } = res.data;
+
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
+
+      window.location.href = '/dashboard';
+
+    } catch (err) {
+      setErrorMsg(err.response?.data?.error || 'Login failed');
+    }
+  };
+
   return (
     <div>
       <div className='flex flex-col lg:flex-row'>
@@ -14,7 +40,7 @@ const LoginForm = () => {
         <div className='flex flex-col justify-center items-center w-full lg:w-1/2 min-h-screen'>
           <div className='w-3/4 lg:w-2/3 max-w-md rounded-lg'>
             <h1 className='text-3xl mb-6 text-center'>Log In</h1>
-            <form>
+            <form onSubmit={handleLogin}>
               <div>
                 <label htmlFor='username' className='block mb-2'>
                   Username
@@ -23,6 +49,7 @@ const LoginForm = () => {
                   className='border border-gray-300 rounded-md p-2 w-full' 
                   id='username' 
                   type='text' 
+                  onChange={(e) => setUsername(e.target.value)}
                   placeholder='Enter your username'>
                 </input>
               </div>
@@ -34,6 +61,7 @@ const LoginForm = () => {
                   className='border border-gray-300 rounded-md p-2 w-full'
                   id='password'
                   type='password'
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder='Enter your password'>
                 </input>
               </div>
@@ -45,7 +73,7 @@ const LoginForm = () => {
               </p>
               <div className='hidden absolute bottom-4 left-4'>
                 <p className='text-xs'>
-                  &copy; {new Date().getFullYear()} Coinly. All rights reserved.
+                  &copy; {new Date().getFullYear)} Coinly. All rights reserved.
                 </p>
               </div>
             </form>
