@@ -16,14 +16,14 @@ const LoginForm = () => {
             <h1 className='text-3xl mb-6 text-center'>Log In</h1>
             <form>
               <div>
-                <label htmlFor='email' className='block mb-2'>
-                  Email
+                <label htmlFor='username' className='block mb-2'>
+                  Username
                 </label>
                 <input
                   className='border border-gray-300 rounded-md p-2 w-full' 
-                  id='email' 
-                  type='email' 
-                  placeholder='Enter your email'>
+                  id='username' 
+                  type='text' 
+                  placeholder='Enter your username'>
                 </input>
               </div>
               <div>
@@ -43,7 +43,7 @@ const LoginForm = () => {
               <p className='mt-4 text-center'>
                 Don't have an account? <a href='/signup' className='underline text-orange-500 hover:text-orange-800'>Sign up</a>
               </p>
-              <div className='absolute bottom-4 left-4'>
+              <div className='hidden absolute bottom-4 left-4'>
                 <p className='text-xs'>
                   &copy; {new Date().getFullYear()} Coinly. All rights reserved.
                 </p>
