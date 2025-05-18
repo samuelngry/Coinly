@@ -2,11 +2,13 @@ import React from 'react'
 import axios from 'axios'
 import loginImage from '../../assets/pets.jpeg'
 import logo from "../../assets/logo.png"
+import { useNavigate } from 'react-router-dom'
 
 const LoginForm = () => {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [errorMsg, setErrorMsg] = React.useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -22,7 +24,7 @@ const LoginForm = () => {
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
 
-      window.location.href = '/dashboard';
+      navigate('/dashboard');
 
     } catch (err) {
       setErrorMsg(err.response?.data?.error || 'Login failed');
