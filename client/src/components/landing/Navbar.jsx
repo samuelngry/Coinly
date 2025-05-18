@@ -2,6 +2,7 @@ import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { navItems } from "../../constants";
 import logo from "../../assets/logo.png";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
     const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
@@ -15,7 +16,9 @@ const Navbar = () => {
             <div className="container px-4 mx-auto relative text-sm">
                 <div className="flex justify-between items-center">
                     <div className="flex items-center flex-shrink-0">
-                        <img className="h-15 w-15 mr-2" src={logo} alt="logo" />
+                        <Link to="/">
+                            <img className="h-15 w-15 mr-2" src={logo} alt="logo" />
+                        </Link>
                     </div>
                     <ul className="hidden lg:flex ml-14 space-x-12">
                         {navItems.map((item, index) => (
@@ -25,10 +28,10 @@ const Navbar = () => {
                         ))}
                     </ul>
                     <div className="hidden lg:flex justify-center space-x-12 items-center">
-                        <a href="#" className="py-2 px-3 border rounded-md">
+                        <a href="/register" className="py-2 px-3 border rounded-md">
                             Sign In
                         </a>
-                        <a href="#" className="bg-gradient-to-r from-orange-500 to-orange-800 py-2 px-3 rounded-md text-white">
+                        <a href="/login" className="bg-gradient-to-r from-orange-500 to-orange-800 py-2 px-3 rounded-md text-white">
                             Create Account
                         </a>
                     </div>
@@ -48,10 +51,10 @@ const Navbar = () => {
                             ))}
                         </ul>
                         <div className="flex space-x-6 p-3">
-                            <a href='#' className="py-2 px-3 border rounded-md">
+                            <a href='/register' className="py-2 px-3 border rounded-md">
                                 Sign In
                             </a>
-                            <a href='#' className="bg-gradient-to-r from-orange-500 to-orange-800 py-2 px-3 rounded-md text-white">
+                            <a href='/login' className="bg-gradient-to-r from-orange-500 to-orange-800 py-2 px-3 rounded-md text-white">
                                 Create Account
                             </a>
                         </div>

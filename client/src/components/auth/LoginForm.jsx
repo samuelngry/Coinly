@@ -3,6 +3,7 @@ import axios from 'axios'
 import loginImage from '../../assets/pets.jpeg'
 import logo from "../../assets/logo.png"
 import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const LoginForm = () => {
   const [username, setUsername] = React.useState('');
@@ -36,7 +37,9 @@ const LoginForm = () => {
       <div className='flex flex-col lg:flex-row'>
 
         <div className='absolute top-4 left-4'>
-          <img className='h-15 w-15' src={logo} alt='logo' />
+          <Link to='/'>
+            <img className='h-15 w-15' src={logo} alt='logo' />
+          </Link>
         </div>
        
         <div className='flex flex-col justify-center items-center w-full lg:w-1/2 min-h-screen'>

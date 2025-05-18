@@ -6,7 +6,7 @@ const Cta = () => {
             Join Coinly today and watch your savings grow while having fun!
         </p>
         <div className="flex justify-center mt-10">
-            <a href='#' className="bg-gradient-to-r from-orange-500 to-orange-800 px-3 py-2 mx-3 rounded-md text-white">
+            <a href='/register' className="bg-gradient-to-r from-orange-500 to-orange-800 px-3 py-2 mx-3 rounded-md text-white">
                 Sign Up
             </a>
         </div>

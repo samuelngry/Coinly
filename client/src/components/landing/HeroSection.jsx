@@ -15,7 +15,7 @@ const HeroSection = () => {
             Turn saving into a fun, rewarding game — complete quests, watch your savings grow, and care for your coin buddy.
         </p>
         <div className="flex justify-center my-10">
-            <a href="#" className="bg-gradient-to-r from-orange-500 to-orange-800 px-3 py-2 mx-3 rounded-md text-white">
+            <a href="/register" className="bg-gradient-to-r from-orange-500 to-orange-800 px-3 py-2 mx-3 rounded-md text-white">
                 Get Started
             </a>
         </div>
