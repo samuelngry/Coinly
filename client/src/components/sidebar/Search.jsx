@@ -7,7 +7,7 @@ const Search = () => {
 
     return (
         <>
-            <div className="bg-stone-100 mb-4 relative rounded flex items-center px-2 py-1.5 text-sm mr-4">
+            <div className="bg-stone-100 mb-4 relative rounded flex items-center px-2 py-1.5 text-sm mr-4 text-stone-400">
                 <FiSearch className='mr-2' />
                 <input 
                     onFocus={(e) => {
@@ -16,10 +16,10 @@ const Search = () => {
                     }}
                     type='text'
                     placeholder='Search'
-                    className='w-full pr-8 bg-transparent placeholder:text-stone-300 focus:outline-none'
+                    className='w-full pr-8 bg-transparent placeholder:text-stone-400 focus:outline-none'
                 />
 
-                <span className='absolute right-2 flex items-center text-xs gap-0.5 p-0.5 bg-white rounded'>
+                <span className='absolute right-2 flex items-center text-xs gap-0.5 p-0.5 bg-white rounded text-black'>
                     <FiCommand />K
                 </span>
             </div>

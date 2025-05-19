@@ -22,7 +22,7 @@ const CommandMenu = ({ open, setOpen }) => {
         open={open} 
         onOpenChange={setOpen} 
         label="Global Command Menu"
-        className='fixed inset-0 bg-stone-950/50'
+        className='fixed inset-0 bg-stone-950/50 text-sm'
         onClick={() => setOpen(false)}
     >
         <div
@@ -33,14 +33,14 @@ const CommandMenu = ({ open, setOpen }) => {
             value={value}
             onValueChange={setValue} 
             placeholder='Search'
-            className='relative border-b border-stone-300 p-3 text-lg w-full placeholder:text-stone-400 focus:outline-none focus:ring-0 focus:border-stone-500'
+            className='relative border-b border-stone-300 p-3 text-sm w-full placeholder:text-stone-400 focus:outline-none focus:ring-0 focus:border-stone-500'
         />
         <Command.List className='p-3'>
             <Command.Empty>
                 No results found for {" "}
                 <span className='text-orange-500'>{value}</span>
             </Command.Empty>
-        
+
             <Command.Group heading="Letters">
             <Command.Item>a</Command.Item>
             <Command.Item>b</Command.Item>
