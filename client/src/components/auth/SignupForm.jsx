@@ -3,7 +3,6 @@ import axios from 'axios'
 import logo from '../../assets/logo.png'
 import { useNavigate } from 'react-router-dom'
 import signupImage from '../../assets/pet.jpg'
-import defaultAvatar from '../../assets/avatar.jpg'
 import { Link } from 'react-router-dom'
 
 const SignupForm = () => {
@@ -54,7 +53,7 @@ const SignupForm = () => {
             </div>
 
             <div className='flex flex-col justify-center items-center w-full lg:w-1/2 min-h-screen'>
-                <div className='w-3/4 lg:w-2/3 max-w-md rounded-lg'>
+                <div className='w-3/4 lg:w-2/3 rounded-lg'>
                     <h1 className='text-3xl mb-6 text-center'>Get Started Now</h1>
                     <form onSubmit={handleSignup}>
                         {/* Username and Password Fields */}
