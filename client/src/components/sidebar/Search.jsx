@@ -7,9 +7,13 @@ const Search = () => {
 
     return (
         <>
-            <div className="bg-stone-100 mb-4 relative rounded flex items-center px-2 py-1.5 text-sm">
+            <div className="bg-stone-100 mb-4 relative rounded flex items-center px-2 py-1.5 text-sm mr-4">
                 <FiSearch className='mr-2' />
                 <input 
+                    onFocus={(e) => {
+                        e.target.blur();
+                        setOpen(true);
+                    }}
                     type='text'
                     placeholder='Search'
                     className='w-full pr-8 bg-transparent placeholder:text-stone-300 focus:outline-none'
