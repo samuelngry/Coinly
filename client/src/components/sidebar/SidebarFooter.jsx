@@ -1,17 +1,15 @@
 import React from 'react'
-import { FiHome, FiFlag, FiStar, FiAward } from 'react-icons/fi'
+import { FiSettings, FiLogOut } from 'react-icons/fi'
 import { NavLink } from 'react-router-dom'
 
 const routes = [
-    { to: '/dashboard', label: 'Dashboard', icon: <FiHome /> },
-    { to: '/quests', label: 'Quests', icon: <FiFlag /> },
-    { to: '/pet', label: 'Coin Pet', icon: <FiStar /> },
-    { to: '/leaderboard', label: 'Leaderboard', icon: <FiAward /> }, 
+    { to: '/settings', label: 'Settings', icon: <FiSettings /> },
+    { to: '/logout', label: 'Logout', icon: <FiLogOut /> },
 ]
 
-const RouteSelect = () => {
+const SidebarFooter = () => {
   return (
-    <div className='space-y-2'>
+    <div className='space-y-2 border-t border-stone-300 pt-2 mb-8 mt-auto'>
       {routes.map(({ to, label, icon }) => (
         <NavLink
             key={to}
@@ -30,4 +28,4 @@ const RouteSelect = () => {
   )
 }
 
-export default RouteSelect
+export default SidebarFooter
