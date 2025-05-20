@@ -9,7 +9,7 @@ const routes = [
 
 const SidebarFooter = () => {
   return (
-    <div className='space-y-2 border-t border-stone-300 pt-2 mb-8 mt-auto'>
+    <div className='space-y-2 border-t border-stone-300 pt-2 mb-8 mt-auto mr-4'>
       {routes.map(({ to, label, icon }) => (
         <NavLink
             key={to}
