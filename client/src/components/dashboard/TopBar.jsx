@@ -7,7 +7,9 @@ const TopBar = () => {
         <div className='flex items-center justify-between p-0.5'>
             <div>
                 <span className='text-sm font-semibold block'>Hey, Yi Jing!</span>
-                <span className='text-neutral-500 block text-xs'>Wednesday, May 21st 2025</span>
+                <span className='text-neutral-500 block text-xs'>  
+                    {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                </span>
             </div>
             <button className='flex text-sm items-center gap-1.5 bg-orange-500 hover:bg-orange-800 text-white rounded-md px-2 py-1'>
                 <FiCalendar className='text-white' />
