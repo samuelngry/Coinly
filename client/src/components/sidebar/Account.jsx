@@ -9,6 +9,7 @@ const Account = () => {
         />
         <div className="text-start">
             <span className="text-sm font-semibold block">yii.jing</span>
+            <span className="text-xs text-neutral-500 block">yijing@gmail.com</span>
         </div>
       </button>
     </div>
