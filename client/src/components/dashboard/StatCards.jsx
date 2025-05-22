@@ -60,7 +60,8 @@ const Card = ({
         : (
             <>
                 <FiTrendingDown className='text-red-500 mr-1'/>
-                <span className='mr-1'>{percent} Down from</span>
+                <span className='text-red-500 mr-1'>{percent}</span>
+                <span className='mr-1'>Down from</span>
             </>
         );
 
@@ -75,7 +76,7 @@ const Card = ({
                 {icon}
             </div>
             <div className='flex flex-col'>
-                <span className='text-neutral-500 flex items-center text-xs mt-2'>
+                <span className='text-neutral-500 flex items-center text-xs mt-6'>
                     {trendIcon}
                     {period}
                 </span>
