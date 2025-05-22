@@ -10,6 +10,7 @@ const StatCards = () => {
         value= "5"
         pillText= "XP: 350/500"
         trend= "up"
+        percent='4.3%'
         period= "last 30 days"
         icon= {<FiZap className='w-10 h-10 bg-yellow-100 text-yellow-400 rounded-full px-2 py-2 shrink-0'/>}
       />
@@ -24,32 +25,37 @@ const Card = ({
     value= '',
     pillText= '',
     trend= "up",
+    percent= '',
     period= '',
     icon= null,
 }) => {
     const trendIcon = trend === "up"
         ? (
-            <>
+            <div className='flex items-center'>
                 <FiTrendingUp className='text-green-500 mr-1'/>
-                <span className='mr-1'>Up from</span>
-            </>
+                <span className='text-green-500 mr-1'>{percent}</span>
+                <span className='mr-1'> Up from</span>
+            </div>
         )
         : (
             <>
                 <FiTrendingDown className='text-red-500 mr-1'/>
-                <span className='mr-1'>Down from</span>
+                <span className='mr-1'>{percent} Down from</span>
             </>
         );
 
     return (
-        <div className='min-w-[120px] p-4 col-span-2 border-stone-300 border rounded shadow'>
+        <div className='min-w-[200px] p-4 col-span-2 rounded-2xl bg-white shadow'>
             <div className='flex items-start justify-between'>
-                <span className='text-neutral-500 text-s'>{title}</span>
+                <div className='flex flex-col'>
+                    <span className='text-neutral-500 text-sm'>{title}</span>
+                    <span className='text-2xl mt-2 '>{value}</span>
+                </div>
+
                 {icon}
             </div>
             <div className='flex flex-col'>
-                <span className='text-s'>{value}</span>
-                <span className='text-neutral-500 flex items-center'>
+                <span className='text-neutral-500 flex items-center text-xs mt-2'>
                     {trendIcon}
                     {period}
                 </span>
