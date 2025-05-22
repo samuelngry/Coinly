@@ -1,5 +1,6 @@
 import React from 'react'
-import { FiZap, FiTrendingDown, FiTrendingUp } from 'react-icons/fi'
+import { FiZap,  FiTrendingDown, FiTrendingUp } from 'react-icons/fi'
+import { FaFire } from 'react-icons/fa'
 
 // TODO: Create card components that displays the stats of the user
 const StatCards = () => {
@@ -8,11 +9,18 @@ const StatCards = () => {
       <Card
         title= "Level"
         value= "5"
-        pillText= "XP: 350/500"
         trend= "up"
         percent='4.3%'
         period= "last 30 days"
         icon= {<FiZap className='w-10 h-10 bg-yellow-100 text-yellow-400 rounded-full px-2 py-2 shrink-0'/>}
+      />
+      <Card 
+        title='Streak'
+        value='67 Days'
+        trend='up'
+        percent='1.3%'
+        period='past week'
+        icon={<FaFire className='w-10 h-10 bg-red-100 text-red-400 rounded-full px-2 py-2 shrink-0'/>}
       />
     </>
   );
@@ -23,7 +31,6 @@ const StatCards = () => {
 const Card = ({
     title= '',
     value= '',
-    pillText= '',
     trend= "up",
     percent= '',
     period= '',
@@ -49,7 +56,7 @@ const Card = ({
             <div className='flex items-start justify-between'>
                 <div className='flex flex-col'>
                     <span className='text-neutral-500 text-sm'>{title}</span>
-                    <span className='text-2xl mt-2 '>{value}</span>
+                    <span className='text-xl mt-2 font-semibold'>{value}</span>
                 </div>
 
                 {icon}
