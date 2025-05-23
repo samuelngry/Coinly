@@ -19,7 +19,7 @@ const PetWidget = ({ mood = "happy" }) => {
     return (
         <div className='flex flex-col justify-center bg-white items-center col-span-6 rounded-2xl bg-white shadow'>
             <img src={petImage} alt={`Pet is ${mood}`} className='w-46 h-46 object-contain'/>
-            <span className='text-xl font-semibold'>Fluffy</span>
+            <span className='text-xl font-semibold mb-2'>Fluffy</span>
         </div>
     )
 }
