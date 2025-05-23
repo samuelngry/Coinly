@@ -1,5 +1,4 @@
 import React from 'react'
-import { FiUser } from 'react-icons/fi'
 import {
   BarChart,
   Bar,
@@ -8,6 +7,8 @@ import {
   Tooltip,
   CartesianGrid,
   ResponsiveContainer,
+  ReferenceLine,
+  Cell
 } from 'recharts';
 
 const data = [
@@ -29,15 +30,27 @@ const ActivityGraph = () => {
         <div className="w-full h-64 mt-2">
             <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={data} margin={{ top: 16, right: 24, left: 0, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="xp" fill="#facc15" radius={[12, 12, 0, 0]}  />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip cursor={{ fill: '#fef9c3' }} />
+                    <Bar
+                        dataKey='xp'
+                        radius={[12, 12, 0, 0]}
+                        isAnimationActive={true}
+                        animationDuration={800}
+                        animationEasing='ease-in-out'
+                    >
+                        {data.map((entry, index) => (
+                            <Cell
+                                key={`cell-${index}`}
+                                fill={entry.name === 'Sun' ? '#f97316' : '#facc15'}
+                            />
+                        ))}
+                    </Bar>                
                 </BarChart>
             </ResponsiveContainer>
         </div>
-
     </div>
   )
 }
