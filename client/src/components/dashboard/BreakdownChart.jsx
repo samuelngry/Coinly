@@ -14,7 +14,8 @@ const BreakdownChart = () => {
   return (
     <div className="p-4 col-span-6 rounded-2xl bg-white shadow">
       <h3>Total XP</h3>
-      <div className="w-full h-64">
+      <div className='flex w-full h-64'>
+        <div className="w-1/2">
         <ResponsiveContainer width="100%" height="100%">
           <PieChart>
             <Pie
@@ -34,6 +35,21 @@ const BreakdownChart = () => {
             <Tooltip />
           </PieChart>
         </ResponsiveContainer>
+        </div>
+
+       <div className="w-1/2 flex flex-col justify-center">
+          {data.map((entry, index) => (
+            <div key={`legend-${index}`} className="flex items-center mb-4">
+              <div
+                className="w-4 h-4 rounded mr-2"
+                style={{ backgroundColor: COLORS[index % COLORS.length] }}
+              />
+              <span className="text-sm text-gray-700">
+                {entry.name}: {entry.value}
+              </span>
+            </div>
+            ))}
+        </div>
       </div>
     </div>
   );
