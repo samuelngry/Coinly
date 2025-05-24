@@ -59,6 +59,17 @@ const QuestsTable = () => {
                     <th className='p-4'>Status</th>
                 </tr>
             </thead>
+            <tbody>
+                {quests.map((quest, index) => (
+                    <tr key={index}>
+                        <td className='p-4'>{quest.name}</td>
+                        <td className='p-4'>{quest.category}</td>
+                        <td className='p-4'>{quest.xp}</td>
+                        <td className='p-4'>{quest.timeLeft}</td>
+                        <td className='p-4'>{quest.status}</td>
+                    </tr>
+                ))}
+            </tbody>
         </table>
     </div>
   )
