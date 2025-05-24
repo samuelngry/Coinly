@@ -46,7 +46,7 @@ const quests = [
 ]
 
 const statusColors = {
-    Pending: 'bg-yellow-500',
+    Pending: 'bg-gray-400',
     Accepted: 'bg-amber-500',
     Completed: 'bg-green-500',
     Expired: 'bg-red-500',
