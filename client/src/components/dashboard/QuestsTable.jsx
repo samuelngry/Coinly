@@ -33,17 +33,24 @@ const quests = [
         quest: "Use public transit instead of rideshare today",
         category: "Transport",
         xp: 20 * 1, 
-        status: "Pending",
+        status: "Completed",
         timeLeft: "1d"
     },
     {
         quest: "Share subscription with friends instead of paying individually for three days",
         category: "Entertainment",
         xp: 15 * 3,
-        status: "Completed",
+        status: "Expired",
         timeLeft: "-"
     }
 ]
+
+const statusColors = {
+    Pending: 'bg-yellow-500',
+    Accepted: 'bg-amber-500',
+    Completed: 'bg-green-500',
+    Expired: 'bg-red-500',
+};
 
 const QuestsTable = () => {
   return (
@@ -62,11 +69,13 @@ const QuestsTable = () => {
             <tbody>
                 {quests.map((quest, index) => (
                     <tr key={index}>
-                        <td className='p-4'>{quest.name}</td>
+                        <td className='p-4 max-w-xs'>{quest.name || quest.quest}</td>
                         <td className='p-4'>{quest.category}</td>
                         <td className='p-4'>{quest.xp}</td>
                         <td className='p-4'>{quest.timeLeft}</td>
-                        <td className='p-4'>{quest.status}</td>
+                        <td className='p-4'>
+                            <span className={`px-3 py-1 text-white rounded-full ${statusColors[quest.status]}`}>{quest.status}</span>
+                        </td>
                     </tr>
                 ))}
             </tbody>
