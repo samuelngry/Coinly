@@ -2,6 +2,7 @@ import React from 'react'
 import StatCards from './StatCards'
 import ActivityGraph from './ActivityGraph'
 import BreakdownChart from './BreakdownChart'
+import QuestsTable from './QuestsTable'
 
 const Grid = () => {
   return (
@@ -9,6 +10,7 @@ const Grid = () => {
       <StatCards />
       <ActivityGraph />
       <BreakdownChart />
+      <QuestsTable />
     </div>
   )
 }

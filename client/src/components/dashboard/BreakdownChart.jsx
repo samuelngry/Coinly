@@ -39,7 +39,7 @@ const BreakdownChart = () => {
 
        <div className="w-1/2 flex flex-col justify-center">
           {data.map((entry, index) => (
-            <div key={`legend-${index}`} className="flex items-center mb-4">
+            <div key={`legend-${index}`} className="flex items-center mb-2 border-b border-stone-300 mr-4 pb-2">
               <div
                 className="w-4 h-4 rounded mr-2"
                 style={{ backgroundColor: COLORS[index % COLORS.length] }}
