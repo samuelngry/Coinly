@@ -47,8 +47,19 @@ const quests = [
 
 const QuestsTable = () => {
   return (
-    <div>
-        
+    <div className='p-4 col-span-12 rounded-2xl bg-white shadow'>
+        <h3 className='font-semibold mb-4'>Quest Hub</h3>
+        <table className='w-full table-auto text-sm rounded-xl overflow-hidden'>
+            <thead>
+                <tr style={{ backgroundColor: 'var(--old-lace)' }} className='text-left'>
+                    <th className='p-4'>Quest</th>
+                    <th className='p-4'>Category</th>
+                    <th className='p-4'>XP</th>
+                    <th className='p-4'>Time Left</th>
+                    <th className='p-4'>Status</th>
+                </tr>
+            </thead>
+        </table>
     </div>
   )
 }
