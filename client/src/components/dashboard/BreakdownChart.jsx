@@ -8,7 +8,7 @@ const data = [
   { name: 'Shopping', value: 80 },
 ];
 
-const COLORS = ['#facc15', '#f97316', '#60a5fa', '#34d399'];
+const COLORS = ['#34d399', '#60a5fa', '#a78bfa', '#f472b6'];
 
 const BreakdownChart = () => {
   return (

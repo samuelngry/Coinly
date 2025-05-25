@@ -3,14 +3,14 @@ import React from 'react'
 const quests = [
     { 
         name: "Skip coffee today",
-        category: "Food & Drink",
+        category: "Food",
         xp: 5 * 1,
         status: "Pending",
         timeLeft: "12h"
     },
     {
         quest: "Make your own lunch for two days",
-        category: "Food & Drink",
+        category: "Food",
         xp: 5 * 2, 
         status: "Pending",
         timeLeft: "2d"
@@ -24,7 +24,7 @@ const quests = [
     },
     {
         quest: "Cook at home instead of getting takeout food for the weekend",
-        category: "Food & Drink",
+        category: "Food",
         xp: 12 * 2,
         status: "Accepted",
         timeLeft: "2d"
@@ -52,6 +52,13 @@ const statusColors = {
     Expired: 'bg-red-500',
 };
 
+const categoryColors = {
+    Food: 'text-emerald-400',
+    Transport: 'text-blue-400',
+    Entertainment: 'text-purple-400',
+    Shopping: 'text-pink-400',
+}
+
 const QuestsTable = () => {
   return (
     <div className='p-4 col-span-12 rounded-2xl bg-white shadow'>
@@ -70,7 +77,7 @@ const QuestsTable = () => {
                 {quests.map((quest, index) => (
                     <tr key={index} className='border-t border-stone-300'>
                         <td className='p-4 max-w-xs'>{quest.name || quest.quest}</td>
-                        <td className='p-4'>{quest.category}</td>
+                        <td className={`p-4 ${categoryColors[quest.category]}`}>{quest.category}</td>
                         <td className='p-4 text-orange-500'>{quest.xp}</td>
                         <td className='p-4'>{quest.timeLeft}</td>
                         <td className='p-4'>
