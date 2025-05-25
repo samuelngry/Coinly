@@ -23,7 +23,7 @@ const data = [
 
 const ActivityGraph = () => {
   return (
-    <div className='p-4 col-span-6 rounded-2xl bg-white shadow'>
+    <div className='p-4 col-span-12 xl:col-span-6 rounded-2xl bg-white shadow'>
         <div className='flex items-start justify-between'>
             <h3>XP Progress</h3>
         </div>
