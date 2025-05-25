@@ -12,14 +12,14 @@ const quests = [
         quest: "Make your own lunch for two days",
         category: "Food & Drink",
         xp: 5 * 2, 
-        status: "Accepted",
+        status: "Pending",
         timeLeft: "2d"
     },
     {
         quest: "Find a cheaper alternative to subscription this week",
         category: "Entertainment",
         xp: 15 * 7,
-        status: "Pending",
+        status: "Accepted",
         timeLeft: "2d"
     },
     {
@@ -37,7 +37,7 @@ const quests = [
         timeLeft: "1d"
     },
     {
-        quest: "Share subscription with friends instead of paying individually for three days",
+        quest: "Share subscription with friends instead of paying individually for today",
         category: "Entertainment",
         xp: 15 * 3,
         status: "Expired",
@@ -47,7 +47,7 @@ const quests = [
 
 const statusColors = {
     Pending: 'bg-gray-400',
-    Accepted: 'bg-amber-500',
+    Accepted: 'bg-orange-500',
     Completed: 'bg-green-500',
     Expired: 'bg-red-500',
 };
@@ -71,7 +71,7 @@ const QuestsTable = () => {
                     <tr key={index} className='border-t border-stone-300'>
                         <td className='p-4 max-w-xs'>{quest.name || quest.quest}</td>
                         <td className='p-4'>{quest.category}</td>
-                        <td className='p-4'>{quest.xp}</td>
+                        <td className='p-4 text-orange-500'>{quest.xp}</td>
                         <td className='p-4'>{quest.timeLeft}</td>
                         <td className='p-4'>
                             <span className={`px-3 py-1 text-white rounded-full ${statusColors[quest.status]}`}>{quest.status}</span>
