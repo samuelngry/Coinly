@@ -68,7 +68,7 @@ const QuestsTable = () => {
             </thead>
             <tbody>
                 {quests.map((quest, index) => (
-                    <tr key={index}>
+                    <tr key={index} className='border-t border-stone-300'>
                         <td className='p-4 max-w-xs'>{quest.name || quest.quest}</td>
                         <td className='p-4'>{quest.category}</td>
                         <td className='p-4'>{quest.xp}</td>

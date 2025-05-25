@@ -6,11 +6,11 @@ import QuestsTable from './QuestsTable'
 
 const Grid = () => {
   return (
-    <div className='px-4 grid gap-6 grid-cols-12'>
-      <StatCards />
-      <ActivityGraph />
-      <BreakdownChart />
-      <QuestsTable />
+    <div className='px-4 grid gap-6 lg:grid-cols-12 md:grid-cols-9 grid-cols-6'>
+        <StatCards />
+        <BreakdownChart />
+        <ActivityGraph />
+        <QuestsTable />
     </div>
   )
 }
