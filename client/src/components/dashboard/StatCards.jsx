@@ -66,7 +66,7 @@ const Card = ({
         );
 
     return (
-        <div className='min-w-[200px] p-4 col-span-3 rounded-2xl bg-white shadow'>
+        <div className='min-w-[200px] p-4 col-span-12 md:col-span-6 xl:col-span-3 rounded-2xl bg-white shadow'>
             <div className='flex items-start justify-between'>
                 <div className='flex flex-col'>
                     <span className='text-neutral-500 text-sm'>{title}</span>
