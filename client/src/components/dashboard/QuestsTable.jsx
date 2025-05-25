@@ -63,7 +63,36 @@ const QuestsTable = () => {
   return (
     <div className='p-4 col-span-12 rounded-2xl bg-white shadow'>
         <h3 className='font-semibold mb-4'>Quest Hub</h3>
-        <table className='w-full table-auto text-sm rounded-xl overflow-hidden'>
+
+        {/* Cards on small screen */}
+        <div className='space-y-4 lg:hidden'>
+            {quests.map((quest, index) => (
+                <div key={index} className='p-4 rounded-2xl shadow bg-neutral-100 flex flex-col'>
+                    <div className='border-b border-stone-300 flex flex-col p-2'>
+                        <span className='text-neutral-500 text-sm'>Quest</span>
+                        <span className='text-sm font-semibold mt-2'>{quest.name || quest.quest}</span>
+                    </div>
+                    <div className='p-2 flex border-b border-stone-300 items-center justify-between'>
+                        <span className='text-neutral-500 text-sm'>Category</span>
+                        <span className={`text-sm ${categoryColors[quest.category]}`}>{quest.category}</span>
+                    </div>
+                    <div className='p-2 flex border-b border-stone-300 items-center justify-between'>
+                        <span className='text-neutral-500 text-sm'>XP</span>
+                        <span className='text-orange-500 text-sm'>{quest.xp}</span>
+                    </div>
+                    <div className='p-2 flex items-center justify-between'>
+                        <span className='text-neutral-500 text-sm'>Time Left</span>
+                        <span className='text-sm'>{quest.timeLeft}</span>
+                    </div>
+                    <div className='p-2 flex justify-center'>
+                        <span className={`text-center px-3 py-1 text-white rounded-full ${statusColors[quest.status]}`}>{quest.status}</span>
+                    </div>
+                </div>
+            ))}
+        </div>
+
+        {/* Table on medium+ screens*/}
+        <table className='hidden w-full md:table text-sm rounded-xl overflow-hidden table-fixed'>
             <thead>
                 <tr style={{ backgroundColor: 'var(--old-lace)' }} className='text-left'>
                     <th className='p-4'>Quest</th>
