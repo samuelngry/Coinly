@@ -3,16 +3,16 @@ import { FiHome, FiFlag, FiStar, FiAward } from 'react-icons/fi'
 import { NavLink } from 'react-router-dom'
 
 const routes = [
-    { to: '/dashboard', label: 'Dashboard', icon: <FiHome /> },
-    { to: '/quests', label: 'Quests', icon: <FiFlag /> },
-    { to: '/pet', label: 'Coin Pet', icon: <FiStar /> },
-    { to: '/leaderboard', label: 'Leaderboard', icon: <FiAward /> }, 
+    { to: '/dashboard', label: 'Dashboard', icon: (className) => <FiHome className={className}/>, color: 'text-blue-500' },
+    { to: '/quests', label: 'Quests', icon: (className) => <FiFlag className={className} />, color: 'text-emerald-500' },
+    { to: '/pet', label: 'Coin Pet', icon: (className) => <FiStar className={className} />, color: 'text-yellow-500' },
+    { to: '/leaderboard', label: 'Leaderboard', icon: (className) => <FiAward className={className} />, color: 'text-purple-500' }, 
 ]
 
 const RouteSelect = () => {
   return (
     <div className='space-y-2'>
-      {routes.map(({ to, label, icon }) => (
+      {routes.map(({ to, label, icon, color }) => (
         <NavLink
             key={to}
             to={to}
@@ -22,8 +22,12 @@ const RouteSelect = () => {
                 }`
             }
         >
-            {icon}
-            {label}
+            {({ isActive }) => (
+              <>
+                {icon(isActive ? 'text-white' : color)}
+                {label}
+              </>
+            )}
         </NavLink>
       ))}
     </div>
