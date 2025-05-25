@@ -37,14 +37,14 @@ const BreakdownChart = () => {
             </ResponsiveContainer>
         </div>
 
-       <div className="w-full px-4 md:w-1/2 grid grid-cols-2 gap-x-2 gap-y-2 md:flex md:flex-col justify-items-start md:justify-center">
+       <div className="w-full px-4 md:w-1/2 grid grid-cols-2 gap-x-4 gap-y-2 md:flex md:flex-col justify-items-start md:justify-center">
           {data.map((entry, index) => (
             <div key={`legend-${index}`} className="flex items-center mb-2 md:border-b md:border-stone-300 pb-2">
               <div
                 className="w-4 h-4 rounded mr-2"
                 style={{ backgroundColor: COLORS[index % COLORS.length] }}
               />
-              <span className="text-sm">
+              <span className="text-xs md:text-sm">
                 {entry.name}: {entry.value}
               </span>
             </div>

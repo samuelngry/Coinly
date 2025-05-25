@@ -72,7 +72,6 @@ const Card = ({
                     <span className='text-neutral-500 text-sm'>{title}</span>
                     <span className='text-xl mt-2 font-semibold'>{value}</span>
                 </div>
-
                 {icon}
             </div>
             <div className='flex flex-col'>
