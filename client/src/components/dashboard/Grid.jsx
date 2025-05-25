@@ -6,7 +6,7 @@ import QuestsTable from './QuestsTable'
 
 const Grid = () => {
   return (
-    <div className='px-4 grid grid-cols-12 gap-6 items-stretch'>
+    <div className='px-4 grid grid-cols-12 p-4 gap-6 items-stretch'>
         <StatCards />
         <BreakdownChart />
         <ActivityGraph />

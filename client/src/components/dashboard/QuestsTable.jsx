@@ -91,8 +91,8 @@ const QuestsTable = () => {
             ))}
         </div>
 
-        {/* Table on medium+ screens*/}
-        <table className='hidden w-full md:table text-sm rounded-xl overflow-hidden table-fixed'>
+        {/* Table on large+ screens*/}
+        <table className='hidden w-full lg:table text-sm rounded-xl overflow-hidden table-fixed'>
             <thead>
                 <tr style={{ backgroundColor: 'var(--old-lace)' }} className='text-left'>
                     <th className='p-4'>Quest</th>

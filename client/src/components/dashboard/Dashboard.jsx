@@ -4,7 +4,7 @@ import Grid from './Grid'
 
 const Dashboard = () => {
   return (
-    <div style={{ backgroundColor: 'var(--old-lace)' }} className='rounded-lg shadow h-[200vh]'>
+    <div style={{ backgroundColor: 'var(--old-lace)' }} className='rounded-lg shadow'>
         <TopBar />
         <Grid /> 
     </div>
