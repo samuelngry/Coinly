@@ -6,6 +6,7 @@ const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const questRoutes = require("./routes/questRoutes");
 const customQuestRoutes = require("./routes/customQuestRoutes");
+const dashboardRoutes = require("./routes/dashboardRoutes");
 const db = require("./config/db");
 
 const app = express();
@@ -17,6 +18,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/quests", questRoutes);
 app.use("/api/custom-quests", customQuestRoutes);
+app.use("/api/dashboard", dashboardRoutes);
 
 const PORT = process.env.PORT || 5000;
 
