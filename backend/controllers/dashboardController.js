@@ -8,7 +8,7 @@ const getDashboardSummary = async (req, res) => {
     try {
         const userId = req.user.id;
         const user = await User.findOne({ where: { id: userId } });
-        const pet = await Pets.findOne({ where: { id: userId } });
+        const pet = await Pets.findOne({ where: { user_id: userId } });
 
         const today = new Date();
         today.setHours(0, 0, 0, 0);
