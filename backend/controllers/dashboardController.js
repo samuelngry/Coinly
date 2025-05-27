@@ -1,7 +1,8 @@
 const UserQuest = require("../models/UserQuest");
 const Pets = require("../models/Pets");
 const User = require("../models/User");
-const { Op } = require('sequelize');
+const { Op, fn } = require('sequelize');
+const sequelize = require("../config/db");
 
 // Return level, streak, pet mood, daily goal progress
 const getDashboardSummary = async (req, res) => {
@@ -36,9 +37,29 @@ const getDashboardSummary = async (req, res) => {
 };
 
 // Return sum of xp per category
-// TODO: Add category to UserQuest model and psql
 const getXPBreakdown = async (req, res) => {
-    
+    try {
+        const userId = req.user.id;
+
+        const xpByCategory = await UserQuest.findAll({
+            where: {
+                user_id: userId,
+                status: 'Completed',
+            },
+            attributes: ['category', [sequelize.fn('SUM', sequelize.col('xp')), 'totalXp']],
+            group: ['category'],
+        });
+
+        const result = {};
+        for (const row of xpByCategory) {
+            result[row.category] = parseInt(row.totalXp);
+        }
+
+        res.json(result);
+    } catch (err) {
+        console.error("XP Breakdown Error:", err);
+        res.status(500).json({ error: err.message });
+    }
 };
 
 module.exports = {
