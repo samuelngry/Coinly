@@ -96,7 +96,8 @@ async function generateBatchQuests(user, relevantItems, actions, generatedQuests
                 source_template_id: null,
                 status: 'Pending',
                 instance_date: new Date(),
-                accepted_at: null
+                accepted_at: null,
+                category: questComponents.itemToCategoryMap[item] || 'Uncategorised'
             });
 
             questPromises.push(questPromise);
