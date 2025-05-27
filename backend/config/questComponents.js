@@ -50,6 +50,19 @@ module.exports = {
         "Share with friends instead of individual": ["subscription", "entertainment"],
     },
 
+    itemToCategoryMap: {
+        "coffee": 'Food & Drink',
+        "lunch": 'Food & Drink',
+        "dinner": 'Food & Drink',
+        "snacks": 'Food & Drink',
+        "takeout food": 'Food & Drink',
+        "drinks": 'Food & Drink',
+        "rideshare": 'Transport',
+        "subscription": 'Subscriptions',
+        "entertainment": 'Leisure',
+        "shopping": 'Leisure',
+    },
+
     questTextTemplates: {
         "Skip": (item, timeframe) => `Skip ${item} ${timeframe}`,
         "Make your own": (item, timeframe) => `Make your own ${item} ${timeframe}`,
