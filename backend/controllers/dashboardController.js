@@ -3,7 +3,7 @@ const Pets = require("../models/Pets");
 const User = require("../models/User");
 const { Op } = require('sequelize');
 
-// return level, streak, pet mood, daily goal progress
+// Return level, streak, pet mood, daily goal progress
 const getDashboardSummary = async (req, res) => {
     try {
         const userId = req.user.id;
@@ -35,7 +35,13 @@ const getDashboardSummary = async (req, res) => {
     }
 };
 
+// Return sum of xp per category
+// TODO: Add category to UserQuest model and psql
+const getXPBreakdown = async (req, res) => {
+    
+};
+
 module.exports = {
     getDashboardSummary,
-
+    getXPBreakdown,
 };

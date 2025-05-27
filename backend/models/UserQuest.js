@@ -45,6 +45,10 @@ const UserQuest = db.define('user_quests', {
         allowNull: false,
         defaultValue: 'Dynamic',
     },
+    category: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
 });
 
 module.exports = UserQuest;
