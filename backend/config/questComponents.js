@@ -9,11 +9,11 @@ module.exports = {
     ],
 
     timeframes: [
-        "today", "this week", "for two days", "for the weekend", "for three days"
+        "today"
     ],
 
     locations: [
-        "at work", "while commuting", "at home", "when going out", "on weekends"
+        "at work", "while commuting", "at home", "when going out"
     ],
 
     baseCosts: {
@@ -30,11 +30,7 @@ module.exports = {
     },
 
     timeMultipliers: {
-        "today": 1,
-        "this week": 7,
-        "for two days": 2,
-        "for the weekend": 2,
-        "for three days": 3
+        "today": 1
     },
 
     actionItemMap: {
