@@ -95,7 +95,23 @@ const getXPDaily = async (req, res) => {
     weeklyCompletedQuests.forEach(q => {
         xpMap[q.date] = parseInt(q.totalXp);
     });
-};
+
+    const result = [];
+    for (let i=0; i < 7; i++) {
+        const date = new Date(today);
+        date.setDate(today.getDate() + i);
+        const dateStr = date.toISOString().slice(0, 10);
+        const day = date.getDay();
+        const dayName = ["S", "M", "T", "W", "T", "F", "S"];
+        result.push({
+            date: dateStr,
+            day: dayName[day],
+            xp: xpMap[dateStr] || 0,
+        });
+    }
+
+    res.json(result);
+}; 
 
 module.exports = {
     getDashboardSummary,
