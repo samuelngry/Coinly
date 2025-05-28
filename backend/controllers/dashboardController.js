@@ -90,6 +90,11 @@ const getXPDaily = async (req, res) => {
         group: ['date'],
         order: [['date', 'ASC']],
     });
+
+    const xpMap = {};
+    weeklyCompletedQuests.forEach(q => {
+        xpMap[q.date] = parseInt(q.totalXp);
+    });
 };
 
 module.exports = {
