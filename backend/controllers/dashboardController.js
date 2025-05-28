@@ -66,51 +66,56 @@ const getXPBreakdown = async (req, res) => {
 // Get xp each day
 // Group by day
 const getXPDaily = async (req, res) => {
-    const userId = req.user.id;
+    try {
+         const userId = req.user.id;
 
-    // Get current date and find start of the week
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+        // Get current date and find start of the week
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
 
-    const startDate = new Date(today);
-    startDate.setDate(today.getDate() - 6);
-    
-    const weeklyCompletedQuests = await UserQuest.findAll({
-        where: {
-            user_id: userId,
-            status: 'Completed',
-            completed_at: {
-                [Op.between]: [startDate, today],
+        const startDate = new Date(today);
+        startDate.setDate(today.getDate() - 6);
+        
+        const weeklyCompletedQuests = await UserQuest.findAll({
+            where: {
+                user_id: userId,
+                status: 'Completed',
+                completed_at: {
+                    [Op.between]: [startDate, today],
+                },
             },
-        },
-        attributes: [
-            [sequelize.fn('DATE', sequelize.col('completed_at')), 'date'],
-            [sequelize.fn('SUM', sequelize.col('total')), 'totalXp']
-        ],
-        group: ['date'],
-        order: [['date', 'ASC']],
-    });
-
-    const xpMap = {};
-    weeklyCompletedQuests.forEach(q => {
-        xpMap[q.date] = parseInt(q.totalXp);
-    });
-
-    const result = [];
-    for (let i=0; i < 7; i++) {
-        const date = new Date(today);
-        date.setDate(today.getDate() + i);
-        const dateStr = date.toISOString().slice(0, 10);
-        const day = date.getDay();
-        const dayName = ["S", "M", "T", "W", "T", "F", "S"];
-        result.push({
-            date: dateStr,
-            day: dayName[day],
-            xp: xpMap[dateStr] || 0,
+            attributes: [
+                [sequelize.fn('DATE', sequelize.col('completed_at')), 'date'],
+                [sequelize.fn('SUM', sequelize.col('total')), 'totalXp']
+            ],
+            group: ['date'],
+            order: [['date', 'ASC']],
         });
-    }
 
-    res.json(result);
+        const xpMap = {};
+        weeklyCompletedQuests.forEach(q => {
+            xpMap[q.date] = parseInt(q.totalXp);
+        });
+
+        const result = [];
+        for (let i=0; i < 7; i++) {
+            const date = new Date(today);
+            date.setDate(today.getDate() + i);
+            const dateStr = date.toISOString().slice(0, 10);
+            const day = date.getDay();
+            const dayName = ["S", "M", "T", "W", "T", "F", "S"];
+            result.push({
+                date: dateStr,
+                day: dayName[day],
+                xp: xpMap[dateStr] || 0,
+            });
+        }
+
+        res.json(result);
+    } catch (err) {
+        console.error("XP Progress Error:", err);
+        res.status(500).json({ error: err.message });
+    }
 }; 
 
 module.exports = {
