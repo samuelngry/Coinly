@@ -1,7 +1,7 @@
 const UserQuest = require("../models/UserQuest");
 const Pets = require("../models/Pets");
 const User = require("../models/User");
-const { Op, fn } = require('sequelize');
+const { Op, fn, col } = require('sequelize');
 const sequelize = require("../config/db");
 
 // Return level, streak, pet mood, daily goal progress
@@ -62,7 +62,38 @@ const getXPBreakdown = async (req, res) => {
     }
 };
 
+// TODO: Return sum xp completed by day
+// Get xp each day
+// Group by day
+const getXPDaily = async (req, res) => {
+    const userId = req.user.id;
+
+    // Get current date and find start of the week
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const startDate = new Date(today);
+    startDate.setDate(today.getDate() - 6);
+    
+    const weeklyCompletedQuests = await UserQuest.findAll({
+        where: {
+            user_id: userId,
+            status: 'Completed',
+            completed_at: {
+                [Op.between]: [startDate, today],
+            },
+        },
+        attributes: [
+            [sequelize.fn('DATE', sequelize.col('completed_at')), 'date'],
+            [sequelize.fn('SUM', sequelize.col('total')), 'totalXp']
+        ],
+        group: ['date'],
+        order: [['date', 'ASC']],
+    });
+};
+
 module.exports = {
     getDashboardSummary,
     getXPBreakdown,
+    getXPDaily,
 };
