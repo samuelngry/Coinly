@@ -1,8 +1,10 @@
 module.exports = {
     actions: [
-        "Skip", "Make your own", "Find a cheaper alternative to", "Reduce spending on", "Try a free alternative to",
-        "Borrow instead of buying", "Pack your own", "Use public transit instead of", "Cook at home instead of",
-        "Share with friends instead of individual", "Unsubscribe from", "Postpone buying", "Spend zero on", "Limit your spending on"
+        "Skip", "DIY instead of buying", "Find a budget hack for", "Go cold turkey on", "Try the free version of",
+        "Swap with a friend instead of buying", "Meal prep instead of buying", "Walk/bike instead of", 
+        "Make at home instead of ordering", "Split the cost of", "Cancel your", "Wait a week before buying", 
+        "Set a spending limit for", "Find a dupe for", "Use what you already have instead of buying",
+        "Have a no-spend day on", "Challenge yourself to avoid", "Get creative with alternatives to"
     ],
 
     items: [
