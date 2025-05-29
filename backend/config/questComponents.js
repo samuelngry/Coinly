@@ -6,7 +6,27 @@ module.exports = {
     ],
 
     items: [
-        "coffee", "lunch", "dinner", "snacks", "rideshare", "subscription", "entertainment", "shopping", "takeout food", "drinks"
+        // 🥤 Food & Drink
+        "coffee", "lunch", "dinner", "snacks", "takeout food", "drinks",
+        "boba", "fast food", "meal delivery", "energy drinks",
+
+        // 🚗 Transport
+        "rideshare", "e-scooter rental", "parking fee", "gas top-up",
+
+        // 📱 Subscriptions
+        "subscription", "YouTube Premium", "cloud storage", "game pass",
+
+        // 🛍️ Leisure
+        "shopping", "entertainment", "Steam sale", "mobile game gems", "DLCs",
+
+        // 🎉 Social Spending
+        "club cover fee", "concert tickets", "dating app boost",
+
+        // 💄 Lifestyle & Shopping
+        "makeup", "phone accessories", "skincare", "impulse buys",
+
+        // 🧘‍♂️ Wellness & Self-Care
+        "spa", "therapist app", "face mask", "gym class"
     ],
 
     timeframes: [
