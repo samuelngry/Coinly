@@ -14,13 +14,12 @@ module.exports = {
         "campus food court meals", "convenience store runs", "expensive coffee beans",
 
         // Transport
-        "Uber rides", "Grab rides", "scooter rentals", "parking fees", "gas money", 
-        "late night ride home", "convenience rides", "airport transport",
+        "Grab rides", "late night ride home", "convenience rides",
 
         // Entertainment
         "streaming subscriptions", "YouTube Premium", "Spotify Premium", "Netflix", "Disney+",
         "mobile game purchases", "Genshin Impact pulls", "League of Legends skins", 
-        "Steam game sales", "concert tickets", "movie theater trips", "karaoke sessions",
+        "Steam game sales", "movie theater trips", "karaoke sessions",
         "escape room sessions", "bowling nights", "arcade games",
 
         // Shopping
@@ -49,24 +48,34 @@ module.exports = {
 
     baseCosts: {
         // Food & Drink
-        "coffee": 5, "lunch": 5, "dinner": 6, "snacks": 4, "takeout food": 12,
-        "drinks": 8, "boba": 6, "fast food": 8, "meal delivery": 15, "energy drinks": 5,
+        "morning coffee run": 6, "bubble tea addiction": 7, "late night snacks": 8, 
+        "brunch": 10, "food delivery apps": 12, "energy drinks": 4,
+        "fancy smoothies": 8, "impulse grocery buys": 14, "campus food court meals": 8,
+        "convenience store runs": 10,
 
         // Transport
-        "rideshare": 10, "e-scooter rental": 4, "parking fee": 5, "gas top-up": 10,
+        "Grab rides": 10, "late night ride home": 15, "convenience rides": 15,
 
-        // Subscriptions
-        "subscription": 15, "YouTube Premium": 12, "cloud storage": 2, "game pass": 10,
+        // Entertainment
+        "streaming subscriptions": 12, "YouTube Premium": 12, "Spotify Premium": 10,
+        "Netflix": 15, "Disney+": 8, "mobile game purchases": 10, "Genshin Impact pulls": 15,
+        "League of Legends skins": 20, "Steam game sales": 25,
+        "movie theater trips": 15, "karaoke sessions": 20, "escape room sessions": 25,
+        "bowling nights": 18, "arcade games": 12,
 
-        // Leisure
-        "shopping": 10, "entertainment": 10, "Steam sale": 10,
-        "mobile game gems": 5,
+        // Shopping
+        "fast fashion hauls": 10, "skincare splurges": 15, "makeup impulse buys": 10,
+        "phone accessories": 10, "aesthetic stationery": 15, "plant purchases": 12,
+        "home decor": 20, "trendy gadgets": 30, "thrift finds": 8, "vintage clothing": 20,
+        "sneaker drops": 15, "jewelry purchases": 10,
 
-        // Social Spending
-        "club cover fee": 20, "concert tickets": 40, "dating app boost": 5,
+        // Digital
+        "premium app subscriptions": 8, "cloud storage upgrades": 3, "online courses": 20,
+        "digital art tools": 20, "productivity apps": 6, "photo editing apps": 10, "VPN services": 5,
 
-        // Lifestyle & Shopping
-        "makeup": 25, "phone accessories": 15, "skincare": 20, "impulse buys": 20
+        // Health & Wellness
+        "gym memberships": 25, "yoga classes": 20, "meditation apps": 8, "protein supplements": 20,
+        "wellness products": 25, "self-care items": 18, "mental health apps": 15, "fitness gear": 15
     },
 
     timeMultipliers: {
