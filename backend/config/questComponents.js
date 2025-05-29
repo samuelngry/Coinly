@@ -41,8 +41,10 @@ module.exports = {
         "today"
     ],
 
-    locations: [
-        "at work", "while commuting", "at home", "when going out"
+    situations: [
+        "when you're stressed", "during late night study sessions", "while scrolling TikTok",
+        "when hanging with friends", "during work breaks", "on your commute",
+        "when you're bored", "during exam season", "on weekends", "after a bad day"
     ],
 
     baseCosts: {
