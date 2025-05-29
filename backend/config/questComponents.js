@@ -6,27 +6,33 @@ module.exports = {
     ],
 
     items: [
-        // 🥤 Food & Drink
-        "coffee", "lunch", "dinner", "snacks", "takeout food", "drinks",
-        "boba", "fast food", "meal delivery", "energy drinks",
+         // Food & Drink
+        "morning coffee run", "bubble tea addiction", "late night snacks", "weekend brunch", 
+        "food delivery apps", "energy drinks", "fancy smoothies", "impulse grocery buys",
+        "campus food court meals", "convenience store runs", "expensive coffee beans",
 
-        // 🚗 Transport
-        "rideshare", "e-scooter rental", "parking fee", "gas top-up",
+        // Transport
+        "Uber rides", "Grab rides", "scooter rentals", "parking fees", "gas money", 
+        "late night ride home", "convenience rides", "airport transport",
 
-        // 📱 Subscriptions
-        "subscription", "YouTube Premium", "cloud storage", "game pass",
+        // Entertainment
+        "streaming subscriptions", "YouTube Premium", "Spotify Premium", "Netflix", "Disney+",
+        "mobile game purchases", "Genshin Impact pulls", "League of Legends skins", 
+        "Steam game sales", "concert tickets", "movie theater trips", "karaoke sessions",
+        "escape room sessions", "bowling nights", "arcade games",
 
-        // 🛍️ Leisure
-        "shopping", "entertainment", "Steam sale", "mobile game gems", "DLCs",
+        // Shopping
+        "fast fashion hauls", "skincare splurges", "makeup impulse buys", "phone accessories",
+        "aesthetic stationery", "plant purchases", "home decor", "trendy gadgets",
+        "thrift finds", "vintage clothing", "sneaker drops", "jewelry purchases",
 
-        // 🎉 Social Spending
-        "club cover fee", "concert tickets", "dating app boost",
+        // Digital
+        "premium app subscriptions", "cloud storage upgrades", "online courses", 
+        "digital art tools", "productivity apps", "photo editing apps", "VPN services",
 
-        // 💄 Lifestyle & Shopping
-        "makeup", "phone accessories", "skincare", "impulse buys",
-
-        // 🧘‍♂️ Wellness & Self-Care
-        "spa", "therapist app", "face mask", "gym class"
+        // Health & Wellness
+        "gym memberships", "yoga classes", "meditation apps", "protein supplements",
+        "wellness products", "self-care items", "mental health apps", "fitness gear"
     ],
 
     timeframes: [
@@ -38,16 +44,25 @@ module.exports = {
     ],
 
     baseCosts: {
-        "coffee": 5,
-        "lunch": 5,
-        "dinner": 6,
-        "snacks": 4,
-        "rideshare": 20,
-        "subscription": 15,
-        "entertainment": 20,
-        "shopping": 60,
-        "takeout food": 12,
-        "drinks": 8 
+        // Food & Drink
+        "coffee": 5, "lunch": 5, "dinner": 6, "snacks": 4, "takeout food": 12,
+        "drinks": 8, "boba": 6, "fast food": 8, "meal delivery": 15, "energy drinks": 5,
+
+        // Transport
+        "rideshare": 10, "e-scooter rental": 4, "parking fee": 5, "gas top-up": 10,
+
+        // Subscriptions
+        "subscription": 15, "YouTube Premium": 12, "cloud storage": 2, "game pass": 10,
+
+        // Leisure
+        "shopping": 10, "entertainment": 10, "Steam sale": 10,
+        "mobile game gems": 5,
+
+        // Social Spending
+        "club cover fee": 20, "concert tickets": 40, "dating app boost": 5,
+
+        // Lifestyle & Shopping
+        "makeup": 25, "phone accessories": 15, "skincare": 20, "impulse buys": 20
     },
 
     timeMultipliers: {
