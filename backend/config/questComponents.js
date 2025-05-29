@@ -121,16 +121,39 @@ module.exports = {
     },
 
     itemToCategoryMap: {
-        "coffee": 'Food & Drink',
-        "lunch": 'Food & Drink',
-        "dinner": 'Food & Drink',
-        "snacks": 'Food & Drink',
-        "takeout food": 'Food & Drink',
-        "drinks": 'Food & Drink',
-        "rideshare": 'Transport',
-        "subscription": 'Subscriptions',
-        "entertainment": 'Leisure',
-        "shopping": 'Leisure',
+        // Food
+        "morning coffee run": 'Food', "bubble tea addiction": 'Food', "late night snacks": 'Food',
+        "weekend brunch": 'Food', "food delivery apps": 'Food', "energy drinks": 'Food',
+        "fancy smoothies": 'Food', "impulse grocery buys": 'Food', "campus food court meals": 'Food',
+        "convenience store runs": 'Food', "expensive coffee beans": 'Food',
+
+        // Transport
+        "Grab rides": 'Transport', "late night ride home": 'Transport', "convenience rides": 'Transport',
+
+        // Entertainment
+        "streaming subscriptions": 'Entertainment', "YouTube Premium": 'Entertainment', 
+        "Spotify Premium": 'Entertainment', "Netflix": 'Entertainment', "Disney+": 'Entertainment',
+        "mobile game purchases": 'Entertainment', "Genshin Impact pulls": 'Entertainment',
+        "League of Legends skins": 'Entertainment', "Steam game sales": 'Entertainment',
+        "concert tickets": 'Entertainment', "movie theater trips": 'Entertainment',
+        "karaoke sessions": 'Entertainment', "escape room sessions": 'Entertainment',
+        "bowling nights": 'Entertainment', "arcade games": 'Entertainment',
+
+        // Shopping
+        "fast fashion hauls": 'Shopping', "skincare splurges": 'Shopping', "makeup impulse buys": 'Shopping',
+        "phone accessories": 'Shopping', "aesthetic stationery": 'Shopping', "plant purchases": 'Shopping',
+        "home decor": 'Shopping', "trendy gadgets": 'Shopping', "thrift finds": 'Shopping',
+        "vintage clothing": 'Shopping', "sneaker drops": 'Shopping', "jewelry purchases": 'Shopping',
+
+        // Digital
+        "premium app subscriptions": 'Digital', "cloud storage upgrades": 'Digital', 
+        "online courses": 'Digital', "digital art tools": 'Digital', "productivity apps": 'Digital',
+        "photo editing apps": 'Digital', "VPN services": 'Digital',
+
+        // Health
+        "gym memberships": 'Health', "yoga classes": 'Health', "meditation apps": 'Health',
+        "protein supplements": 'Health', "wellness products": 'Health', "self-care items": 'Health',
+        "mental health apps": 'Health', "fitness gear": 'Health'
     },
 
     questTextTemplates: {
