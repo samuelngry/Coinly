@@ -83,16 +83,41 @@ module.exports = {
     },
 
     actionItemMap: {
-        "Skip": ["coffee", "lunch", "dinner", "snacks", "rideshare", "subscription", "entertainment", "shopping", "takeout food", "drinks"],
-        "Make your own": ["coffee", "lunch", "dinner", "snacks", "takeout food", "drinks"],
-        "Find a cheaper alternative to": ["coffee", "lunch", "dinner", "rideshare", "subscription", "entertainment", "shopping", "takeout food", "drinks"],
-        "Reduce spending on": ["coffee", "lunch", "dinner", "snacks", "rideshare", "subscription", "entertainment", "shopping", "takeout food", "drinks"],
-        "Try a free alternative to": ["rideshare", "subscription", "entertainment", "shopping"],
-        "Borrow instead of buying": ["shopping", "entertainment"],
-        "Pack your own": ["lunch", "snacks"],
-        "Use public transit instead of": ["rideshare"],
-        "Cook at home instead of": ["takeout food", "dinner"],
-        "Share with friends instead of individual": ["subscription", "entertainment"],
+        "Skip": ["morning coffee run", "bubble tea addiction", "late night snacks", "convenience rides", "impulse grocery buys", "mobile game purchases"],
+    
+        "DIY instead of buying": ["morning coffee run", "fancy smoothies", "expensive coffee beans", "skincare splurges", "self-care items"],
+        
+        "Find a budget hack for": ["streaming subscriptions", "gym memberships", "online courses", "food delivery apps"],
+        
+        "Go cold turkey on": ["bubble tea addiction", "energy drinks", "fast fashion hauls", "mobile game purchases", "impulse grocery buys"],
+        
+        "Try the free version of": ["Spotify Premium", "YouTube Premium", "premium app subscriptions", "meditation apps", "productivity apps"],
+        
+        "Swap with a friend instead of buying": ["Netflix", "Disney+", "streaming subscriptions", "online courses", "vintage clothing"],
+        
+        "Meal prep instead of buying": ["campus food court meals", "food delivery apps", "convenience store runs", "late night snacks"],
+        
+        "Walk/bike instead of": ["Grab rides", "convenience rides"],
+        
+        "Make at home instead of ordering": ["weekend brunch", "fancy smoothies", "food delivery apps"],
+        
+        "Split the cost of": ["streaming subscriptions", "concert tickets", "escape room sessions", "karaoke sessions"],
+        
+        "Cancel your": ["streaming subscriptions", "gym memberships", "premium app subscriptions"],
+        
+        "Wait a week before buying": ["sneaker drops", "trendy gadgets", "makeup impulse buys", "fast fashion hauls"],
+        
+        "Set a spending limit for": ["Steam game sales", "thrift finds", "aesthetic stationery", "plant purchases"],
+        
+        "Find a dupe for": ["skincare splurges", "makeup impulse buys", "trendy gadgets", "sneaker drops"],
+        
+        "Use what you already have instead of buying": ["home decor", "aesthetic stationery", "phone accessories", "jewelry purchases"],
+        
+        "Have a no-spend day on": ["convenience store runs", "impulse grocery buys", "mobile game purchases"],
+        
+        "Challenge yourself to avoid": ["late night ride home", "energy drinks", "League of Legends skins", "arcade games"],
+        
+        "Get creative with alternatives to": ["movie theater trips", "bowling nights", "expensive coffee beans", "wellness products"]
     },
 
     itemToCategoryMap: {
