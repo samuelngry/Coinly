@@ -1,7 +1,8 @@
 module.exports = {
     actions: [
-        "Skip", "Make your own", "Find a cheaper alternative to", "Reduce spending on", "Try a free alternative to", "Borrow instead of buying", 
-        "Pack your own", "User public transit instead of", "Cook at home instead of", "Share with friends instead of individual"
+        "Skip", "Make your own", "Find a cheaper alternative to", "Reduce spending on", "Try a free alternative to",
+        "Borrow instead of buying", "Pack your own", "Use public transit instead of", "Cook at home instead of",
+        "Share with friends instead of individual", "Unsubscribe from", "Postpone buying", "Spend zero on", "Limit your spending on"
     ],
 
     items: [
