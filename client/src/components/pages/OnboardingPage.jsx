@@ -2,10 +2,12 @@ import OnboardingHeader from "../onboarding/OnboardingHeader";
 
 const OnboardingPage = () => {
     const [step, setStep] = useState(1);
+    const [answers, setAnswers] = useState({});
 
     return (
         <div className="max-w-7xl mx-auto py-10" >
             <OnboardingHeader step={step} />
+            <OnboardingStep step={step} setStep={setStep} answers={answers} setAnswers={setAnswers} />
         </div>
     );
 };

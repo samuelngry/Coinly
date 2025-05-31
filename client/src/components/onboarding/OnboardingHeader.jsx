@@ -1,7 +1,7 @@
 import React from 'react'
 import { ArrowLeft } from 'lucide-react'
 
-const OnboardingHeader = ({step}) => {
+const OnboardingHeader = ({ step }) => {
     const progress = step * 20;
     return (
         <div className='flex items-center w-full rounded-full'>
