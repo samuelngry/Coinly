@@ -21,7 +21,13 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
     if (step === 1) {
     return (
         <div className='flex flex-col items-center justify-center mt-30'>
-            <h1 className='mb-4 font-semibold text-lg'>What's your biggest spending category?</h1>
+            <h1 className='font-semibold text-lg'>What's your biggest spending category?</h1>
+            <span className='text-neutral-500 mb-4'>
+                {selectedCategories.length === 0
+                    ? 'Select up to 2'
+                    : `Selected ${selectedCategories.length}/2`
+                }
+            </span>
             <div>
                 <div className='grid grid-cols-3 gap-4 mb-4'>
                     {categories.map(({ label, image }) => (
