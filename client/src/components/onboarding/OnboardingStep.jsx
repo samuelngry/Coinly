@@ -58,6 +58,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                             : "hidden"
                     }`}
                     onClick={() => {
+                        setAnswers({ ...answers, categories: selectedCategories });
                         setStep(2);
                     }}
                 >
