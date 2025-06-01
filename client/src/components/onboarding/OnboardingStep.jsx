@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import foodImage from '../../assets/food.png';
 import transportImage from '../../assets/transport.png';
-import entertainmentImage from '../../assets/entertainment.png';
+import trackImage from '../../assets/track.png';
 import shoppingImage from '../../assets/shopping.png';
 import digitalImage from '../../assets/digital.png';
 import healthImage from '../../assets/health.png';
@@ -10,18 +10,18 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
     const [selectedCategories, setSelectedCategories] = useState([]);
 
     const categories = [
-        { label: 'Food & Drink', image: foodImage },
-        { label: 'Transport', image: transportImage},
-        { label: 'Entertainment', image: entertainmentImage},
+        { label: 'Food/Delivery', image: foodImage },
+        { label: 'Transport Costs', image: transportImage},
+        { label: "I don't track my spending", image: trackImage},
         { label: 'Shopping', image: shoppingImage},
-        { label: 'Digital', image: digitalImage},
-        { label: 'Health & Wellness', image: healthImage}
+        { label: 'I want better money habits', image: digitalImage},
+        { label: "I'm saving for something big", image: healthImage}
     ];
 
     if (step === 1) {
     return (
         <div className='flex flex-col items-center justify-center mt-30'>
-            <h1 className='font-semibold text-lg'>What's your biggest spending category?</h1>
+            <h1 className='font-semibold text-lg'>What do you struggle with most?</h1>
             <span className='text-neutral-500 mb-4'>
                 {selectedCategories.length === 0
                     ? 'Select up to 2'
@@ -68,6 +68,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
         </div>
         )
     };
+
 };
 
 export default OnboardingStep
