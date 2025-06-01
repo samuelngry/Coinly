@@ -1,4 +1,5 @@
 import OnboardingHeader from "../onboarding/OnboardingHeader";
+import { useState } from "react";
 
 const OnboardingPage = () => {
     const [step, setStep] = useState(1);
