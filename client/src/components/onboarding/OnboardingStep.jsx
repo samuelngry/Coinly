@@ -22,18 +22,28 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
     return (
         <>
             <p>What's your biggest spending category?</p>
-            <div>
-                <button onClick={() => {
-                    if (selectedCategories.includes("Food")) {
-                        setSelectedCategories(selectedCategories.filter((c) => c != "Food"));
-                    } else {
-                        setSelectedCategories([...selectedCategories, "Food"]);
-                    };
-                }}>
-                    Food
-                </button>
+            <div className='grid grid-cols-3 gap-4'>
+                {categories.map(({ label, image }) => (
+                    <button
+                        key={label}
+                        onClick={() => {
+                            if (selectedCategories.includes(label)) {
+                                setSelectedCategories(selectedCategories.filter((c) => c != label));
+                            } else {
+                                setSelectedCategories([...selectedCategories, label]);
+                            }
+                        }}
+                        className={`rounded-lg p-4 border-2 ${
+                            selectedCategories.includes(label)
+                                ? "bg-orange-100 border-orange-500"
+                                : "border-gray-300"
+                        }`}
+                    >
+                        <img src={image} alt={label} className='h-10 w-10 mx-auto mb-2' />
+                        <span className='text-sm font-medium'>{label}</span>
+                    </button>
+                ))}
             </div>
-
         </>
         )
     };
