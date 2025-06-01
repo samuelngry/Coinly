@@ -11,7 +11,7 @@ import outofcontrolImage from '../../assets/outofcontrol.png';
 
 const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
     const [selectedCategories, setSelectedCategories] = useState([]);
-    const [selectedStruggle, setSelectedStruggle] = useState();
+    const [selectedStruggle, setSelectedStruggle] = useState("");
 
     const categories = [
         { label: 'Food/Delivery', image: foodImage },
@@ -87,11 +87,10 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                     <div className='grid grid-cols-2 gap-4 mb-4'>
                         {struggles.map(({ label, image }) => (
                             <button
-                                key={label}
                                 onClick={() => {
                                     if (selectedStruggle.includes(label)) {
-                                        setSelectedCategories(selectedStruggle.filter((c) => c != label));
-                                    } else if (!selectedStruggle.includes(label) && selectedStruggle.length < 1) {
+                                        setSelectedStruggle(selectedStruggle.filter((s) => s !== label));
+                                    } else {
                                         setSelectedStruggle([...selectedStruggle, label]);
                                     }
                                 }}
@@ -100,15 +99,15 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                                         ? "bg-orange-100 border-orange-500 text-orange-500"
                                         : "border-gray-300"
                                 }`}
-                            >
-                                <img src={image} alt={label} className='h-20 w-20 mx-auto mb-2' />
-                                <span className='text-sm font-medium'>{label}</span>
+                                >
+                                    <img src={image} alt={label} className='h-20 w-20 mx-auto mb-2'/>
+                                    <span className='text-sm font-medium'>{label}</span>
                             </button>
                         ))}
                     </div>
                     <button 
                         className={`w-full border rounded-xl py-3 shadow text-xs bg-orange-500 text-white ${
-                            selectedCategories.length > 0
+                            selectedStruggle.length > 0
                                 ? "visible"
                                 : "hidden"
                         }`}
