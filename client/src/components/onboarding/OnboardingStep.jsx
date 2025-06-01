@@ -8,10 +8,15 @@ import entertainmentImage from '../../assets/entertainment.png';
 import habitImage from '../../assets/habit.png';
 import impulseImage from '../../assets/impulse.png';
 import outofcontrolImage from '../../assets/outofcontrol.png';
+import saveImage from '../../assets/save.png';
+import emergencyImage from '../../assets/emergency.png';
+import payImage from '../../assets/pay.png';
+import travelImage from '../../assets/travel.png';
 
 const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [selectedStruggle, setSelectedStruggle] = useState("");
+    const [selectedGoal, setSelectedGoal] = useState("");
 
     const categories = [
         { label: 'Food/Delivery', image: foodImage },
@@ -26,6 +31,13 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
         { label: "I want better money habits", image: habitImage},
         { label: "I impulse buy", image: impulseImage},
         { label: "I feel out of control with money", image: outofcontrolImage},
+    ]
+
+    const goal = [
+        { label: "Save monthly", image: saveImage },
+        { label: "Emergency fund", image: emergencyImage},
+        { label: "Pay off debts", image: payImage},
+        { label: "Travel or big purchase", image: travelImage},
     ]
 
     if (step === 1) {
@@ -62,7 +74,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                     ))}
                 </div>
                 <button 
-                    className={`w-full border rounded-xl py-3 shadow text-xs bg-orange-500 text-white ${
+                    className={`w-full border rounded-xl py-3 shadow text-xs bg-orange-500 text-white hover:bg-orange-800 ${
                         selectedCategories.length > 0
                             ? "visible"
                             : "hidden"
@@ -90,7 +102,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                                 onClick={() => {
                                     if (selectedStruggle.includes(label)) {
                                         setSelectedStruggle(selectedStruggle.filter((s) => s !== label));
-                                    } else {
+                                    } else if (!selectedStruggle.includes(label) && selectedStruggle.length < 1) {
                                         setSelectedStruggle([...selectedStruggle, label]);
                                     }
                                 }}
@@ -106,7 +118,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                         ))}
                     </div>
                     <button 
-                        className={`w-full border rounded-xl py-3 shadow text-xs bg-orange-500 text-white ${
+                        className={`w-full border rounded-xl py-3 shadow text-xs bg-orange-500 text-white hover:bg-orange-800 ${
                             selectedStruggle.length > 0
                                 ? "visible"
                                 : "hidden"
@@ -121,8 +133,51 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                 </div>
             </div>
         )
-    };        
-
+    };
+    
+    if (step === 3) {
+        return (
+            <div className='flex flex-col items-center justify-center mt-30'>
+                <h1 className='font-semibold text-lg mb-4 '>What's your current money goal?</h1>
+                <div>
+                    <div className='grid grid-cols-2 gap-4 mb-4'>
+                        {goal.map(({ label, image }) => (
+                            <button
+                                onClick={() => {
+                                    if (selectedGoal.includes(label)) {
+                                        setSelectedGoal(selectedGoal.filter((s) => s !== label));
+                                    } else if (!selectedGoal.includes(label) && selectedGoal.length < 1) {
+                                        setSelectedGoal([...selectedGoal, label]);
+                                    }
+                                }}
+                                className={`rounded-lg p-4 border-2 hover:bg-orange-50 hover:text-orange-400 ${
+                                    selectedGoal.includes(label)
+                                        ? "bg-orange-100 border-orange-500 text-orange-500"
+                                        : "border-gray-300"
+                                }`}
+                                >
+                                    <img src={image} alt={label} className='h-20 w-20 mx-auto mb-2'/>
+                                    <span className='text-sm font-medium'>{label}</span>
+                            </button>
+                        ))}
+                    </div>
+                    <button 
+                        className={`w-full border rounded-xl py-3 shadow text-xs bg-orange-500 text-white hover:bg-orange-800 ${
+                            selectedGoal.length > 0
+                                ? "visible"
+                                : "hidden"
+                        }`}
+                        onClick={() => {
+                            setAnswers({ ...answers, goal: selectedGoal });
+                            setStep(3);
+                        }}
+                    >
+                        CONTINUE
+                    </button>
+                </div>
+            </div>
+        )
+    };
 };
 
 export default OnboardingStep
