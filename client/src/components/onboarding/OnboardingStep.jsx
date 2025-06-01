@@ -12,11 +12,18 @@ import saveImage from '../../assets/save.png';
 import emergencyImage from '../../assets/emergency.png';
 import payImage from '../../assets/pay.png';
 import travelImage from '../../assets/travel.png';
+import eatoutImage from '../../assets/eatout.png';
+import boredImage from '../../assets/bored.png';
+import billsImage from '../../assets/bills.png';
+import subscriptionImage from '../../assets/subscription.png';
+import salesImage from '../../assets/sales.png';
+
 
 const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [selectedStruggle, setSelectedStruggle] = useState("");
     const [selectedGoal, setSelectedGoal] = useState("");
+    const [selectedLifestyles, setSelectedLifestyles] = useState([]);
 
     const categories = [
         { label: 'Food/Delivery', image: foodImage },
@@ -27,18 +34,26 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
     ];
 
     const struggles = [
-        { label: "I don't track my spending", image: trackImage },
+        { label: "I don't track spendings", image: trackImage },
         { label: "I want better money habits", image: habitImage},
         { label: "I impulse buy", image: impulseImage},
-        { label: "I feel out of control with money", image: outofcontrolImage},
-    ]
+        { label: "Money feels out of control", image: outofcontrolImage},
+    ];
 
     const goal = [
         { label: "Save monthly", image: saveImage },
         { label: "Emergency fund", image: emergencyImage},
         { label: "Pay off debts", image: payImage},
         { label: "Travel or big purchase", image: travelImage},
-    ]
+    ];
+
+    const lifestyles = [
+        { label: 'Eat out often', image: eatoutImage },
+        { label: 'Shop when bored', image: boredImage},
+        { label: 'Mostly just cover bills', image: billsImage},
+        { label: 'Too many subscriptions', image: subscriptionImage},
+        { label: 'Easily tempted by sales', image: salesImage},
+    ];
 
     if (step === 1) {
     return (
@@ -169,13 +184,63 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                         }`}
                         onClick={() => {
                             setAnswers({ ...answers, goal: selectedGoal });
-                            setStep(3);
+                            setStep(4);
                         }}
                     >
                         CONTINUE
                     </button>
                 </div>
             </div>
+        )
+    };
+    if (step === 4) {
+        return (
+            <div className='flex flex-col items-center justify-center mt-30'>
+            <h1 className='font-semibold text-lg'>What describes your lifestyle best?</h1>
+            <span className='text-neutral-500 mb-4'>
+                {selectedLifestyles.length === 0
+                    ? 'Select up to 2'
+                    : `Selected ${selectedLifestyles.length}/2`
+                }
+            </span>
+            <div>
+                <div className='grid grid-cols-3 gap-4 mb-4'>
+                    {lifestyles.map(({ label, image }) => (
+                        <button
+                            key={label}
+                            onClick={() => {
+                                if (selectedLifestyles.includes(label)) {
+                                    setSelectedLifestyles(selectedLifestyles.filter((c) => c != label));
+                                } else if (!selectedLifestyles.includes(label) && selectedLifestyles.length < 2) {
+                                    setSelectedLifestyles([...selectedLifestyles, label]);
+                                }
+                            }}
+                            className={`rounded-lg p-4 border-2 hover:bg-orange-50 hover:text-orange-400 ${
+                                selectedLifestyles.includes(label)
+                                    ? "bg-orange-100 border-orange-500 text-orange-500"
+                                    : "border-gray-300"
+                            }`}
+                        >
+                            <img src={image} alt={label} className='h-20 w-20 mx-auto mb-2' />
+                            <span className='text-sm font-medium'>{label}</span>
+                        </button>
+                    ))}
+                </div>
+                <button 
+                    className={`w-full border rounded-xl py-3 shadow text-xs bg-orange-500 text-white hover:bg-orange-800 ${
+                        selectedLifestyles.length > 0
+                            ? "visible"
+                            : "hidden"
+                    }`}
+                    onClick={() => {
+                        setAnswers({ ...answers, lifestyles: selectedLifestyles });
+                        setStep(5);
+                    }}
+                >
+                    CONTINUE
+                </button>
+            </div>
+        </div>
         )
     };
 };
