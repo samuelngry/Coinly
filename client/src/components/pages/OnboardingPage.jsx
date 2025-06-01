@@ -8,7 +8,7 @@ const OnboardingPage = () => {
 
     return (
         <div className="max-w-7xl mx-auto py-10" >
-            <OnboardingHeader step={step} />
+            <OnboardingHeader step={step} setStep={setStep} />
             <OnboardingStep step={step} setStep={setStep} answers={answers} setAnswers={setAnswers} />
         </div>
     );
