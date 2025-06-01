@@ -3,7 +3,7 @@ import OnboardingStep from "../onboarding/OnboardingStep";
 import { useState } from "react";
 
 const OnboardingPage = () => {
-    const [step, setStep] = useState(1);
+    const [step, setStep] = useState(0);
     const [answers, setAnswers] = useState({});
 
     return (

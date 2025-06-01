@@ -17,7 +17,7 @@ import boredImage from '../../assets/bored.png';
 import billsImage from '../../assets/bills.png';
 import subscriptionImage from '../../assets/subscription.png';
 import salesImage from '../../assets/sales.png';
-
+import welcomeImage from '../../assets/welcome.png';
 
 const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
     const [selectedCategories, setSelectedCategories] = useState([]);
@@ -55,6 +55,24 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
         { label: 'Easily tempted by sales', image: salesImage},
     ];
 
+    if (step === 0) {
+        return (
+            <div className="flex flex-col items-center justify-center mt-20 lg:mt-30 px-6 text-center">
+                <img src={welcomeImage} alt='Welcome' className='w-60 h-60'/>
+                <h1 className="text-2xl font-semibold mb-4">Let's understand your money habits!</h1>
+                <p className="text-gray-600 max-w-md mb-8">
+                    Answer a few quick questions to get personalized tips and build better money habits.
+                </p>
+                <button
+                    onClick={() => setStep(1)}
+                    className="bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-xl shadow"
+                >
+                    Get Started
+                </button>
+            </div>
+        )
+    }
+
     if (step === 1) {
     return (
         <div className='flex flex-col items-center justify-center mt-10 lg:mt-30'>
@@ -89,7 +107,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                     ))}
                 </div>
                 <button 
-                    className={`w-full border rounded-xl py-3 shadow text-xs bg-orange-500 text-white hover:bg-orange-800 ${
+                    className={`w-full border rounded-xl py-3 shadow text-xs bg-orange-500 text-white hover:bg-orange-600 ${
                         selectedCategories.length > 0
                             ? "visible"
                             : "hidden"
@@ -139,7 +157,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                         ))}
                     </div>
                     <button 
-                        className={`w-full border rounded-xl py-3 shadow text-xs bg-orange-500 text-white hover:bg-orange-800 ${
+                        className={`w-full border rounded-xl py-3 shadow text-xs bg-orange-500 text-white hover:bg-orange-600 ${
                             selectedStruggle.length > 0
                                 ? "visible"
                                 : "hidden"
@@ -189,7 +207,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                         ))}
                     </div>
                     <button 
-                        className={`w-full border rounded-xl py-3 shadow text-xs bg-orange-500 text-white hover:bg-orange-800 ${
+                        className={`w-full border rounded-xl py-3 shadow text-xs bg-orange-500 text-white hover:bg-orange-600 ${
                             selectedGoal.length > 0
                                 ? "visible"
                                 : "hidden"
@@ -239,7 +257,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                     ))}
                 </div>
                 <button 
-                    className={`w-full border rounded-xl py-3 shadow text-xs bg-orange-500 text-white hover:bg-orange-800 ${
+                    className={`w-full border rounded-xl py-3 shadow text-xs bg-orange-500 text-white hover:bg-orange-600 ${
                         selectedLifestyles.length > 0
                             ? "visible"
                             : "hidden"
