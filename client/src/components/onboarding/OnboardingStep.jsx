@@ -59,7 +59,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
     return (
         <div className='flex flex-col items-center justify-center mt-10 lg:mt-30'>
             <h1 className='font-semibold text-lg'>Where do you spend the most?</h1>
-            <span className='text-neutral-500 mb-4'>
+            <span className='text-neutral-500 mb-4 text-sm'>
                 {selectedCategories.length === 0
                     ? 'Select up to 2'
                     : `Selected ${selectedCategories.length}/2`
@@ -109,7 +109,13 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
     if (step === 2) {
         return (
             <div className='flex flex-col items-center justify-center mt-10 lg:mt-30'>
-                <h1 className='font-semibold text-lg mb-4 text-center'>How do you feel about your money right now?</h1>
+                <h1 className='font-semibold text-lg text-center'>How do you feel about your money right now?</h1>
+                <span className='text-neutral-500 mb-4 text-sm'>
+                {selectedStruggle.length === 0
+                    ? 'Select 1'
+                    : `Selected ${selectedStruggle.length}/1`
+                }
+                </span>
                 <div>
                     <div className='grid grid-cols-2 gap-4 mb-4'>
                         {struggles.map(({ label, image }) => (
@@ -153,7 +159,13 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
     if (step === 3) {
         return (
             <div className='flex flex-col items-center justify-center mt-10 lg:mt-30'>
-                <h1 className='font-semibold text-lg mb-4 '>What's your current money goal?</h1>
+                <h1 className='font-semibold text-lg'>What's your current money goal?</h1>
+                <span className='text-neutral-500 mb-4 text-sm'>
+                {selectedGoal.length === 0
+                    ? 'Select 1'
+                    : `Selected ${selectedGoal.length}/1`
+                }
+                </span>
                 <div>
                     <div className='grid grid-cols-2 gap-4 mb-4'>
                         {goal.map(({ label, image }) => (
@@ -197,7 +209,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
         return (
             <div className='flex flex-col items-center justify-center mt-10 lg:mt-30'>
             <h1 className='font-semibold text-lg'>What describes your lifestyle best?</h1>
-            <span className='text-neutral-500 mb-4'>
+            <span className='text-neutral-500 mb-4 text-sm'>
                 {selectedLifestyles.length === 0
                     ? 'Select up to 2'
                     : `Selected ${selectedLifestyles.length}/2`
