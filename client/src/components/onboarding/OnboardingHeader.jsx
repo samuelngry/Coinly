@@ -2,7 +2,7 @@ import React from 'react'
 import { ArrowLeft } from 'lucide-react'
 
 const OnboardingHeader = ({ step }) => {
-    const progress = step * 20;
+    const progress = step * 25;
     return (
         <div className='flex items-center w-full rounded-full'>
             <a href='/'>

@@ -34,10 +34,10 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
     ];
 
     const struggles = [
-        { label: "I don't track spendings", image: trackImage },
-        { label: "I want better money habits", image: habitImage},
-        { label: "I impulse buy", image: impulseImage},
-        { label: "Money feels out of control", image: outofcontrolImage},
+        { label: "Don't track spendings", image: trackImage },
+        { label: "Want better habits", image: habitImage},
+        { label: "Impulse spending", image: impulseImage},
+        { label: "Feel out of control", image: outofcontrolImage},
     ];
 
     const goal = [
@@ -57,7 +57,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
 
     if (step === 1) {
     return (
-        <div className='flex flex-col items-center justify-center mt-30'>
+        <div className='flex flex-col items-center justify-center mt-10 lg:mt-30'>
             <h1 className='font-semibold text-lg'>Where do you spend the most?</h1>
             <span className='text-neutral-500 mb-4'>
                 {selectedCategories.length === 0
@@ -66,7 +66,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                 }
             </span>
             <div>
-                <div className='grid grid-cols-3 gap-4 mb-4'>
+                <div className='grid grid-cols-2 lg:grid-cols-3 gap-4 mb-4'>
                     {categories.map(({ label, image }) => (
                         <button
                             key={label}
@@ -84,7 +84,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                             }`}
                         >
                             <img src={image} alt={label} className='h-20 w-20 mx-auto mb-2' />
-                            <span className='text-sm font-medium'>{label}</span>
+                            <span className='text-xs lg:text-sm font-medium'>{label}</span>
                         </button>
                     ))}
                 </div>
@@ -108,8 +108,8 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
 
     if (step === 2) {
         return (
-            <div className='flex flex-col items-center justify-center mt-30'>
-                <h1 className='font-semibold text-lg mb-4 '>How do you feel about your money right now?</h1>
+            <div className='flex flex-col items-center justify-center mt-10 lg:mt-30'>
+                <h1 className='font-semibold text-lg mb-4 text-center'>How do you feel about your money right now?</h1>
                 <div>
                     <div className='grid grid-cols-2 gap-4 mb-4'>
                         {struggles.map(({ label, image }) => (
@@ -128,7 +128,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                                 }`}
                                 >
                                     <img src={image} alt={label} className='h-20 w-20 mx-auto mb-2'/>
-                                    <span className='text-sm font-medium'>{label}</span>
+                                    <span className='text-xs lg:text-sm font-medium'>{label}</span>
                             </button>
                         ))}
                     </div>
@@ -152,7 +152,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
     
     if (step === 3) {
         return (
-            <div className='flex flex-col items-center justify-center mt-30'>
+            <div className='flex flex-col items-center justify-center mt-10 lg:mt-30'>
                 <h1 className='font-semibold text-lg mb-4 '>What's your current money goal?</h1>
                 <div>
                     <div className='grid grid-cols-2 gap-4 mb-4'>
@@ -172,7 +172,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                                 }`}
                                 >
                                     <img src={image} alt={label} className='h-20 w-20 mx-auto mb-2'/>
-                                    <span className='text-sm font-medium'>{label}</span>
+                                    <span className='text-xs lg:text-sm font-medium'>{label}</span>
                             </button>
                         ))}
                     </div>
@@ -195,7 +195,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
     };
     if (step === 4) {
         return (
-            <div className='flex flex-col items-center justify-center mt-30'>
+            <div className='flex flex-col items-center justify-center mt-10 lg:mt-30'>
             <h1 className='font-semibold text-lg'>What describes your lifestyle best?</h1>
             <span className='text-neutral-500 mb-4'>
                 {selectedLifestyles.length === 0
@@ -204,7 +204,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                 }
             </span>
             <div>
-                <div className='grid grid-cols-3 gap-4 mb-4'>
+                <div className='grid grid-cols-2 lg:grid-cols-3 gap-4 mb-4'>
                     {lifestyles.map(({ label, image }) => (
                         <button
                             key={label}
@@ -222,7 +222,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                             }`}
                         >
                             <img src={image} alt={label} className='h-20 w-20 mx-auto mb-2' />
-                            <span className='text-sm font-medium'>{label}</span>
+                            <span className='text-xs lg:text-sm font-medium'>{label}</span>
                         </button>
                     ))}
                 </div>
@@ -234,7 +234,6 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                     }`}
                     onClick={() => {
                         setAnswers({ ...answers, lifestyles: selectedLifestyles });
-                        setStep(5);
                     }}
                 >
                     CONTINUE
