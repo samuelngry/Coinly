@@ -29,7 +29,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                         onClick={() => {
                             if (selectedCategories.includes(label)) {
                                 setSelectedCategories(selectedCategories.filter((c) => c != label));
-                            } else {
+                            } else if (!selectedCategories.includes(label) && selectedCategories.length < 2) {
                                 setSelectedCategories([...selectedCategories, label]);
                             }
                         }}
