@@ -11,14 +11,18 @@ const OnboardingHeader = ({ step, setStep }) => {
                     setStep(prevStep => prevStep - 1);
                 }}
                 className={`${
-                    step === 0
+                    step === 0 || step === 5
                     ? 'hidden'
                     : 'visible'
                 }`}
             >
                 <ArrowLeft className='h-5 w-5 mr-2 text-gray-400 bg-white hover:text-gray-800' alt='back' />
             </button>
-            <div className='bg-gray-300 flex-1 rounded-full overflow-hidden h-3'>
+            <div className={`bg-gray-300 flex-1 rounded-full overflow-hidden h-3 ${
+                step === 5
+                ? 'hidden'
+                : 'visible'
+            }`}>
                 <div
                     className='h-full bg-orange-500 rounded-full transition-all duration-300 '
                     style={{ width: `${progress}%`}}
