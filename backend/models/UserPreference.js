@@ -12,9 +12,6 @@ const UserPreference = db.define('user_preferences', {
         }
     },
     struggles: {
-        type: Sequelize.ARRAY(Sequelize.TEXT),
-    },
-    money_feeling: {
         type: Sequelize.STRING(50),
     },
     goal: {
