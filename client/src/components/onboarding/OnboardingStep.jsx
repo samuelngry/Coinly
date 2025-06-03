@@ -286,7 +286,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                 <span class="sr-only">Loading...</span>
             </div>
         )
-    }
+    };
 };
 
 export default OnboardingStep

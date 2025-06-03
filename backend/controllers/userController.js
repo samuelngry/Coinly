@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const UserPreference = require("../models/UserPreference");
 
 const updateUsername = async (req, res) => {
     try {
@@ -29,7 +30,14 @@ const updateAvatar = async (req, res) => {
     }
 };
 
+const savePreferences = async (req, res) => {
+    try {
+
+    }
+}
+
 module.exports = {
     updateUsername,
     updateAvatar,
+    savePreferences
 };
