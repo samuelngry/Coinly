@@ -202,10 +202,17 @@ const savePreferences = async (req, res) => {
 
         await UserPreference.upsert({
             user_id: userId,
+<<<<<<< HEAD
             struggle: struggle,
             goal: goal,
             categories: categories,
             lifestyle: lifestyles
+=======
+            struggle,
+            goal,
+            categories: JSON.stringify(categories),
+            lifestyle: JSON.stringify(lifestyles)
+>>>>>>> 522459d (feat: send user preferences to backend with token on final onboarding step)
         });
 
         await User.update(
