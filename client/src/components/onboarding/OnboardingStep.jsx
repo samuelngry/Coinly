@@ -326,6 +326,27 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
     };
 
     if (step === 5) {
+        const token = localStorage.getItem("token");
+        
+        fetch("http://localhost:5000/api/users/preferences", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                goal: answers.goal,
+                struggle: answers.struggle,
+                lifestyle: answers.lifestyles,
+                categories: answers.categories
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data.message);
+        })
+        .catch(err => console.error("Error saving preferences", err));
+
         return (
             <div className='flex flex-col items-center justify-center mt-20 lg:mt-30'>
             <h1 className='font-semibold mb-4'>Setting things up...</h1>
