@@ -11,7 +11,7 @@ const UserPreference = db.define('user_preferences', {
             key: 'id'
         }
     },
-    struggles: {
+    struggle: {
         type: Sequelize.STRING(50),
     },
     goal: {

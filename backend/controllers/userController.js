@@ -32,8 +32,23 @@ const updateAvatar = async (req, res) => {
 
 const savePreferences = async (req, res) => {
     try {
+        const userId = req.user.id;
+        const { categories, struggle, goal, lifestyles } = req.body;
+
+        await UserPreference.upsert({
+            user_id: userId,
+            struggle,
+            goal,
+            categories: JSON.stringify(categories),
+            lifestyles: JSON.stringify(lifestyles)
+        });
+
+        res.status(200).json({ message: "User Preferences saved successfully"});
+    } catch (err) {
+        console.error("Error in saving User Preferences", err);
+        res.status(500).json({ error: err.message })
     }
-}
+};
 
 module.exports = {
     updateUsername,
