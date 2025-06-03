@@ -40,7 +40,7 @@ const savePreferences = async (req, res) => {
             struggle,
             goal,
             categories: JSON.stringify(categories),
-            lifestyles: JSON.stringify(lifestyles)
+            lifestyle: JSON.stringify(lifestyles)
         });
 
         res.status(200).json({ message: "User Preferences saved successfully"});
