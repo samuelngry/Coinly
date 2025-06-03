@@ -32,7 +32,6 @@ const updateAvatar = async (req, res) => {
 
 const savePreferences = async (req, res) => {
     try {
-        const userId =
     }
 }
 

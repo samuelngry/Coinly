@@ -23,6 +23,9 @@ const UserPreference = db.define('user_preferences', {
     lifestyle: {
         type: Sequelize.ARRAY(Sequelize.TEXT),
     },
+    categories: {
+        type: Sequelize.ARRAY(Sequelize.TEXT),
+    }
 });
 
 module.exports = UserPreference;
