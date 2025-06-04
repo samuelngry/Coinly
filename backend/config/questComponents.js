@@ -120,6 +120,10 @@ module.exports = {
         "Get creative with alternatives to": ["movie theater trips", "bowling nights", "expensive coffee beans", "wellness products"]
     },
 
+    goals: [
+        "save money", "build discipline", "boost mental health", "reduce screen time", "eat healthier"
+    ],
+
     itemToCategoryMap: {
         // Food
         "morning coffee run": 'Food', "bubble tea addiction": 'Food', "late night snacks": 'Food',
