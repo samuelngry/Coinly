@@ -53,6 +53,34 @@ module.exports = {
         ]
     },
 
+    lifestyleMap: {
+        "Eat out often": [
+            "Make a meal at home today. Bonus points for plating it like a restaurant 👨‍🍳",
+            "Meal prep for tomorrow’s lunch. Save money and flex your chef powers.",
+            "Avoid delivery apps today. Pretend they don’t exist 🍱"
+        ],
+        "Shop when bored": [
+            "Next time you're bored, do 5 jumping jacks instead of opening Shopee 🛍️",
+            "Delete one shopping app from your phone. Just one.",
+            "Distract yourself from boredom spending with a free hobby today."
+        ],
+        "Mostly just cover bills": [
+            "See if any bill can be reduced today. Cancel something? Downgrade a plan?",
+            "Do a ‘budget check-in’ for 5 minutes. Are your bills still aligned with your needs?",
+            "Celebrate a bill you paid on time. You’re doing more than you think!"
+        ],
+        "Too many subscriptions": [
+            "Review your subscriptions today. Cancel one or mark for review 📋",
+            "Try free alternatives to one paid app/service today.",
+            "Log in and check if you still use that streaming service. Be honest 👀"
+        ],
+        "Easily tempted by sales": [
+            "Mute a brand’s notifications or emails for today 🛑",
+            "Window-shop only. Browse but don’t buy!",
+            "Postpone buying a ‘sale’ item until next week."
+        ]
+    },
+
     actions: [
         "Skip", "DIY instead of buying", "Find a budget hack for", "Go cold turkey on", "Try the free version of",
         "Swap with a friend instead of buying", "Meal prep instead of buying", "Walk/bike instead of", 
