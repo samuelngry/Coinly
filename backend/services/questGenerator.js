@@ -24,6 +24,15 @@ async function generateDynamicQuests(userId) {
 
         let relevantItems = [];
 
+        if (Array.isArray(userPreference.categories)) {
+            userPreference.categories.forEach(category => {
+                const itemsForCategory = questComponents.categoriesMap[category] || [];
+                relevantItems.push(...itemsForCategory);
+            });
+        }
+
+        relevantItems = [...new Set(relevantItems)];
+
         const generatedQuests = [];
         const actions = questComponents.actions;
 
