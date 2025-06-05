@@ -29,7 +29,30 @@ module.exports = {
             "Write down one financial win this week. Even a small one counts 🎉"
         ]
     },
-    
+
+    goalMap: {
+        "Save monthly": [
+            "Set a spending cap today. Imagine you're in a budgeting video game 🕹️",
+            "Skip your usual splurge and move that amount to savings 💸",
+            "DIY one thing today instead of buying it. Your wallet will thank you."
+        ],
+        "Emergency fund": [
+            "Transfer just $2 to savings. Yes, even that counts!",
+            "Cook today instead of food delivery and stash the saved cash 🧂➡️💰",
+            "Cancel or pause a subscription you haven’t used in 2 weeks."
+        ],
+        "Pay off debts": [
+            "Make a mini payment to your debt — even $1 helps build momentum 🧮",
+            "Avoid one non-essential purchase and put the money toward your loan 🔁",
+            "Unsubscribe from a temptation newsletter today (looking at you, flash sales 🫣)"
+        ],
+        "Travel or big purchase": [
+            "Plan your dream trip for 2 minutes instead of doomscrolling 🌍",
+            "Screenshot something you *want* to buy and revisit it in 3 days 📸",
+            "Say no to a small impulse today. You're saving for something big!"
+        ]
+    },
+
     actions: [
         "Skip", "DIY instead of buying", "Find a budget hack for", "Go cold turkey on", "Try the free version of",
         "Swap with a friend instead of buying", "Meal prep instead of buying", "Walk/bike instead of", 
