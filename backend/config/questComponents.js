@@ -1,11 +1,11 @@
 module.exports = {
     categoriesMap: {
         "Food/Delivery": [
-        "Avoid bubble tea today 🧋",
-        "Cook at home instead of ordering takeout 🍳",
-        "Pack lunch instead of buying out today 🍱",
-        "Try not to open any delivery app today 🚫📱",
-        "Make your own drink instead of buying coffee ☕️"
+            "Avoid bubble tea today 🧋",
+            "Cook at home instead of ordering takeout 🍳",
+            "Pack lunch instead of buying out today 🍱",
+            "Try not to open any delivery app today 🚫📱",
+            "Make your own drink instead of buying coffee ☕️"
         ],
         "Transport": [
             "Skip ride-hailing today and walk instead 🚶‍♂️",

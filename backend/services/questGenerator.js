@@ -22,20 +22,9 @@ async function generateDynamicQuests(userId) {
     if (!lastGeneratedDate || lastGeneratedDate < today) {
         await expireOldQuests(userId);
 
-        let relevantItems = [];
-
-        if (Array.isArray(userPreference.categories)) {
-            userPreference.categories.forEach(category => {
-                const itemsForCategory = questComponents.categoriesMap[category] || [];
-                relevantItems.push(...itemsForCategory);
-            });
-        }
-
-        relevantItems = [...new Set(relevantItems)];
-
         const generatedQuests = [];
 
-        await generateQuest(user, relevantItems, generatedQuests);
+        await generateQuest(user, userPreference, generatedQuests);
 
         user.last_generated_at = new Date();
         await user.save();
@@ -46,7 +35,8 @@ async function generateDynamicQuests(userId) {
     return []; // Already generated today
 }
 
-async function generateQuest(user, relevantItems, generatedQuests) {
+async function generateQuest(user, userPreference, generatedQuests) {
+    let allQuests = [];
     const startOfToday = new Date();
     startOfToday.setHours(0, 0, 0, 0);
 
@@ -60,12 +50,41 @@ async function generateQuest(user, relevantItems, generatedQuests) {
 
     const questToGenerate = 5 - availableCount; 
 
+    if (questComponents.goalMap[userPreference.goal]) {
+        allQuests.push(...questComponents.goalMap[userPreference.goal]);
+    }
+
+    if (questComponents.struggleMap[userPreference.struggle]) {
+        allQuests.push(...questComponents.struggleMap[userPreference.struggle]);
+    }
+
+    if (Array.isArray(userPreference.lifestyle)) {
+        userPreference.lifestyle.forEach(life => {
+            if (questComponents.lifestyleMap[life]) {
+                allQuests.push(...questComponents.lifestyleMap[life]);
+            }
+        });
+    }
+
+    if (Array.isArray(userPreference.categories)) {
+        userPreference.categories.forEach(category => {
+            if (questComponents.categoriesMap[category]) {
+                allQuests.push(...questComponents.categoriesMap[category]);
+            }
+        });
+    }
+
+    allQuests = [...new Set(allQuests)];
+
+    const shuffledQuests = allQuests.sort(() => Math.random() - 0.5);
+    const selectedQuests = shuffledQuests.slice(0, questToGenerate);
+
     if (questToGenerate > 0) {
-        await generateBatchQuests(user, relevantItems, generatedQuests, questToGenerate);
+        await generateBatchQuests(user, generatedQuests, selectedQuests, questToGenerate);
     }
 }
 
-async function generateBatchQuests(user, relevantItems, actions, generatedQuests, questToGenerate, timeframe="today") {
+async function generateBatchQuests(user, generatedQuests, questToGenerate, timeframe="today") {
     const questPromises = [];
     let count = 0;
 
