@@ -6,6 +6,30 @@ module.exports = {
         "Shopping": ["sale item", "shopping"],
         "Health & Wellness": ["fitness class"]
     },
+
+    struggleMap: {
+        "Don't track spendings": [
+            "Track all your expenses today using our tracker. Like a budget detective 🕵️‍♂️",
+            "Before you spend today, pause for 5 seconds and ask: 'Do I *really* need this?'",
+            "End your day with a 2-minute money recap. Just you and your spending sins."
+        ],
+        "Want better habits": [
+            "Do one thing today that Future You would be proud of 💪",
+            "Say no to one impulse buy today and give yourself a gold star 🌟",
+            "Create a 1-day no-spend streak. Yes, just 1. Baby steps!"
+        ],
+        "Impulse spending": [
+            "Leave 1 item in your cart overnight. If you still want it tomorrow, maybe.",
+            "Resist the 'Treat Yourself' urge once today and log it in your vault 🧠",
+            "Open your favorite shopping app… and close it. That’s it. That’s the quest."
+        ],
+        "Feel out of control": [
+            "Take 3 minutes to look at your past 3 transactions. No judgment, just awareness.",
+            "Declutter your wallet or app subscriptions. Tiny steps = big wins!",
+            "Write down one financial win this week. Even a small one counts 🎉"
+        ]
+    },
+    
     actions: [
         "Skip", "DIY instead of buying", "Find a budget hack for", "Go cold turkey on", "Try the free version of",
         "Swap with a friend instead of buying", "Meal prep instead of buying", "Walk/bike instead of", 
