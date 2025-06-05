@@ -24,21 +24,6 @@ async function generateDynamicQuests(userId) {
 
         let relevantItems = [];
 
-        const spendingCategories = Array.isArray(userPreference.spending_categories)
-            ? userPreference.spending_categories
-            : JSON.parse(userPreference.spending_categories || '[]' );
-    
-        relevantItems = questComponents.items.filter(item =>
-            spendingCategories.includes(item)
-        );
-    
-        // If user does not have enough spending categories, add some defaults
-        if (relevantItems.length < 3) {
-            relevantItems = ["coffee", "lunch", "entertainment", "snacks", "takeout food"].filter(
-                item => !relevantItems.includes(item)  
-            ).concat(relevantItems).slice(0, 5);
-        }
-
         const generatedQuests = [];
         const actions = questComponents.actions;
 
