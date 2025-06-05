@@ -1,4 +1,11 @@
 module.exports = {
+    categoriesMap: {
+        "Food/Delivery": ["coffee", "bubble tea", "food delivery", "brunch", "late night food", "grocery impulse", "snack"],
+        "Transport": ["ride"],
+        "Entertainment": ["streaming", "loot box", "game skin"],
+        "Shopping": ["sale item", "shopping"],
+        "Health & Wellness": ["fitness class"]
+    },
     actions: [
         "Skip", "DIY instead of buying", "Find a budget hack for", "Go cold turkey on", "Try the free version of",
         "Swap with a friend instead of buying", "Meal prep instead of buying", "Walk/bike instead of", 
