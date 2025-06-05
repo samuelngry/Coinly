@@ -1,10 +1,40 @@
 module.exports = {
     categoriesMap: {
-        "Food/Delivery": ["coffee", "bubble tea", "food delivery", "brunch", "late night food", "grocery impulse", "snack"],
-        "Transport": ["ride"],
-        "Entertainment": ["streaming", "loot box", "game skin"],
-        "Shopping": ["sale item", "shopping"],
-        "Health & Wellness": ["fitness class"]
+        "Food/Delivery": [
+        "Avoid bubble tea today 🧋",
+        "Cook at home instead of ordering takeout 🍳",
+        "Pack lunch instead of buying out today 🍱",
+        "Try not to open any delivery app today 🚫📱",
+        "Make your own drink instead of buying coffee ☕️"
+        ],
+        "Transport": [
+            "Skip ride-hailing today and walk instead 🚶‍♂️",
+            "Try public transport today 🚌",
+            "Bike to your destination today 🚲",
+            "Carpool or share a ride if possible 🚗➡️👫",
+            "Plan your trip without using Grab today 📍"
+        ],
+        "Entertainment": [
+            "Have a no-streaming day today 🎬🚫",
+            "Play a free mobile game instead of buying one 🎮",
+            "Skip one episode binge and do something offline 📵",
+            "Rewatch something you already love instead of renting 📼",
+            "Avoid impulse in-game purchases today 🧃🎮"
+        ],
+        "Shopping": [
+            "Avoid impulse buying on sales today 🛍️",
+            "Remove 1 item from your wishlist 👟",
+            "Don’t visit any shopping sites for 24 hours 🚫🛒",
+            "Try a no-spend challenge just for today 💪",
+            "Window shop only — no checkout allowed 🧾"
+        ],
+        "Health & Wellness": [
+            "Stretch for 10 minutes instead of snacking 🧘‍♀️",
+            "Drink water before buying energy drinks 💧",
+            "Do a quick 5-min workout at home 🏃‍♂️",
+            "Skip one sugary snack today 🍬",
+            "Do one self-care activity that costs nothing 💆‍♀️"
+        ]
     },
 
     struggleMap: {

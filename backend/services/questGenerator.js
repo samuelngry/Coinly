@@ -34,9 +34,8 @@ async function generateDynamicQuests(userId) {
         relevantItems = [...new Set(relevantItems)];
 
         const generatedQuests = [];
-        const actions = questComponents.actions;
 
-        await generateQuest(user, relevantItems, actions, generatedQuests);
+        await generateQuest(user, relevantItems, generatedQuests);
 
         user.last_generated_at = new Date();
         await user.save();
@@ -47,7 +46,7 @@ async function generateDynamicQuests(userId) {
     return []; // Already generated today
 }
 
-async function generateQuest(user, relevantItems, actions, generatedQuests) {
+async function generateQuest(user, relevantItems, generatedQuests) {
     const startOfToday = new Date();
     startOfToday.setHours(0, 0, 0, 0);
 
@@ -62,7 +61,7 @@ async function generateQuest(user, relevantItems, actions, generatedQuests) {
     const questToGenerate = 5 - availableCount; 
 
     if (questToGenerate > 0) {
-        await generateBatchQuests(user, relevantItems, actions, generatedQuests, questToGenerate);
+        await generateBatchQuests(user, relevantItems, generatedQuests, questToGenerate);
     }
 }
 
@@ -70,7 +69,7 @@ async function generateBatchQuests(user, relevantItems, actions, generatedQuests
     const questPromises = [];
     let count = 0;
 
-    for (const action of actions) {
+    for (const item of relevantItems) {
         const compatibleItems = relevantItems.filter(item => 
             questComponents.actionItemMap[action] && questComponents.actionItemMap[action].includes(item)
         );
