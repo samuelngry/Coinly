@@ -84,39 +84,20 @@ async function generateQuest(user, userPreference, generatedQuests) {
     }
 }
 
-async function generateBatchQuests(user, generatedQuests, questToGenerate, timeframe="today") {
+async function generateBatchQuests(user, generatedQuests, selectedQuests) {
     const questPromises = [];
-    let count = 0;
 
-    for (const item of relevantItems) {
-        const compatibleItems = relevantItems.filter(item => 
-            questComponents.actionItemMap[action] && questComponents.actionItemMap[action].includes(item)
-        );
-
-        for (const item of compatibleItems) {
-            if (count >= questToGenerate) break;
-
-            const savingsAmount = calculateSavingsAmount(item, timeframe);
-            const questText = questComponents.questTextTemplates[action]
-                ? questComponents.questTextTemplates[action](item, timeframe)
-                : `${action} ${item} ${timeframe}`;
-
-            const questPromise = UserQuest.create({
-                user_id: user.id,
-                quest_text: questText,
-                xp: calculateXpReward(savingsAmount),
-                source_template_id: null,
-                status: 'Pending',
-                instance_date: new Date(),
-                accepted_at: null,
-                category: questComponents.itemToCategoryMap[item] || 'Uncategorised'
-            });
-
-            questPromises.push(questPromise);
-            count++;
-        }
-
-        if (count >= questToGenerate) break;
+    for (const questText of selectedQuests) {
+        const questPromise = UserQuest.create({
+            user_id: user.id,
+            quest_text: questText,
+            xp: 50, // TODO: Create logic for xp
+            source_template_id: null,
+            status: 'Pending',
+            instance_date: new Date(),
+            accepted_at: null,
+        });
+        questPromises.push(questPromise);
     }
 
     const quests = await Promise.all(questPromises);
