@@ -1,12 +1,12 @@
 import React from 'react'
 import TopBar from './TopBar'
-import Grid from './Grid'
+import MainContent from './MainContent'
 
 const Dashboard = () => {
   return (
     <div style={{ backgroundColor: 'var(--old-lace)' }} className='rounded-lg shadow'>
         <TopBar />
-        <Grid /> 
+        <MainContent /> 
     </div>
   )
 }
