@@ -1,12 +1,10 @@
 import React from 'react'
-import TopBar from '../archived/TopBar'
-import MainContent from '../archived/MainContent'
+import RivePet from './RivePet';
 
 const Dashboard = () => {
   return (
-    <div style={{ backgroundColor: 'var(--old-lace)' }} className='rounded-lg shadow'>
-        <TopBar />
-        <MainContent /> 
+    <div className='min-h-screen p-4 rounded-lg shadow'>
+        <RivePet />
     </div>
   )
 }

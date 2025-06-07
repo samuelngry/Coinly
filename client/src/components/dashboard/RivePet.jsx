@@ -1,15 +1,16 @@
 import { useRive } from '@rive-app/react-canvas';
-import petAnimation from '../../assets/shark.riv';
+import monster from '../../assets/monster.riv';
 
 const RivePet = () => {
     const { RiveComponent } = useRive({
-        src: petAnimation,
-        autoplay: true,
+        src: monster,
+        animations: ['Timeline 1'],
+        autoplay: true
     });
 
     return (
-        <div>
-            <RiveComponent />
+        <div className='flex justify-center'>
+            <RiveComponent style={{ width: 300, height: 300 }} />
         </div>
     )
 }
