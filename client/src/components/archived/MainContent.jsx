@@ -1,8 +1,8 @@
 import React from 'react'
-import StatCards from './StatCards'
+import StatCards from '../dashboard/StatCards'
 import ActivityGraph from './ActivityGraph'
 import BreakdownChart from './BreakdownChart'
-import QuestsTable from './QuestsTable'
+import QuestsTable from '../dashboard/QuestsTable'
 
 const Grid = () => {
   return (

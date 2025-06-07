@@ -1,7 +1,7 @@
 import { useRive } from '@rive-app/react-canvas';
 import petAnimation from '../../assets/shark.riv';
 
-const PetDisplay = () => {
+const RivePet = () => {
     const { RiveComponent } = useRive({
         src: petAnimation,
         autoplay: true,
@@ -14,4 +14,4 @@ const PetDisplay = () => {
     )
 }
 
-export default PetDisplay
+export default RivePet

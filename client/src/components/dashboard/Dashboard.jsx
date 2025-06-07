@@ -1,6 +1,6 @@
 import React from 'react'
-import TopBar from './TopBar'
-import MainContent from './MainContent'
+import TopBar from '../archived/TopBar'
+import MainContent from '../archived/MainContent'
 
 const Dashboard = () => {
   return (
