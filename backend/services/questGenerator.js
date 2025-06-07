@@ -89,11 +89,13 @@ async function generateQuest(user, userPreference, generatedQuests) {
 async function generateBatchQuests(user, generatedQuests, selectedQuests) {
     const questPromises = [];
 
-    for (const questText of selectedQuests) {
+    for (const quest of selectedQuests) {
+        const xp = getXpForType(quest.type);
+
         const questPromise = UserQuest.create({
             user_id: user.id,
-            quest_text: questText,
-            xp: 50, // TODO: Create logic for xp
+            quest_text: quest.text,
+            xp: xp,
             source_template_id: null,
             status: 'Pending',
             instance_date: new Date(),
@@ -122,15 +124,14 @@ async function expireOldQuests(userId) {
     );
 }
 
-function calculateSavingsAmount(item, timeframe) {
-    const baseCosts = questComponents.baseCosts[item] || 10;
-    const timeMultiplier = questComponents.timeMultipliers[timeframe] || 1;
-
-    return Math.round(baseCosts * timeMultiplier);
-}
-
-function calculateXpReward(savingsAmount) {
-    return Math.max(20, Math.min(100, savingsAmount * 5));
+function getXpForType(type) {
+    const xpValues = {
+        goal: 40,
+        categories: 35,
+        struggle: 30,
+        lifestyle: 25
+    };
+    return xpValues[type] || 20;
 }
 
 module.exports = {
