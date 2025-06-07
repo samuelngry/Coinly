@@ -51,26 +51,28 @@ async function generateQuest(user, userPreference, generatedQuests) {
     const questToGenerate = 5 - availableCount; 
 
     if (questComponents.goalMap[userPreference.goal]) {
-        allQuests.push(...questComponents.goalMap[userPreference.goal]);
+        questComponents.goalMap[userPreference.goal].forEach(q => {
+            allQuests.push({ text: q, type: "goal" });
+        });
     }
 
     if (questComponents.struggleMap[userPreference.struggle]) {
-        allQuests.push(...questComponents.struggleMap[userPreference.struggle]);
+        questComponents.struggleMap[userPreference.struggle].forEach(q => {
+            allQuests.push({ text: q, type: "struggle" });
+        })
     }
 
     if (Array.isArray(userPreference.lifestyle)) {
         userPreference.lifestyle.forEach(life => {
-            if (questComponents.lifestyleMap[life]) {
-                allQuests.push(...questComponents.lifestyleMap[life]);
-            }
+            const quests = questComponents.lifestyleMap[life] || [];
+            quests.forEach(q => allQuests.push({ text: q, type: "lifestyle" }));
         });
     }
 
     if (Array.isArray(userPreference.categories)) {
         userPreference.categories.forEach(category => {
-            if (questComponents.categoriesMap[category]) {
-                allQuests.push(...questComponents.categoriesMap[category]);
-            }
+            const quests = questComponents.categoriesMap[category] || []
+            quests.forEach(q => allQuests.push({ text: q, type: "categories" }));
         });
     }
 
