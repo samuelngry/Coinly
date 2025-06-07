@@ -1,6 +1,6 @@
 import Sidebar from '../sidebar/Sidebar'
-import Dashboard from '../dashboard/Dashboard'
 import BottomNavbar from '../sidebar/BottomNavbar'
+import Quests from '../quests/Quests'
 
 const DashboardPage = () => {
   return (
