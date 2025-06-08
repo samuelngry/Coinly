@@ -4,6 +4,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&display=swap');
 
 @import "tailwindcss";
+@import 'primereact/resources/themes/lara-light-indigo/theme.css';
+@import 'primereact/resources/primereact.min.css';
 
 :root {
   font-family: "Ginka TRIAL Medium", "Instrument Sans", "Feather Bold", "DIN Next Rounded LT W01 Regular", sans-serif;
@@ -16,4 +18,8 @@ h1, h2, h3, h4, h5, h6, strong {
 
 .subheader, p, span, a{
   font-family: "Instrument Sans", "DIN Next Rounded LT W01 Regular", sans-serif;
+}
+
+.custom-xp-bar .p-progressbar-value {
+  @apply bg-green-400;
 }
