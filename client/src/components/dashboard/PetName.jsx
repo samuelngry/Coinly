@@ -3,7 +3,7 @@ import EditIcon from '../../assets/edit.png'
 
 const PetName = () => {
   return (
-    <div className='border-b border-neutral-300 px-3 py-1 flex items-center justify-center gap-2 py-4'>
+    <div className='px-3 py-1 flex items-center justify-center gap-2'>
       <h2>Gaden</h2>
       <button
       >

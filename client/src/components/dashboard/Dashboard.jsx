@@ -2,6 +2,7 @@ import React from 'react'
 import RivePet from './RivePet';
 import LevelBar from './LevelBar';
 import PetName from './PetName';
+import MainCards from './MainCards';
 
 const Dashboard = () => {
   return (
@@ -9,6 +10,7 @@ const Dashboard = () => {
         <LevelBar />
         <RivePet />
         <PetName />
+        <MainCards />
     </div>
   )
 }
