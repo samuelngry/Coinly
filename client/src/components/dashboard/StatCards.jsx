@@ -8,9 +8,6 @@ const StatCards = () => {
       <Card
         title= "Level"
         value= "5"
-        trend= "up"
-        percent='4.3%'
-        period= "last 30 days"
         icon= {<FiZap className='w-10 h-10 bg-yellow-100 text-yellow-400 rounded-full px-2 py-2 shrink-0'/>}
       />
       <Card 
