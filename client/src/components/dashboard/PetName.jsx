@@ -4,7 +4,7 @@ import EditIcon from '../../assets/edit.png'
 const PetName = () => {
   return (
     <div className='px-3 py-1 flex items-center justify-center gap-2'>
-      <h2>Gaden</h2>
+      <h2>Bueno</h2>
       <button
       >
         <img src={EditIcon} alt='Edit' className='w-3.5 h-3.5'/>

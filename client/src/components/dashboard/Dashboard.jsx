@@ -3,6 +3,7 @@ import RivePet from './RivePet';
 import LevelBar from './LevelBar';
 import PetName from './PetName';
 import MainCards from './MainCards';
+import QuestsList from './QuestsList';
 
 const Dashboard = () => {
   return (
@@ -11,6 +12,7 @@ const Dashboard = () => {
         <RivePet />
         <PetName />
         <MainCards />
+        <QuestsList />
     </div>
   )
 }
