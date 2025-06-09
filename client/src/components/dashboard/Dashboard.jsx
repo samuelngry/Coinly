@@ -7,7 +7,7 @@ import QuestsList from './QuestsList';
 
 const Dashboard = () => {
   return (
-    <div className='min-h-screen p-10 rounded-lg shadow'>
+    <div className='min-h-screen p-8 rounded-lg shadow'>
         <LevelBar />
         <RivePet />
         <PetName />
