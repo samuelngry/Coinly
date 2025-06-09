@@ -24,9 +24,9 @@ const DailyQuests = () => {
                     <span className='text-xs break-words'>Track all your expenses today</span>
                 </div>
                 <div className='flex items-center shrink-0'>
-                    <div className="bg-orange-100 text-orange-600 px-1.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
+                    <div className="bg-orange-100 text-orange-500 px-1.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
                         <span>20</span>
-                        <img src={pawIcon} className="w-3 h-3" />
+                        <PawPrint className="w-3 h-3" />
                     </div>
                     <button
                     >
@@ -44,7 +44,7 @@ const DailyQuests = () => {
                 <div className='flex items-center shrink-0'>
                     <div className="bg-orange-100 text-orange-600 px-1.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
                         <span>15</span>
-                        <img src={pawIcon} className="w-3 h-3" />
+                        <PawPrint className="w-3 h-3" />
                     </div>
                     <button
                     >

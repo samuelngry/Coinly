@@ -19,7 +19,7 @@ const MainCards = () => {
             <img src={questIcon} alt='Quest' className='w-7 h-7'/>
             <div className='flex flex-col'>
                 <h3 className='text-sm lg:text-lg'>3/5</h3>
-                <span className='text-neutral-400 text-xs -mt-0.5 lg:text-md'>daily quests</span>
+                <span className='text-neutral-400 text-xs -mt-0.5 lg:text-md'>quests</span>
             </div>
         </div>
       </div>
