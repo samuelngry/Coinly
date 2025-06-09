@@ -3,16 +3,18 @@ import RivePet from './RivePet';
 import LevelBar from './LevelBar';
 import PetName from './PetName';
 import MainCards from './MainCards';
-import QuestsList from './QuestsList';
+import DailyQuests from './DailyQuests';
+import BonusQuests from './BonusQuests';
 
 const Dashboard = () => {
   return (
-    <div className='min-h-screen p-6 rounded-lg shadow'>
+    <div className='min-h-screen p-6 mb-12 rounded-lg shadow'>
         <LevelBar />
         <RivePet />
         <PetName />
         <MainCards />
-        <QuestsList />
+        <DailyQuests />
+        <BonusQuests />
     </div>
   )
 }
