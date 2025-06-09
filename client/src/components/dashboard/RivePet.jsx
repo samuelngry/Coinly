@@ -10,7 +10,7 @@ const RivePet = () => {
 
     return (
         <div className='flex justify-center'>
-            <RiveComponent style={{ width: 300, height: 300 }}/>
+            <RiveComponent style={{ width: 275, height: 275 }}/>
         </div>
     )
 }
