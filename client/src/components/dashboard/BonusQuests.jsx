@@ -7,8 +7,8 @@ const BonusQuests = () => {
   return (
     <div className='flex flex-col mt-6'>
       <h3 className='text-sm'>Bonus Quests</h3>
-      <div className='space-y-2'>
-        <div className='mt-3 p-3 rounded-xl shadow-none transition-shadow duration-300 hover:shadow-gray-400 hover:shadow-lg border border-neutral-300 flex justify-between items-center gap-2'>
+      <div className='space-y-2 grid grid-cols-1 lg:grid-cols-3 lg:space-x-2 lg:space-y-0'>
+        <div className='mt-4 p-3 rounded-xl shadow-none transition-shadow duration-300 hover:shadow-gray-400 hover:shadow-lg border border-neutral-300 flex justify-between items-center gap-2'>
             <div className='flex items-center gap-2 flex-1'>
                 <img src={starIcon} alt='Quest' className='w-10 h-10'/>
                 <span className='text-xs break-words'>Take public transport instead of Grab today</span>
@@ -26,7 +26,7 @@ const BonusQuests = () => {
                 </button>
             </div>
         </div>
-        <div className='mt-3 p-3 rounded-xl shadow-none transition-shadow duration-300 hover:shadow-gray-400 hover:shadow-lg border border-neutral-300 flex justify-between items-center gap-2'>
+        <div className='mt-4 p-3 rounded-xl shadow-none transition-shadow duration-300 hover:shadow-gray-400 hover:shadow-lg border border-neutral-300 flex justify-between items-center gap-2'>
             <div className='flex items-center gap-2 flex-1'>
                 <img src={starIcon} alt='Quest' className='w-10 h-10'/>
                 <span className='text-xs break-words'>Write down one financial win this week</span>
