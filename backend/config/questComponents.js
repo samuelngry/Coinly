@@ -1,4 +1,8 @@
 module.exports = {
+    mandatoryDaily: [
+        { text: "Track all your expenses today 🧾", type: "daily", xp: 20 },
+    ],
+
     categoriesMap: {
         "Food/Delivery": [
             "Avoid bubble tea today 🧋",
