@@ -1,166 +1,121 @@
 module.exports = {
     mandatoryDaily: [
-        {
-            text: "Log your spending at least once today",
-            xp: 20,
-            type: "daily",
-        },
-        {
-            text: "Avoid buying something you don’t really need today",
-            xp: 20,
-            type: "daily",
-        },
-        {
-            text: "Pause before each purchase today. Ask: 'Do I need this?'",
-            xp: 20,
-            type: "daily",
-        },
-        {
-            text: "Review your spending summary or wallet for 2 mins",
-            xp: 20,
-            type: "daily",
-        },
-        {
-            text: "Try not to spend on anything non-essential today",
-            xp: 20,
-            type: "daily",
-        },
-        {
-            text: "Open your budgeting app or money tracker once today",
-            xp: 20,
-            type: "daily",
-        },
-        {
-            text: "Write down or think about one thing you spent well on",
-            xp: 20,
-            type: "daily",
-        },
-        {
-            text: "Take 60 seconds to check your bank or wallet balance",
-            xp: 20,
-            type: "daily",
-        },
-        {
-            text: "Skip a small treat or habit purchase today (e.g., snack, app)",
-            xp: 20,
-            type: "daily",
-        },
-        {
-            text: "Do one small action to care about your finances today",
-            xp: 20,
-            type: "daily",
-        },
+        { text: "Log your spending at least once today", xp: 15, type: "daily" },
+        { text: "Avoid buying something you don’t really need today", xp: 20, type: "daily" },
+        { text: "Pause before each purchase today. Ask: 'Do I need this?'", xp: 20, type: "daily" },
+        { text: "Review your spending summary or wallet for 2 mins", xp: 10, type: "daily" },
+        { text: "Try not to spend on anything non-essential today", xp: 25, type: "daily" },
+        { text: "Open your budgeting app or money tracker once today", xp: 15, type: "daily" },
+        { text: "Write down or think about one thing you spent well on", xp: 20, type: "daily" },
+        { text: "Take 60 seconds to check your bank or wallet balance", xp: 10, type: "daily" },
+        { text: "Skip a small treat or habit purchase today", xp: 15, type: "daily" },
+        { text: "Do one small action to care about your finances today", xp: 25, type: "daily" }
     ],
 
     categoriesMap: {
         "Food/Delivery": [
-            "Avoid bubble tea today 🧋",
-            "Cook at home instead of ordering takeout 🍳",
-            "Pack lunch instead of buying out today 🍱",
-            "Try not to open any delivery app today 🚫📱",
-            "Make your own drink instead of buying coffee ☕️"
+            { text: "Cook at home instead of ordering out 🍳", xp: 15, type: "bonus" },
+            { text: "Pack a meal instead of eating out 🍱", xp: 20, type: "bonus" },
+            { text: "Make your own drink instead of buying one ☕️", xp: 10, type: "bonus" },
+            { text: "Avoid delivery apps for today 🚫📱", xp: 15, type: "bonus" }
         ],
         "Transport": [
-            "Skip ride-hailing today and walk instead 🚶‍♂️",
-            "Try public transport today 🚌",
-            "Bike to your destination today 🚲",
-            "Carpool or share a ride if possible 🚗➡️👫",
-            "Plan your trip without using Grab today 📍"
+            { text: "Walk instead of taking a ride-hailing app 🚶‍♂️", xp: 20, type: "bonus" },
+            { text: "Try using public transport today 🚌", xp: 10, type: "bonus" },
+            { text: "Bike to your destination 🚲", xp: 20, type: "bonus" },
+            { text: "Carpool or share a ride if possible 🚗➡️👫", xp: 15, type: "bonus" }
         ],
         "Entertainment": [
-            "Have a no-streaming day today 🎬🚫",
-            "Play a free mobile game instead of buying one 🎮",
-            "Skip one episode binge and do something offline 📵",
-            "Rewatch something you already love instead of renting 📼",
-            "Avoid impulse in-game purchases today 🧃🎮"
+            { text: "Skip streaming for a day 🎬🚫", xp: 15, type: "bonus" },
+            { text: "Play a free offline game today 🎮", xp: 10, type: "bonus" },
+            { text: "Do an offline activity for 30 mins 📵", xp: 20, type: "bonus" },
+            { text: "Avoid in-game purchases for the day 🧃🎮", xp: 15, type: "bonus" }
         ],
         "Shopping": [
-            "Avoid impulse buying on sales today 🛍️",
-            "Remove 1 item from your wishlist 👟",
-            "Don’t visit any shopping sites for 24 hours 🚫🛒",
-            "Try a no-spend challenge just for today 💪",
-            "Window shop only — no checkout allowed 🧾"
+            { text: "Don’t browse any shopping apps today 🛍️", xp: 15, type: "bonus" },
+            { text: "Remove 1 item from your wishlist 👟", xp: 10, type: "bonus" },
+            { text: "Do a one-day no-spend challenge 💪", xp: 25, type: "bonus" }
         ],
         "Health & Wellness": [
-            "Stretch for 10 minutes instead of snacking 🧘‍♀️",
-            "Drink water before buying energy drinks 💧",
-            "Do a quick 5-min workout at home 🏃‍♂️",
-            "Skip one sugary snack today 🍬",
-            "Do one self-care activity that costs nothing 💆‍♀️"
+            { text: "Stretch or walk for 10 minutes 🧘‍♀️", xp: 10, type: "bonus" },
+            { text: "Replace one sugary snack with water 💧", xp: 10, type: "bonus" },
+            { text: "Do a 5-minute home workout 🏃‍♂️", xp: 20, type: "bonus" },
+            { text: "Do one free self-care activity 💆‍♀️", xp: 15, type: "bonus" }
         ]
     },
 
     struggleMap: {
         "Don't track spendings": [
-            "Track all your expenses today using our tracker. Like a budget detective 🕵️‍♂️",
-            "Before you spend today, pause for 5 seconds and ask: 'Do I *really* need this?'",
-            "End your day with a 2-minute money recap. Just you and your spending sins."
+            { text: "Use a tracker to record at least one expense today 🕵️‍♂️", xp: 20, type: "bonus" },
+            { text: "Pause for 5 seconds before any purchase today", xp: 15, type: "bonus" },
+            { text: "End your day with a short review of your purchases", xp: 15, type: "bonus" }
         ],
         "Want better habits": [
-            "Do one thing today that Future You would be proud of 💪",
-            "Say no to one impulse buy today and give yourself a gold star 🌟",
-            "Create a 1-day no-spend streak. Yes, just 1. Baby steps!"
+            { text: "Do one small thing today Future You would be proud of 💪", xp: 20, type: "bonus" },
+            { text: "Say no to one temptation and record your win 🌟", xp: 15, type: "bonus" },
+            { text: "Create a 1-day no-spend streak", xp: 25, type: "bonus" }
         ],
         "Impulse spending": [
-            "Leave 1 item in your cart overnight. If you still want it tomorrow, maybe.",
-            "Resist the 'Treat Yourself' urge once today and log it in your vault 🧠",
-            "Open your favorite shopping app… and close it. That’s it. That’s the quest."
+            { text: "Leave something in your cart for 24 hours", xp: 10, type: "bonus" },
+            { text: "Resist one 'Treat Yourself' urge today 🧠", xp: 20, type: "bonus" },
+            { text: "Open your favorite shopping app and close it immediately 😂", xp: 10, type: "bonus" }
         ],
         "Feel out of control": [
-            "Take 3 minutes to look at your past 3 transactions. No judgment, just awareness.",
-            "Declutter your wallet or app subscriptions. Tiny steps = big wins!",
-            "Write down one financial win this week. Even a small one counts 🎉"
+            { text: "Look at your past 3 purchases without judging", xp: 10, type: "bonus" },
+            { text: "Declutter one subscription or wallet item", xp: 15, type: "bonus" },
+            { text: "Write down a small financial win today 🎉", xp: 15, type: "bonus" }
         ]
     },
 
     goalMap: {
         "Save monthly": [
-            "Set a spending cap today. Imagine you're in a budgeting video game 🕹️",
-            "Skip your usual splurge and move that amount to savings 💸",
-            "DIY one thing today instead of buying it. Your wallet will thank you."
+            { text: "Set a spending cap for the day 🕹️", xp: 15, type: "bonus" },
+            { text: "Skip a small indulgence and move the money to savings 💸", xp: 20, type: "bonus" },
+            { text: "DIY one thing you would normally buy", xp: 15, type: "bonus" }
         ],
         "Emergency fund": [
-            "Transfer just $2 to savings. Yes, even that counts!",
-            "Cook today instead of food delivery and stash the saved cash 🧂➡️💰",
-            "Cancel or pause a subscription you haven’t used in 2 weeks."
+            { text: "Transfer $2 to your emergency savings 💰", xp: 15, type: "bonus" },
+            { text: "Cook instead of ordering to save money 🧂➡️💰", xp: 10, type: "bonus" },
+            { text: "Pause or cancel one unused subscription", xp: 20, type: "bonus" }
         ],
         "Pay off debts": [
-            "Make a mini payment to your debt — even $1 helps build momentum 🧮",
-            "Avoid one non-essential purchase and put the money toward your loan 🔁",
-            "Unsubscribe from a temptation newsletter today (looking at you, flash sales 🫣)"
+            { text: "Make a small debt payment today 🧮", xp: 20, type: "bonus" },
+            { text: "Avoid a small expense and put it toward your debt 🔁", xp: 15, type: "bonus" },
+            { text: "Unsubscribe from a marketing email", xp: 10, type: "bonus" }
         ],
         "Travel or big purchase": [
-            "Plan your dream trip for 2 minutes instead of doomscrolling 🌍",
-            "Screenshot something you *want* to buy and revisit it in 3 days 📸",
-            "Say no to a small impulse today. You're saving for something big!"
+            { text: "Plan your dream trip instead of shopping 🌍", xp: 10, type: "bonus" },
+            { text: "Screenshot something you want and wait 3 days 📸", xp: 10, type: "bonus" },
+            { text: "Say no to a small impulse. Your goal > instant reward!", xp: 20, type: "bonus" }
         ]
     },
 
     lifestyleMap: {
         "Eat out often": [
-            "Make a meal at home today. Bonus points for plating it like a restaurant 👨‍🍳",
-            "Meal prep for tomorrow’s lunch. Save money and flex your chef powers.",
-            "Avoid delivery apps today. Pretend they don’t exist 🍱"
+            { text: "Make a meal at home today 👨‍🍳", xp: 15, type: "bonus" },
+            { text: "Meal prep tomorrow’s lunch 🍱", xp: 20, type: "bonus" },
+            { text: "Don’t open any food delivery apps today", xp: 15, type: "bonus" }
         ],
         "Shop when bored": [
-            "Next time you're bored, do 5 jumping jacks instead of opening Shopee 🛍️",
-            "Delete one shopping app from your phone. Just one.",
-            "Distract yourself from boredom spending with a free hobby today."
+            { text: "Do 5 jumping jacks when bored instead of opening Shopee 🛍️", xp: 10, type: "bonus" },
+            { text: "Delete 1 shopping app from your phone", xp: 20, type: "bonus" },
+            { text: "Do a free hobby for 15 mins instead of shopping", xp: 15, type: "bonus" }
         ],
         "Mostly just cover bills": [
-            "See if any bill can be reduced today. Cancel something? Downgrade a plan?",
-            "Do a ‘budget check-in’ for 5 minutes. Are your bills still aligned with your needs?",
-            "Celebrate a bill you paid on time. You’re doing more than you think!"
+            { text: "See if any bill can be reduced today 💡", xp: 15, type: "bonus" },
+            { text: "Spend 5 mins doing a quick budget check-in", xp: 15, type: "bonus" },
+            { text: "Celebrate a bill paid on time ✅", xp: 10, type: "bonus" }
         ],
         "Too many subscriptions": [
-            "Review your subscriptions today. Cancel one or mark for review 📋",
-            "Try free alternatives to one paid app/service today.",
-            "Log in and check if you still use that streaming service. Be honest 👀"
+            { text: "Review your active subscriptions 📋", xp: 10, type: "bonus" },
+            { text: "Try a free alternative to a paid service today", xp: 15, type: "bonus" },
+            { text: "Check if you still use one paid service honestly 👀", xp: 15, type: "bonus" }
         ],
         "Easily tempted by sales": [
-            "Mute a brand’s notifications or emails for today 🛑",
-            "Window-shop only. Browse but don’t buy!",
-            "Postpone buying a ‘sale’ item until next week."
+            { text: "Mute brand alerts for the day 🛑", xp: 10, type: "bonus" },
+            { text: "Window-shop only — don’t check out!", xp: 15, type: "bonus" },
+            { text: "Postpone a sale item for 1 week", xp: 15, type: "bonus" }
         ]
+    }
     },
 };
