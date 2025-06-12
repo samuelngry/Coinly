@@ -39,6 +39,20 @@ async function generateBonusQuests(user, userPreference) {
     pushQuests(questComponents.categoriesMap, userPreference.categories, 'categories');
     pushQuests(questComponents.struggleMap, userPreference.struggle, 'struggles');
     pushQuests(questComponents.lifestyleMap, userPreference.lifestyle, 'lifestyles');
+
+    const uniqueQuests = [...new Map(allQuests.map(q => [q.text, q])).values()];
+    const selected = uniqueQuests.sort(() => Math.random() - 0.5).slice(0, 3);
+
+    return await Promise.all(selected.map(q =>
+        UserQuest.create({
+            user_id: user.id,
+            quest_text: q.text,
+            xp: q.xp,
+            status: 'Pending',
+            type: 'bonus',
+            instance_date: new Date(),
+        })
+    ));
 }
 
 async function generateDynamicQuests(userId) {
