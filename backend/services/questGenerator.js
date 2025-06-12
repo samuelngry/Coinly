@@ -4,6 +4,22 @@ const UserPreference = require("../models/UserPreference");
 const UserQuest = require("../models/UserQuest");
 const { Op } = require('sequelize');
 
+async function generateDailyQuests(userId) {
+    const today = new Date();
+    const dailyQuests = questComponents.mandatoryDaily.sort(() => Math.random() - 0.5).slice(0, 3);
+
+    return await Promise.all(dailyQuests.map(q =>
+        UserQuest.create({
+            user_id: userId,
+            quest_text: q.text,
+            xp: q.xp,
+            status: 'Pending',
+            type: 'daily',
+            instance_date: today,
+        })
+    ));
+}
+
 async function generateDynamicQuests(userId) {
     const user = await User.findByPk(userId);
     const userPreference = await UserPreference.findByPk(userId);
