@@ -73,14 +73,13 @@ async function generateDynamicQuests(userId) {
     if (!lastGeneratedDate || lastGeneratedDate < today) {
         await expireOldQuests(userId);
 
-        const generatedQuests = [];
-
-        await generateQuest(user, userPreference, generatedQuests);
+        const daily = await generateDailyQuests(userId);
+        const bonus = await generateBonusQuests(user, userPreference);
 
         user.last_generated_at = new Date();
         await user.save();
 
-        return generatedQuests;
+        return [...daily, ...bonus];
     }
 
     return []; // Already generated today
