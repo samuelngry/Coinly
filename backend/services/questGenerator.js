@@ -20,6 +20,27 @@ async function generateDailyQuests(userId) {
     ));
 }
 
+async function generateBonusQuests(user, userPreference) {
+    let allQuests = [];
+
+    const pushQuests = (map, key, type) => {
+        if (Array.isArray(key)) {
+            key.forEach(k => {
+                const quests = map[k] || [];
+                quests.forEach(q => allQuests.push({ ...q, type }));
+            });
+        } else {
+            const quests = map[key] || [];
+            quests.forEach(q => allQuests.push({ ...q, type }));
+        }
+    };
+
+    pushQuests(questComponents.goalMap, userPreference.goal, 'goal');
+    pushQuests(questComponents.categoriesMap, userPreference.categories, 'categories');
+    pushQuests(questComponents.struggleMap, userPreference.struggle, 'struggles');
+    pushQuests(questComponents.lifestyleMap, userPreference.lifestyle, 'lifestyles');
+}
+
 async function generateDynamicQuests(userId) {
     const user = await User.findByPk(userId);
     const userPreference = await UserPreference.findByPk(userId);
