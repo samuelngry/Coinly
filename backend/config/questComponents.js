@@ -1,6 +1,55 @@
 module.exports = {
     mandatoryDaily: [
-        { text: "Track all your expenses today 🧾", type: "daily", xp: 20 },
+        {
+            text: "Log your spending at least once today",
+            xp: 20,
+            type: "daily",
+        },
+        {
+            text: "Avoid buying something you don’t really need today",
+            xp: 20,
+            type: "daily",
+        },
+        {
+            text: "Pause before each purchase today. Ask: 'Do I need this?'",
+            xp: 20,
+            type: "daily",
+        },
+        {
+            text: "Review your spending summary or wallet for 2 mins",
+            xp: 20,
+            type: "daily",
+        },
+        {
+            text: "Try not to spend on anything non-essential today",
+            xp: 20,
+            type: "daily",
+        },
+        {
+            text: "Open your budgeting app or money tracker once today",
+            xp: 20,
+            type: "daily",
+        },
+        {
+            text: "Write down or think about one thing you spent well on",
+            xp: 20,
+            type: "daily",
+        },
+        {
+            text: "Take 60 seconds to check your bank or wallet balance",
+            xp: 20,
+            type: "daily",
+        },
+        {
+            text: "Skip a small treat or habit purchase today (e.g., snack, app)",
+            xp: 20,
+            type: "daily",
+        },
+        {
+            text: "Do one small action to care about your finances today",
+            xp: 20,
+            type: "daily",
+        },
     ],
 
     categoriesMap: {
