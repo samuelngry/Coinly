@@ -75,7 +75,7 @@ async function generateDynamicQuests(userId) {
 
         const daily = await generateDailyQuests(userId);
         const bonus = await generateBonusQuests(user, userPreference);
-ß
+
         user.last_generated_at = new Date();
         await user.save();
 

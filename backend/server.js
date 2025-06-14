@@ -17,7 +17,6 @@ app.use('/uploads', express.static('uploads'));
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/quests", questRoutes);
-app.use("/api/custom-quests", customQuestRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 
 const PORT = process.env.PORT || 5000;
