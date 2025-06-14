@@ -10,7 +10,7 @@ const generateQuests = async (req, res) => {
 
         const quest = await generateDynamicQuests(userId);
 
-        res.status(200).json({ message: "Quest generated successfully", quest });
+        res.status(200).json({ message: "Daily and bonus quesets generated successfully", quest });
     } catch (err) {
         console.error("Error in generateQuests:", err);
         res.status(500).json({ error: err.message });
