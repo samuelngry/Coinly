@@ -31,7 +31,7 @@ const completeQuests = async (req, res) => {
                 where: {
                     id: questId,
                     user_id: userId,
-                    status: 'Accepted',
+                    status: 'Pending',
                 },
             },
         );
