@@ -1,7 +1,6 @@
 import React from 'react'
 import starIcon from '../../assets/stars.png'
-import pawIcon from '../../assets/paw.png'
-import { Gift, Star, CheckIcon, PawPrint } from 'lucide-react'
+import { Gift, Star, CheckIcon, PawPrint, Clock } from 'lucide-react'
 
 const BonusQuests = () => {
   return (

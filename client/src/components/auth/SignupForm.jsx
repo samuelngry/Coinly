@@ -28,7 +28,7 @@ const SignupForm = () => {
                 formData.append('avatar', avatar);
             }
 
-            const res = await axios.post('http://localhost:5000/api/auth/register', formData);
+            const res = await axios.post('/api/auth/register', formData);
 
             const { token, user } = res.data;
 
