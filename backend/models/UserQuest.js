@@ -41,9 +41,8 @@ const UserQuest = db.define('user_quests', {
         defaultValue: Sequelize.NOW,
     },
     type: {
-        type: Sequelize.ENUM('Dynamic', 'Custom'),
+        type: Sequelize.ENUM('daily', 'bonus'),
         allowNull: false,
-        defaultValue: 'Dynamic',
     },
     category: {
         type: Sequelize.STRING,

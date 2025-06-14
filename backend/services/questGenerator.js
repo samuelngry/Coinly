@@ -20,7 +20,6 @@ async function generateDailyQuests(userId) {
     ));
 }
 
-// TODO: understand and try
 async function generateBonusQuests(user, userPreference) {
     let allQuests = [];
 
