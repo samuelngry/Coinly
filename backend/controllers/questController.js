@@ -10,7 +10,10 @@ const generateQuests = async (req, res) => {
 
         const quest = await generateDynamicQuests(userId);
 
-        res.status(200).json({ message: "Daily and bonus quesets generated successfully", quest });
+        const daily = quest.filter(q => q.type === 'daily');
+        const bonus = quest.filter(q => q.type === 'bonus');
+
+        res.status(200).json({ message: "Daily and bonus quesets generated successfully", daily, bonus });
     } catch (err) {
         console.error("Error in generateQuests:", err);
         res.status(500).json({ error: err.message });
@@ -126,6 +129,5 @@ const completeQuests = async (req, res) => {
 
 module.exports = {
     generateQuests,
-    acceptQuests,
     completeQuests,
 };
