@@ -2,7 +2,7 @@ import React from 'react'
 import starIcon from '../../assets/stars.png'
 import { Gift, Star, CheckIcon, PawPrint, Clock } from 'lucide-react'
 
-const BonusQuests = ({ quests, onComplete }) => {
+const BonusQuests = ({ quests, onComplete, completedCount, totalCount  }) => {
     return (
         <div className='flex flex-col mt-6'>
             <div className='flex items-center gap-3 mb-2 justify-center lg:justify-start'>
@@ -12,7 +12,7 @@ const BonusQuests = ({ quests, onComplete }) => {
                     <h3 className='text-sm lg:text-lg'>Bonus Quests</h3>
                     <div className='bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs lg:text-sm font-bold flex items-center gap-1'>
                         <Star className="w-3 h-3 fill-current" />
-                        <span>1/3</span>
+                        <span>{completedCount}/{totalCount}</span>
                     </div>
             </div>
             <div className='space-y-1 grid grid-cols-1 lg:grid-cols-3 lg:space-x-2 lg:space-y-0'>

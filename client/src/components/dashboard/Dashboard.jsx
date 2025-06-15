@@ -62,12 +62,15 @@ const Dashboard = () => {
   const totalBonus = bonusQuests.length;
   const completedBonus = bonusQuests.filter(q => q.status === 'Completed').length;
 
+  const totalQuest = totalDaily + totalBonus;
+  const completedQuest = completedDaily + completedBonus;
+
   return (
     <div className='min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow justify-center'>
         <LevelBar xp={xp} level={level} />
         <RivePet />
         <PetName />
-        <MainCards streak={streak} />
+        <MainCards streak={streak} completedCount={completedQuest} totalCount={totalQuest}/>
         <DailyQuests quests={dailyQuests} onComplete={handleCompleteQuest} completedCount={completedDaily} totalCount={totalDaily} />
         <BonusQuests quests={bonusQuests} onComplete={handleCompleteQuest} completedCount={completedBonus} totalCount={totalBonus} />
     </div>
