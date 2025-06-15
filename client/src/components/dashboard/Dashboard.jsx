@@ -10,6 +10,9 @@ import { completeQuest, fetchQuests } from '../../services/api';
 const Dashboard = () => {
   const [dailyQuests, setDailyQuests] = useState([]);
   const [bonusQuests, setBonusQuests] = useState([]);
+  const [xp, setXp] = useState(0);
+  const [level, setLevel] = useState(1);
+  const [mood, setMood] = useState("");
 
   const getQuests = async () => {
     try {
@@ -20,6 +23,17 @@ const Dashboard = () => {
         console.error("Failed to load quests:", err);
       }
     };
+
+  const getPetUpdates = async (id) => {
+    try {
+      const res = await completeQuest(id);
+      setXp(res.xp);
+      setLevel(res.level);
+      setMood(res.mood);
+    } catch (err) {
+      console.error("Failed to load pet updates:", err);
+    }
+  };
   
   const handleCompleteQuest = async (id, type) => {
     try {
