@@ -2,7 +2,7 @@ import React from 'react'
 import starIcon from '../../assets/stars.png'
 import { Gift, Star, CheckIcon, PawPrint, Clock } from 'lucide-react'
 
-const BonusQuests = ({ quests }) => {
+const BonusQuests = ({ quests, onComplete }) => {
     return (
         <div className='flex flex-col mt-6'>
             <div className='flex items-center gap-3 mb-2 justify-center lg:justify-start'>
@@ -29,6 +29,7 @@ const BonusQuests = ({ quests }) => {
                                     <PawPrint className="w-3 h-3" />
                                 </div>
                                 <button
+                                    onClick={() => onComplete(quest.id, quest.type)}
                                 >
                                     <div className='w-8 h-8 cursor-pointer rounded-xl border border-neutral-300 shadow-xl flex items-center justify-center hover:bg-green-100 ml-1.5'>
                                         <CheckIcon className='w-5 h-5 text-green-500'/>

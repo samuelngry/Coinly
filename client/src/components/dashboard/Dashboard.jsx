@@ -21,10 +21,15 @@ const Dashboard = () => {
       }
     };
   
-  const handleCompleteQuest = async (id) => {
+  const handleCompleteQuest = async (id, type) => {
     try {
       await completeQuest(id);
-      await getQuests();
+
+      if (type === 'daily') {
+        setDailyQuests(prev => prev.filter(q => q.id !== id));
+      } else if (type === 'bonus') {
+        setBonusQuests(prev => prev.filter(q => q.id !== id));
+      }
     } catch (err) {
       console.error("Failed to complete quest:", err);
     }
