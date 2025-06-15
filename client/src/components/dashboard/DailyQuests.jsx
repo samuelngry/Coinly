@@ -1,80 +1,49 @@
 import React from 'react'
 import dailyIcon from '../../assets/daily.png'
-import pawIcon from '../../assets/paw.png'
 import { CheckIcon, PawPrint, Zap, Star } from 'lucide-react'
 
-const DailyQuests = () => {
-  return (
-    <div className='flex flex-col mt-6'>
-        <div className='flex items-center gap-3 mb-2 justify-center lg:justify-start border-t border-neutral-300 pt-4 lg:pt-6'>
-            <div className="bg-gradient-to-r from-orange-500 to-orange-800 p-2 rounded-xl shadow-lg">
-                <Zap className='w-4 h-4 text-white' />
+const DailyQuests = ({ quests }) => {
+    return (
+        <div className='flex flex-col mt-6'>
+            <div className='flex items-center gap-3 mb-2 justify-center lg:justify-start border-t border-neutral-300 pt-4 lg:pt-6'>
+                <div className="bg-gradient-to-r from-orange-500 to-orange-800 p-2 rounded-xl shadow-lg">
+                    <Zap className='w-4 h-4 text-white' />
+                </div>
+                <h3 className='text-sm lg:text-lg'>Daily Quests</h3>
+                <div className='bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs lg:text-sm font-bold flex items-center gap-1'>
+                    <Star className="w-3 h-3 fill-current" />
+                    <span>2/3</span>
+                </div>
             </div>
-            <h3 className='text-sm lg:text-lg'>Daily Quests</h3>
-            <div className='bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs lg:text-sm font-bold flex items-center gap-1'>
-                <Star className="w-3 h-3 fill-current" />
-                <span>2/3</span>
-            </div>
-        </div>
 
-        <div className='space-y-1 grid grid-cols-1 lg:grid-cols-3 lg:space-x-2 lg:space-y-0'>
-            <div className='mt-3 p-3 rounded-xl shadow-none transition-shadow duration-300 hover:shadow-gray-400 hover:shadow-lg border border-neutral-300 flex justify-between items-center gap-2'>
-                <div className='flex items-center gap-2 flex-1'>
-                    <img src={dailyIcon} alt='Quest' className='w-10 h-10'/>
-                    <span className='text-xs break-words font-semibold'>Track all your expenses today</span>
-                </div>
-                <div className='flex items-center shrink-0'>
-                    <div className="bg-orange-100 text-orange-500 px-1.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
-                        <span>20</span>
-                        <PawPrint className="w-3 h-3" />
-                    </div>
-                    <button
-                    >
-                        <div className='w-8 h-8 cursor-pointer rounded-xl border border-neutral-300 shadow-xl flex items-center justify-center hover:bg-green-100 ml-1.5'>
-                            <CheckIcon className='w-5 h-5 text-green-500'/>
+            <div className='space-y-1 grid grid-cols-1 lg:grid-cols-3 lg:space-x-2 lg:space-y-0'>
+                {quests.length > 0 ? (
+                    quests.map((quest) => (
+                        <div key={quest.id} className='mt-3 p-3 rounded-xl shadow-none transition-shadow duration-300 hover:shadow-gray-400 hover:shadow-lg border border-neutral-300 flex justify-between items-center gap-2'>
+                            <div className='flex items-center gap-2 flex-1'>
+                                <img src={dailyIcon} alt='Quest' className='w-10 h-10'/>
+                                <span className='text-xs break-words font-semibold'>{quest.quest_text}</span>
+                            </div>
+                            <div className='flex items-center shrink-0'>
+                                <div className="bg-orange-100 text-orange-500 px-1.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
+                                    <span>{quest.xp}</span>
+                                    <PawPrint className="w-3 h-3" />
+                                </div>
+                                <button
+                                >
+                                    <div className='w-8 h-8 cursor-pointer rounded-xl border border-neutral-300 shadow-xl flex items-center justify-center hover:bg-green-100 ml-1.5'>
+                                        <CheckIcon className='w-5 h-5 text-green-500'/>
+                                    </div>
+                                </button>
+                            </div>
                         </div>
-                    </button>
-                </div>
-            </div>
-            <div className='mt-3 p-3 rounded-xl shadow-none transition-shadow duration-300 hover:shadow-gray-400 hover:shadow-lg border border-neutral-300 flex justify-between items-center gap-2'>
-                <div className='flex items-center gap-2 flex-1'>
-                    <img src={dailyIcon} alt='Quest' className='w-10 h-10'/>
-                    <span className='text-xs break-words font-semibold'>Cook your own meals today</span>
-                </div>
-                <div className='flex items-center shrink-0'>
-                    <div className="bg-orange-100 text-orange-600 px-1.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
-                        <span>15</span>
-                        <PawPrint className="w-3 h-3" />
-                    </div>
-                    <button
-                    >
-                        <div className='w-8 h-8 rounded-xl cursor-pointer border border-neutral-300 shadow-xl flex items-center justify-center hover:bg-green-100 ml-1.5'>
-                            <CheckIcon className='w-5 h-5 text-green-500'/>
-                        </div>
-                    </button>
-                </div>
-            </div>
-            <div className='mt-3 p-3 rounded-xl shadow-none transition-shadow duration-300 hover:shadow-gray-400 hover:shadow-lg border border-neutral-300 flex justify-between items-center gap-2'>
-                <div className='flex items-center gap-2 flex-1'>
-                    <img src={dailyIcon} alt='Quest' className='w-10 h-10'/>
-                    <span className='text-xs break-words font-semibold'>Don't buy any soft drinks today</span>
-                </div>
-                <div className='flex items-center shrink-0'>
-                    <div className="bg-orange-100 text-orange-600 px-1.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
-                        <span>10</span>
-                        <PawPrint className="w-3 h-3" />
-                    </div>
-                    <button
-                    >
-                        <div className='w-8 h-8 rounded-xl cursor-pointer border border-neutral-300 shadow-xl flex items-center justify-center hover:bg-green-100 ml-1.5'>
-                            <CheckIcon className='w-5 h-5 text-green-500'/>
-                        </div>
-                    </button>
-                </div>
+                    ))
+                ) : (
+                    <p className='text-sm text-center text-gray-500 col-span-3'>No daily quests found</p>
+                )}
             </div>
         </div>
-    </div>
-  )
+    )
 }
 
 export default DailyQuests
