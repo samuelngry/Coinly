@@ -38,6 +38,7 @@ const Dashboard = () => {
   const handleCompleteQuest = async (id, type) => {
     try {
       await completeQuest(id);
+      await getPetUpdates(id);
 
       if (type === 'daily') {
         setDailyQuests(prev => prev.filter(q => q.id !== id));
