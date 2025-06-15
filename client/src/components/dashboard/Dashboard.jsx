@@ -10,10 +10,15 @@ import { completeQuest, fetchQuests } from '../../services/api';
 const Dashboard = () => {
   const [dailyQuests, setDailyQuests] = useState([]);
   const [bonusQuests, setBonusQuests] = useState([]);
+  const [completedDailyCount, setCompletedDailyCount] = useState(0);
+  const [completedBonusCount, setCompletedBonusCount] = useState(0);
   const [xp, setXp] = useState(0);
   const [level, setLevel] = useState(1);
   const [mood, setMood] = useState("");
   const [streak, setStreak] = useState(0);
+
+  const TOTAL_DAILY_QUESTS = 3;
+  const TOTAL_BONUS_QUESTS = 3;
 
   const getQuests = async () => {
     try {
@@ -55,6 +60,10 @@ const Dashboard = () => {
   useEffect(() => {
     getQuests();
   }, []);
+
+  useEffect(() => {
+
+  }, [dailyQuests]);
 
   return (
     <div className='min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow justify-center'>
