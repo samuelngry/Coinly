@@ -18,23 +18,29 @@ const BonusQuests = ({ quests, onComplete }) => {
             <div className='space-y-1 grid grid-cols-1 lg:grid-cols-3 lg:space-x-2 lg:space-y-0'>
                 {quests.length > 0 ? (
                     quests.map((quest) => (
-                        <div key={quest.id} className='mt-4 p-3 rounded-xl shadow-none transition-shadow duration-300 hover:shadow-gray-400 hover:shadow-lg border border-neutral-300 flex justify-between items-center gap-2'>
+                        <div key={quest.id} className={`mt-3 p-3 rounded-xl ${quest.status === 'Completed' ? 'bg-green-100' : 'bg-white'} shadow-none transition-shadow duration-300 hover:shadow-gray-400 hover:shadow-lg border border-neutral-300 flex justify-between items-center gap-2`}>
                             <div className='flex items-center gap-2 flex-1'>
                                 <img src={starIcon} alt='Quest' className='w-10 h-10'/>
-                                <span className='text-xs break-words font-semibold'>{quest.quest_text}</span>
+                                <span className={`text-xs break-words font-semibold ${quest.status !== 'Completed' ? 'line-through text-green-500' : ''}`}>{quest.quest_text}</span>
                             </div>
+
                             <div className='flex items-center shrink-0'>
-                                <div className="bg-orange-100 text-orange-600 px-1.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
-                                    <span>{quest.xp}</span>
-                                    <PawPrint className="w-3 h-3" />
-                                </div>
-                                <button
-                                    onClick={() => onComplete(quest.id, quest.type)}
-                                >
-                                    <div className='w-8 h-8 cursor-pointer rounded-xl border border-neutral-300 shadow-xl flex items-center justify-center hover:bg-green-100 ml-1.5'>
-                                        <CheckIcon className='w-5 h-5 text-green-500'/>
+                                {quest.status !== 'Completed' && (
+                                    <div className="bg-orange-100 text-orange-600 px-1.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
+                                        <span>{quest.xp}</span>
+                                        <PawPrint className="w-3 h-3" />
                                     </div>
-                                </button>
+                                )}
+
+                                {quest.status !=='Completed' && (
+                                    <button
+                                        onClick={() => onComplete(quest.id, quest.type)}
+                                    >
+                                        <div className='w-8 h-8 cursor-pointer rounded-xl border border-neutral-300 shadow-xl flex items-center justify-center hover:bg-green-100 ml-1.5'>
+                                            <CheckIcon className='w-5 h-5 text-green-500'/>
+                                        </div>
+                                    </button>
+                                )}
                             </div>
                         </div>
                     ))
