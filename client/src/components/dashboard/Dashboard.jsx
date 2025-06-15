@@ -24,15 +24,15 @@ const Dashboard = () => {
 
     getQuests();
   }, []);
-  
+
   return (
     <div className='min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow justify-center'>
         <LevelBar />
         <RivePet />
         <PetName />
         <MainCards />
-        <DailyQuests />
-        <BonusQuests />
+        <DailyQuests quests={dailyQuests} />
+        <BonusQuests quests={bonusQuests} />
     </div>
   )
 }
