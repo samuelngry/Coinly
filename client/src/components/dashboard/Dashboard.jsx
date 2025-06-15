@@ -13,6 +13,7 @@ const Dashboard = () => {
   const [xp, setXp] = useState(0);
   const [level, setLevel] = useState(1);
   const [mood, setMood] = useState("");
+  const [streak, setStreak] = useState(0);
 
   const getQuests = async () => {
     try {
@@ -30,6 +31,7 @@ const Dashboard = () => {
       setXp(res.xp);
       setLevel(res.level);
       setMood(res.mood);
+      setStreak(res.streak);
     } catch (err) {
       console.error("Failed to load pet updates:", err);
     }
@@ -59,7 +61,7 @@ const Dashboard = () => {
         <LevelBar xp={xp} level={level} />
         <RivePet />
         <PetName />
-        <MainCards mood={mood} />
+        <MainCards streak={streak} />
         <DailyQuests quests={dailyQuests} onComplete={handleCompleteQuest} />
         <BonusQuests quests={bonusQuests} onComplete={handleCompleteQuest} />
     </div>
