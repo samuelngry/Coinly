@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom'
 const SignupForm = () => {
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
-    const [avatar, setAvatar] = React.useState(null);
     const [errorMsg, setErrorMsg] = React.useState('');
     const navigate = useNavigate();
 
@@ -24,9 +23,6 @@ const SignupForm = () => {
             const formData = new FormData();
             formData.append('username', username);
             formData.append('password', password);
-            if (avatar) {
-                formData.append('avatar', avatar);
-            }
 
             const res = await axios.post('/api/auth/register', formData);
 
@@ -90,13 +86,13 @@ const SignupForm = () => {
                         </button>
 
                         <p className='text-center mt-4'>
-                            Already have an account? <a href='/login' className='text-orange-500 underline hover:text-orange-800'>Log in</a>
+                            Already have an account? <Link to='/login' className='text-orange-500 underline hover:text-orange-800'>Log in</Link>
                         </p>
                         
                         {/* Footer */}
                         <div className='absolute bottom-4 left-4'>
                             <p className='text-xs'>
-                                &copy; {new Date().getFullYear} Coinly. All rights reserved.
+                                &copy; {new Date().getFullYear()} Coinly. All rights reserved.
                             </p>
                         </div>
                     </form>
