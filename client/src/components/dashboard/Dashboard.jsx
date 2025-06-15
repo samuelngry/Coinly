@@ -55,10 +55,10 @@ const Dashboard = () => {
 
   return (
     <div className='min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow justify-center'>
-        <LevelBar />
+        <LevelBar xp={xp} level={level} />
         <RivePet />
         <PetName />
-        <MainCards />
+        <MainCards mood={mood} />
         <DailyQuests quests={dailyQuests} onComplete={handleCompleteQuest} />
         <BonusQuests quests={bonusQuests} onComplete={handleCompleteQuest} />
     </div>
