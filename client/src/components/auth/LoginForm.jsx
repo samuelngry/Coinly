@@ -25,9 +25,10 @@ const LoginForm = () => {
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
 
-      navigate('/dashboard');
+      navigate('/onboard');
 
     } catch (err) {
+      console.error("Login error:", err);
       setErrorMsg(err.response?.data?.error || 'Login failed');
     }
   };
@@ -77,11 +78,11 @@ const LoginForm = () => {
                 Log in
               </button>
               <p className='mt-4 text-center'>
-                Don't have an account? <a href='/register' className='underline text-orange-500 hover:text-orange-800'>Sign up</a>
+                Don't have an account? <Link to='/register' className='underline text-orange-500 hover:text-orange-800'>Sign up</Link>
               </p>
               <div className='absolute bottom-4 left-4'>
                 <p className='text-xs'>
-                  &copy; {new Date().getFullYear} Coinly. All rights reserved.
+                  &copy; {new Date().getFullYear()} Coinly. All rights reserved.
                 </p>
               </div>
             </form>
