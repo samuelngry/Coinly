@@ -121,7 +121,7 @@ const completeQuests = async (req, res) => {
             mood: petMood,
         });
 
-        res.status(200).json({ xp: petXp, level: petLevel, mood: petMood });
+        res.status(200).json({ xp: petXp, level: petLevel, mood: petMood, streak: newStreak });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
