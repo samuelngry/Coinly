@@ -117,5 +117,4 @@ module.exports = {
             { text: "Postpone a sale item for 1 week", xp: 15, type: "bonus" }
         ]
     }
-    },
 };
