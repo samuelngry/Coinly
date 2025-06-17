@@ -20,21 +20,33 @@ const SignupForm = () => {
         }
 
         try {
-            const formData = new FormData();
-            formData.append('username', username);
-            formData.append('password', password);
+            const userData = { username, password };
 
-            const res = await axios.post('/api/auth/register', formData);
+            console.log('Sending sign-up request with data:', userData);
+
+            const res = await axios.post('http://localhost:3000/api/auth/register', userData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                withCredentials: true,
+            });
+
+            console.log('Response from backend:', res.data);
 
             const { token, user } = res.data;
 
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));
 
-            navigate('/login');
-
+            navigate('/onboard');
         } catch (err) {
-            setErrorMsg(err.response?.data?.error || 'Signup failed');
+            if (err.response?.status === 401 || err.response?.status === 403) {
+                console.log("Session expired, please log in again.");
+                localStorage.removeItem('token');  // Clear invalid token
+                navigate('/login');
+            } else {
+                setErrorMsg(err.response?.data?.error || 'Signup failed');
+            }
         }
     };
 
@@ -63,6 +75,7 @@ const SignupForm = () => {
                                 type='text'
                                 onChange={(e) => setUsername(e.target.value)}
                                 placeholder='Enter your username'
+                                required
                             />
                             <label htmlFor='password' className='block mb-2 mt-4'>
                                 Password
@@ -73,6 +86,7 @@ const SignupForm = () => {
                                 type='password'
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder='Enter your password'
+                                required
                             />
                         </div>
 

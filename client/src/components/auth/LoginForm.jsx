@@ -25,7 +25,7 @@ const LoginForm = () => {
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
 
-      navigate('/onboard');
+      navigate('/dashboard');
 
     } catch (err) {
       console.error("Login error:", err);
