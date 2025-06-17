@@ -1,30 +1,38 @@
 const express = require('express');
-const cors = require('cors');
+const cors = require('cors')
 require('dotenv').config();
+
+const app = express();
+
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true,
+}))
+
+// Test route
+app.get('/test-cors', (req, res) => {
+  res.json({ message: 'CORS is working!' });
+});
 
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const questRoutes = require("./routes/questRoutes");
-const customQuestRoutes = require("./routes/customQuestRoutes");
-const dashboardRoutes = require("./routes/dashboardRoutes");
+//const customQuestRoutes = require("./routes/customQuestRoutes");
+//const dashboardRoutes = require("./routes/dashboardRoutes");
 const db = require("./config/db");
 
-const app = express();
-app.use(cors());
 app.use(express.json());
-
-app.use('/uploads', express.static('uploads'));
+//app.use('/uploads', express.static('uploads'));
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/quests", questRoutes);
-app.use("/api/dashboard", dashboardRoutes);
+//app.use("/api/dashboard", dashboardRoutes);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 db.authenticate().then(() => {
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
-})
-.catch((error) => {
+}).catch((error) => {
   console.log(error.message)
 });
 

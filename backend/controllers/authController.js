@@ -10,8 +10,8 @@ const createToken = (userId) => {
 
 const register = async (req, res) => {
     try {
+        console.log('Received request to register:', req.body);
         const { username, password } = req.body;
-        const avatar_url = req.file ? `/uploads/${req.file.filename}` : null;
 
         const existingUser = await User.findOne({ where: { username } });
         if (existingUser) return res.status(400).json({ error: "Username taken." });
@@ -20,18 +20,19 @@ const register = async (req, res) => {
         const user = await User.create({ 
             username, 
             password: hashedPassword,
-            avatar_url
          });
 
         const token = createToken(user.id);
+        console.log('User registered:', user);
+
         res.status(201).json({ token,
             user: { 
                 id: user.id, 
                 username: user.username,
-                avatar_url: user.avatar_url
              } 
         });
     } catch (err) {
+        console.error('Error during registration:', err.message);
         res.status(500).json({ error: err.message });
     }
 };

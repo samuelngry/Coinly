@@ -9,7 +9,10 @@ function verifyToken(req, res, next) {
         req.user = decoded;
         next();
     } catch (err) {
-        res.status(403).json({ error: "Invalid token" });
+        if (err.name === 'TokenExpiredError') {
+            return res.status(401).json({ error: "Token has expired" });
+        }
+        return res.status(403).json({ error: "Invalid token" });
     }
 };
 
