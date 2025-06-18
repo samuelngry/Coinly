@@ -51,7 +51,15 @@ const login = async (req, res) => {
         if (!passwordMatch) return res.status(401).json({ error: "Authentication failed." });
 
         const token = createToken(user.id);
-        res.status(200).json({ token, user: { id: user.id, username: user.username } });
+
+        res.status(200).json({ 
+            token, 
+            user: { 
+                id: user.id, 
+                username: user.username, 
+                onboarding_completed: user.onboarding_completed 
+            },
+        });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
