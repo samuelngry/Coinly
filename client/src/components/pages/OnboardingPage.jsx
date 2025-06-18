@@ -1,10 +1,27 @@
 import OnboardingHeader from "../onboarding/OnboardingHeader";
 import OnboardingStep from "../onboarding/OnboardingStep";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const OnboardingPage = () => {
     const [step, setStep] = useState(0);
     const [answers, setAnswers] = useState({});
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            navigate('/login');
+            return;
+        }
+
+        const user = JSON.parse(localStorage.getItem('user'));
+
+        if (user && user.onboarding_completed) {
+            navigate('/dashboard');
+        }
+    }, [navigate])
 
     return (
         <div className="max-w-7xl mx-auto py-10" >
