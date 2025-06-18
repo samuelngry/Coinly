@@ -21,6 +21,7 @@ const register = async (req, res) => {
             username, 
             password: hashedPassword,
             streak_count: 0,
+            onboarding_completed: false,
          });
 
         const token = createToken(user.id);
@@ -30,6 +31,7 @@ const register = async (req, res) => {
             user: { 
                 id: user.id, 
                 username: user.username,
+                onboarding_completed: user.onboarding_completed,
              } 
         });
     } catch (err) {
