@@ -20,6 +20,7 @@ const register = async (req, res) => {
         const user = await User.create({ 
             username, 
             password: hashedPassword,
+            streak_count: 0,
          });
 
         const token = createToken(user.id);
