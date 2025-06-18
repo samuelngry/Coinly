@@ -26,7 +26,7 @@ const LoginForm = () => {
       localStorage.setItem('user', JSON.stringify(user));
 
       if (!user.onboarding_completed) {
-        navigate('/onboarding');
+        navigate('/onboard');
       } else {
         navigate('/dashboard');
       }
