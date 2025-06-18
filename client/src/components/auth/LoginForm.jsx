@@ -25,8 +25,11 @@ const LoginForm = () => {
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
 
-      navigate('/dashboard');
-
+      if (!user.onboarding_completed) {
+        navigate('/onboarding');
+      } else {
+        navigate('/dashboard');
+      }
     } catch (err) {
       console.error("Login error:", err);
       setErrorMsg(err.response?.data?.error || 'Login failed');
