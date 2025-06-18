@@ -43,7 +43,15 @@ const savePreferences = async (req, res) => {
             lifestyle: JSON.stringify(lifestyles)
         });
 
-        res.status(200).json({ message: "User Preferences saved successfully"});
+        await User.update(
+            { onboarding_completed: true },
+            {
+                where: {
+                    id: userId,
+                },
+            },
+        );
+        res.status(200).json({ message: "User Preferences saved successfully" });
     } catch (err) {
         console.error("Error in saving User Preferences", err);
         res.status(500).json({ error: err.message })
