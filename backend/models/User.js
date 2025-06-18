@@ -28,6 +28,10 @@ const User = db.define('users', {
         type: Sequelize.INTEGER,
         defaultValue: 0,
     },
+    onboarding_completed: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+    },
 });
 
 module.exports = User;
