@@ -37,10 +37,10 @@ const savePreferences = async (req, res) => {
 
         await UserPreference.upsert({
             user_id: userId,
-            struggle,
-            goal,
-            categories: JSON.stringify(categories),
-            lifestyle: JSON.stringify(lifestyles)
+            struggle: struggle,
+            goal: goal,
+            categories: categories,
+            lifestyle: lifestyles
         });
 
         await User.update(

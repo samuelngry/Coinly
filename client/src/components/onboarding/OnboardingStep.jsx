@@ -60,6 +60,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
     useEffect(() => {
         if (step === 5) {
             const token = localStorage.getItem("token");
+            console.log("Token:", token);
 
             fetch("http://localhost:3000/api/users/preferences", {
             method: "POST",
