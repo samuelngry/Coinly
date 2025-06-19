@@ -12,16 +12,16 @@ const UserPreference = db.define('user_preferences', {
         }
     },
     struggle: {
-        type: Sequelize.JSON,
+        type: Sequelize.TEXT,
     },
     goal: {
-        type: Sequelize.JSON,
+        type: Sequelize.TEXT,
     },
     lifestyle: {
-        type: Sequelize.JSON,
+        type: Sequelize.ARRAY(Sequelize.TEXT),
     },
     categories: {
-        type: Sequelize.JSON,
+        type: Sequelize.ARRAY(Sequelize.TEXT),
     }
 });
 

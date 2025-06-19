@@ -33,7 +33,15 @@ const updateAvatar = async (req, res) => {
 const savePreferences = async (req, res) => {
     try {
         const userId = req.user.id;
-        const { categories, struggle, goal, lifestyles } = req.body;
+        let { categories, struggle, goal, lifestyles } = req.body;
+
+        if (Array.isArray(struggle)) {
+            struggle = struggle.join(', ');
+        }
+
+        if (Array.isArray(goal)) {
+            goal = goal.join(', ');
+        }
 
         await UserPreference.upsert({
             user_id: userId,
