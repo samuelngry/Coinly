@@ -35,6 +35,10 @@ const savePreferences = async (req, res) => {
         const userId = req.user.id;
         let { categories, struggle, goal, lifestyles } = req.body;
 
+        if (!goal || !struggle || !lifestyles || !categories) {
+            return res.status(400).json({ error: "All preferences are required." });
+        }
+
         if (Array.isArray(struggle)) {
             struggle = struggle.join(', ');
         }
