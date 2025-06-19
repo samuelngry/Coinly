@@ -17,7 +17,24 @@ const Dashboard = () => {
 
   const getQuests = async () => {
     try {
-        const res = await fetchQuests();
+        const token = localStorage.getItem("token");
+
+        const res = await fetch("http://localhost:3000/api/quests", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({})
+        });
+
+        if (!res.ok) {
+          throw new Error('Failed to fetch quests');
+        }
+
+        const data = await res.json();
+        console.log("Quests:", data);
+
         setDailyQuests(res.daily || []);
         setBonusQuests(res.bonus || []);
       } catch (err) {
