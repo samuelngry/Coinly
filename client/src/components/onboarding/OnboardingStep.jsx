@@ -28,40 +28,40 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
     const navigate = useNavigate();
 
     const categories = [
-        { label: 'Food/Delivery', image: foodImage },
-        { label: 'Transport', image: transportImage},
-        { label: 'Shopping', image: shoppingImage},
-        { label: 'Entertainment', image: entertainmentImage},
-        { label: "Health & Wellness", image: healthImage}
+        { id: 1, label: 'Food/Delivery', image: foodImage },
+        { id: 2, label: 'Transport', image: transportImage},
+        { id: 3, label: 'Shopping', image: shoppingImage},
+        { id: 4, label: 'Entertainment', image: entertainmentImage},
+        { id: 5, label: "Health & Wellness", image: healthImage}
     ];
 
     const struggles = [
-        { label: "Don't track spendings", image: trackImage },
-        { label: "Want better habits", image: habitImage},
-        { label: "Impulse spending", image: impulseImage},
-        { label: "Feel out of control", image: outofcontrolImage},
+        { id: 1, label: "Don't track spendings", image: trackImage },
+        { id: 2, label: "Want better habits", image: habitImage},
+        { id: 3, label: "Impulse spending", image: impulseImage},
+        { id: 4, label: "Feel out of control", image: outofcontrolImage},
     ];
 
     const goal = [
-        { label: "Save monthly", image: saveImage },
-        { label: "Emergency fund", image: emergencyImage},
-        { label: "Pay off debts", image: payImage},
-        { label: "Travel or big purchase", image: travelImage},
+        { id: 1, label: "Save monthly", image: saveImage },
+        { id: 2,label: "Emergency fund", image: emergencyImage},
+        { id: 3, label: "Pay off debts", image: payImage},
+        { id: 4, label: "Travel or big purchase", image: travelImage},
     ];
 
     const lifestyles = [
-        { label: 'Eat out often', image: eatoutImage },
-        { label: 'Shop when bored', image: boredImage},
-        { label: 'Mostly just cover bills', image: billsImage},
-        { label: 'Too many subscriptions', image: subscriptionImage},
-        { label: 'Easily tempted by sales', image: salesImage},
+        { id: 1, label: 'Eat out often', image: eatoutImage },
+        { id: 2, label: 'Shop when bored', image: boredImage},
+        { id: 3, label: 'Mostly just cover bills', image: billsImage},
+        { id: 4, label: 'Too many subscriptions', image: subscriptionImage},
+        { id: 5, label: 'Easily tempted by sales', image: salesImage},
     ];
 
     useEffect(() => {
         if (step === 5) {
             const token = localStorage.getItem("token");
 
-            fetch("http://localhost:5000/api/users/preferences", {
+            fetch("http://localhost:3000/api/users/preferences", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -89,7 +89,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                 <img src={welcomeImage} alt='Welcome' className='w-60 h-60'/>
                 <h1 className="text-2xl font-semibold mb-4">Let's understand your money habits!</h1>
                 <p className="text-gray-600 max-w-md mb-8">
-                    Answer a few quick questions to get personalized tips and build better money habits.
+                    Answer a few quick questions to get personalised quests and build better money habits.
                 </p>
                 <button
                     onClick={() => setStep(1)}
@@ -113,9 +113,9 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
             </span>
             <div>
                 <div className='grid grid-cols-2 lg:grid-cols-3 gap-4 mb-4'>
-                    {categories.map(({ label, image }) => (
+                    {categories.map(({ id, label, image }) => (
                         <button
-                            key={label}
+                            key={id}
                             onClick={() => {
                                 if (selectedCategories.includes(label)) {
                                     setSelectedCategories(selectedCategories.filter((c) => c != label));
@@ -164,8 +164,9 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                 </span>
                 <div>
                     <div className='grid grid-cols-2 gap-4 mb-4'>
-                        {struggles.map(({ label, image }) => (
+                        {struggles.map(({ id, label, image }) => (
                             <button
+                                key={id}
                                 onClick={() => {
                                     if (selectedStruggle.includes(label)) {
                                         setSelectedStruggle(selectedStruggle.filter((s) => s !== label));
@@ -214,8 +215,9 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                 </span>
                 <div>
                     <div className='grid grid-cols-2 gap-4 mb-4'>
-                        {goal.map(({ label, image }) => (
+                        {goal.map(({ id, label, image }) => (
                             <button
+                                key={id}
                                 onClick={() => {
                                     if (selectedGoal.includes(label)) {
                                         setSelectedGoal(selectedGoal.filter((s) => s !== label));
@@ -263,9 +265,9 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
             </span>
             <div>
                 <div className='grid grid-cols-2 lg:grid-cols-3 gap-4 mb-4'>
-                    {lifestyles.map(({ label, image }) => (
+                    {lifestyles.map(({ id, label, image }) => (
                         <button
-                            key={label}
+                            key={id}
                             onClick={() => {
                                 if (selectedLifestyles.includes(label)) {
                                     setSelectedLifestyles(selectedLifestyles.filter((c) => c != label));
