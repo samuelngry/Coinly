@@ -41,7 +41,7 @@ const Dashboard = () => {
       }
     };
 
-  const getPetUpdates = async (id) => {
+  const handleCompleteQuest = async (id, type) => {
     try {
       const token = localStorage.getItem("token");
 
@@ -65,20 +65,11 @@ const Dashboard = () => {
       setLevel(data.level);
       setMood(data.mood);
       setStreak(data.streak);
-    } catch (err) {
-      console.error("Failed to load pet updates:", err);
-    }
-  };
-  
-  const handleCompleteQuest = async (id, type) => {
-    try {
-      await completeQuest(id);
-      await getPetUpdates(id);
 
-      if (type === 'daily') {
-        setDailyQuests(prev => prev.filter(q => q.id !== id));
-      } else if (type === 'bonus') {
-        setBonusQuests(prev => prev.filter(q => q.id !== id));
+      if (type === "daily") {
+        setDailyQuests((prev) => prev.filter((q) => q.id !== id));
+      } else if (type === "bonus") {
+        setBonusQuests((prev) => prev.filter((q) => q.id !== id));
       }
     } catch (err) {
       console.error("Failed to complete quest:", err);
