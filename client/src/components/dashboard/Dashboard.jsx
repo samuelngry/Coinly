@@ -5,7 +5,6 @@ import PetName from './PetName';
 import MainCards from './MainCards';
 import DailyQuests from './DailyQuests';
 import BonusQuests from './BonusQuests';
-import { completeQuest, fetchQuests } from '../../services/api';
 
 const Dashboard = () => {
   const [dailyQuests, setDailyQuests] = useState([]);
@@ -44,11 +43,28 @@ const Dashboard = () => {
 
   const getPetUpdates = async (id) => {
     try {
-      const res = await completeQuest(id);
-      setXp(res.xp);
-      setLevel(res.level);
-      setMood(res.mood);
-      setStreak(res.streak);
+      const token = localStorage.getItem("token");
+
+      const res = await fetch(`http://localhost:3000/api/${id}/complete`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({})
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to complete quest')
+      }
+
+      const data = await res.json();
+      console.log("Quests Completed:", data);
+
+      setXp(data.xp);
+      setLevel(data.level);
+      setMood(data.mood);
+      setStreak(data.streak);
     } catch (err) {
       console.error("Failed to load pet updates:", err);
     }
