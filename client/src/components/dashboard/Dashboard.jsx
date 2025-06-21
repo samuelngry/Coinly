@@ -34,8 +34,8 @@ const Dashboard = () => {
         const data = await res.json();
         console.log("Quests:", data);
 
-        setDailyQuests(res.daily || []);
-        setBonusQuests(res.bonus || []);
+        setDailyQuests(data.daily || []);
+        setBonusQuests(data.bonus || []);
       } catch (err) {
         console.error("Failed to load quests:", err);
       }
