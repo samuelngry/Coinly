@@ -46,7 +46,7 @@ const UserQuest = db.define('user_quests', {
     },
     category: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
     },
 });
 
