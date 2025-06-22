@@ -22,8 +22,8 @@ import welcomeImage from '../../assets/welcome.png';
 
 const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
     const [selectedCategories, setSelectedCategories] = useState([]);
-    const [selectedStruggle, setSelectedStruggle] = useState("");
-    const [selectedGoal, setSelectedGoal] = useState("");
+    const [selectedStruggle, setSelectedStruggle] = useState([]);
+    const [selectedGoal, setSelectedGoal] = useState([]);
     const [selectedLifestyles, setSelectedLifestyles] = useState([]);
     const navigate = useNavigate();
 
@@ -58,34 +58,43 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
     ];
 
     useEffect(() => {
-        if (step === 5) {
+        if (step === 5) {            
             const token = localStorage.getItem("token");
-            console.log("Token:", token);
 
-            if (!answers.goal || !answers.struggle || !answers.lifestyles || !answers.categories) {
-                console.error("Missing required preferences.");
-                return;
-            }
+            const payload = {
+                goal: Array.isArray(answers.goal) ? answers.goal : [answers.goal],
+                struggle: Array.isArray(answers.struggle) ? answers.struggle : [answers.struggle],
+                lifestyles: Array.isArray(answers.lifestyles) ? answers.lifestyles : [answers.lifestyles],
+                categories: Array.isArray(answers.categories) ? answers.categories : [answers.categories]
+            };
 
             fetch("http://localhost:3000/api/users/preferences", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`
-            },
-            body: JSON.stringify({
-                goal: answers.goal || "",
-                struggle: answers.struggle || "",
-                lifestyle: answers.lifestyles.length > 0 ? answers.lifestyles : null,
-                categories: answers.categories.length > 0 ? answers.categories : null
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(payload)
             })
+            .then(res => {
+                console.log("Response status:", res.status);
+                console.log("Response headers:", res.headers);
+                if (!res.ok) {
+                    return res.text().then(text => {
+                        console.error("Error response body:", text);
+                        throw new Error(`HTTP ${res.status}: ${text}`);
+                    });
+                }
+                return res.json();
             })
-            .then(res => res.json())
             .then(data => {
-                console.log(data.message);
+                console.log("Preferences saved:", data.message);
                 navigate("/dashboard");
             })
-            .catch(err => console.error("Error saving preferences", err));
+            .catch(err => {
+                console.error("Error saving preferences:", err);
+                console.error("Full error object:", err);
+            });
         }
     }, [step, answers, navigate]);
 
@@ -165,7 +174,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                 <span className='text-neutral-500 mb-4 text-sm'>
                 {selectedStruggle.length === 0
                     ? 'Select 1'
-                    : `Selected ${selectedStruggle.length}/1`
+                    : 'Selected 1/1'
                 }
                 </span>
                 <div>
@@ -175,9 +184,9 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                                 key={id}
                                 onClick={() => {
                                     if (selectedStruggle.includes(label)) {
-                                        setSelectedStruggle(selectedStruggle.filter((s) => s !== label));
-                                    } else if (!selectedStruggle.includes(label) && selectedStruggle.length < 1) {
-                                        setSelectedStruggle([...selectedStruggle, label]);
+                                        setSelectedStruggle([]);
+                                    } else {
+                                        setSelectedStruggle([label]);
                                     }
                                 }}
                                 className={`rounded-lg p-4 border-2 hover:bg-orange-50 hover:text-orange-400 ${
@@ -216,7 +225,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                 <span className='text-neutral-500 mb-4 text-sm'>
                 {selectedGoal.length === 0
                     ? 'Select 1'
-                    : `Selected ${selectedGoal.length}/1`
+                    : 'Selected 1/1'
                 }
                 </span>
                 <div>
@@ -226,9 +235,9 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                                 key={id}
                                 onClick={() => {
                                     if (selectedGoal.includes(label)) {
-                                        setSelectedGoal(selectedGoal.filter((s) => s !== label));
-                                    } else if (!selectedGoal.includes(label) && selectedGoal.length < 1) {
-                                        setSelectedGoal([...selectedGoal, label]);
+                                        setSelectedGoal([]);
+                                    } else {
+                                        setSelectedGoal([label]);
                                     }
                                 }}
                                 className={`rounded-lg p-4 border-2 hover:bg-orange-50 hover:text-orange-400 ${
