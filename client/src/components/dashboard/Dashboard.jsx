@@ -18,6 +18,9 @@ const Dashboard = () => {
     try {
         const token = localStorage.getItem("token");
 
+        setDailyQuests([]);
+        setBonusQuests([]);
+
         const res = await fetch("http://localhost:3000/api/quests", {
           method: "POST",
           headers: {
