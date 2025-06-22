@@ -69,6 +69,10 @@ async function generateDynamicQuests(userId) {
     const lastGenerated = user.last_generated_at;
     const lastGeneratedDate = lastGenerated ? new Date(lastGenerated.setHours(0, 0, 0, 0)) : null;
 
+    await UserQuest.update({ status: 'Pending'}, {
+        where: { user_id: userId, status: 'Completed' },
+    });
+    
     // Generate new quests if it's a new day
     if (!lastGeneratedDate || lastGeneratedDate < today) {
         await expireOldQuests(userId);
