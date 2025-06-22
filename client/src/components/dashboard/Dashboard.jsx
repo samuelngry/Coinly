@@ -5,6 +5,7 @@ import PetName from './PetName';
 import MainCards from './MainCards';
 import DailyQuests from './DailyQuests';
 import BonusQuests from './BonusQuests';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
   const [dailyQuests, setDailyQuests] = useState([]);
@@ -13,6 +14,7 @@ const Dashboard = () => {
   const [level, setLevel] = useState(1);
   const [mood, setMood] = useState("");
   const [streak, setStreak] = useState(0);
+  const navigate = useNavigate();
 
   const getQuests = async () => {
     try {
@@ -79,6 +81,13 @@ const Dashboard = () => {
     }
   };
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    navigate('/login');
+  };
+
   useEffect(() => {
     getQuests();
   }, []);
@@ -100,6 +109,13 @@ const Dashboard = () => {
         <MainCards streak={streak} completedCount={completedQuest} totalCount={totalQuest}/>
         <DailyQuests quests={dailyQuests} onComplete={handleCompleteQuest} completedCount={completedDaily} totalCount={totalDaily} />
         <BonusQuests quests={bonusQuests} onComplete={handleCompleteQuest} completedCount={completedBonus} totalCount={totalBonus} />
+        
+        <button
+          onClick={logout}
+          className='bg-red-500 text-white py-1 px-4 rounded-lg mt-10 hover:bg-red-600'
+        >
+          Log Out
+        </button>
     </div>
   )
 }

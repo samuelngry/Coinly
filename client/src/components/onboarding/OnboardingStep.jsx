@@ -62,6 +62,11 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
             const token = localStorage.getItem("token");
             console.log("Token:", token);
 
+            if (!answers.goal || !answers.struggle || !answers.lifestyles || !answers.categories) {
+                console.error("Missing required preferences.");
+                return;
+            }
+
             fetch("http://localhost:3000/api/users/preferences", {
             method: "POST",
             headers: {
@@ -69,10 +74,10 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                 Authorization: `Bearer ${token}`
             },
             body: JSON.stringify({
-                goal: answers.goal,
-                struggle: answers.struggle,
-                lifestyle: answers.lifestyles,
-                categories: answers.categories
+                goal: answers.goal || "",
+                struggle: answers.struggle || "",
+                lifestyle: answers.lifestyles.length > 0 ? answers.lifestyles : null,
+                categories: answers.categories.length > 0 ? answers.categories : null
             })
             })
             .then(res => res.json())
