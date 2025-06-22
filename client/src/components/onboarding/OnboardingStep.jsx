@@ -60,6 +60,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
     useEffect(() => {
         if (step === 5) {            
             const token = localStorage.getItem("token");
+            const user = localStorage.getItem("user");
 
             const payload = {
                 goal: Array.isArray(answers.goal) ? answers.goal : [answers.goal],
@@ -89,7 +90,11 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
             })
             .then(data => {
                 console.log("Preferences saved:", data.message);
-                navigate("/dashboard");
+                localStorage.setItem("user", JSON.stringify({ 
+                    ...user, 
+                    onboarding_completed: true,
+                }));
+                navigate('/dashboard');
             })
             .catch(err => {
                 console.error("Error saving preferences:", err);
