@@ -21,7 +21,7 @@ const BonusQuests = ({ quests, onComplete, completedCount, totalCount  }) => {
                         <div key={quest.id} className={`mt-3 p-3 rounded-xl ${quest.status === 'Completed' ? 'bg-green-100' : 'bg-white'} shadow-none transition-shadow duration-300 hover:shadow-gray-400 hover:shadow-lg border border-neutral-300 flex justify-between items-center gap-2`}>
                             <div className='flex items-center gap-2 flex-1'>
                                 <img src={starIcon} alt='Quest' className='w-10 h-10'/>
-                                <span className={`text-xs break-words font-semibold ${quest.status !== 'Completed' ? 'line-through text-green-500' : ''}`}>{quest.quest_text}</span>
+                                <span className={`text-xs break-words font-semibold ${quest.status === 'Completed' ? 'line-through text-green-500' : ''}`}>{quest.quest_text}</span>
                             </div>
 
                             <div className='flex items-center shrink-0'>

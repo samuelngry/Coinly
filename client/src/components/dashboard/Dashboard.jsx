@@ -18,6 +18,14 @@ const Dashboard = () => {
 
   const getQuests = async () => {
     try {
+        const storedQuests = getQuestsFromLocalStorage();
+
+        if (storedQuests.daily.length && storedQuests.bonus.length) {
+          setDailyQuests(storedQuests.daily);
+          setBonusQuests(storedQuests.bonus);
+          return;
+        }
+
         const token = localStorage.getItem("token");
 
         setDailyQuests([]);
@@ -41,10 +49,23 @@ const Dashboard = () => {
 
         setDailyQuests(data.daily || []);
         setBonusQuests(data.bonus || []);
+
+        saveQuestsToLocalStorage(data.daily, data.bonus);
       } catch (err) {
         console.error("Failed to load quests:", err);
       }
     };
+  
+  const saveQuestsToLocalStorage = (daily, bonus) => {
+    localStorage.setItem('dailyQuests', JSON.stringify(daily));
+    localStorage.setItem('bonusQuests', JSON.stringify(bonus));
+  };
+
+  const getQuestsFromLocalStorage = () => {
+    const daily = JSON.parse(localStorage.getItem('dailyQuests')) || [];
+    const bonus = JSON.parse(localStorage.getItem('bonusQuests')) || [];
+    return { daily, bonus };
+  };
 
   const handleCompleteQuest = async (id, type) => {
     try {
