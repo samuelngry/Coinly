@@ -35,7 +35,7 @@ const DailyQuests = ({ quests, onComplete, completedCount, totalCount }) => {
                                     </div>
                                 )}
 
-                                {quest.status !=='Completed' && (
+                                {quest.status !== 'Completed' && (
                                     <button
                                         onClick={() => onComplete(quest.id, quest.type)}
                                     >

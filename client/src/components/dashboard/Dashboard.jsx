@@ -67,9 +67,9 @@ const Dashboard = () => {
       setStreak(data.streak);
 
       if (type === "daily") {
-        setDailyQuests((prev) => prev.filter((q) => q.id !== id));
+        setDailyQuests((prev) => prev.map((q) => q.id === id ? { ...q, status: "Completed" } : q ));
       } else if (type === "bonus") {
-        setBonusQuests((prev) => prev.filter((q) => q.id !== id));
+        setBonusQuests((prev) => prev.map((q) => q.id === id ? { ...q, status: "Completed" } : q ));
       }
     } catch (err) {
       console.error("Failed to complete quest:", err);
