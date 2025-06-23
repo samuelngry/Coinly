@@ -71,7 +71,7 @@ const Dashboard = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch(`http://localhost:3000/api/${id}/complete`, {
+      const res = await fetch(`http://localhost:3000/api/quests/${id}/complete`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
