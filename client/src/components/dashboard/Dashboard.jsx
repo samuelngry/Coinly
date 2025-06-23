@@ -80,7 +80,7 @@ const Dashboard = () => {
     }
   };
 
-  const handlePetNameChange = async () => {
+  const handlePetNameChange = async (newName) => {
     try {
       const token = localStorage.getItem("token");
 
@@ -90,7 +90,7 @@ const Dashboard = () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify({ name: petName })
+        body: JSON.stringify({ name: newName })
       });
 
       if (!res.ok) {
@@ -130,7 +130,7 @@ const Dashboard = () => {
     <div className='min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow justify-center'>
         <LevelBar xp={xp} level={level} />
         <RivePet />
-        <PetName onComplete={handlePetNameChange} />
+        <PetName name={petName} onComplete={handlePetNameChange} />
         <MainCards streak={streak} completedCount={completedQuest} totalCount={totalQuest}/>
         <DailyQuests quests={dailyQuests} onComplete={handleCompleteQuest} completedCount={completedDaily} totalCount={totalDaily} />
         <BonusQuests quests={bonusQuests} onComplete={handleCompleteQuest} completedCount={completedBonus} totalCount={totalBonus} />
