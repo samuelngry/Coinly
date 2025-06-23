@@ -1,5 +1,20 @@
 const Pets = require("../models/Pets");
 
+const getPetName = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const pet = await Pets.findOne({ where: {user_id: userId} });
+
+        if (!pet) {
+            return res.status(404).json({ error: "Pet not found" });
+        }
+
+        res.status(200).json({ name: pet.name });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+}
+
 const editPetName = async (req, res) => {
     try {
         const userId = req.user.id;
@@ -20,5 +35,6 @@ const editPetName = async (req, res) => {
 }
 
 module.exports = {
+    getPetName,
     editPetName,
 };

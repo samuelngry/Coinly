@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const UserPreference = require("../models/UserPreference");
+const Pets = require("../models/Pets");
 const bcrypt = require("bcrypt");
 
 const createToken = (userId) => {
@@ -33,8 +34,17 @@ const register = async (req, res) => {
             categories: []
         });
 
+        const pet = await Pets.create({
+            user_id: user.id,
+            name: 'Bueno',
+            level: 1,
+            xp: 0,
+            last_fed: new Date(),
+        });
+
         const token = createToken(user.id);
         console.log('User registered:', user);
+        console.log('Default pet created:', pet);
 
         res.status(201).json({ 
             token,
