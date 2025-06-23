@@ -14,6 +14,7 @@ const Dashboard = () => {
   const [level, setLevel] = useState(1);
   const [mood, setMood] = useState("");
   const [streak, setStreak] = useState(0);
+  const [petName, setPetName] = useState("");
   const navigate = useNavigate();
 
   const getQuests = async () => {
@@ -79,6 +80,32 @@ const Dashboard = () => {
     }
   };
 
+  const handlePetNameChange = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const res = await fetch(`http://localhost:3000/api/pet`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({ name: petName })
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to change pet name');
+      }
+
+      const data = await res.json();
+      console.log("Pet name updated:", data);
+
+      setPetName(data.newPetName);
+    } catch (err) {
+      console.error("Failed to update pet name:", err);
+    }
+  };
+
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
@@ -103,7 +130,7 @@ const Dashboard = () => {
     <div className='min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow justify-center'>
         <LevelBar xp={xp} level={level} />
         <RivePet />
-        <PetName />
+        <PetName onComplete={handlePetNameChange} />
         <MainCards streak={streak} completedCount={completedQuest} totalCount={totalQuest}/>
         <DailyQuests quests={dailyQuests} onComplete={handleCompleteQuest} completedCount={completedDaily} totalCount={totalDaily} />
         <BonusQuests quests={bonusQuests} onComplete={handleCompleteQuest} completedCount={completedBonus} totalCount={totalBonus} />
