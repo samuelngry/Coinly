@@ -71,10 +71,6 @@ async function generateDynamicQuests(userId) {
 
     console.log("Last Generated At:", lastGeneratedDate);
     console.log("Today:", today);
-
-    await UserQuest.update({ status: 'Pending'}, {
-        where: { user_id: userId, status: 'Completed' },
-    });
     
     // Check if quests has been generated for today
     if (lastGeneratedDate && lastGeneratedDate >= today) {
