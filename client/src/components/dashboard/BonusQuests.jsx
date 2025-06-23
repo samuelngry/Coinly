@@ -1,6 +1,6 @@
 import React from 'react'
 import starIcon from '../../assets/stars.png'
-import { Gift, Star, CheckIcon, PawPrint, Clock } from 'lucide-react'
+import { Gift, Star, CheckIcon, PawPrint, Clock, CircleCheck } from 'lucide-react'
 
 const BonusQuests = ({ quests, onComplete, completedCount, totalCount  }) => {
     return (
@@ -20,7 +20,11 @@ const BonusQuests = ({ quests, onComplete, completedCount, totalCount  }) => {
                     quests.map((quest) => (
                         <div key={quest.id} className={`mt-3 p-3 rounded-xl ${quest.status === 'Completed' ? 'bg-green-100' : 'bg-white'} shadow-none transition-shadow duration-300 hover:shadow-gray-400 hover:shadow-lg border border-neutral-300 flex justify-between items-center gap-2`}>
                             <div className='flex items-center gap-2 flex-1'>
-                                <img src={starIcon} alt='Quest' className='w-10 h-10'/>
+                                {quest.status !== 'Completed' ? (
+                                    <img src={starIcon} alt='Quest' className='w-10 h-10'/>
+                                ) : (
+                                    <CircleCheck className='w-10 h-10 text-green-500'/>
+                                )}
                                 <span className={`text-xs break-words font-semibold ${quest.status === 'Completed' ? 'line-through text-green-500' : ''}`}>{quest.quest_text}</span>
                             </div>
 
