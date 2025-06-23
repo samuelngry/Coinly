@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const UserPreference = require("../models/UserPreference");
 const bcrypt = require("bcrypt");
 
 const createToken = (userId) => {
@@ -24,10 +25,19 @@ const register = async (req, res) => {
             onboarding_completed: false,
          });
 
+        await UserPreference.create({
+            user_id: user.id,
+            goal: "",
+            struggle: "",
+            lifestyle: [],
+            categories: []
+        });
+
         const token = createToken(user.id);
         console.log('User registered:', user);
 
-        res.status(201).json({ token,
+        res.status(201).json({ 
+            token,
             user: { 
                 id: user.id, 
                 username: user.username,

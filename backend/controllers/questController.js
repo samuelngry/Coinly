@@ -25,6 +25,27 @@ const completeQuests = async (req, res) => {
         const userId = req.user.id;
         const questId = parseInt(req.params.id);
 
+        console.log("User ID:", userId);
+        console.log("Quest ID:", questId);
+
+        // Add this: Check if quest exists before updating
+        const existingQuest = await UserQuest.findOne({
+            where: {
+                id: questId,
+                user_id: userId,
+            }
+        });
+
+        console.log("Existing quest:", existingQuest);
+
+        if (!existingQuest) {
+            return res.status(404).json({ error: 'Quest not found for this user.' });
+        }
+
+        if (existingQuest.status === 'Completed') {
+            return res.status(400).json({ error: 'Quest already completed.' });
+        }
+
         const [updatedRows] = await UserQuest.update(
             {
                 status: 'Completed', 
@@ -123,6 +144,7 @@ const completeQuests = async (req, res) => {
 
         res.status(200).json({ xp: petXp, level: petLevel, mood: petMood, streak: newStreak });
     } catch (err) {
+        console.error("Error in completeQuests:", err);
         res.status(500).json({ error: err.message });
     }
 };

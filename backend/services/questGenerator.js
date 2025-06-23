@@ -86,7 +86,20 @@ async function generateDynamicQuests(userId) {
         return [...daily, ...bonus];
     }
 
-    return []; // Already generated today
+    const existingQuests = await UserQuest.findAll({
+        where: {
+            user_id: userId,
+            instance_date: {
+                [Op.gte] : today
+            },
+            status: {
+                [Op.in]: ['Pending', 'Completed']
+            }
+        },
+        order: [['createdAt', 'ASC']]
+    });
+    
+    return existingQuests;
 }
 
 async function expireOldQuests(userId) {
