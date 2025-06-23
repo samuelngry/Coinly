@@ -69,37 +69,42 @@ async function generateDynamicQuests(userId) {
     const lastGenerated = user.last_generated_at;
     const lastGeneratedDate = lastGenerated ? new Date(lastGenerated.setHours(0, 0, 0, 0)) : null;
 
+    console.log("Last Generated At:", lastGeneratedDate);
+    console.log("Today:", today);
+
     await UserQuest.update({ status: 'Pending'}, {
         where: { user_id: userId, status: 'Completed' },
     });
     
-    // Generate new quests if it's a new day
-    if (!lastGeneratedDate || lastGeneratedDate < today) {
-        await expireOldQuests(userId);
-
-        const daily = await generateDailyQuests(userId);
-        const bonus = await generateBonusQuests(user, userPreference);
-
-        user.last_generated_at = new Date();
-        await user.save();
-
-        return [...daily, ...bonus];
+    // Check if quests has been generated for today
+    if (lastGeneratedDate && lastGeneratedDate >= today) {
+        const existingQuests = await UserQuest.findAll({
+            where: {
+                user_id: userId,
+                instance_date: {
+                    [Op.gte] : today
+                },
+                status: {
+                    [Op.in]: ['Pending', 'Completed']
+                }
+            },
+            order: [['createdAt', 'ASC']]
+        });
+    
+        return existingQuests;
     }
 
-    const existingQuests = await UserQuest.findAll({
-        where: {
-            user_id: userId,
-            instance_date: {
-                [Op.gte] : today
-            },
-            status: {
-                [Op.in]: ['Pending', 'Completed']
-            }
-        },
-        order: [['createdAt', 'ASC']]
-    });
+    // If quests has not been generated for today
+    await expireOldQuests(userId);
+
+    const daily = await generateDailyQuests(userId);
+    const bonus = await generateBonusQuests(user, userPreference);
+
+    user.last_generated_at = new Date();
+    await user.save();
+
+    return [...daily, ...bonus];
     
-    return existingQuests;
 }
 
 async function expireOldQuests(userId) {
