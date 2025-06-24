@@ -48,7 +48,7 @@ const PetName = ({ name, onComplete }) => {
             onClick={handleCancel}
             className='text-gray-500'
           >
-            Cancel
+            Close
           </button>
         </form>
       )}
