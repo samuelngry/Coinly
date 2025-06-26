@@ -59,46 +59,65 @@ async function generateDynamicQuests(userId) {
     const user = await User.findByPk(userId);
     const userPreference = await UserPreference.findByPk(userId);
     
-    if (!user || !userPreference) {
-        throw new Error('User or user preferences not found');
+    if (!user) {
+        throw new Error('User not found');
     }
 
+    // Create date for today at start of day
     const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const todayEnd = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59, 999);
 
-    const lastGenerated = user.last_generated_at;
-    const lastGeneratedDate = lastGenerated ? new Date(lastGenerated.setHours(0, 0, 0, 0)) : null;
+    console.log("Checking for existing quests between:", todayStart, "and", todayEnd);
 
-    console.log("Last Generated At:", lastGeneratedDate);
-    console.log("Today:", today);
-    
-    // Check if quests has been generated for today
-    if (lastGeneratedDate && lastGeneratedDate >= today) {
-        const existingQuests = await UserQuest.findAll({
-            where: {
-                user_id: userId,
-                instance_date: {
-                    [Op.gte] : today
-                },
-                status: {
-                    [Op.in]: ['Pending', 'Completed']
-                }
+    // FIRST: Always check for existing quests for today
+    const existingQuests = await UserQuest.findAll({
+        where: {
+            user_id: userId,
+            instance_date: {
+                [Op.between]: [todayStart, todayEnd]
             },
-            order: [['createdAt', 'ASC']]
-        });
-    
+            status: {
+                [Op.in]: ['Pending', 'Completed']
+            }
+        },
+        order: [['createdAt', 'ASC']]
+    });
+
+    console.log(`Found ${existingQuests.length} existing quests for today`);
+
+    // If we already have quests for today, return them
+    if (existingQuests.length > 0) {
+        console.log('Returning existing quests for today');
         return existingQuests;
     }
 
-    // If quests has not been generated for today
+    // Handle missing user preferences for new accounts
+    if (!userPreference) {
+        console.log('User preferences not found, generating daily quests only');
+        await expireOldQuests(userId);
+        
+        const daily = await generateDailyQuests(userId);
+        
+        // Update last_generated_at
+        user.last_generated_at = new Date();
+        await user.save();
+        
+        return daily;
+    }
+
+    // Generate new quests for today
+    console.log('No existing quests found, generating new quests for today');
     await expireOldQuests(userId);
 
     const daily = await generateDailyQuests(userId);
     const bonus = await generateBonusQuests(user, userPreference);
 
+    // Update last_generated_at
     user.last_generated_at = new Date();
     await user.save();
 
+    console.log(`Generated ${daily.length} daily quests and ${bonus.length} bonus quests`);
     return [...daily, ...bonus];
     
 }
