@@ -23,7 +23,9 @@ const BonusQuests = ({ quests, onComplete, completedCount, totalCount  }) => {
                                 {quest.status !== 'Completed' ? (
                                     <img src={starIcon} alt='Quest' className='w-10 h-10'/>
                                 ) : (
-                                    <CircleCheck className='w-10 h-10 text-green-500'/>
+                                    <div className="w-10 h-10 flex items-center justify-center shrink-0">
+                                        <CircleCheck className='text-green-500' style={{ width: '100%', height: '100%' }}/>
+                                    </div>
                                 )}
                                 <span className={`text-xs break-words font-semibold ${quest.status === 'Completed' ? 'line-through text-green-500' : ''}`}>{quest.quest_text}</span>
                             </div>
