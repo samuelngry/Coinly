@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Pets = require("../models/Pets");
 const UserPreference = require("../models/UserPreference");
 
 const getUserData = async (req, res) => {
@@ -6,13 +7,15 @@ const getUserData = async (req, res) => {
         const userId = req.user.id;
 
         const user = await User.findByPk(userId);
-        if (!user) {
-            return res.status(404).json({ error: 'User not found' });
+
+        const pet = await Pets.findOne({ where: { user_id: userId } });
+        if (!pet) {
+            return res.status(404).json({ error: 'User data not found' });
         }
 
         const userData = {
-            xp: user.xp,
-            level: user.level,
+            xp: pet.xp,
+            level: pet.level,
             streak: user.streak_count,
         };
 

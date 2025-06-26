@@ -17,6 +17,31 @@ const Dashboard = () => {
   const [petName, setPetName] = useState("");
   const navigate = useNavigate();
 
+  const getUserData = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const res = await fetch("http://localhost:3000/api/users", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to fetch user data');
+      }
+
+      const data = await res.json();
+      setXp(data.xp);
+      setLevel(data.level);
+      setStreak(data.streak);
+    } catch (err) {
+      console.error("Failed to fetch user data:", err);
+    }
+  };
+
   const getPetName = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -137,6 +162,7 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
+    getUserData();
     getPetName();
     getQuests();
   }, []);
