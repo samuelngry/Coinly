@@ -66,7 +66,7 @@ const completeQuests = async (req, res) => {
 
         const now = new Date();
         const user = await User.findOne({ where: { id: userId } });
-        let newStreak = 0;
+        let newStreak = 1;
 
         const lastCompletedQuest = await UserQuest.findOne({
             where: {
@@ -86,7 +86,7 @@ const completeQuests = async (req, res) => {
             } else if (diffDays === 0) {
                 newStreak = user.streak_count;
             } else {
-                newStreak = 0;
+                newStreak = 1;
             }
         }
 
