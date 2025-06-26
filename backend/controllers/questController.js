@@ -65,7 +65,7 @@ const completeQuests = async (req, res) => {
         }
 
         const now = new Date();
-        const user = await User.findOne({ where: { user_id: userId } });
+        const user = await User.findOne({ where: { id: userId } });
         let newStreak = 0;
 
         const lastCompletedQuest = await UserQuest.findOne({

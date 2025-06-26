@@ -70,7 +70,6 @@ async function generateDynamicQuests(userId) {
 
     console.log("Checking for existing quests between:", todayStart, "and", todayEnd);
 
-    // FIRST: Always check for existing quests for today
     const existingQuests = await UserQuest.findAll({
         where: {
             user_id: userId,
@@ -86,7 +85,6 @@ async function generateDynamicQuests(userId) {
 
     console.log(`Found ${existingQuests.length} existing quests for today`);
 
-    // If we already have quests for today, return them
     if (existingQuests.length > 0) {
         console.log('Returning existing quests for today');
         return existingQuests;
