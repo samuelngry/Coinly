@@ -108,6 +108,17 @@ async function generateDynamicQuests(userId) {
     console.log('No existing quests found, generating new quests for today');
     await expireOldQuests(userId);
 
+    await UserQuest.update(
+        { status: 'Expired' },
+        {
+            where: {
+                user_id: userId,
+                status: 'Completed',
+                instance_date: { [Op.lt] : today },
+            },
+        }
+    );
+
     const daily = await generateDailyQuests(userId);
     const bonus = await generateBonusQuests(user, userPreference);
 
