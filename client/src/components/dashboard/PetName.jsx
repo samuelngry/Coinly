@@ -9,8 +9,6 @@ import {
   CardFooter,
   Typography,
   Input,
-  Checkbox,
-  DialogBackdrop,
 } from "@material-tailwind/react";
 
 const PetName = ({ name, onComplete }) => {
@@ -46,26 +44,42 @@ const PetName = ({ name, onComplete }) => {
         <Dialog 
           size='xs'
           open={open}
-          onClose={handleCancel}
-          handler={handleOpen}
-          className='flex justify-center items-center'>
-        <Card className='mx-auto w-full max-w-[24rem]'>
-          <CardHeader className='text-center'>
-            <Typography className='text-sm font-bold p-2'>
-              Edit Pet Name
-            </Typography>
-          </CardHeader>
-          <Input size='lg' value={newName} onChange={handleNameChange} className='border border-gray-300 rounded-lg' autoFocus />
-          <CardFooter className='flex justify-between gap-2 p-4'>
-            <Button variant='gradient' onClick={handleSubmit} className='bg-orange-500 hover:bg-orange-800 text-white' fullWidth>
-              Confirm
-            </Button>
-            <Button variant="text" onClick={handleCancel} fullWidth className="mt-2">
-                Cancel
-            </Button>
-          </CardFooter>
-        </Card>
-      </Dialog>
+          handler={handleClose}
+        > 
+          <Card className='mx-auto w-full max-w-[24rem] bg-gray-100 relative'>
+            {/* Close button in top right */}
+            <button 
+              onClick={handleCancel}
+              className='absolute top-3 right-3 text-gray-600 hover:text-gray-800 text-xl font-bold z-10'>
+              ×
+            </button>
+            
+            <CardHeader className='mb-4 pt-6 pb-4 pl-2 bg-gray-100'>
+              <Typography variant="h5" color="blue-gray" className='font-bold'>
+                Edit Pet Name
+              </Typography>
+            </CardHeader>
+            <CardBody className='flex flex-col gap-4 pt-0'>
+              <Input 
+                size='lg' 
+                label="Pet Name"
+                value={newName} 
+                onChange={handleNameChange} 
+                autoFocus 
+                className='bg-white'
+              />
+            </CardBody>
+            <CardFooter className='pt-0'>
+              <Button 
+                variant='filled' 
+                onClick={handleSubmit} 
+                fullWidth
+                className='bg-blue-500 hover:bg-blue-600 text-white'>
+                Confirm
+              </Button>
+            </CardFooter>
+          </Card>
+        </Dialog>
     </div>
   )
 }
