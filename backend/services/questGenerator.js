@@ -66,13 +66,26 @@ async function generateDynamicQuests(userId) {
     try {
         // Create date for today at start of day
         const today = new Date();
-        const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-        const todayEnd = new Date(today.getFullYear(), today.getMonth(), today.getDate(), 23, 59, 59, 999);
+        const singaporeOffset = 8 * 60 * 60 * 1000;
+        const todaySGT = new Date(today.getTime() + singaporeOffset);
+
+        const todayStart = new Date(todaySGT.getFullYear(), todaySGT.getMonth(), todaySGT.getDate());
+        todayStart.setHours(0, 0, 0, 0);
+
+        const todayEnd = new Date(todayStart);
+        todayEnd.setHours(23, 59, 59, 999);
 
         console.log("Checking for existing quests between:", todayStart, "and", todayEnd);
         console.log("Last generated at:", user.last_generated_at);
 
         const lastGeneratedDate = user.last_generated_at ? new Date(user.last_generated_at) : null;
+
+        if (!user.last_generated_at) {
+            console.log("First time generating quests, updating last_generated_at");
+            user.last_generated_at = todaySGT;
+            await user.save();
+            console.log("Updated last_generated_at:", user.last_generated_at);
+        }
 
         const existingQuests = await UserQuest.findAll({
             where: {
@@ -94,14 +107,9 @@ async function generateDynamicQuests(userId) {
         const hasGeneratedToday = lastGeneratedDate && lastGeneratedDate.toDateString() === todayStart.toDateString();
 
         if(!hasGeneratedToday) {
+            user.last_generated_at = todaySGT;
+            await user.save();
 
-            await User.update(
-                { last_generated_at: new Date() },
-                {
-                    where: { id: userId },
-                }
-            );
-            
             // Generate new quests for today
             console.log('No existing quests found, generating new quests for today');
             await expireOldQuests(userId);
