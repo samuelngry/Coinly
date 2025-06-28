@@ -3,6 +3,13 @@ import starIcon from '../../assets/stars.png'
 import { Gift, Star, CheckIcon, PawPrint, Clock, CircleCheck } from 'lucide-react'
 
 const BonusQuests = ({ quests, onComplete, completedCount, totalCount  }) => {
+
+    const sortedQuests = quests.sort((a, b) => {
+        if (a.status === 'Completed' && b.status !== 'Completed') return 1;
+        if (b.status === 'Completed' && a.status !== 'Completed') return -1;
+        return 0;
+    });
+
     return (
         <div className='flex flex-col mt-6'>
             <div className='flex items-center gap-3 mb-2 justify-center lg:justify-start'>
@@ -17,7 +24,7 @@ const BonusQuests = ({ quests, onComplete, completedCount, totalCount  }) => {
             </div>
             <div className='space-y-1 grid grid-cols-1 lg:grid-cols-3 lg:space-x-2 lg:space-y-0'>
                 {quests.length > 0 ? (
-                    quests.map((quest) => (
+                    sortedQuests.map((quest) => (
                         <div key={quest.id} className={`mt-3 p-3 rounded-xl ${quest.status === 'Completed' ? 'bg-green-100' : 'bg-white'} shadow-none transition-shadow duration-300 hover:shadow-gray-400 hover:shadow-lg border border-neutral-300 flex justify-between items-center gap-2`}>
                             <div className='flex items-center gap-2 flex-1'>
                                 {quest.status !== 'Completed' ? (
