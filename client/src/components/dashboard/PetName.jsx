@@ -15,8 +15,7 @@ const PetName = ({ name, onComplete }) => {
   const [open, setOpen] = useState(false);
   const [newName, setNewName] = useState(name);
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () =>setOpen(false);
+  const handleOpen = () => setOpen((cur) => !cur);
 
   const handleNameChange = (e) => {
     setNewName(e.target.value);
@@ -25,11 +24,6 @@ const PetName = ({ name, onComplete }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onComplete(newName);
-    setOpen(false);
-  }
-
-  const handleCancel = () => {
-    setNewName(name);
     setOpen(false);
   }
 
@@ -44,37 +38,30 @@ const PetName = ({ name, onComplete }) => {
         <Dialog 
           size='xs'
           open={open}
-          handler={handleClose}
+          handler={handleOpen}
+          className='bg-transparent shadow-none inset-0 flex items-center justify-center'
         > 
-          <Card className='mx-auto w-full max-w-[24rem] bg-gray-100 relative'>
-            {/* Close button in top right */}
-            <button 
-              onClick={handleCancel}
-              className='absolute top-3 right-3 text-gray-600 hover:text-gray-800 text-xl font-bold z-10'>
-              ×
-            </button>
-            
-            <CardHeader className='mb-4 pt-6 pb-4 pl-2 bg-gray-100'>
-              <Typography variant="h5" color="blue-gray" className='font-bold'>
+          <Card className='mx-auto w-full max-w-[24rem]'>
+            <CardBody className='flex flex-col gap-4'>
+              <Typography variant="h4" color="blue-gray">
                 Edit Pet Name
               </Typography>
-            </CardHeader>
-            <CardBody className='flex flex-col gap-4 pt-0'>
+              <Typography className='-mb-2' variant='h6'>
+                Your Pet Name
+              </Typography>
               <Input 
-                size='lg' 
-                label="Pet Name"
+                size='lg'
+                label='Pet Name'
                 value={newName} 
                 onChange={handleNameChange} 
-                autoFocus 
-                className='bg-white'
               />
             </CardBody>
             <CardFooter className='pt-0'>
               <Button 
-                variant='filled' 
+                variant='gradient' 
                 onClick={handleSubmit} 
                 fullWidth
-                className='bg-blue-500 hover:bg-blue-600 text-white'>
+                className='bg-orange-500 hover:bg-orange-600 text-white'>
                 Confirm
               </Button>
             </CardFooter>
