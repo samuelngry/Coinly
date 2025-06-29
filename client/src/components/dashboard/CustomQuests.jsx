@@ -187,8 +187,6 @@ const CustomQuests = ({ quests, onComplete, completedCount, totalCount, onAddCus
                 </div>
               </div>
             )}
-
-            
         </div>
     )
 }

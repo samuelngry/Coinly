@@ -139,6 +139,8 @@ const Dashboard = () => {
 
       const data = await res.json();
       console.log("Custom Quest Added:", data.quest);
+
+      setCustomQuests((prev) => [...prev, data.quest]);
     } catch (err) {
         console.error("Failed to add custom quest:", err);
     }
