@@ -122,14 +122,29 @@ const Dashboard = () => {
   const handleCompleteQuest = async (id, type) => {
     try {
       const token = localStorage.getItem("token");
+      let url;
+      let body = {};
 
-      const res = await fetch(`http://localhost:3000/api/quests/${id}/complete`, {
+      // Determine the URL and body based on the quest type
+      if (type === "daily" || type === "bonus") {
+        url = `http://localhost:3000/api/quests/${id}/complete`;
+        body = {};
+      } else if (type === "custom") {
+        // Handle custom quest completion
+        url = `http://localhost:3000/api/customquests/${id}/complete`;
+        body = {};  // You can add any additional data if needed
+      } else {
+        throw new Error("Invalid quest type");
+      }
+
+      // Send the request to complete the quest
+      const res = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify({})
+        body: JSON.stringify(body)
       });
 
       if (!res.ok) {
@@ -148,6 +163,8 @@ const Dashboard = () => {
         setDailyQuests((prev) => prev.map((q) => q.id === id ? { ...q, status: "Completed" } : q ));
       } else if (type === "bonus") {
         setBonusQuests((prev) => prev.map((q) => q.id === id ? { ...q, status: "Completed" } : q ));
+      } else if (type === "custom") {
+        setCustomQuests((prev) => prev.map((q) => q.id === id ? {...q, status: "Completed" } : q ));
       }
     } catch (err) {
       console.error("Failed to complete quest:", err);
