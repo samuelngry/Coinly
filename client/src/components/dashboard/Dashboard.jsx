@@ -139,9 +139,9 @@ const Dashboard = () => {
       const data = await res.json();
       console.log("Custom Quest Added:", data.quest);
     } catch (err) {
-      console.error("Failed to add custom quest:", err);
+        console.error("Failed to add custom quest:", err);
     }
-  }
+  };
 
   const updateCustomQuest = async (id, questText) => {
     try {
@@ -161,9 +161,34 @@ const Dashboard = () => {
       }
 
       const data = await res.json();
-      console.log("Custom Quest Updated:", data.)
+      console.log("Custom Quest Updated:", data.quest)
+    } catch (err) {
+      console.error("Failed to update custom quest:", err);
     }
-  }
+  };
+
+  const deleteCustomQuest = async (id) => {
+    try {
+      const token = localStorage.getItem("token");
+      
+      const res = await fetch(`http://localhost:3000/api/custom/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to delete custom quest");
+      }
+
+      const data = await res.json();
+      console.log("Custom Quest Deleted:", data.quest);
+    } catch (err) {
+      console.error("Failed to delete custom quest:", err);
+    }
+  };
 
   const handleCompleteQuest = async (id, type) => {
     try {

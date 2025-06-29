@@ -225,6 +225,14 @@ const deleteCustomQuest = async (req, res) => {
         const userId = req.user.id;
         const questId = parseInt(req.params.id);
 
+        const questToDelete = await UserQuest.findOne({
+            where: {
+                id: questId,
+                user_id: userId,
+                type: 'Custom',
+            },
+        });
+
         const deletedCount = await UserQuest.destroy({
             where: {
                 id: questId,
@@ -237,7 +245,7 @@ const deleteCustomQuest = async (req, res) => {
             return res.status(404).json({ error: 'Custom quest not found or already deleted' });
         }
 
-        res.status(200).json({ message: 'Custom quest deleted successfully' });
+        res.status(200).json({ message: 'Custom quest deleted successfully', quest: questToDelete });
     } catch (err) {
         console.error('Error in deleteCustomQuest:', err);
         res.status(500).json({ error: err.message });
