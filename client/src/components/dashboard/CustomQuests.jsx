@@ -35,64 +35,6 @@ const CustomQuests = ({ quests, onComplete, completedCount, totalCount, onAddCus
                     <span>{completedCount}/{totalCount}</span>
                 </div>
             </div>
-            
-            {/* Button to add a custom quest */}
-            <button
-              className="bg-gray-300 text-white px-4 py-2 rounded-lg mt-4 hover:bg-gray-600"
-              onClick={() => setOpen(true)}
-            >
-              Add Quest
-            </button>
-
-            {/* Dialog for adding custom quest */}
-            {open && (
-              <div className="fixed inset-0 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-                <div 
-                  className="fixed inset-0" 
-                  onClick={() => setOpen(false)}
-                ></div>
-                <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-sm mx-auto transform transition-all duration-300 scale-100">
-                  <div className="p-6">
-                    <div className='flex justify-center'>
-                      <img src={newQuestIcon} className='w-65 h-65 '/>
-                    </div>
-                    
-                    <div className="text-center mb-6">
-                      <h2 className="text-xl font-bold text-gray-800 mb-1">
-                        New Quest! 🎯
-                      </h2>
-                      <p className="text-gray-600 text-sm">
-                        What adventure shall we embark on?
-                      </p>
-                    </div>
-                    
-                    <input
-                      type="text"
-                      value={questText}
-                      onChange={(e) => setQuestText(e.target.value)}
-                      placeholder="Enter your quest..."
-                      className="w-full px-4 py-3 border-2 border-orange-200 rounded-xl focus:border-orange-500 focus:outline-none transition-colors duration-200"
-                    />
-                    
-                    <div className="mt-6 space-y-3">
-                      <button
-                        onClick={handleAddQuest}
-                        disabled={!questText.trim()}
-                        className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 disabled:from-gray-300 disabled:to-gray-400 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 disabled:cursor-not-allowed"
-                      >
-                        Add Quest ✨
-                      </button>
-                      <button
-                        onClick={() => setOpen(false)}
-                        className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 rounded-xl transition-colors duration-200"
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
 
             {/* Table Layout for Laptop and Above */}
             {quests.length > 0 && (
@@ -187,6 +129,66 @@ const CustomQuests = ({ quests, onComplete, completedCount, totalCount, onAddCus
                     <p className='text-sm text-center text-gray-500 col-span-3'></p>
                 )}
             </div>
+            
+            {/* Button to add a custom quest */}
+            <button
+              className="bg-gray-300 text-white px-4 py-2 rounded-lg mt-4 hover:bg-gray-400"
+              onClick={() => setOpen(true)}
+            >
+              Add Quest
+            </button>
+
+            {/* Dialog for adding custom quest */}
+            {open && (
+              <div className="fixed inset-0 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+                <div 
+                  className="fixed inset-0" 
+                  onClick={() => setOpen(false)}
+                ></div>
+                <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-sm mx-auto transform transition-all duration-300 scale-100">
+                  <div className="p-6">
+                    <div className='flex justify-center'>
+                      <img src={newQuestIcon} className='w-65 h-65 '/>
+                    </div>
+                    
+                    <div className="text-center mb-6">
+                      <h2 className="text-xl font-bold text-gray-800 mb-1">
+                        New Quest! 🎯
+                      </h2>
+                      <p className="text-gray-600 text-sm">
+                        What adventure shall we embark on?
+                      </p>
+                    </div>
+                    
+                    <input
+                      type="text"
+                      value={questText}
+                      onChange={(e) => setQuestText(e.target.value)}
+                      placeholder="Enter your quest..."
+                      className="w-full px-4 py-3 border-2 border-orange-200 rounded-xl focus:border-orange-500 focus:outline-none transition-colors duration-200"
+                    />
+                    
+                    <div className="mt-6 space-y-3">
+                      <button
+                        onClick={handleAddQuest}
+                        disabled={!questText.trim()}
+                        className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 disabled:from-gray-300 disabled:to-gray-400 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 disabled:cursor-not-allowed"
+                      >
+                        Add Quest ✨
+                      </button>
+                      <button
+                        onClick={() => setOpen(false)}
+                        className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 rounded-xl transition-colors duration-200"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            
         </div>
     )
 }
