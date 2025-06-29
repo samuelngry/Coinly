@@ -180,8 +180,10 @@ const Dashboard = () => {
 
   return (
     <div className='min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow justify-center'>
-        <LevelBar xp={xp} level={level} />
-        <RivePet />
+        <div className='sticky top-6 bg-white/80 backdrop-blur-md'>
+            <LevelBar xp={xp} level={level} />
+        </div>
+         <RivePet />
         <PetName name={petName} onComplete={handlePetNameChange} />
         <MainCards streak={streak} completedCount={completedQuest} totalCount={totalQuest}/>
         <DailyQuests quests={dailyQuests} onComplete={handleCompleteQuest} completedCount={completedDaily} totalCount={totalDaily} />
