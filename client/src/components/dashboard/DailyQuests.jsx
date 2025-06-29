@@ -24,13 +24,13 @@ const DailyQuests = ({ quests, onComplete, completedCount, totalCount }) => {
             </div>
 
             <div className='lg:w-full hidden lg:block'>
-                <table className='w-full table-auto text-left'>
+                <table className='w-full table-fixed text-left'>
                     <thead>
                         <tr className='border-b-2 border-gray-300'>
-                            <th className='px-6 py-3 text-sm font-semibold text-gray-700'>Quest</th>
-                            <th className='px-6 py-3 text-sm font-semibold text-gray-700'>XP</th>
-                            <th className='px-6 py-3 text-sm font-semibold text-gray-700'>Status</th>
-                            <th className='px-6 py-3'></th>
+                            <th className='px-6 py-3 text-sm font-semibold text-gray-700 w-1/2'>Quest</th>
+                            <th className='px-6 py-3 text-sm font-semibold text-gray-700 w-1/6'>XP</th>
+                            <th className='px-6 py-3 text-sm font-semibold text-gray-700 w-1/6'>Status</th>
+                            <th className='px-6 py-3 w-1/6'></th>
                         </tr>
                     </thead>
                     <tbody>
