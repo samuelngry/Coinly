@@ -5,6 +5,7 @@ import PetName from './PetName';
 import MainCards from './MainCards';
 import DailyQuests from './DailyQuests';
 import BonusQuests from './BonusQuests';
+import CustomQuests from './CustomQuests';
 import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
@@ -185,6 +186,8 @@ const Dashboard = () => {
 
       const data = await res.json();
       console.log("Custom Quest Deleted:", data.quest);
+
+      setCustomQuests((prev) => prev.filter((q) => q.id !== id));
     } catch (err) {
       console.error("Failed to delete custom quest:", err);
     }
@@ -288,8 +291,11 @@ const Dashboard = () => {
   const totalBonus = bonusQuests.length;
   const completedBonus = bonusQuests.filter(q => q.status === 'Completed').length;
 
-  const totalQuest = totalDaily + totalBonus;
-  const completedQuest = completedDaily + completedBonus;
+  const totalCustom = customQuests.length;
+  const completedCustom = customQuests.filter(q => q.status === 'Completed').length;
+
+  const totalQuest = totalDaily + totalBonus + totalCustom;
+  const completedQuest = completedDaily + completedBonus + completedCustom;
 
   return (
     <div className='min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow justify-center'>
@@ -301,7 +307,8 @@ const Dashboard = () => {
         <MainCards streak={streak} completedCount={completedQuest} totalCount={totalQuest}/>
         <DailyQuests quests={dailyQuests} onComplete={handleCompleteQuest} completedCount={completedDaily} totalCount={totalDaily} />
         <BonusQuests quests={bonusQuests} onComplete={handleCompleteQuest} completedCount={completedBonus} totalCount={totalBonus} />
-        
+        <CustomQuests quests={customQuests} onComplete={handleCompleteQuest} completedCount={completedCustom} totalCount={totalCustom} onAddCustomQuest={addCustomQuest} />
+
         <button
           onClick={logout}
           className='bg-red-500 text-white py-1 px-4 rounded-lg mt-10 hover:bg-red-600'
