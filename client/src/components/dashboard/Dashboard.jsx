@@ -143,6 +143,28 @@ const Dashboard = () => {
     }
   }
 
+  const updateCustomQuest = async (id, questText) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const res = await fetch(`http://localhost:3000/api/custom/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify( {quest_text: questText} )
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to update custom quest");
+      }
+
+      const data = await res.json();
+      console.log("Custom Quest Updated:", data.)
+    }
+  }
+
   const handleCompleteQuest = async (id, type) => {
     try {
       const token = localStorage.getItem("token");

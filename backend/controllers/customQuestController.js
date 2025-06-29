@@ -167,7 +167,7 @@ const addCustomQuest = async (req, res) => {
         const newQuest = await UserQuest.create({
             user_id: userId,
             quest_text,
-            xp: 1,
+            xp: 5,
             type: 'Custom',
             status: 'Pending',
             instance_date: new Date(),
@@ -206,7 +206,14 @@ const updateCustomQuest = async (req, res) => {
             return res.status(404).json({ error: 'Custom quest not found not found or cannot be updated' });
         }
 
-        res.status(200).json({ message: 'Custom quest updated successfully' });
+        const updatedQuest = await UserQuest.findOne({
+            where: {
+                id: questId,
+                user_id: userId,
+            }
+        });
+
+        res.status(200).json({ message: 'Custom quest updated successfully', quest: updatedQuest });
     } catch (err) {
         console.error('Error in updateCustomQuest:', err);
         res.status(500).json({ error: err.message });
