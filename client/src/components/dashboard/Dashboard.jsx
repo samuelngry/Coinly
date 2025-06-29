@@ -119,6 +119,30 @@ const Dashboard = () => {
       }
     };
 
+  const addCustomQuest = async (questText) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const res = await fetch("http://localhost:3000/api/custom", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify( {quest_text: questText} )
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to add custom quest");
+      }
+
+      const data = await res.json();
+      console.log("Custom Quest Added:", data.quest);
+    } catch (err) {
+      console.error("Failed to add custom quest:", err);
+    }
+  }
+
   const handleCompleteQuest = async (id, type) => {
     try {
       const token = localStorage.getItem("token");
@@ -131,7 +155,7 @@ const Dashboard = () => {
         body = {};
       } else if (type === "custom") {
         // Handle custom quest completion
-        url = `http://localhost:3000/api/customquests/${id}/complete`;
+        url = `http://localhost:3000/api/custom/${id}/complete`;
         body = {};  // You can add any additional data if needed
       } else {
         throw new Error("Invalid quest type");

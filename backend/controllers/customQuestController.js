@@ -1,5 +1,7 @@
 const UserQuest = require("../models/UserQuest");
 const User = require("../models/User");
+const Pets = require("../models/Pets");
+const { Op } = require('sequelize');
 
 const getCustomQuests = async (req, res) => {
     try {
