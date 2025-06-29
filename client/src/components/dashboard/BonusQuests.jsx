@@ -29,7 +29,7 @@ const BonusQuests = ({ quests, onComplete, completedCount, totalCount  }) => {
                     <thead>
                         <tr className='border-b-2 border-gray-300'>
                             <th className='px-6 py-3 text-sm font-semibold text-gray-700 w-1/2'>Quest</th>
-                            <th className='px-6 py-3 text-sm font-semibold text-gray-700 w-1/6'>XP</th>
+                            <th className='px-6 py-3 text-sm font-semibold text-gray-700 w-1/6'><PawPrint alt='Paw' className='w-5 h-5 text-orange-500'/></th>
                             <th className='px-6 py-3 text-sm font-semibold text-gray-700 w-1/6'>Status</th>
                             <th className='px-6 py-3 w-1/6'></th>
                         </tr>
