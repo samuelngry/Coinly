@@ -38,7 +38,7 @@ const BonusQuests = ({ quests, onComplete, completedCount, totalCount  }) => {
                         {sortedQuests.map((quest) => (
                             <tr
                                 key={quest.id}
-                                className={`${quest.status === 'Completed' ? 'bg-green-100' : 'bg-white'} hover:bg-green-50 transition-all duration-300 ease-in-out border-b border-gray-200 rounded-lg`}
+                                className={`${quest.status === 'Completed' ? 'bg-green-100' : 'bg-white hover:bg-green-50'} transition-all duration-300 ease-in-out border-b border-gray-200 rounded-lg`}
                             >
                                 <td className='px-6 py-4 flex items-center'>
                                     {quest.status !== 'Completed' ? (
