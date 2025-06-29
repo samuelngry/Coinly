@@ -23,7 +23,57 @@ const DailyQuests = ({ quests, onComplete, completedCount, totalCount }) => {
                 </div>
             </div>
 
-            <div className='space-y-1 grid grid-cols-1 lg:grid-cols-3 lg:space-x-2 lg:space-y-0'>
+            <div className='lg:w-full hidden lg:block'>
+                <table className='w-full table-auto text-left'>
+                    <thead>
+                        <tr className='border-b-2 border-gray-300'>
+                            <th className='px-6 py-3 text-sm font-semibold text-gray-700'>Quest</th>
+                            <th className='px-6 py-3 text-sm font-semibold text-gray-700'>XP</th>
+                            <th className='px-6 py-3 text-sm font-semibold text-gray-700'>Status</th>
+                            <th className='px-6 py-3'></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {sortedQuests.map((quest) => (
+                            <tr
+                                key={quest.id}
+                                className={`${quest.status === 'Completed' ? 'bg-green-100' : 'bg-white'} hover:bg-green-50 transition-all duration-300 ease-in-out border-b border-gray-200 rounded-lg`}
+                            >
+                                <td className='px-6 py-4 flex items-center'>
+                                    {quest.status !== 'Completed' ? (
+                                        <img src={dailyIcon} alt='Quest' className='w-10 h-10 inline' />
+                                    ) : (
+                                        <CircleCheck className='w-10 h-10 text-green-500 inline' />
+                                    )}
+                                    <span className={`text-sm font-semibold ml-3 ${quest.status === 'Completed' ? 'line-through text-green-500' : ''}`}>
+                                        {quest.quest_text}
+                                    </span>
+                                </td>
+                                <td className='px-6 py-4 text-sm text-gray-700'>
+                                    {quest.xp}
+                                </td>
+                                <td className='px-6 py-4'>
+                                    <span className={`text-xs font-semibold ${quest.status === 'Completed' ? 'text-green-500' : 'text-gray-500'}`}>
+                                        {quest.status}
+                                    </span>
+                                </td>
+                                <td className='px-6 py-4'>
+                                    {quest.status !== 'Completed' && (
+                                        <button
+                                            onClick={() => onComplete(quest.id, quest.type)}
+                                            className='bg-gradient-to-r from-orange-500 to-orange-700 text-white px-3 py-1 rounded-full hover:from-orange-600'
+                                        >
+                                            <CheckIcon className='w-5 h-5' />
+                                        </button>
+                                    )}
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+
+            <div className='lg:hidden space-y-1 grid grid-cols-1 lg:grid-cols-3 lg:space-x-2 lg:space-y-0'>
                 {quests.length > 0 ? (
                     sortedQuests.map((quest) => (
                         <div key={quest.id} className={`mt-3 p-3 rounded-xl ${quest.status === 'Completed' ? 'bg-green-100' : 'bg-white'} shadow-none transition-shadow duration-300 hover:shadow-gray-400 hover:shadow-lg border border-neutral-300 flex justify-between items-center gap-2`}>

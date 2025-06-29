@@ -15,6 +15,7 @@ const Dashboard = () => {
   const [mood, setMood] = useState("");
   const [streak, setStreak] = useState(0);
   const [petName, setPetName] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   const getUserData = async () => {
@@ -87,6 +88,7 @@ const Dashboard = () => {
 
         setDailyQuests(data.daily || []);
         setBonusQuests(data.bonus || []);
+        setIsLoading(false);
 
       } catch (err) {
         console.error("Failed to load quests:", err);

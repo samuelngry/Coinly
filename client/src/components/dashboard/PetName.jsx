@@ -9,6 +9,7 @@ import {
   CardFooter,
   Typography,
   Input,
+  DialogBackdrop,
 } from "@material-tailwind/react";
 
 const PetName = ({ name, onComplete }) => {
@@ -39,15 +40,12 @@ const PetName = ({ name, onComplete }) => {
           size='xs'
           open={open}
           handler={handleOpen}
-          className='bg-transparent shadow-none inset-0 flex items-center justify-center'
-        > 
+          className='bg-transparent shadow-none w-80 flex justify-center items-center fixed inset-0 z-50'
+        >
           <Card className='mx-auto w-full max-w-[24rem]'>
             <CardBody className='flex flex-col gap-4'>
-              <Typography variant="h4" color="blue-gray">
+              <Typography variant="h5" color="blue-gray">
                 Edit Pet Name
-              </Typography>
-              <Typography className='-mb-2' variant='h6'>
-                Your Pet Name
               </Typography>
               <Input 
                 size='lg'
@@ -61,7 +59,7 @@ const PetName = ({ name, onComplete }) => {
                 variant='gradient' 
                 onClick={handleSubmit} 
                 fullWidth
-                className='bg-orange-500 hover:bg-orange-600 text-white'>
+                className='bg-orange-500 hover:bg-orange-600 text-white mt-2'>
                 Confirm
               </Button>
             </CardFooter>
