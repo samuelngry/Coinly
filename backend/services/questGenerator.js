@@ -66,32 +66,22 @@ async function generateDynamicQuests(userId) {
     try {
         // Create date for today at start of day
         const today = new Date();
-        const singaporeOffset = 8 * 60 * 60 * 1000;
-        const todaySGT = new Date(today.getTime() + singaporeOffset);
+        const singaporeNow = new Date(today.getTime() + (8 * 60 * 60 * 1000));
 
-        const todayStart = new Date(todaySGT.getFullYear(), todaySGT.getMonth(), todaySGT.getDate());
-        todayStart.setHours(0, 0, 0, 0);
+        const todayStartSGT = new Date(singaporeNow.getFullYear(), singaporeNow.getMonth(), singaporeNow.getDate(), 0, 0, 0, 0);
+        const todayEndSGT = new Date(singaporeNow.getFullYear(), singaporeNow.getMonth(), singaporeNow.getDate(), 23, 59, 59, 999);
 
-        const todayEnd = new Date(todayStart);
-        todayEnd.setHours(23, 59, 59, 999);
+        const todayStartUTC = new Date(todayStartSGT.getTime() - (8 * 60 * 60 * 1000));
+        const todayEndUTC = new Date(todayEndSGT.getTime() - (8 * 60 * 60 * 1000));
 
-        console.log("Checking for existing quests between:", todayStart, "and", todayEnd);
-        console.log("Last generated at:", user.last_generated_at);
-
-        const lastGeneratedDate = user.last_generated_at ? new Date(user.last_generated_at) : null;
-
-        if (!user.last_generated_at) {
-            console.log("First time generating quests, updating last_generated_at");
-            user.last_generated_at = todaySGT;
-            await user.save();
-            console.log("Updated last_generated_at:", user.last_generated_at);
-        }
+        console.log("Checking for existing quests between:", todayStartUTC, "and", todayEndUTC);
+        console.log("Singapore date:", singaporeNow.toDateString());
 
         const existingQuests = await UserQuest.findAll({
             where: {
                 user_id: userId,
                 instance_date: {
-                    [Op.between]: [todayStart, todayEnd]
+                    [Op.between]: [todayStartUTC, todayEndUTC]
                 },
                 status: {
                     [Op.in]: ['Pending', 'Completed']
@@ -104,14 +94,19 @@ async function generateDynamicQuests(userId) {
         const bonusQuestsCount = existingQuests.filter(q => q.type === 'bonus').length;
 
         // Check if we've already generated quests today
-        const hasGeneratedToday = lastGeneratedDate && lastGeneratedDate.toDateString() === todayStart.toDateString();
+        const needsGeneration = !user.last_generated_at || 
+            new Date(user.last_generated_at) < todayStartUTC || 
+            new Date(user.last_generated_at) > todayEndUTC;
 
-        if(!hasGeneratedToday) {
-            user.last_generated_at = todaySGT;
-            await user.save();
+        if(needsGeneration && (dailyQuestsCount < 3 || bonusQuestsCount < 3)) {
+            console.log('Generating new quests for today');
+
+            await User.update(
+                { last_generated_at: singaporeNow },
+                { where: {id: userId}}
+            );
 
             // Generate new quests for today
-            console.log('No existing quests found, generating new quests for today');
             await expireOldQuests(userId);
 
             await UserQuest.update(
@@ -138,8 +133,6 @@ async function generateDynamicQuests(userId) {
             }
 
             console.log('Updated last_generated_at to:', user.last_generated_at);
-
-            return existingQuests;
         }
 
         console.log('Returning existing quests for today');

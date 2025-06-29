@@ -18,7 +18,7 @@ const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
 const questRoutes = require("./routes/questRoutes");
 const petRoutes = require("./routes/petRoutes");
-//const customQuestRoutes = require("./routes/customQuestRoutes");
+const customQuestRoutes = require("./routes/customQuestRoutes");
 //const dashboardRoutes = require("./routes/dashboardRoutes");
 const db = require("./config/db");
 
@@ -28,6 +28,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/quests", questRoutes);
 app.use("/api/pet", petRoutes);
+app.use("/api/custom", customQuestRoutes);
 //app.use("/api/dashboard", dashboardRoutes);
 
 const PORT = process.env.PORT || 3000;
