@@ -8,6 +8,7 @@ import BonusQuests from './BonusQuests';
 import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
+  const [customQuests, setCustomQuests] = useState([]);
   const [dailyQuests, setDailyQuests] = useState([]);
   const [bonusQuests, setBonusQuests] = useState([]);
   const [xp, setXp] = useState(0);
@@ -17,6 +18,29 @@ const Dashboard = () => {
   const [petName, setPetName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+
+  const getCustomQuests = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const res = await fetch("http://localhost:3000/api/custom", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to fetch custom quests");
+      }
+
+      const data = await res.json();
+      setCustomQuests(data.quests);
+    } catch (err) {
+      console.error("Failed to fetch custom quests data:", err);
+    }
+  };
 
   const getUserData = async () => {
     try {
@@ -164,6 +188,7 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
+    getCustomQuests();
     getUserData();
     getPetName();
     getQuests();
