@@ -24,7 +24,7 @@ const CustomQuests = ({ quests, onComplete, completedCount, totalCount, onAddCus
     });
 
     return (
-        <div className='flex flex-col mt-6'>
+        <div className='flex flex-col mt-10 lg:mt-15'>
             <div className='flex items-center gap-3 mb-2 justify-center lg:justify-start'>
                 <div className="bg-gradient-to-r from-yellow-500 to-yellow-800 p-2 rounded-xl shadow-lg">
                     <Pencil className='w-4 h-4 text-white' />
@@ -132,7 +132,7 @@ const CustomQuests = ({ quests, onComplete, completedCount, totalCount, onAddCus
             
             {/* Button to add a custom quest */}
             <button
-              className="bg-gray-300 text-white px-4 py-2 rounded-lg mt-4 hover:bg-gray-400"
+              className="bg-orange-500 text-white px-4 py-2 rounded-lg mt-4 hover:bg-orange-600"
               onClick={() => setOpen(true)}
             >
               Add Quest

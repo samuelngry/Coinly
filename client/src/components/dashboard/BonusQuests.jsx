@@ -11,7 +11,7 @@ const BonusQuests = ({ quests, onComplete, completedCount, totalCount  }) => {
     });
 
     return (
-        <div className='flex flex-col mt-6'>
+        <div className='flex flex-col mt-10 lg:mt-15'>
             <div className='flex items-center gap-3 mb-2 justify-center lg:justify-start'>
                     <div className="bg-gradient-to-r from-purple-500 to-purple-800 p-2 rounded-xl shadow-lg">
                         <Gift className='w-4 h-4 text-white' />
