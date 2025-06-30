@@ -45,7 +45,7 @@ const DailyQuests = ({ quests, onComplete, completedCount, totalCount }) => {
                                     ) : (
                                         <CircleCheck className='w-10 h-10 text-green-500 inline' />
                                     )}
-                                    <span className={`text-sm font-semibold ml-3 ${quest.status === 'Completed' ? 'line-through text-green-500' : ''}`}>
+                                    <span className={`text-sm font-semibold ml-3 ${quest.status === 'Completed' ? 'text-green-500' : ''}`}>
                                         {quest.quest_text}
                                     </span>
                                 </td>
@@ -85,7 +85,7 @@ const DailyQuests = ({ quests, onComplete, completedCount, totalCount }) => {
                                         <CircleCheck className='text-green-500' style={{ width: '100%', height: '100%' }}/>
                                     </div>
                                 )}
-                                <span className={`text-xs break-words font-semibold ${quest.status === 'Completed' ? 'line-through text-green-500' : ''}`}>
+                                <span className={`text-xs break-words font-semibold ${quest.status === 'Completed' ? 'text-green-500' : ''}`}>
                                     {quest.quest_text}
                                 </span>
                             </div>
