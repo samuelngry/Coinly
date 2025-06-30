@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Star, CheckIcon, PawPrint, CircleCheck, Pencil } from 'lucide-react'
+import { Star, CheckIcon, PawPrint, CircleCheck, Pencil, Trash, ChevronDown } from 'lucide-react'
 import noteIcon from '../../assets/note.png'
 import newQuestIcon from '../../assets/newquest.png'
 
@@ -45,7 +45,7 @@ const CustomQuests = ({ quests, onComplete, completedCount, totalCount, onAddCus
                             <th className='px-6 py-3 text-sm font-semibold text-gray-700 w-1/2'>Quest</th>
                             <th className='px-6 py-3 text-sm font-semibold text-gray-700 w-1/6'><PawPrint alt='Paw' className='w-5 h-5 text-orange-500'/></th>
                             <th className='px-6 py-3 text-sm font-semibold text-gray-700 w-1/6'>Status</th>
-                            <th className='px-6 py-3 w-1/6'></th>
+                            <th className='px-6 py-3 text-sm font-semibold text-gray-700 w-1/6'></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -73,15 +73,46 @@ const CustomQuests = ({ quests, onComplete, completedCount, totalCount, onAddCus
                                     </span>
                                 </td>
                                 <td className='px-6 py-4'>
-                                    {quest.status !== 'Completed' && (
-                                        <button
-                                            onClick={() => onComplete(quest.id, quest.type)}
-                                            className='bg-gradient-to-r from-orange-500 to-orange-700 text-white px-3 py-1 rounded-full hover:from-orange-600'
-                                        >
-                                            <CheckIcon className='w-5 h-5' />
-                                        </button>
-                                    )}
-                                </td>
+                                  {quest.status !== 'Completed' && (
+                                      <div className='flex items-center justify-center'>
+                                          {/* Dropdown Menu */}
+                                          <div className='relative group'>
+                                              <button
+                                                  className='bg-gradient-to-r from-orange-500 to-orange-700 text-white px-3 py-1 rounded-full hover:from-orange-600 flex items-center gap-1'
+                                                  title="Quest Actions"
+                                              >
+                                                  <span className='text-sm'>Actions</span>
+                                                  <ChevronDown className='w-4 h-4' />
+                                              </button>
+                                              
+                                              {/* Dropdown Content */}
+                                              <div className='absolute right-0 mt-1 w-36 bg-white border border-gray-200 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-10'>
+                                                  <button
+                                                      onClick={() => onComplete(quest.id, quest.type)}
+                                                      className='w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-green-50 hover:text-green-600 flex items-center gap-2 rounded-t-lg'
+                                                  >
+                                                      <CheckIcon className='w-4 h-4' />
+                                                      Complete
+                                                  </button>
+                                                  <button
+                                                      onClick={() => onEdit(quest.id)}
+                                                      className='w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 flex items-center gap-2'
+                                                  >
+                                                      <Pencil className='w-4 h-4' />
+                                                      Edit
+                                                  </button>
+                                                  <button
+                                                      onClick={() => onDelete(quest.id)}
+                                                      className='w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 flex items-center gap-2 rounded-b-lg'
+                                                  >
+                                                      <Trash className='w-4 h-4' />
+                                                      Delete
+                                                  </button>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  )}
+                              </td>
                             </tr>
                         ))}
                     </tbody>
