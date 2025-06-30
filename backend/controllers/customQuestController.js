@@ -3,14 +3,32 @@ const User = require("../models/User");
 const Pets = require("../models/Pets");
 const { Op } = require('sequelize');
 
+const expireCompletedQuests = async (userId) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    await UserQuest.update(
+        { status: 'Expired'},
+        {
+            where: {
+                user_id: userId,
+                status: 'Completed',
+                instance_date: { [Op.lt] : today },
+            },
+        }
+    );
+};
+
 const getCustomQuests = async (req, res) => {
     try {
         const userId = req.user.id;
         const { status } = req.query;
 
+        expireCompletedQuests(userId);
+
         const whereClause = {
             user_id: userId,
-            type: 'Custom',
+            type: 'custom',
         };
 
         if (status) {
@@ -168,7 +186,7 @@ const addCustomQuest = async (req, res) => {
             user_id: userId,
             quest_text,
             xp: 5,
-            type: 'Custom',
+            type: 'custom',
             status: 'Pending',
             instance_date: new Date(),
         });
@@ -197,7 +215,7 @@ const updateCustomQuest = async (req, res) => {
                     id: questId,
                     user_id: userId,
                     status: 'Pending',
-                    type: 'Custom',
+                    type: 'custom',
                 },
             },
         );
@@ -229,7 +247,7 @@ const deleteCustomQuest = async (req, res) => {
             where: {
                 id: questId,
                 user_id: userId,
-                type: 'Custom',
+                type: 'custom',
             },
         });
 
@@ -237,7 +255,7 @@ const deleteCustomQuest = async (req, res) => {
             where: {
                 id: questId,
                 user_id: userId,
-                type: 'Custom',
+                type: 'custom',
             },
         });
 
