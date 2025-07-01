@@ -16,8 +16,10 @@ const CustomQuests = ({ quests, onComplete, completedCount, totalCount, onAddCus
       setQuestText(''); // Reset the input field
       setOpen(false); // Close the dialog
     };
+    
+    const activeQuests = quests.filter(quest => quest.status !== 'Expired');
 
-    const sortedQuests = quests.sort((a, b) => {
+    const sortedQuests = activeQuests.sort((a, b) => {
       if (a.status === 'Completed' && b.status !== 'Completed') return 1;
       if (b.status === 'Completed' && a.status !== 'Completed') return -1;
       return 0;
