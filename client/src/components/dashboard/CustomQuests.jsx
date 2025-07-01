@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Star, CheckIcon, PawPrint, CircleCheck, Pencil, Trash, ChevronDown } from 'lucide-react'
 import noteIcon from '../../assets/note.png'
 import newQuestIcon from '../../assets/newquest.png'
+import editQuestIcon from '../../assets/editpet.png'
 
 const CustomQuests = ({ quests, onComplete, completedCount, totalCount, onAddCustomQuest, onUpdateCustomQuest, onDeleteCustomQuest }) => {
     const [open, setOpen] = useState(false);
@@ -258,9 +259,7 @@ const CustomQuests = ({ quests, onComplete, completedCount, totalCount, onAddCus
                 <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-sm mx-auto transform transition-all duration-300 scale-100">
                   <div className="p-6">
                     <div className='flex justify-center'>
-                      <div className="bg-gradient-to-r from-blue-500 to-blue-700 p-4 rounded-full shadow-lg">
-                        <Pencil className='w-8 h-8 text-white' />
-                      </div>
+                      <img src={editQuestIcon} className='w-50 h-50'/>
                     </div>
                     
                     <div className="text-center mb-6 mt-4">
