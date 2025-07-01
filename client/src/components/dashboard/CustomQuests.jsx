@@ -3,7 +3,7 @@ import { Star, CheckIcon, PawPrint, CircleCheck, Pencil, Trash, ChevronDown } fr
 import noteIcon from '../../assets/note.png'
 import newQuestIcon from '../../assets/newquest.png'
 
-const CustomQuests = ({ quests, onComplete, completedCount, totalCount, onAddCustomQuest }) => {
+const CustomQuests = ({ quests, onComplete, completedCount, totalCount, onAddCustomQuest, onUpdateCustomQuest, onDeleteCustomQuest }) => {
     const [open, setOpen] = useState(false);
     const [questText, setQuestText] = useState(''); 
 
@@ -104,7 +104,7 @@ const CustomQuests = ({ quests, onComplete, completedCount, totalCount, onAddCus
                                                       Edit
                                                   </button>
                                                   <button
-                                                      onClick={() => onDelete(quest.id)}
+                                                      onClick={() => onDeleteCustomQuest(quest.id)}
                                                       className='w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 flex items-center gap-2 rounded-b-lg'
                                                   >
                                                       <Trash className='w-4 h-4' />

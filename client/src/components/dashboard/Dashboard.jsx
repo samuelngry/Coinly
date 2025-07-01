@@ -309,7 +309,7 @@ const Dashboard = () => {
         <MainCards streak={streak} completedCount={completedQuest} totalCount={totalQuest}/>
         <DailyQuests quests={dailyQuests} onComplete={handleCompleteQuest} completedCount={completedDaily} totalCount={totalDaily} />
         <BonusQuests quests={bonusQuests} onComplete={handleCompleteQuest} completedCount={completedBonus} totalCount={totalBonus} />
-        <CustomQuests quests={customQuests} onComplete={handleCompleteQuest} completedCount={completedCustom} totalCount={totalCustom} onAddCustomQuest={addCustomQuest} />
+        <CustomQuests quests={customQuests} onComplete={handleCompleteQuest} completedCount={completedCustom} totalCount={totalCustom} onAddCustomQuest={addCustomQuest} onUpdateCustomQuest={updateCustomQuest} onDeleteCustomQuest={deleteCustomQuest} />
 
         <button
           onClick={logout}
