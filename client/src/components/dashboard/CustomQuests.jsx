@@ -5,7 +5,11 @@ import newQuestIcon from '../../assets/newquest.png'
 
 const CustomQuests = ({ quests, onComplete, completedCount, totalCount, onAddCustomQuest, onUpdateCustomQuest, onDeleteCustomQuest }) => {
     const [open, setOpen] = useState(false);
-    const [questText, setQuestText] = useState(''); 
+    const [questText, setQuestText] = useState('');
+
+    const [editOpen, setEditOpen] = useState(false);
+    const [editingQuest, setEditingQuest] = useState(null);
+    const [editQuestText, setEditQuestText] = useState('');
 
     const handleAddQuest = () => {
       if (questText.trim() === '') {
@@ -15,6 +19,29 @@ const CustomQuests = ({ quests, onComplete, completedCount, totalCount, onAddCus
       onAddCustomQuest(questText);
       setQuestText(''); // Reset the input field
       setOpen(false); // Close the dialog
+    };
+
+    const handleEditQuest = (quest) => {
+      setEditingQuest(quest);
+      setEditQuestText(quest.quest_text);
+      setEditOpen(true);
+    };
+
+    const handleUpdateQuest = () => {
+      if (editQuestText.trim() === '') {
+        alert("Quest text cannot be empty");
+        return;
+      }
+      onUpdateCustomQuest(editingQuest.id, editQuestText);
+      setEditQuestText('');
+      setEditingQuest(null);
+      setEditOpen(false);
+    };
+
+    const handleCancelEdit = () => {
+      setEditQuestText('');
+      setEditingQuest(null);
+      setEditOpen(false);
     };
     
     const activeQuests = quests.filter(quest => quest.status !== 'Expired');
@@ -97,7 +124,7 @@ const CustomQuests = ({ quests, onComplete, completedCount, totalCount, onAddCus
                                                       Complete
                                                   </button>
                                                   <button
-                                                      onClick={() => onEdit(quest.id)}
+                                                      onClick={() => handleEditQuest(quest)}
                                                       className='w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 flex items-center gap-2'
                                                   >
                                                       <Pencil className='w-4 h-4' />
@@ -211,6 +238,58 @@ const CustomQuests = ({ quests, onComplete, completedCount, totalCount, onAddCus
                       </button>
                       <button
                         onClick={() => setOpen(false)}
+                        className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 rounded-xl transition-colors duration-200"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Dialog for editing custom quest */}
+            {editOpen && (
+              <div className="fixed inset-0 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+                <div 
+                  className="fixed inset-0" 
+                  onClick={handleCancelEdit}
+                ></div>
+                <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-sm mx-auto transform transition-all duration-300 scale-100">
+                  <div className="p-6">
+                    <div className='flex justify-center'>
+                      <div className="bg-gradient-to-r from-blue-500 to-blue-700 p-4 rounded-full shadow-lg">
+                        <Pencil className='w-8 h-8 text-white' />
+                      </div>
+                    </div>
+                    
+                    <div className="text-center mb-6 mt-4">
+                      <h2 className="text-xl font-bold text-gray-800 mb-1">
+                        Edit Quest ✏️
+                      </h2>
+                      <p className="text-gray-600 text-sm">
+                        Update your quest
+                      </p>
+                    </div>
+                    
+                    <input
+                      type="text"
+                      value={editQuestText}
+                      onChange={(e) => setEditQuestText(e.target.value)}
+                      placeholder="Enter your quest..."
+                      className="w-full px-4 py-3 border-2 border-blue-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors duration-200"
+                    />
+                    
+                    <div className="mt-6 space-y-3">
+                      <button
+                        onClick={handleUpdateQuest}
+                        disabled={!editQuestText.trim()}
+                        className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 disabled:from-gray-300 disabled:to-gray-400 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 disabled:cursor-not-allowed"
+                      >
+                        Update Quest 🔄
+                      </button>
+                      <button
+                        onClick={handleCancelEdit}
                         className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 rounded-xl transition-colors duration-200"
                       >
                         Cancel
