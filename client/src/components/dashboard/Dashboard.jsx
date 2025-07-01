@@ -165,6 +165,14 @@ const Dashboard = () => {
 
       const data = await res.json();
       console.log("Custom Quest Updated:", data.quest)
+
+      setCustomQuests(prevQuests =>
+        prevQuests.map(quest =>
+          quest.id === id
+            ? data.quest
+            : quest
+        )
+      );
     } catch (err) {
       console.error("Failed to update custom quest:", err);
     }
