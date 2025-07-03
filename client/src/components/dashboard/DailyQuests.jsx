@@ -1,6 +1,6 @@
 import React from 'react'
 import dailyIcon from '../../assets/daily.png'
-import { CheckIcon, PawPrint, Zap, Star, CircleCheck } from 'lucide-react'
+import { CheckIcon, PawPrint, Zap, Star, CircleCheck, Trophy } from 'lucide-react'
 
 const DailyQuests = ({ quests, onComplete, completedCount, totalCount }) => {
 
@@ -17,10 +17,17 @@ const DailyQuests = ({ quests, onComplete, completedCount, totalCount }) => {
                     <Zap className='w-4 h-4 text-white' />
                 </div>
                 <h3 className='text-sm lg:text-lg'>Daily Quests</h3>
-                <div className='bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs lg:text-sm font-bold flex items-center gap-1'>
-                    <Star className="w-3 h-3 fill-current" />
-                    <span>{completedCount}/{totalCount}</span>
-                </div>
+                {completedCount !== totalCount ? (
+                        <div className='bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs lg:text-sm font-bold flex items-center gap-1'>
+                            <Star className="w-3 h-3 fill-current" />
+                            <span>{completedCount}/{totalCount}</span>
+                        </div>
+                    ) : (
+                        <div className='bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1 rounded-full text-xs lg:text-sm font-bold flex items-center gap-1'>
+                            <Trophy className="w-3 h-3 fill-current" />
+                            <span>{completedCount}/{totalCount}</span>
+                        </div>
+                    )}
             </div>
 
             <div className='lg:w-full hidden lg:block'>
