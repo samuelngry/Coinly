@@ -93,18 +93,51 @@ async function generateDynamicQuests(userId) {
         const dailyQuestsCount = existingQuests.filter(q => q.type === 'daily').length;
         const bonusQuestsCount = existingQuests.filter(q => q.type === 'bonus').length;
 
-        // Check if we've already generated quests today
-        const needsGeneration = !user.last_generated_at || 
-            new Date(user.last_generated_at) < todayStartUTC || 
-            new Date(user.last_generated_at) > todayEndUTC;
+        // Fix: Use consistent timezone and correct logic
+        const lastGeneratedAt = user.last_generated_at ? new Date(user.last_generated_at) : null;
+        const needsGeneration = !lastGeneratedAt || lastGeneratedAt < todayStartUTC;
+
+        console.log("Last generated at:", lastGeneratedAt);
+        console.log("Today start UTC:", todayStartUTC);
+        console.log("Needs generation:", needsGeneration);
+        console.log("Daily quests count:", dailyQuestsCount);
+        console.log("Bonus quests count:", bonusQuestsCount);
 
         if(needsGeneration && (dailyQuestsCount < 3 || bonusQuestsCount < 3)) {
             console.log('Generating new quests for today');
 
-            await User.update(
-                { last_generated_at: singaporeNow },
-                { where: {id: userId}}
+            // Use atomic update with WHERE condition to prevent race conditions
+            const [affectedRows] = await User.update(
+                { last_generated_at: todayStartUTC },
+                { 
+                    where: {
+                        id: userId,
+                        [Op.or]: [
+                            { last_generated_at: null },
+                            { last_generated_at: { [Op.lt]: todayStartUTC } }
+                        ]
+                    }
+                }
             );
+
+            // Only proceed if this call successfully updated the timestamp
+            if (affectedRows === 0) {
+                console.log('Another process already generating quests, fetching existing ones...');
+                // Refetch existing quests in case they were created by the other process
+                const updatedQuests = await UserQuest.findAll({
+                    where: {
+                        user_id: userId,
+                        instance_date: {
+                            [Op.between]: [todayStartUTC, todayEndUTC]
+                        },
+                        status: {
+                            [Op.in]: ['Pending', 'Completed']
+                        }
+                    },
+                    order: [['createdAt', 'ASC']]
+                });
+                return updatedQuests;
+            }
 
             // Generate new quests for today
             await expireOldQuests(userId);
@@ -115,7 +148,7 @@ async function generateDynamicQuests(userId) {
                     where: {
                         user_id: userId,
                         status: 'Completed',
-                        instance_date: { [Op.lt] : today },
+                        instance_date: { [Op.lt] : todayStartUTC }, // Use consistent date
                     },
                 }
             );
@@ -132,7 +165,9 @@ async function generateDynamicQuests(userId) {
                 console.log('Generated', bonus.length, 'bonus quests');
             }
 
-            console.log('Updated last_generated_at to:', user.last_generated_at);
+            console.log('Updated last_generated_at to:', todayStartUTC);
+        } else {
+            console.log('No generation needed - already generated today or sufficient quests exist');
         }
 
         console.log('Returning existing quests for today');
