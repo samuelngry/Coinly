@@ -20,7 +20,7 @@ const CustomQuests = ({ quests, onComplete, completedCount, totalCount, onAddCus
       setIsQuestOpen(true);
     };
 
-    const handleCancleQuest = () => {
+    const handleCancelQuest = () => {
       setIsQuestOpen(false);
       setSelectedQuest(null);
     };
@@ -219,8 +219,8 @@ const CustomQuests = ({ quests, onComplete, completedCount, totalCount, onAddCus
               Add Quest
             </button>
 
-            {/* Dialog for quest card on mobile */}
-            {isQuestOpen && (
+            {/* Dialog for quest card (delete, edit, complete) on mobile */}
+            {isQuestOpen && selectedQuest && (
               <div className="fixed inset-0 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
                 <div 
                   className="fixed inset-0" 
@@ -228,40 +228,76 @@ const CustomQuests = ({ quests, onComplete, completedCount, totalCount, onAddCus
                 ></div>
                 <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-sm mx-auto transform transition-all duration-300 scale-100">
                   <div className="p-6">
-                    <div className='flex justify-center'>
-                      <img src={newQuestIcon} className='w-65 h-65 '/>
+                    <div className='flex justify-center mb-4'>
+                      {selectedQuest.status !== 'Completed' ? (
+                        <img src={noteIcon} alt='Quest' className='w-16 h-16'/>
+                      ) : (
+                        <div className="w-16 h-16 flex items-center justify-center">
+                          <CircleCheck className='text-green-500' style={{ width: '100%', height: '100%' }}/>
+                        </div>
+                      )}
                     </div>
                     
                     <div className="text-center mb-6">
-                      <h2 className="text-xl font-bold text-gray-800 mb-1">
-                        New Quest! 🎯
+                      <h2 className="text-lg font-bold text-gray-800 mb-2">
+                        Quest
                       </h2>
-                      <p className="text-gray-600 text-sm">
-                        What adventure shall we embark on?
+                      <p className="text-gray-800 text-sm font-medium bg-gray-50 p-3 rounded-lg">
+                        {selectedQuest.quest_text}
                       </p>
+                      {selectedQuest.status !== 'Completed' && (
+                        <div className="mt-3 flex justify-center">
+                          <div className="bg-orange-100 text-orange-600 px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1">
+                            <span>{selectedQuest.xp}</span>
+                            <PawPrint className="w-4 h-4" />
+                          </div>
+                        </div>
+                      )}
                     </div>
                     
-                    <input
-                      type="text"
-                      value={questText}
-                      onChange={(e) => setQuestText(e.target.value)}
-                      placeholder="Enter your quest..."
-                      className="w-full px-4 py-3 border-2 border-orange-200 rounded-xl focus:border-orange-500 focus:outline-none transition-colors duration-200"
-                    />
-                    
-                    <div className="mt-6 space-y-3">
-                      <button
-                        onClick={handleAddQuest}
-                        disabled={!questText.trim()}
-                        className="w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 disabled:from-gray-300 disabled:to-gray-400 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 disabled:cursor-not-allowed"
-                      >
-                        Add Quest ✨
-                      </button>
+                    <div className="space-y-3">
+                      {selectedQuest.status !== 'Completed' && (
+                        <>
+                          <button
+                            onClick={() => {
+                              onComplete(selectedQuest.id, selectedQuest.type);
+                              setIsQuestOpen(false);
+                            }}
+                            className="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
+                          >
+                            <CheckIcon className='w-5 h-5' />
+                            Complete
+                          </button>
+                          
+                          <button
+                            onClick={() => {
+                              handleEditQuest(selectedQuest);
+                              setIsQuestOpen(false);
+                            }}
+                            className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
+                          >
+                            <Pencil className='w-5 h-5' />
+                            Edit
+                          </button>
+                          
+                          <button
+                            onClick={() => {
+                              onDeleteCustomQuest(selectedQuest.id);
+                              setIsQuestOpen(false);
+                            }}
+                            className="w-full bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
+                          >
+                            <Trash className='w-5 h-5' />
+                            Delete
+                          </button>
+                        </>
+                      )}
+                      
                       <button
                         onClick={() => setIsQuestOpen(false)}
                         className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 rounded-xl transition-colors duration-200"
                       >
-                        Cancel
+                        {selectedQuest.status === 'Completed' ? 'Close' : 'Cancel'}
                       </button>
                     </div>
                   </div>
