@@ -88,7 +88,6 @@ const completeCustomQuest = async (req, res) => {
             return res.status(404).json({ error: 'Quest not found or already completed.' });
         }
 
-        const now = new Date();
         const user = await User.findOne({ where: { id: userId } });
         let newStreak = 1;
 
@@ -102,16 +101,24 @@ const completeCustomQuest = async (req, res) => {
         });
 
         if (lastCompletedQuest) {
-            const lastCompletedDate = new Date(lastCompletedQuest.completed_at);
-            const diffDays = Math.floor((now - lastCompletedDate) / (1000 * 60 * 60 * 24));
+            const lastDate = new Date(lastCompletedQuest.completed_at);
+            lastDate.setHours(0, 0, 0, 0);
 
-            if (diffDays === 1) {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            const yesterday = new Date(today);
+            yesterday.setDate(yesterday.getDate() - 1);
+
+            if (lastDate.getTime() === yesterday.getTime()) {
                 newStreak = user.streak_count + 1;
-            } else if (diffDays === 0) {
+            } else if (lastDate.getTime() === today.getTime()) {
                 newStreak = user.streak_count;
             } else {
                 newStreak = 1;
             }
+        } else {
+            newStreak = 1;
         }
 
         await user.update({ streak_count: newStreak });

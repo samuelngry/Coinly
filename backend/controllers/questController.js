@@ -64,7 +64,6 @@ const completeQuests = async (req, res) => {
             return res.status(404).json({ error: 'Quest not found or already completed.' });
         }
 
-        const now = new Date();
         const user = await User.findOne({ where: { id: userId } });
         let newStreak = 1;
 
