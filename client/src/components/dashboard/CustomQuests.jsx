@@ -193,7 +193,10 @@ const CustomQuests = ({ quests, onComplete, completedCount, totalCount, onAddCus
 
                               {quest.status !=='Completed' && (
                                   <button
-                                      onClick={() => onComplete(quest.id, quest.type)}
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        onComplete(quest.id, quest.type);
+                                      }}
                                   >
                                       <div className='w-8 h-8 cursor-pointer rounded-xl border border-neutral-300 shadow-xl flex items-center justify-center hover:bg-green-100 ml-1.5'>
                                           <CheckIcon className='w-5 h-5 text-green-500'/>
@@ -217,11 +220,11 @@ const CustomQuests = ({ quests, onComplete, completedCount, totalCount, onAddCus
             </button>
 
             {/* Dialog for quest card on mobile */}
-            {editOpen && (
+            {isQuestOpen && (
               <div className="fixed inset-0 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
                 <div 
                   className="fixed inset-0" 
-                  onClick={() => setOpen(false)}
+                  onClick={() => setIsQuestOpen(false)}
                 ></div>
                 <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-sm mx-auto transform transition-all duration-300 scale-100">
                   <div className="p-6">
@@ -255,7 +258,7 @@ const CustomQuests = ({ quests, onComplete, completedCount, totalCount, onAddCus
                         Add Quest ✨
                       </button>
                       <button
-                        onClick={() => setOpen(false)}
+                        onClick={() => setIsQuestOpen(false)}
                         className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 rounded-xl transition-colors duration-200"
                       >
                         Cancel
