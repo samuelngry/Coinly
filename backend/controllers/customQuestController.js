@@ -13,7 +13,7 @@ const expireCompletedQuests = async (userId) => {
             where: {
                 user_id: userId,
                 status: 'Completed',
-                instance_date: { [Op.lt] : today },
+                completed_at: { [Op.lt] : today },
             },
         }
     );
