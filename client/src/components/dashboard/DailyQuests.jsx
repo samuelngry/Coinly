@@ -18,16 +18,16 @@ const DailyQuests = ({ quests, onComplete, completedCount, totalCount }) => {
                 </div>
                 <h3 className='text-sm lg:text-lg'>Daily Quests</h3>
                 {completedCount !== totalCount ? (
-                        <div className='bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs lg:text-sm font-bold flex items-center gap-1'>
-                            <Star className="w-3 h-3 fill-current" />
-                            <span>{completedCount}/{totalCount}</span>
-                        </div>
-                    ) : (
-                        <div className='bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1 rounded-full text-xs lg:text-sm font-bold flex items-center gap-1'>
-                            <Trophy className="w-3 h-3 fill-current" />
-                            <span>{completedCount}/{totalCount}</span>
-                        </div>
-                    )}
+                    <div className='bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs lg:text-sm font-bold flex items-center gap-1'>
+                        <Star className="w-3 h-3 fill-current" />
+                        <span>{completedCount}/{totalCount}</span>
+                    </div>
+                ) : (
+                    <div className='bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1 rounded-full text-xs lg:text-sm font-bold flex items-center gap-1'>
+                        <Trophy className="w-3 h-3 fill-current" />
+                        <span>{completedCount}/{totalCount}</span>
+                    </div>
+                )}
             </div>
 
             <div className='lg:w-full hidden lg:block'>

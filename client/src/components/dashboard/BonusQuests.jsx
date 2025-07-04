@@ -2,7 +2,7 @@ import React from 'react'
 import starIcon from '../../assets/stars.png'
 import { Gift, Star, CheckIcon, PawPrint, Clock, CircleCheck, Trophy } from 'lucide-react'
 
-const BonusQuests = ({ quests, onComplete, completedCount, totalCount  }) => {
+const BonusQuests = ({ quests, onComplete, completedCount, totalCount }) => {
 
     const sortedQuests = quests.sort((a, b) => {
         if (a.status === 'Completed' && b.status !== 'Completed') return 1;

@@ -312,7 +312,7 @@ const Dashboard = () => {
         <div className='sticky lg:px-60 top-6 bg-white/80 backdrop-blur-md'>
             <LevelBar xp={xp} level={level} />
         </div>
-         <RivePet />
+        <RivePet />
         <PetName name={petName} onComplete={handlePetNameChange} />
         <MainCards streak={streak} completedCount={completedQuest} totalCount={totalQuest}/>
         <DailyQuests quests={dailyQuests} onComplete={handleCompleteQuest} completedCount={completedDaily} totalCount={totalDaily} />
