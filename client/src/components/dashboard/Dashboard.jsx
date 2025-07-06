@@ -7,6 +7,8 @@ import DailyQuests from './DailyQuests';
 import BonusQuests from './BonusQuests';
 import CustomQuests from './CustomQuests';
 import { useNavigate } from 'react-router-dom';
+import Confetti from 'react-confetti';
+import { useWindowSize } from '@react-hook/window-size';
 
 const Dashboard = () => {
   const [customQuests, setCustomQuests] = useState([]);
@@ -18,6 +20,8 @@ const Dashboard = () => {
   const [streak, setStreak] = useState(0);
   const [petName, setPetName] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [width, height] = useWindowSize();
   const navigate = useNavigate();
 
   const getCustomQuests = async () => {
@@ -243,6 +247,9 @@ const Dashboard = () => {
       setMood(data.mood);
       setStreak(data.streak);
 
+      setShowConfetti(true);
+      setTimeout(() => setShowConfetti(false), 4000);
+
       if (type === "daily") {
         setDailyQuests((prev) => prev.map((q) => q.id === id ? { ...q, status: "Completed" } : q ));
       } else if (type === "bonus") {
@@ -307,10 +314,19 @@ const Dashboard = () => {
   const totalQuest = totalDaily + totalBonus + totalCustom;
   const completedQuest = completedDaily + completedBonus + completedCustom;
 
+  // useEffect(() => {
+  //   // Trigger confetti when all daily and bonus quests are completed
+  //   if (completedDaily === totalDaily && completedBonus === totalBonus && completedCustom === totalBonus && totalDaily > 0 && totalBonus > 0 && totalCustom > 0) {
+  //     setShowConfetti(true);
+  //     setTimeout(() => setShowConfetti(false), 4000); // Confetti for 4 seconds
+  //   }
+  // }, [completedDaily, completedBonus, completedCustom, totalDaily, totalBonus, totalCustom]);
+
   return (
     <div className='min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow justify-center'>
         <div className='sticky lg:px-60 top-6 bg-white/80 backdrop-blur-md'>
-            <LevelBar xp={xp} level={level} />
+          {showConfetti && <Confetti width={width} height={height} numberOfPieces={300} />}
+          <LevelBar xp={xp} level={level} />
         </div>
         <RivePet />
         <PetName name={petName} onComplete={handlePetNameChange} />
