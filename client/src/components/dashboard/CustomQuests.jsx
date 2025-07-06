@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Star, CheckIcon, PawPrint, CircleCheck, Pencil, Trash, ChevronDown } from 'lucide-react'
+import { Star, CheckIcon, PawPrint, CircleCheck, Pencil, Trash, ChevronDown, Trophy } from 'lucide-react'
 import noteIcon from '../../assets/note.png'
 import newQuestIcon from '../../assets/newquest.png'
 import editQuestIcon from '../../assets/editpet.png'
@@ -73,10 +73,17 @@ const CustomQuests = ({ quests, onComplete, completedCount, totalCount, onAddCus
                     <Pencil className='w-4 h-4 text-white' />
                 </div>
                 <h3 className='text-sm lg:text-lg'>Personal Quests</h3>
-                <div className='bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs lg:text-sm font-bold flex items-center gap-1'>
-                    <Star className="w-3 h-3 fill-current" />
-                    <span>{completedCount}/{totalCount}</span>
-                </div>
+                {completedCount !== totalCount ? (
+                    <div className='bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs lg:text-sm font-bold flex items-center gap-1'>
+                        <Star className="w-3 h-3 fill-current" />
+                        <span>{completedCount}/{totalCount}</span>
+                    </div>
+                ) : (
+                    <div className='bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-3 py-1 rounded-full text-xs lg:text-sm font-bold flex items-center gap-1'>
+                        <Trophy className="w-3 h-3 fill-current" />
+                        <span>{completedCount}/{totalCount}</span>
+                    </div>
+                )}
             </div>
 
             {/* Table Layout for Laptop and Above */}
