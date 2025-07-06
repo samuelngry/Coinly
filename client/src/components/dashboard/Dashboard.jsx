@@ -324,9 +324,11 @@ const Dashboard = () => {
 
   return (
     <div className='min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow justify-center'>
-        <div className='sticky lg:px-60 top-6 bg-white/80 backdrop-blur-md'>
+        <div className='sticky top-0 left-0 lg:px-60 bg-white backdrop-blur-md'>
           {showConfetti && <Confetti width={width} height={height} numberOfPieces={300} />}
-          <LevelBar xp={xp} level={level} />
+          <div className='py-2'>
+            <LevelBar xp={xp} level={level} />
+          </div>
         </div>
         <RivePet />
         <PetName name={petName} onComplete={handlePetNameChange} />
