@@ -6,6 +6,7 @@ import SignupPage from "./components/pages/SignupPage";
 import DashboardPage from "./components/pages/DashboardPage";
 import OnboardingPage from "./components/pages/OnboardingPage";
 import QuestsPage from "./components/pages/QuestsPage";
+import PetPage from "./components/pages/PetPage";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/register" element={<SignupPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/quests" element={<QuestsPage />} />
+        <Route path="/pet" element={<PetPage />} />
         <Route path="/onboard" element={<OnboardingPage />} />
       </Routes>
     </Router>
