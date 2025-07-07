@@ -95,7 +95,15 @@ async function generateDynamicQuests(userId) {
 
         // Fix: Use consistent timezone and correct logic
         const lastGeneratedAt = user.last_generated_at ? new Date(user.last_generated_at) : null;
-        const needsGeneration = !lastGeneratedAt || lastGeneratedAt < todayStartUTC;
+        const lastGeneratedSGT = lastGeneratedAt
+            ? new Date(lastGeneratedAt.getTime() + (8 * 60 * 60 * 1000))  // Convert to SGT
+            : null;
+
+        const needsGeneration =
+        !lastGeneratedSGT ||
+        lastGeneratedSGT.getFullYear() !== singaporeNow.getFullYear() ||
+        lastGeneratedSGT.getMonth() !== singaporeNow.getMonth() ||
+        lastGeneratedSGT.getDate() !== singaporeNow.getDate();
 
         console.log("Last generated at:", lastGeneratedAt);
         console.log("Today start UTC:", todayStartUTC);
