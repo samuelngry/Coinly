@@ -1,7 +1,7 @@
 import React from 'react'
 import petImage from '../assets/petimage.png'
 
-const PetCard = ({ name, level }) => {
+const PetCard = ({ name, level, mood }) => {
   return (
     <div className='flex flex-col border border-neutral-300 mx-auto shadow-lg rounded-xl lg:w-1/2'>
         <div className='flex'>
@@ -22,7 +22,7 @@ const PetCard = ({ name, level }) => {
             </div>
             <div className='flex mt-1'>
                 <h4 className='w-33 text-xs'>MOOD</h4>
-                <span className='text-xs'>Happy</span>
+                <span className='text-xs'>{mood}</span>
             </div>
             <div className='flex mt-1'>
                 <h4 className='w-33 text-xs'>OWNER</h4>

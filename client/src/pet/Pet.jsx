@@ -49,6 +49,7 @@ const Pet = () => {
       }
 
       const data = await res.json();
+      
       setXp(data.xp);
       setLevel(data.level);
       setStreak(data.streak);
@@ -65,7 +66,7 @@ const Pet = () => {
 
   return (
     <div className='min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow justify-center'>
-      <PetCard name={petName} level={level} />
+      <PetCard name={petName} level={level} mood={mood} />
       <StreakCard streak={streak} />
     </div>
   )
