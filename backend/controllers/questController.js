@@ -2,6 +2,7 @@ const { generateDynamicQuests } = require("../services/questGenerator");
 const UserQuest = require("../models/UserQuest");
 const Pets = require("../models/Pets");
 const User = require("../models/User");
+const DailyCompletion = require("../models/DailyCompletion");
 const { Op } = require('sequelize');
 
 const generateQuests = async (req, res) => {
@@ -63,6 +64,19 @@ const completeQuests = async (req, res) => {
         if (updatedRows === 0) {
             return res.status(404).json({ error: 'Quest not found or already completed.' });
         }
+
+        const todayCompletion = new Date().toISOString().slice(0, 10);
+
+        await DailyCompletion.findOrCreate({
+            where: {
+                user_id: userId,
+                date: todayCompletion,
+            },
+            defaults: {
+                user_id: userId,
+                date: todayCompletion,
+            }
+        });
 
         const user = await User.findOne({ where: { id: userId } });
         let newStreak = 1;

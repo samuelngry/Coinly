@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require("../config/db");
 
-const UserQuest = db.define('DailyCompletion', {
+const DailyCompletion = db.define('DailyCompletion', {
     id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -27,3 +27,5 @@ const UserQuest = db.define('DailyCompletion', {
         defaultValue: Sequelize.fn('NOW')
     }
 });
+
+module.exports = DailyCompletion;
