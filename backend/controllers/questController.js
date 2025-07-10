@@ -67,32 +67,27 @@ const completeQuests = async (req, res) => {
         const user = await User.findOne({ where: { id: userId } });
         let newStreak = 1;
 
-        const lastCompletedQuest = await UserQuest.findOne({
-            where: {
-                user_id: userId,
-                status: 'Completed',
-                id: { [Op.ne]: questId }, // Exclude current quest
+        const now = new Date();
+        now.setHours(0, 0, 0, 0);
+
+        const yesterday = new Date(now);
+        yesterday.setDate(now.getDate() - 1);
+
+        const questsYesterday = await UserQuest.findAll({
+        where: {
+            user_id: userId,
+            status: 'Completed',
+            completed_at: {
+                [Op.gte]: yesterday,
+                [Op.lt]: now,
             },
-            order: [['completed_at', 'DESC']],
+        },
         });
 
-        if (lastCompletedQuest) {
-            const lastDate = new Date(lastCompletedQuest.completed_at);
-            lastDate.setHours(0, 0, 0, 0);
-
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-
-            const yesterday = new Date(today);
-            yesterday.setDate(yesterday.getDate() - 1);
-
-            if (lastDate.getTime() === yesterday.getTime()) {
-                newStreak = user.streak_count + 1;
-            } else if (lastDate.getTime() === today.getTime()) {
-                newStreak = user.streak_count;
-            } else {
-                newStreak = 1;
-            }
+        if (questsYesterday.length > 0) {
+            newStreak = user.streak_count + 1;
+        } else if (user.streak_count > 0) {
+            newStreak = user.streak_count; // dont change if already updated today
         } else {
             newStreak = 1;
         }

@@ -17,6 +17,7 @@ const getUserData = async (req, res) => {
             xp: pet.xp,
             level: pet.level,
             streak: user.streak_count,
+            mood: pet.mood,
         };
 
         res.status(200).json(userData);
