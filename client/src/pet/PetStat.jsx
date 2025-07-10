@@ -17,10 +17,10 @@ const PetStat = ({ data }) => {
         <div className='flex justify-between mx-6.5 my-2'>
             <div className='flex items-center gap-1'>
                 <div className='w-2 h-2 rounded-full bg-orange-500'></div>
-                <span className='text-orange-500 font-semibold text-sm'>Total</span>
+                <span className='text-orange-500 font-semibold text-xs'>Total</span>
             </div>
             <div className='flex items-center gap-1'>
-                <span className='text-orange-500 font-semibold text-md'>59</span>
+                <span className='text-orange-500 font-semibold text-sm'>59</span>
                 <PawPrint alt='Paw' className='w-4 h-4 text-orange-500'/>
             </div>
         </div>

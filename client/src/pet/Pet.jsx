@@ -9,6 +9,7 @@ const Pet = () => {
     const [level, setLevel] = useState(1);
     const [streak, setStreak] = useState(0);
     const [mood, setMood] = useState("");
+    const [weeklyXPData, setWeeklyXPData] = useState([]);
 
     const getPetName = async () => {
         try {
@@ -60,19 +61,31 @@ const Pet = () => {
     }
   };
 
-    const [weeklyXPData, setWeeklyXPData] = useState([
-        { day: 'M', xp: 30 },
-        { day: 'T', xp: 20 },
-        { day: 'W', xp: 50 },
-        { day: 'T', xp: 10 },
-        { day: 'F', xp: 40 },
-        { day: 'S', xp: 70 },
-        { day: 'S', xp: 0 },
-    ]);
-
     useEffect(() => {
         getPetName();
         getUserData();
+    }, []);
+
+    useEffect(() => {
+        const fetchWeeklyXP = async () => {
+            try {
+                const token = localStorage.getItem("token");
+                const res = await fetch("http://localhost:3000/api/stats/weekly-xp", {
+                    headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                    }
+                });
+                if (!res.ok) throw new Error("Failed to fetch weekly XP");
+
+                const data = await res.json();
+                setWeeklyXPData(data);
+            } catch (err) {
+                console.error("Weekly XP fetch error:", err);
+            }
+        };
+
+        fetchWeeklyXP();
     }, []);
 
   return (
