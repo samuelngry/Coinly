@@ -19,7 +19,7 @@ const userRoutes = require("./routes/userRoutes");
 const questRoutes = require("./routes/questRoutes");
 const petRoutes = require("./routes/petRoutes");
 const customQuestRoutes = require("./routes/customQuestRoutes");
-//const dashboardRoutes = require("./routes/dashboardRoutes");
+const statsRoutes = require("./routes/statsRoutes");
 const db = require("./config/db");
 
 app.use(express.json());
@@ -29,7 +29,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/quests", questRoutes);
 app.use("/api/pet", petRoutes);
 app.use("/api/custom", customQuestRoutes);
-//app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/stats", statsRoutes);
 
 const PORT = process.env.PORT || 3000;
 
