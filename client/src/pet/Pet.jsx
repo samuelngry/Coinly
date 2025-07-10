@@ -10,6 +10,7 @@ const Pet = () => {
     const [streak, setStreak] = useState(0);
     const [mood, setMood] = useState("");
     const [weeklyXPData, setWeeklyXPData] = useState([]);
+    const [totalXP, setTotalXP] = useState(0);
 
     const getPetName = async () => {
         try {
@@ -79,7 +80,8 @@ const Pet = () => {
                 if (!res.ok) throw new Error("Failed to fetch weekly XP");
 
                 const data = await res.json();
-                setWeeklyXPData(data);
+                setWeeklyXPData(data.result);
+                setTotalXP(data.total);
             } catch (err) {
                 console.error("Weekly XP fetch error:", err);
             }
@@ -92,7 +94,7 @@ const Pet = () => {
     <div className='min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow justify-center'>
       <PetCard name={petName} level={level} mood={mood} />
       <StreakCard streak={streak} />
-      <PetStat data={weeklyXPData} />
+      <PetStat data={weeklyXPData} total={totalXP} />
     </div>
   )
 }

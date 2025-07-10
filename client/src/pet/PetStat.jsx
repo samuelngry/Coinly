@@ -9,7 +9,7 @@ import {
 } from 'recharts';
 import { PawPrint } from 'lucide-react';
 
-const PetStat = ({ data }) => {
+const PetStat = ({ data, total }) => {
   return (
     <div className='mt-6 w-full max-w-2xl mx-auto'>
       <h2 className='mb-2'>Weekly Progress</h2>
@@ -20,7 +20,7 @@ const PetStat = ({ data }) => {
                 <span className='text-orange-500 font-semibold text-xs'>Total</span>
             </div>
             <div className='flex items-center gap-1'>
-                <span className='text-orange-500 font-semibold text-sm'>59</span>
+                <span className='text-orange-500 font-semibold text-sm'>{total}</span>
                 <PawPrint alt='Paw' className='w-4 h-4 text-orange-500'/>
             </div>
         </div>

@@ -44,7 +44,9 @@ const getWeeklyXP = async (req, res) => {
             });
         }
 
-        res.json(result);
+        const totalXP = result.reduce((sum, day) => sum + day.xp, 0);
+
+        res.json({ total: totalXP, result });
     } catch (err) {
         console.error('Error fetching weekly XP:', err);
         res.status(500).json({ error: 'Failed to fetch weekly XP' });
