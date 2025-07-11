@@ -47,12 +47,31 @@ const getUserData = async (req, res) => {
             badge = createdBadge;
         }
 
+        const monthNameMap = {
+            '01': 'jan', '02': 'feb', '03': 'mar', '04': 'apr',
+            '05': 'may', '06': 'jun', '07': 'jul', '08': 'aug',
+            '09': 'sep', '10': 'oct', '11': 'nov', '12': 'dec'
+        };
+
+        const allBadges = await UserBadge.findAll({ where: { user_id: userId }, raw: true });
+
+        const badgesWithImages = allBadges.map(badge => {
+            const [, month] = badge.month.split('-');
+            const monthKey = monthNameMap[month] || 'default';
+
+            return {
+                ...badge,
+                image_url: `/badges/${monthKey}.png`
+            };
+        });
+
         const userData = {
             xp: pet.xp,
             level: pet.level,
             streak: user.streak_count,
             mood: pet.mood,
-            badge
+            badges: badgesWithImages,
+            recentBadge: badge
         };
 
         res.status(200).json(userData);
