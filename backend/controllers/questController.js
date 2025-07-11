@@ -92,18 +92,18 @@ const completeQuests = async (req, res) => {
             user_id: userId,
             status: 'Completed',
             completed_at: {
-                [Op.gte]: yesterday,
-                [Op.lt]: now,
+            [Op.gte]: yesterday,
+            [Op.lt]: now,
             },
         },
         });
 
         if (questsYesterday.length > 0) {
-            newStreak = user.streak_count + 1;
+        newStreak = user.streak_count + 1;
         } else if (user.streak_count > 0) {
-            newStreak = user.streak_count; // dont change if already updated today
+        newStreak = user.streak_count; // don't change if already updated today
         } else {
-            newStreak = 1;
+        newStreak = 1;
         }
 
         await user.update({ streak_count: newStreak });
