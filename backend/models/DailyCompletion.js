@@ -26,6 +26,9 @@ const DailyCompletion = db.define('DailyCompletion', {
         allowNull: false,
         defaultValue: Sequelize.fn('NOW')
     }
+}, {
+    timestamps: false,
+    tableName: 'DailyCompletion'
 });
 
 module.exports = DailyCompletion;

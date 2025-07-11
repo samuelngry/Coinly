@@ -67,17 +67,21 @@ const completeQuests = async (req, res) => {
 
         const todayCompletion = new Date().toISOString().slice(0, 10);
 
-        await DailyCompletion.findOrCreate({
-            where: {
-                user_id: userId,
-                date: todayCompletion,
-            },
-            defaults: {
-                user_id: userId,
-                date: todayCompletion,
-            }
-        });
-
+        try {
+            await DailyCompletion.findOrCreate({
+                where: {
+                    user_id: userId,
+                    date: todayCompletion,
+                },
+                defaults: {
+                    user_id: userId,
+                    date: todayCompletion,
+                }
+            });
+        } catch (err) {
+            console.error('DailyCompletion error:', err);
+        }
+        
         const user = await User.findOne({ where: { id: userId } });
         let newStreak = 1;
 
@@ -99,11 +103,11 @@ const completeQuests = async (req, res) => {
         });
 
         if (questsYesterday.length > 0) {
-        newStreak = user.streak_count + 1;
+            newStreak = user.streak_count + 1;
         } else if (user.streak_count > 0) {
-        newStreak = user.streak_count; // don't change if already updated today
+            newStreak = user.streak_count; // don't change if already updated today
         } else {
-        newStreak = 1;
+            newStreak = 1;
         }
 
         await user.update({ streak_count: newStreak });
