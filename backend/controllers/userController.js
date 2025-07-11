@@ -1,6 +1,9 @@
 const User = require("../models/User");
 const Pets = require("../models/Pets");
 const UserPreference = require("../models/UserPreference");
+const DailyCompletion = require("../models/DailyCompletion");
+const UserBadge = require("../models/UserBadge");
+const { Op } = require('sequelize');
 
 const getUserData = async (req, res) => {
     try {
@@ -13,11 +16,43 @@ const getUserData = async (req, res) => {
             return res.status(404).json({ error: 'User data not found' });
         }
 
+        const today = new Date();
+        const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+
+        const completions = await DailyCompletion.findAll({
+            where: {
+                user_id: userId,
+                date: {
+                    [Op.gte]: startOfMonth,
+                    [Op.lte]: today
+                }
+            }
+        });
+
+        const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+        let badge = null;
+
+        if (completions.length === daysInMonth) {
+            const [createdBadge] = await UserBadge.findOrCreate({
+                where: {
+                    user_id: userId,
+                    month: `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}`,
+                },
+                defaults: {
+                    user_id: userId,
+                    badge_name: today.toLocaleString('default', { month: 'long' }),
+                }
+            });
+
+            badge = createdBadge;
+        }
+
         const userData = {
             xp: pet.xp,
             level: pet.level,
             streak: user.streak_count,
             mood: pet.mood,
+            badge
         };
 
         res.status(200).json(userData);
