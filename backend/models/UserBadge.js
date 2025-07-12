@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require("../config/db");
 
-const UserBadge = db.define('UserBadge', {
+const UserBadge = db.define('userbadges', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -30,7 +30,7 @@ const UserBadge = db.define('UserBadge', {
         defaultValue: Sequelize.fn('NOW'),
     }
     }, {
-        tableName: 'UserBadge',
+        tableName: 'userbadges',
         timestamps: true,
         underscored: true,
 });
