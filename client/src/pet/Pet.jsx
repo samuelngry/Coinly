@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import PetCard from './PetCard'
 import StreakCard from './StreakCard';
 import PetStat from './PetStat';
+import PetBadge from './PetBadge';
 
 const Pet = () => {
     const [petName, setPetName] = useState("");
@@ -100,6 +101,7 @@ const Pet = () => {
       <PetCard name={petName} level={level} mood={mood} />
       <StreakCard streak={streak} />
       <PetStat data={weeklyXPData} total={totalXP} />
+      <PetBadge badge={badge} />
     </div>
   )
 }
