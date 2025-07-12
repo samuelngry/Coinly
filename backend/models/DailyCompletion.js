@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require("../config/db");
 
-const DailyCompletion = db.define('DailyCompletion', {
+const DailyCompletion = db.define('dailycompletion', {
     id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -28,7 +28,7 @@ const DailyCompletion = db.define('DailyCompletion', {
     }
 }, {
     timestamps: false,
-    tableName: 'DailyCompletion'
+    tableName: 'dailycompletion'
 });
 
 module.exports = DailyCompletion;

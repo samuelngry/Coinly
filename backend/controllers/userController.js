@@ -76,6 +76,7 @@ const getUserData = async (req, res) => {
 
         res.status(200).json(userData);
     } catch (err) {
+        console.error("Error in getUserData:", err);
         res.status(500).json({ error: err.message });
     }
 };

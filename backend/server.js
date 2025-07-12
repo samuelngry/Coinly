@@ -1,13 +1,7 @@
 const express = require('express');
 const cors = require('cors')
 const path = require('path');
-const { fileURLToPath } = require('url');
-const process = require('process');
 require('dotenv').config();
-
-// Define __dirname for ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -15,6 +9,10 @@ app.use(cors({
   origin: 'http://localhost:5173',
   credentials: true,
 }))
+
+app.use(express.json());
+
+app.use('/badges', express.static(path.join(__dirname, 'public/badges')));
 
 // Test route
 app.get('/test-cors', (req, res) => {
@@ -29,7 +27,6 @@ const customQuestRoutes = require("./routes/customQuestRoutes");
 const statsRoutes = require("./routes/statsRoutes");
 const db = require("./config/db");
 
-app.use(express.json());
 //app.use('/uploads', express.static('uploads'));
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
@@ -37,7 +34,6 @@ app.use("/api/quests", questRoutes);
 app.use("/api/pet", petRoutes);
 app.use("/api/custom", customQuestRoutes);
 app.use("/api/stats", statsRoutes);
-app.use('/badges', express.static(path.join(__dirname, 'public/badges')));
 
 const PORT = process.env.PORT || 3000;
 
