@@ -28,6 +28,8 @@ const DailyCompletion = db.define('dailycompletion', {
     }
 }, {
     timestamps: false,
+    createdAt: 'created_at',
+    updatedAt: 'updated_at',
     tableName: 'dailycompletion'
 });
 
