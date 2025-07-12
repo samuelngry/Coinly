@@ -18,6 +18,8 @@ const getUserData = async (req, res) => {
 
         const today = new Date();
         const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+        const currentMonthKey = String(today.getMonth() + 1).padStart(2, '0');
+        const currentMonthFull = `${today.getFullYear()}-${currentMonthKey}`;
 
         const completions = await DailyCompletion.findAll({
             where: {
@@ -32,6 +34,7 @@ const getUserData = async (req, res) => {
         const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
         let badge = null;
 
+        // Create badge if all days completed
         if (completions.length === daysInMonth) {
             const [createdBadge] = await UserBadge.findOrCreate({
                 where: {
@@ -47,21 +50,29 @@ const getUserData = async (req, res) => {
             badge = createdBadge;
         }
 
-        const monthNameMap = {
-            '01': 'jan', '02': 'feb', '03': 'mar', '04': 'apr',
-            '05': 'may', '06': 'jun', '07': 'jul', '08': 'aug',
-            '09': 'sep', '10': 'oct', '11': 'nov', '12': 'dec'
-        };
+        const unlockedBadges = await UserBadge.findAll({
+            where: { user_id: userId },
+            raw: true
+        });
 
-        const allBadges = await UserBadge.findAll({ where: { user_id: userId }, raw: true });
+        const unlockedMonthMap = {};
+        unlockedBadges.forEach(b => unlockedMonthMap[b.month] = true);
 
-        const badgesWithImages = allBadges.map(badge => {
-            const [, month] = badge.month.split('-');
-            const monthKey = monthNameMap[month] || 'default';
+        const monthList = [
+            { key: 'January', label: 'jan' }, { key: 'February', label: 'feb' }, { key: 'March', label: 'mar' },
+            { key: 'April', label: 'apr' }, { key: 'May', label: 'may' }, { key: 'June', label: 'jun' },
+            { key: 'July', label: 'jul' }, { key: 'August', label: 'aug' }, { key: 'September', label: 'sep' },
+            { key: 'October', label: 'oct' }, { key: 'November', label: 'nov' }, { key: 'December', label: 'dec' }
+        ];
 
+        const fullYear = today.getFullYear();
+
+        const badgesWithImages = monthList.map(m => {
+            const fullMonth = `${fullYear}-${m.key}`;
             return {
-                ...badge,
-                image_url: `/badges/${monthKey}.png`
+                month: fullMonth,
+                unlocked: !!unlockedMonthMap[fullMonth],
+                image_url: `/badges/${m.label}.png`
             };
         });
 
