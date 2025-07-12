@@ -11,6 +11,7 @@ const Pet = () => {
     const [mood, setMood] = useState("");
     const [weeklyXPData, setWeeklyXPData] = useState([]);
     const [totalXP, setTotalXP] = useState(0);
+    const [badge, setBadge] = useState(null);
 
     const getPetName = async () => {
         try {
@@ -57,6 +58,10 @@ const Pet = () => {
       setLevel(data.level);
       setStreak(data.streak);
       setMood(data.mood);
+
+      if (data.badges) {
+        setBadge(data.badges);
+      }
     } catch (err) {
       console.error("Failed to fetch user data:", err);
     }
