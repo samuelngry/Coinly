@@ -76,9 +76,13 @@ const getUserData = async (req, res) => {
             };
         });
 
+        const level = Number(pet.level) || 1;
+        const maxXp = 100 + (level - 1) * 50;
+
         const userData = {
             xp: pet.xp,
             level: pet.level,
+            maxXp: maxXp,
             streak: user.streak_count,
             mood: pet.mood,
             badges: badgesWithImages,

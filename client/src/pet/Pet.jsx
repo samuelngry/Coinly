@@ -3,10 +3,12 @@ import PetCard from './PetCard'
 import StreakCard from './StreakCard';
 import PetStat from './PetStat';
 import PetBadge from './PetBadge';
+import PetMotivation from './PetMotivation';
 
 const Pet = () => {
     const [petName, setPetName] = useState("");
     const [xp, setXp] = useState(0);
+    const [levelUpXp, setLevelUpXp] = useState(0);
     const [level, setLevel] = useState(1);
     const [streak, setStreak] = useState(0);
     const [mood, setMood] = useState("");
@@ -59,6 +61,7 @@ const Pet = () => {
       setLevel(data.level);
       setStreak(data.streak);
       setMood(data.mood);
+      setLevelUpXp(data.maxXp);
 
       if (data.badges) {
         setBadge(data.badges);
@@ -117,15 +120,16 @@ const Pet = () => {
           </div>
           <PetCard name={petName} level={level} mood={mood} />
           <StreakCard streak={streak} />
-          <PetStat data={weeklyXPData} total={totalXP} />
-          <PetBadge badge={badge} />
         </div>
-        
+        <div className='md:col-span-2 space-y-6'>
+          <PetStat data={weeklyXPData} total={totalXP} />
+        </div>
       </div>
-    </div>
-      
-    /* RIGHT SIDE: Sidebar */
-    
+      <div>
+        <PetMotivation xp={xp} level={level} levelXp={levelUpXp} />
+        <PetBadge badge={badge} />
+      </div>
+    </div>    
   )
 }
 

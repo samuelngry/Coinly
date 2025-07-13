@@ -11,8 +11,8 @@ import { PawPrint } from 'lucide-react';
 
 const PetStat = ({ data, total }) => {
   return (
-    <div className='mt-6 mx-auto'>
-      <h2 className='mb-2 md:text-xl'>Weekly Progress</h2>
+    <div className='mx-auto'>
+      <h2 className='mb-2 md:text-xl md:hidden'>Weekly Progress</h2>
       <div className='border border-neutral-300 shadow-lg bg-white rounded-2xl'>
         <div className='flex justify-between mx-6.5 my-2'>
             <div className='flex items-center gap-1'>
@@ -25,7 +25,7 @@ const PetStat = ({ data, total }) => {
             </div>
         </div>
         <div className='flex justify-center items-center mt-3'>
-            <ResponsiveContainer width="100%" height={200}>
+            <ResponsiveContainer width="100%" height={450}>
                 <LineChart data={data} margin={{ right: 30}}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="day" />
