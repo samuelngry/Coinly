@@ -1,11 +1,10 @@
 import React from 'react'
 import petImage from '../assets/petimage.png'
-import boyIcon from '../assets/boy.png'
 
 const PetCard = ({ name, level, mood }) => {
 
   return (
-    <div className='relative overflow-hidden bg-white border border-gray-200 mx-auto shadow-xl rounded-2xl lg:w-1/2 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1'>
+    <div className='relative overflow-hidden bg-white border border-neutral-300 mx-auto shadow-lg rounded-2xl lg:w-1/2'>
         <div className='absolute top-4 right-4 bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg'>
             LVL {level}
         </div>

@@ -20,7 +20,7 @@ const PetBadge = ({ badge }) => {
   return (
     <div className='mt-6 w-full max-w-2xl mx-auto'>
       <h2 className='mb-2 text-center'>Monthly Badges</h2>
-      <div className='border border-neutral-300 shadow-lg shadow-black/10 rounded-xl'>
+      <div className='border border-neutral-300 shadow-lg shadow-black/10 rounded-2xl bg-white'>
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 justify-items-center">
           {visibleBadges.map((b, idx) => (
             <div
@@ -34,7 +34,10 @@ const PetBadge = ({ badge }) => {
                   b.unlocked ? 'border-yellow-400 shadow' : 'border-gray-400 grayscale'
                 }`}
               />
-              <p className="mt-2 text-sm font-medium text-neutral-400 capitalize">
+              <p className={`mt-2 text-sm font-medium capitalize ${
+                    b.unlocked ? '' : 'text-gray-400'
+                }`}
+                >
                 {b.month.split('-')[1]}
               </p>
             </div>
