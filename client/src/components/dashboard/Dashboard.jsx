@@ -288,13 +288,6 @@ const Dashboard = () => {
     }
   };
 
-  const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-
-    navigate('/login');
-  };
-
   useEffect(() => {
     getCustomQuests();
     getUserData();
@@ -336,13 +329,6 @@ const Dashboard = () => {
         <DailyQuests quests={dailyQuests} onComplete={handleCompleteQuest} completedCount={completedDaily} totalCount={totalDaily} />
         <BonusQuests quests={bonusQuests} onComplete={handleCompleteQuest} completedCount={completedBonus} totalCount={totalBonus} />
         <CustomQuests quests={customQuests} onComplete={handleCompleteQuest} completedCount={completedCustom} totalCount={totalCustom} onAddCustomQuest={addCustomQuest} onUpdateCustomQuest={updateCustomQuest} onDeleteCustomQuest={deleteCustomQuest} />
-
-        <button
-          onClick={logout}
-          className='bg-red-500 text-white py-1 px-4 rounded-lg mt-10 hover:bg-red-600'
-        >
-          Log Out
-        </button>
     </div>
   )
 }

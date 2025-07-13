@@ -104,21 +104,28 @@ const Pet = () => {
 
   return (
     <div className='min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow justify-center'>
-      <div className='flex justify-between items-center mb-6 md:hidden'>
-        <h1 className='text-2xl font-bold text-gray-800'>Coin Pet</h1>
-        <button 
-          onClick={handleLogout}
-          className='bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-lg transition-colors duration-200'
-        >
-          Log out
-        </button>
+      <div className='grid grid-cols-1 md:grid-cols-4 gap-6'>
+        <div className='md:col-span-2 space-y-6'>
+          <div className='flex justify-between items-center mb-6 md:hidden'>
+            <h1 className='text-2xl font-bold text-gray-800'>Coin Pet</h1>
+            <button 
+              onClick={handleLogout}
+              className='bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg transition-colors duration-200'
+            >
+              Log out
+            </button>
+          </div>
+          <PetCard name={petName} level={level} mood={mood} />
+          <StreakCard streak={streak} />
+          <PetStat data={weeklyXPData} total={totalXP} />
+          <PetBadge badge={badge} />
+        </div>
+        
       </div>
-
-      <PetCard name={petName} level={level} mood={mood} />
-      <StreakCard streak={streak} />
-      <PetStat data={weeklyXPData} total={totalXP} />
-      <PetBadge badge={badge} />
     </div>
+      
+    /* RIGHT SIDE: Sidebar */
+    
   )
 }
 
