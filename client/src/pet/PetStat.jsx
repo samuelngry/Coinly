@@ -12,7 +12,7 @@ import { PawPrint } from 'lucide-react';
 const PetStat = ({ data, total }) => {
   return (
     <div className='mt-6 w-full max-w-2xl mx-auto'>
-      <h2 className='mb-2'>Weekly Progress</h2>
+      <h2 className='mb-2 text-center'>Weekly Progress</h2>
       <div className='border border-neutral-300 shadow-lg shadow-black/10 rounded-xl'>
         <div className='flex justify-between mx-6.5 my-2'>
             <div className='flex items-center gap-1'>
