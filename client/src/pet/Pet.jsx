@@ -68,6 +68,12 @@ const Pet = () => {
     }
   };
 
+  const handleLogout = () => {
+        localStorage.removeItem("token");
+        // Add your logout logic here (e.g., redirect to login page, clear user state, etc.)
+        window.location.href = "/login"; // or use your router's navigation
+    };
+
     useEffect(() => {
         getPetName();
         getUserData();
@@ -98,6 +104,16 @@ const Pet = () => {
 
   return (
     <div className='min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow justify-center'>
+      <div className='flex justify-between items-center mb-6 md:hidden'>
+        <h1 className='text-2xl font-bold text-gray-800'>Coin Pet</h1>
+        <button 
+          onClick={handleLogout}
+          className='bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-lg transition-colors duration-200'
+        >
+          Log out
+        </button>
+      </div>
+
       <PetCard name={petName} level={level} mood={mood} />
       <StreakCard streak={streak} />
       <PetStat data={weeklyXPData} total={totalXP} />
