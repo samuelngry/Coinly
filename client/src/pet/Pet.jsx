@@ -16,6 +16,7 @@ const Pet = () => {
     const [totalXP, setTotalXP] = useState(0);
     const [badge, setBadge] = useState(null);
     const [username, setUsername] = useState('');
+    const [accountAge, setAccountAge] = useState(0);
 
     const getPetName = async () => {
         try {
@@ -64,6 +65,7 @@ const Pet = () => {
       setMood(data.mood);
       setLevelUpXp(data.maxXp);
       setUsername(data.username);
+      setAccountAge(data.accountAge);
 
       if (data.badges) {
         setBadge(data.badges);
@@ -120,7 +122,7 @@ const Pet = () => {
               Log out
             </button>
           </div>
-          <PetCard name={petName} level={level} mood={mood} username={username} />
+          <PetCard name={petName} level={level} mood={mood} username={username} accountAge={accountAge} />
           <StreakCard streak={streak} />
         </div>
         <div className='md:col-span-2 space-y-6'>

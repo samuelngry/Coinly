@@ -79,6 +79,11 @@ const getUserData = async (req, res) => {
         const level = Number(pet.level) || 1;
         const maxXp = 100 + (level - 1) * 50;
 
+        const createdAt = new Date(user.createdAt);
+        const now = new Date();
+
+        const accountAgeDays = Math.floor((now - createdAt) / (1000 * 60 * 60 * 24));
+
         const userData = {
             xp: pet.xp,
             level: pet.level,
@@ -87,7 +92,8 @@ const getUserData = async (req, res) => {
             mood: pet.mood,
             badges: badgesWithImages,
             recentBadge: badge,
-            username: user.username
+            username: user.username,
+            accountAge: accountAgeDays
         };
 
         res.status(200).json(userData);
