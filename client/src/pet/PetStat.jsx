@@ -9,7 +9,22 @@ import {
 } from 'recharts';
 import { PawPrint } from 'lucide-react';
 
+function useResponsiveHeight() {
+  const [height, setHeight] = React.useState(window.innerWidth >= 768 ? 450 : 200);
+
+  React.useEffect(() => {
+    function handleResize() {
+      setHeight(window.innerWidth >= 768 ? 450 : 200);
+    }
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return height;
+}
+
 const PetStat = ({ data, total }) => {
+  const chartHeight = useResponsiveHeight();
   return (
     <div className='mx-auto'>
       <h2 className='mb-2 md:text-xl md:hidden'>Weekly Progress</h2>
@@ -25,7 +40,7 @@ const PetStat = ({ data, total }) => {
             </div>
         </div>
         <div className='flex justify-center items-center mt-3'>
-            <ResponsiveContainer width="100%" height={450}>
+            <ResponsiveContainer width="100%" height={chartHeight}>
                 <LineChart data={data} margin={{ right: 30}}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="day" />
