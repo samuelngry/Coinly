@@ -7,6 +7,7 @@ import DashboardPage from "./components/pages/DashboardPage";
 import OnboardingPage from "./components/pages/OnboardingPage";
 import QuestsPage from "./components/pages/QuestsPage";
 import PetPage from "./components/pages/PetPage";
+import LeaderboardPage from "./components/pages/LeaderboardPage";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/quests" element={<QuestsPage />} />
         <Route path="/pet" element={<PetPage />} />
         <Route path="/onboard" element={<OnboardingPage />} />
+        <Route path="/leaderboard" element={<LeaderboardPage />} />
       </Routes>
     </Router>
   );
