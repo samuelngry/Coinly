@@ -86,7 +86,8 @@ const getUserData = async (req, res) => {
             streak: user.streak_count,
             mood: pet.mood,
             badges: badgesWithImages,
-            recentBadge: badge
+            recentBadge: badge,
+            username: user.username
         };
 
         res.status(200).json(userData);
