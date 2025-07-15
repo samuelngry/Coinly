@@ -42,4 +42,5 @@ const Pets = db.define('pets', {
     },
 });
 
+
 module.exports = Pets;

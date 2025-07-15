@@ -24,7 +24,7 @@ const getCustomQuests = async (req, res) => {
         const userId = req.user.id;
         const { status } = req.query;
 
-        expireCompletedQuests(userId);
+        await expireCompletedQuests(userId);
 
         const whereClause = {
             user_id: userId,
