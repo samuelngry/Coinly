@@ -10,7 +10,7 @@ const getLeaderboard = async (req, res) => {
             },
             order: [['xp', 'DESC']],
             limit: 10,
-            attributes: ['id', 'username', 'xp', 'avatar_url']
+            attributes: ['id', 'username', 'xp', 'avatar_url', 'streak_count']
         });
 
         const leaderboard = users.map((user, index) => ({
@@ -19,6 +19,7 @@ const getLeaderboard = async (req, res) => {
             avatar_url: user.avatar_url,
             xp: user.xp,
             level: user.Pet?.level || 1,
+            streak: user.streak_count,
             mood: user.Pet?.mood || 'Neutral',
         }));
 
