@@ -21,7 +21,7 @@ const getLeaderboard = async (req, res) => {
         const leaderboard = users.map((user, index) => ({
             rank: index + 1,
             username: user.username,
-            avatar_url: user.avatar_url,
+            avatar_url: user.avatar_url ? `http://localhost:3000${user.avatar_url}` : null,
             xp: user.Pet?.total_xp || 0,
             level: user.Pet?.level || 1,
             streak: user.streak_count,
