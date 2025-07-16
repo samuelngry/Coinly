@@ -17,6 +17,7 @@ const Pet = () => {
     const [badge, setBadge] = useState(null);
     const [username, setUsername] = useState('');
     const [accountAge, setAccountAge] = useState(0);
+    const [avatarUrl, setAvatarUrl] = useState('');
 
     const getPetName = async () => {
         try {
@@ -66,12 +67,36 @@ const Pet = () => {
       setLevelUpXp(data.maxXp);
       setUsername(data.username);
       setAccountAge(data.accountAge);
+      setAvatarUrl(data.avatar_url);
 
       if (data.badges) {
         setBadge(data.badges);
       }
     } catch (err) {
       console.error("Failed to fetch user data:", err);
+    }
+  };
+
+  const handleAvatarUpload = async (file) => {
+    const token = localStorage.getItem("token");
+    const formData = new FormData();
+    formData.append('avatar', file);
+
+    try {
+      const res = await fetch("http://localhost:3000/api/users/avatar", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+
+      if (!res.ok) throw new Error("Failed to upload avatar");
+
+      const data = await res.json();
+      setAvatarUrl(data.avatar_url);
+    } catch (err) {
+      console.error("Upload error:", err);
     }
   };
 
@@ -122,7 +147,7 @@ const Pet = () => {
               Log out
             </button>
           </div>
-          <PetCard name={petName} level={level} mood={mood} username={username} accountAge={accountAge} />
+          <PetCard name={petName} level={level} mood={mood} username={username} accountAge={accountAge} avatarUrl={avatarUrl} onAvatarUpload={handleAvatarUpload} />
           <StreakCard streak={streak} />
         </div>
         <div className='md:col-span-2 space-y-6'>

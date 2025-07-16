@@ -3,6 +3,7 @@ import { PawPrint } from 'lucide-react'
 import firstIcon from '../../assets/first.png'
 import secondIcon from '../../assets/second.png'
 import thirdIcon from '../../assets/third.png'
+import defaultIcon from '../../assets/default.png'
 
 const LeaderboardTable = ({ data }) => {
     if (!data || data.length === 0) {
@@ -45,7 +46,7 @@ const LeaderboardTable = ({ data }) => {
               <td className="py-2 px-4 text-center w-12">{getTrophy(user.rank)}</td>
               <td className="flex items-center gap-3 py-3 px-4">
                 <img
-                  src={user.avatar_url || '/default-avatar.png'}
+                  src={user.avatar_url || defaultIcon}
                   alt="avatar"
                   className="w-8 h-8 rounded-full object-cover"
                 />
