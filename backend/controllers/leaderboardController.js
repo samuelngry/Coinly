@@ -7,7 +7,7 @@ const getLeaderboard = async (req, res) => {
             include: {
                 model: Pets,
                 as: 'Pet',
-                attributes: ['mood', 'level', 'xp'],
+                attributes: ['mood', 'level', 'xp', 'total_xp'],
                 required: true
             },
             attributes: ['id', 'username', 'avatar_url', 'streak_count'],
@@ -22,7 +22,7 @@ const getLeaderboard = async (req, res) => {
             rank: index + 1,
             username: user.username,
             avatar_url: user.avatar_url,
-            xp: user.Pet?.xp,
+            xp: user.Pet?.total_xp || 0,
             level: user.Pet?.level || 1,
             streak: user.streak_count,
             mood: user.Pet?.mood || 'Neutral',

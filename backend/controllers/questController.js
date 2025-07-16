@@ -126,6 +126,7 @@ const completeQuests = async (req, res) => {
 
         let levelUpXp = 100 + (pet.level - 1) * 50;
         let petXp = pet.xp + xpReward;
+        let totalXp = (pet.total_xp || 0) + xpReward;
         let petLevel = pet.level;
         let leveledUp = false;
 
@@ -160,6 +161,7 @@ const completeQuests = async (req, res) => {
             level: petLevel,
             last_fed: new Date(),
             mood: petMood,
+            total_xp: totalXp
         });
 
         res.status(200).json({ xp: petXp, maxXp: levelUpXp, level: petLevel, mood: petMood, streak: newStreak });
