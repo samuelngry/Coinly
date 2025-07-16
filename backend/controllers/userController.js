@@ -86,6 +86,7 @@ const getUserData = async (req, res) => {
 
         const userData = {
             xp: pet.xp,
+            avatar_url: user.avatar_url,
             level: pet.level,
             maxXp: maxXp,
             streak: user.streak_count,
@@ -123,10 +124,11 @@ const updateUsername = async (req, res) => {
 const updateAvatar = async (req, res) => {
     try {
         const userId = req.user.id;
-        const { avatar_url } = req.body;
 
-        await User.update({ avatar_url }, { where: { id: userId } });
-        res.status(200).json({ message: "Avatar changed successfully", avatar_url});
+        const avatarUrl = `/avatars/${req.file.filename}`;
+
+        await User.update({ avatar_url: avatarUrl }, { where: { id: userId } });
+        res.status(200).json({ message: "Avatar changed successfully", avatar_url: avatarUrl});
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

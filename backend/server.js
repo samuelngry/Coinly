@@ -13,6 +13,7 @@ app.use(cors({
 app.use(express.json());
 
 app.use('/badges', express.static(path.join(__dirname, 'public/badges')));
+app.use('/avatars', express.static(path.join(__dirname, 'public/avatars')));
 
 // Test route
 app.get('/test-cors', (req, res) => {
