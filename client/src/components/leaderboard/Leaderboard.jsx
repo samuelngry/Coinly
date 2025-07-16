@@ -1,6 +1,8 @@
 import React from 'react'
 import { useState } from 'react';
 import { useEffect } from 'react';
+import TopLeaderboard from './TopLeaderboard';
+import LeaderboardTable from './LeaderboardTable';
 
 const Leaderboard = () => {
     const [leaderboard, setLeaderboard] = useState([]);
@@ -28,8 +30,8 @@ const Leaderboard = () => {
     }, []);
 
   return (
-    <div>
-      
+    <div className='min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow justify-center'>
+        <LeaderboardTable data={leaderboard} />
     </div>
   )
 }

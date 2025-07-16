@@ -6,7 +6,6 @@ import MainCards from './MainCards';
 import DailyQuests from './DailyQuests';
 import BonusQuests from './BonusQuests';
 import CustomQuests from './CustomQuests';
-import { useNavigate } from 'react-router-dom';
 import Confetti from 'react-confetti';
 import { useWindowSize } from '@react-hook/window-size';
 
@@ -22,7 +21,6 @@ const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showConfetti, setShowConfetti] = useState(false);
   const [width, height] = useWindowSize();
-  const navigate = useNavigate();
 
   const getCustomQuests = async () => {
     try {
