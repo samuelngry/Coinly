@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaTrophy } from "react-icons/fa";
+import { PawPrint } from 'lucide-react'
 import firstIcon from '../../assets/first.png'
 import secondIcon from '../../assets/second.png'
 import thirdIcon from '../../assets/third.png'
@@ -31,7 +31,7 @@ const LeaderboardTable = ({ data }) => {
             <th className="py-2 px-4">Rank</th>
             <th className="py-2 px-4">User</th>
             <th className="py-2 px-4 hidden sm:table-cell">Level</th>
-            <th className="py-2 px-4">XP</th>
+            <th className="py-2 px-4"><PawPrint alt='Paw' className='w-4 h-4 text-orange-500'/></th>
           </tr>
         </thead>
         <tbody>
@@ -52,7 +52,7 @@ const LeaderboardTable = ({ data }) => {
                 <span className="truncate">{user.username}</span>
               </td>
               <td className="py-3 px-4 hidden sm:table-cell">{user.level}</td>
-              <td className="py-3 px-4 font-medium text-blue-600">{user.xp} XP</td>
+              <td className="py-3 px-4 font-medium text-orange-500">{user.xp}</td>
             </tr>
           ))}
         </tbody>
