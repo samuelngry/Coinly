@@ -12,13 +12,13 @@ const LeaderboardTable = ({ data }) => {
     const getTrophy = (rank) => {
         switch (rank) {
             case 1:
-            return <img src={firstIcon} className='w-8 h-8' />;
+            return <img src={firstIcon} alt='1st' className='w-11 h-8' />;
             case 2:
-            return <img src={secondIcon} className='w-8 h-8' />;
+            return <img src={secondIcon} alt='2nd' className='w-11 h-8' />;
             case 3:
-            return <img src={thirdIcon} className='w-8 h-8' />;
+            return <img src={thirdIcon} alt='3rd' className='w-11 h-8' />;
             default:
-            return <span>{rank}</span>;
+            return <span className='text-base font-semibold'>{rank}</span>;
         }
         };
 
@@ -42,7 +42,7 @@ const LeaderboardTable = ({ data }) => {
                 idx === 0 ? 'bg-yellow-100 font-semibold' : ''
               }`}
             >
-              <td className="py-2 px-4">{getTrophy(user.rank)}</td>
+              <td className="py-2 px-4 text-center w-12">{getTrophy(user.rank)}</td>
               <td className="flex items-center gap-3 py-3 px-4">
                 <img
                   src={user.avatar_url || '/default-avatar.png'}
