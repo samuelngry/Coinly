@@ -28,6 +28,11 @@ const Pets = db.define('pets', {
         type: Sequelize.INTEGER,
         defaultValue: 0
     },
+    total_xp: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+    },
     level: {
         type: Sequelize.INTEGER,
         defaultValue: 1

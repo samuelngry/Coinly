@@ -1,10 +1,7 @@
-const User = require("../models/User");
-const Pets = require("../models/Pets");
+const { User, Pets } = require("../models");
 
 const getLeaderboard = async (req, res) => {
     try {
-        User.hasOne(Pets, { foreignKey: 'user_id', as: 'Pet' });
-        Pets.belongsTo(User, { foreignKey: 'user_id' });
 
         const users = await User.findAll({
             include: {
