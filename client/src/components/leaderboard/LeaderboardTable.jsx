@@ -13,26 +13,29 @@ const LeaderboardTable = ({ data }) => {
     const getTrophy = (rank) => {
         switch (rank) {
             case 1:
-            return <img src={firstIcon} alt='1st' className='w-11 h-8' />;
+            return <img src={firstIcon} alt='1st' className='w-6 h-6' />;
             case 2:
-            return <img src={secondIcon} alt='2nd' className='w-11 h-8' />;
+            return <img src={secondIcon} alt='2nd' className='w-6 h-6' />;
             case 3:
-            return <img src={thirdIcon} alt='3rd' className='w-11 h-8' />;
+            return <img src={thirdIcon} alt='3rd' className='w-6 h-6' />;
             default:
-            return <span className='text-base font-semibold'>{rank}</span>;
+            return <span className='text-base font-semibold'>[{rank}]</span>;
         }
         };
 
   return (
-   <div className="bg-white rounded-xl shadow-md overflow-hidden max-w-4xl mx-auto">
+   <div className="bg-white rounded-2xl shadow-md overflow-hidden mx-auto">
       <h2 className="text-xl font-bold text-center py-4 border-b border-gray-200">🏆 Weekly Leaderboard</h2>
       <table className="w-full text-left table-auto">
         <thead className="bg-gray-100 text-gray-700">
           <tr className="text-sm">
-            <th className="py-2 px-4">Rank</th>
-            <th className="py-2 px-4">User</th>
-            <th className="py-2 px-4 hidden sm:table-cell">Level</th>
-            <th className="py-2 px-4"><PawPrint alt='Paw' className='w-4 h-4 text-orange-500'/></th>
+            <th className="py-2 px-4 md:w-1/14 border-r w-1/6 border-neutral-300">Rank</th>
+            <th className="py-2 px-4 md:w-4/14 border-r w-3/6 border-neutral-300">User</th>
+            <th className="py-2 px-4 md:w-3/14 border-r hidden sm:table-cell border-neutral-300">Level</th>
+            <th className="py-2 px-4 md:border-r w-2/6 md:w-3/14 md:border-neutral-300 border-none">
+              <PawPrint className='w-4 h-4 text-orange-500 inline-block' />
+            </th>
+            <th className="py-2 px-4 md:w-3/14 hidden sm:table-cell">Streak</th>
           </tr>
         </thead>
         <tbody>
@@ -43,8 +46,8 @@ const LeaderboardTable = ({ data }) => {
                 idx === 0 ? 'bg-yellow-100 font-semibold' : ''
               }`}
             >
-              <td className="py-2 px-4 text-center w-12">{getTrophy(user.rank)}</td>
-              <td className="flex items-center gap-3 py-3 px-4">
+              <td className="py-2 px-4 border-r border-neutral-300">{getTrophy(user.rank)}</td>
+              <td className="flex items-center gap-3 py-3 px-4 border-r border-neutral-300">
                 <img
                   src={user.avatar_url || defaultIcon}
                   alt="avatar"
@@ -52,8 +55,9 @@ const LeaderboardTable = ({ data }) => {
                 />
                 <span className="truncate">{user.username}</span>
               </td>
-              <td className="py-3 px-4 hidden sm:table-cell">{user.level}</td>
-              <td className="py-3 px-4 font-medium text-orange-500">{user.xp}</td>
+              <td className="py-3 px-4 hidden sm:table-cell border-r border-neutral-300">{user.level}</td>
+              <td className="py-3 px-4 font-medium text-orange-500 md:border-r md:border-neutral-300 border-none">{user.xp}</td>
+              <td className="py-3 px-4 hidden sm:table-cell">{user.streak}</td>
             </tr>
           ))}
         </tbody>
