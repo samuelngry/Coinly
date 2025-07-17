@@ -23,9 +23,11 @@ const LeaderboardTable = ({ data }) => {
         }
         };
 
+    const currentUserId = parseInt(localStorage.getItem("userId"));
+
   return (
-   <div className="bg-white rounded-2xl shadow-md overflow-hidden mx-auto">
-      <h2 className="text-xl font-bold text-center py-4 border-b border-gray-200">🏆 Weekly Leaderboard</h2>
+   <div className="bg-white rounded-2xl max-w-7xl shadow-md overflow-hidden mx-auto">
+      <h2 className="text-xl font-bold text-center py-4 border-b border-gray-200">🏆 Leaderboard</h2>
       <table className="w-full text-left table-auto">
         <thead className="bg-gray-100 text-gray-700">
           <tr className="text-sm">
@@ -43,7 +45,7 @@ const LeaderboardTable = ({ data }) => {
             <tr
               key={idx}
               className={`border-b text-sm hover:bg-gray-50 transition-all ${
-                idx === 0 ? 'bg-yellow-100 font-semibold' : ''
+                user.id === currentUserId ? 'bg-yellow-100 font-semibold' : ''
               }`}
             >
               <td className="py-2 px-4 border-r border-neutral-300">{getTrophy(user.rank)}</td>

@@ -24,6 +24,7 @@ const LoginForm = () => {
 
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('userId', user.id);
 
       if (!user.onboarding_completed) {
         navigate('/onboard');

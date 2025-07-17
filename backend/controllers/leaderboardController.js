@@ -19,6 +19,7 @@ const getLeaderboard = async (req, res) => {
         });
 
         const leaderboard = users.map((user, index) => ({
+            id: user.id,
             rank: index + 1,
             username: user.username,
             avatar_url: user.avatar_url ? `http://localhost:3000${user.avatar_url}` : null,
