@@ -1,6 +1,6 @@
 import React from 'react';
-import { Trophy } from 'lucide-react';
 import defaultIcon from '../../assets/default.png'
+import TrophyIcon from './TrophyIcon';
 
 const TopLeaderboard = ({ topThree }) => {
   if (!topThree || topThree.length < 3) return null;
@@ -9,18 +9,18 @@ const TopLeaderboard = ({ topThree }) => {
 
   const getTrophyIcon = (rank) => {
     switch (rank) {
-      case 1: return <Trophy className='w-6 h-6' />;
-      case 2: return <Trophy className='w-6 h-6' />;
-      case 3: return <Trophy className='w-6 h-6' />;
+      case 1: return <TrophyIcon className='fill-[#4A3F2C]' />;
+      case 2: return <TrophyIcon className='fill-[#5A5A5A]'/>;
+      case 3: return <TrophyIcon className='fill-[#EAEAEA]'/>;
       default: return '🏆';
     }
   };
 
   const getTrophyColor = (rank) => {
     switch (rank) {
-      case 1: return 'bg-yellow-500';
-      case 2: return 'bg-gray-400';
-      case 3: return 'bg-orange-500';
+      case 1: return 'bg-yellow-300';
+      case 2: return 'bg-gray-300';
+      case 3: return 'bg-yellow-600';
       default: return 'bg-gray-400';
     }
   };
@@ -42,7 +42,7 @@ const TopLeaderboard = ({ topThree }) => {
       {/* Card */}
       <div className="border border-neutral-300 rounded-lg p-4 w-80 flex flex-col items-center relative">
         {/* Trophy Icon */}
-        <div className={`${getTrophyColor(rank)} w-8 h-8 rounded-full flex items-center justify-center text-sm absolute -top-4`}>
+        <div className={`${getTrophyColor(rank)} w-10 h-10 rounded-xl flex items-center justify-center text-sm absolute -top-5`}>
           {getTrophyIcon(rank)}
         </div>
         
