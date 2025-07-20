@@ -26,7 +26,7 @@ const LeaderboardTable = ({ data }) => {
     const currentUserId = parseInt(localStorage.getItem("userId"));
 
   return (
-   <div className="bg-white rounded-2xl max-w-7xl shadow-md overflow-hidden mx-auto mt-12">
+   <div className="bg-white rounded-2xl  shadow-md overflow-hidden mx-auto mt-12">
       <table className="w-full text-left table-auto">
         <thead className="bg-gray-100 text-gray-700">
           <tr className="text-sm">
