@@ -25,7 +25,7 @@ const TopLeaderboard = ({ topThree }) => {
   };
 
   const PlayerCard = ({ player, rank, isCenter = false }) => (
-    <div className={`flex flex-col items-center ${isCenter ? 'order-2' : rank === 2 ? 'order-1' : 'order-3'}`}>
+    <div className={`flex flex-col items-center ${isCenter ? 'order-2 -translate-y-4' : rank === 2 ? 'order-1 translate-y-2' : 'order-3 translate-y-4'} transform`}>
       {/* Avatar */}
       <div className={`${isCenter ? 'w-30 h-30' : 'w-25 h-25'} rounded-xl overflow-hidden border border-neutral-300 mb-2`}>
         <img 
@@ -58,7 +58,7 @@ const TopLeaderboard = ({ topThree }) => {
               {player.level}
             </span>
           </div>
-          <div className="flex flex-col items-center gap-1 mb-0.5 border-r border-neutral-300 px-4">
+          <div className="flex flex-col items-center gap-1 mb-0.5 border-r border-neutral-300 px-8">
             <span className="text-neutral-500 text-sm"><PawPrint className='w-3.5 h-3.5 text-orange-500 inline-block' /></span>
             <span className="font-bold text-sm">
               {player.xp}
