@@ -1,32 +1,79 @@
-import React from 'react'
+import React from 'react';
+import { Trophy } from 'lucide-react';
+import defaultIcon from '../../assets/default.png'
 
-const TopLeaderboard = ({ leaderboard }) => {
+const TopLeaderboard = ({ topThree }) => {
+  if (!topThree || topThree.length < 3) return null;
+
+  const [first, second, third] = topThree;
+
+  const getTrophyIcon = (rank) => {
+    switch (rank) {
+      case 1: return <Trophy className='w-6 h-6' />;
+      case 2: return <Trophy className='w-6 h-6' />;
+      case 3: return <Trophy className='w-6 h-6' />;
+      default: return '🏆';
+    }
+  };
+
+  const getTrophyColor = (rank) => {
+    switch (rank) {
+      case 1: return 'bg-yellow-500';
+      case 2: return 'bg-gray-400';
+      case 3: return 'bg-orange-500';
+      default: return 'bg-gray-400';
+    }
+  };
+
+  const PlayerCard = ({ player, rank, isCenter = false }) => (
+    <div className={`flex flex-col items-center ${isCenter ? 'order-2' : rank === 2 ? 'order-1' : 'order-3'}`}>
+      {/* Avatar */}
+      <div className={`${isCenter ? 'w-30 h-30' : 'w-25 h-25'} rounded-xl overflow-hidden border border-neutral-300 mb-2`}>
+        <img 
+          src={player.avatar_url || defaultIcon} 
+          alt={player.username}
+          className="w-full h-full object-cover"
+        />
+      </div>
+      
+      {/* Username */}
+      <h3 className="font-medium text-sm mb-7">{player.username}</h3>
+      
+      {/* Card */}
+      <div className="border border-neutral-300 rounded-lg p-4 w-80 flex flex-col items-center relative">
+        {/* Trophy Icon */}
+        <div className={`${getTrophyColor(rank)} w-8 h-8 rounded-full flex items-center justify-center text-sm absolute -top-4`}>
+          {getTrophyIcon(rank)}
+        </div>
+        
+        {/* Points to earn */}
+        <p className="text-xs mb-2 mt-2">Earn 2,000 points</p>
+        
+        {/* Prize amount */}
+        <div className="flex items-center gap-1 mb-1">
+          <span className="text-blue-400 text-sm">💎</span>
+          <span className="text-white font-bold text-lg">
+            {player.prize?.toLocaleString() || (rank === 1 ? '100,000' : rank === 2 ? '50,000' : '20,000')}
+          </span>
+        </div>
+        
+        {/* Prize label */}
+        <p className="text-gray-400 text-xs">Prize</p>
+      </div>
+    </div>
+  );
+
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-6 text-center">Daily Leaderboard</h1>
-
-      <div className="flex justify-center gap-6 mb-12">
-        {leaderboard.slice(0, 3).map((user, index) => (
-          <div
-            key={user.username}
-            className="bg-white text-black rounded-2xl p-6 w-64 shadow-lg flex flex-col items-center"
-          >
-            <img
-              src={user.avatar_url || '/default-avatar.png'}
-              alt={user.username}
-              className="w-20 h-20 rounded-full mb-4 border-4 border-blue-400"
-            />
-            <h2 className="text-xl font-semibold">{user.username}</h2>
-            <p className="text-gray-600 mb-2">Level {user.level}</p>
-            <p className="text-yellow-600 font-bold">Earn {user.xp} XP</p>
-            <p className="text-blue-700 mt-2 text-sm">
-              💎 {index === 0 ? '10,000' : index === 1 ? '5,000' : '2,500'} Prize
-            </p>
-          </div>
-        ))}
+      <div className="mx-auto">
+        <div className="flex justify-center items-end gap-6 pt-12">
+          <PlayerCard player={second} rank={2} />
+          <PlayerCard player={first} rank={1} isCenter={true} />
+          <PlayerCard player={third} rank={3} />
         </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default TopLeaderboard
+export default TopLeaderboard;

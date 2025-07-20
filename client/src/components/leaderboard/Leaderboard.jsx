@@ -29,8 +29,12 @@ const Leaderboard = () => {
     fetchLeaderboard();
     }, []);
 
+    const topThree = leaderboard.slice(0, 3);
+    const others = leaderboard.slice(3);
+
   return (
     <div className='min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow justify-center'>
+        <TopLeaderboard topThree={topThree} />
         <LeaderboardTable data={leaderboard} />
     </div>
   )
