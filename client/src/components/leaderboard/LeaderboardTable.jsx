@@ -19,15 +19,14 @@ const LeaderboardTable = ({ data }) => {
             case 3:
             return <img src={thirdIcon} alt='3rd' className='w-6 h-6' />;
             default:
-            return <span className='text-sm md:text-base'>[{rank}]</span>;
+            return <span className='text-sm md:text-base'>{rank}</span>;
         }
         };
 
     const currentUserId = parseInt(localStorage.getItem("userId"));
 
   return (
-   <div className="bg-white rounded-2xl max-w-7xl shadow-md overflow-hidden mx-auto">
-      <h2 className="text-xl font-bold text-center py-4 border-b border-gray-200">🏆 Leaderboard</h2>
+   <div className="bg-white rounded-2xl max-w-7xl shadow-md overflow-hidden mx-auto mt-12">
       <table className="w-full text-left table-auto">
         <thead className="bg-gray-100 text-gray-700">
           <tr className="text-sm">
@@ -44,7 +43,7 @@ const LeaderboardTable = ({ data }) => {
           {data.map((user, idx) => (
             <tr
               key={idx}
-              className={`border-b text-sm hover:bg-gray-50 transition-all ${
+              className={`border-b text-sm hover:bg-gray-50 border-neutral-300 transition-all ${
                 user.id === currentUserId ? 'bg-yellow-100 font-semibold' : ''
               }`}
             >

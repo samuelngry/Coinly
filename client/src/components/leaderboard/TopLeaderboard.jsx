@@ -10,8 +10,8 @@ const TopLeaderboard = ({ topThree }) => {
   const getTrophyIcon = (rank) => {
     switch (rank) {
       case 1: return <TrophyIcon className='fill-[#4A3F2C]' />;
-      case 2: return <TrophyIcon className='fill-[#5A5A5A]'/>;
-      case 3: return <TrophyIcon className='fill-[#EAEAEA]'/>;
+      case 2: return <TrophyIcon className='fill-[#5A5A5A]' />;
+      case 3: return <TrophyIcon className='fill-[#EAEAEA]' />;
       default: return '🏆';
     }
   };
