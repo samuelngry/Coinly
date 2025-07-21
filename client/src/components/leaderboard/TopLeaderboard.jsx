@@ -27,7 +27,7 @@ const TopLeaderboard = ({ topThree }) => {
   const PlayerCard = ({ player, rank, isCenter = false }) => (
     <div className={`flex flex-col items-center ${isCenter ? 'order-2 -translate-y-4' : rank === 2 ? 'order-1 translate-y-2' : 'order-3 translate-y-4'} transform`}>
       {/* Avatar */}
-      <div className={`${isCenter ? 'w-25 h-25 md:w-30 md:h-30' : 'w-20 h-20 md:w-25 md:h-25'} rounded-xl overflow-hidden border border-neutral-300 mb-2`}>
+      <div className={`${isCenter ? 'w-25 h-25 md:w-40 md:h-40' : 'w-20 h-20 md:w-35 md:h-35'} rounded-xl overflow-hidden border border-neutral-300 mb-2`}>
         <img 
           src={player.avatar_url || defaultIcon} 
           alt={player.username}
@@ -36,7 +36,7 @@ const TopLeaderboard = ({ topThree }) => {
       </div>
       
       {/* Username */}
-      <h3 className="font-medium text-sm mb-7">{player.username}</h3>
+      <h3 className="font-medium text-sm md:text-lg mb-7">{player.username}</h3>
       
       {/* Card */}
       <div className="border border-neutral-300 rounded-lg p-0.5 md:p-4 w-full max-w-[120px] md:max-w-[220px] lg:max-w-[220px] min-w-[100px] flex flex-col items-center relative">
