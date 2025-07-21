@@ -32,11 +32,11 @@ const LeaderboardTable = ({ data }) => {
           <tr className="text-sm">
             <th className="py-2 px-4 md:w-1/14 border-r w-1/6 border-neutral-300">Rank</th>
             <th className="py-2 px-4 md:w-4/14 border-r w-3/6 border-neutral-300">User</th>
-            <th className="py-2 px-4 md:w-3/14 border-r hidden sm:table-cell border-neutral-300">Level</th>
+            <th className="py-2 px-4 md:w-3/14 border-r hidden md:table-cell border-neutral-300">Level</th>
             <th className="py-2 px-4 w-2/6 md:w-3/14 md:border-r md:border-neutral-300">
               <PawPrint className='w-4 h-4 text-orange-500 inline-block' />
             </th>
-            <th className="py-2 px-4 md:w-3/14 hidden sm:table-cell">Streak</th>
+            <th className="py-2 px-4 md:w-3/14 hidden md:table-cell">Streak</th>
           </tr>
         </thead>
         <tbody>
@@ -56,9 +56,9 @@ const LeaderboardTable = ({ data }) => {
                 />
                 <span className="truncate">{user.username}</span>
               </td>
-              <td className="py-3 px-4 hidden sm:table-cell border-r border-neutral-300">{user.level}</td>
+              <td className="py-3 px-4 hidden md:table-cell border-r border-neutral-300">{user.level}</td>
               <td className="py-3 px-4 font-medium text-orange-500 md:border-r md:border-neutral-300">{user.xp}</td>
-              <td className="py-3 px-4 hidden sm:table-cell ">{user.streak}</td>
+              <td className="py-3 px-4 hidden md:table-cell ">{user.streak}</td>
             </tr>
           ))}
         </tbody>
