@@ -8,25 +8,25 @@ const Leaderboard = () => {
     const [leaderboard, setLeaderboard] = useState([]);
     
     useEffect(() => {
-    const fetchLeaderboard = async () => {
-        const token = localStorage.getItem("token");
+        const fetchLeaderboard = async () => {
+            const token = localStorage.getItem("token");
 
-        const res = await fetch("http://localhost:3000/api/leaderboard", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`
+            const res = await fetch("http://localhost:3000/api/leaderboard", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            
+            if (!res.ok) {
+                throw new Error("Failed to fetch leaderboard");
             }
-        });
-        
-        if (!res.ok) {
-            throw new Error("Failed to fetch leaderboard");
-        }
-        
-        const data = await res.json();
-        setLeaderboard(data);
-    };
-    fetchLeaderboard();
+            
+            const data = await res.json();
+            setLeaderboard(data);
+        };
+        fetchLeaderboard();
     }, []);
 
     const topThree = leaderboard.slice(0, 3);

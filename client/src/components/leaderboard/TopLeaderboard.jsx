@@ -18,71 +18,74 @@ const TopLeaderboard = ({ topThree }) => {
 
   const getTrophyColor = (rank) => {
     switch (rank) {
-      case 1: return 'bg-gradient-to-br from-yellow-200 to-yellow-300 shadow-lg shadow-yellow-500/50';
+      case 1: return 'bg-gradient-to-br from-yellow-200 to-yellow-300 shadow-lg shadow-yellow-500/50 animate-pulse-slow';
       case 2: return 'bg-gradient-to-br from-gray-200 to-gray-300 shadow-lg shadow-gray-400/50';
       case 3: return 'bg-gradient-to-br from-amber-300 to-amber-400 shadow-lg shadow-amber-400/50';
     }
   };
 
-  const PlayerCard = ({ player, rank, isCenter = false }) => (
-    <div className={`flex flex-col items-center transform transition-all duration-300 hover:scale-105 ${isCenter ? 'order-2 -translate-y-4' : rank === 2 ? 'order-1 translate-y-2' : 'order-3 translate-y-4'}`}>
-      {/* Avatar */}
-      <div className={`${isCenter ? 'w-25 h-25 md:w-40 md:h-40' : 'w-20 h-20 md:w-35 md:h-35'} rounded-xl overflow-hidden border border-neutral-300 mb-2`}>
-        <img 
-          src={player.avatar_url || defaultIcon} 
-          alt={player.username}
-          className="w-full h-full object-cover"
-        />
-      </div>
-      
-      {/* Username */}
-      <h3 className="font-medium text-sm md:text-lg mb-7">{player.username}</h3>
-      
-      {/* Card */}
-      <div className="border border-neutral-300 rounded-lg p-0.5 md:p-4 w-full max-w-[120px] md:max-w-[220px] lg:max-w-[220px] min-w-[100px] flex flex-col items-center relative">
-        {/* Trophy Icon */}
-        <div className={`${getTrophyColor(rank)} w-10 h-10 rounded-xl flex items-center justify-center text-sm absolute -top-5`}>
-          {getTrophyIcon(rank)}
+  const PlayerCard = ({ player, rank, isCenter = false }) => {
+
+    return (
+      <div className={`flex flex-col items-center transform transition-all duration-300 hover:scale-105 ${isCenter ? 'order-2 -translate-y-4' : rank === 2 ? 'order-1 translate-y-2' : 'order-3 translate-y-4'}`}>
+        {/* Avatar */}
+        <div className={`${isCenter ? 'w-25 h-25 md:w-40 md:h-40' : 'w-20 h-20 md:w-35 md:h-35'} rounded-xl overflow-hidden border border-neutral-300 mb-2`}>
+          <img 
+            src={player.avatar_url || defaultIcon} 
+            alt={player.username}
+            className="w-full h-full object-cover"
+          />
         </div>
         
-        {/* Stats */}
-        <div className='flex justify mt-4'>
-          <div className="flex flex-col items-center gap-1 mb-0.5 md:border-r border-neutral-300 md:px-4 lg:px-6">
-            <span className="text-neutral-500 text-sm hidden md:block">Level</span>
-            <span className="font-bold text-sm hidden md:block">
-              {player.level}
-            </span>
+        {/* Username */}
+        <h3 className="font-medium text-sm md:text-lg mb-7">{player.username}</h3>
+        
+        {/* Card */}
+        <div className="border border-neutral-300 rounded-lg p-0.5 md:p-4 w-full max-w-[120px] md:max-w-[220px] lg:max-w-[220px] min-w-[100px] flex flex-col items-center relative">
+          {/* Trophy Icon */}
+          <div className={`${getTrophyColor(rank)} w-10 h-10 rounded-xl flex items-center justify-center text-sm absolute -top-5`}>
+            {getTrophyIcon(rank)}
           </div>
-          <div className="flex flex-col items-center gap-1 mb-0.5 md:border-r border-neutral-300 mx-auto px-1 md:px-4 lg:px-6 mt-1 md:mt-0">
-            <span className="text-neutral-500 text-sm"><PawPrint className='w-3.5 h-3.5 text-orange-500 inline-block' /></span>
-            <span className="font-bold text-sm text-orange-500">
-              {player.xp}
-            </span>
-            <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
-              <div 
-                className="bg-orange-500 h-2 rounded-full transition-all duration-300" 
-                style={{width: `${player.xp/player.total_xp}`}}
-              />
+          
+          {/* Stats */}
+          <div className='flex justify mt-4'>
+            <div className="flex flex-col items-center gap-1 mb-0.5 md:border-r border-neutral-300 md:px-4 lg:px-6">
+              <span className="text-neutral-500 text-sm hidden md:block">Level</span>
+              <span className="font-bold text-sm hidden md:block">
+                {player.level}
+              </span>
+            </div>
+            <div className="flex flex-col items-center gap-1 mb-0.5 md:border-r border-neutral-300 mx-auto px-1 md:px-4 lg:px-6 mt-1 md:mt-0">
+              <span className="text-neutral-500 text-sm"><PawPrint className='w-3.5 h-3.5 text-orange-500 inline-block' /></span>
+              <span className="font-bold text-sm text-orange-500">
+                {player.xp}
+              </span>
+              <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
+                <div 
+                  className="bg-orange-500 h-2 rounded-full transition-all duration-300" 
+                  style={{width: `${player.xp/player.total_xp}`}}
+                />
+              </div>
+            </div>
+            <div className="flex flex-col items-center gap-1 mb-0.5 md:px-4 lg:px-6">
+              <span className="text-neutral-500 text-sm hidden md:block">Streak</span>
+              <span className="font-bold text-sm hidden md:block">
+                {player.streak}
+              </span>
             </div>
           </div>
-          <div className="flex flex-col items-center gap-1 mb-0.5 md:px-4 lg:px-6">
-            <span className="text-neutral-500 text-sm hidden md:block">Streak</span>
-            <span className="font-bold text-sm hidden md:block">
-              {player.streak}
+
+          {/* XP to Earn */}
+          <div className="mt-2 mb-2 md:mt-4">
+            <span className="text-[10px] sm:text-xs font-medium text-gray-700 bg-gray-100 px-3 py-1 rounded-full border border-neutral-300 hover:bg-orange-100 hover:text-orange-600 transition-colors">
+              {rank === 1 ? 'Earn 800XP' : rank === 2 ? 'Earn 600XP' : rank === 3 ? 'Earn 400XP' : ''}
             </span>
           </div>
+          
         </div>
-
-        {/* XP to Earn */}
-        <div className="mt-2 mb-2 md:mt-4">
-          <span className="text-[10px] sm:text-xs font-medium text-gray-700 bg-gray-100 px-3 py-1 rounded-full border border-neutral-300 hover:bg-orange-100 hover:text-orange-600 transition-colors">
-            {rank === 1 ? 'Earn 800XP' : rank === 2 ? 'Earn 600XP' : rank === 3 ? 'Earn 400XP' : ''}
-          </span>
-        </div>
-        
       </div>
-    </div>
-  );
+    )
+  };
 
   return (
     <div>
