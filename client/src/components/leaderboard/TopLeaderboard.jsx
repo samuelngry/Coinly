@@ -27,7 +27,7 @@ const TopLeaderboard = ({ topThree }) => {
   const PlayerCard = ({ player, rank, isCenter = false }) => (
     <div className={`flex flex-col items-center ${isCenter ? 'order-2 -translate-y-4' : rank === 2 ? 'order-1 translate-y-2' : 'order-3 translate-y-4'} transform`}>
       {/* Avatar */}
-      <div className={`${isCenter ? 'w-30 h-30' : 'w-25 h-25'} rounded-xl overflow-hidden border border-neutral-300 mb-2`}>
+      <div className={`${isCenter ? 'w-25 h-25 md:w-30 md:h-30' : 'w-20 h-20 md:w-25 md:h-25'} rounded-xl overflow-hidden border border-neutral-300 mb-2`}>
         <img 
           src={player.avatar_url || defaultIcon} 
           alt={player.username}
@@ -39,37 +39,39 @@ const TopLeaderboard = ({ topThree }) => {
       <h3 className="font-medium text-sm mb-7">{player.username}</h3>
       
       {/* Card */}
-      <div className="border border-neutral-300 rounded-lg p-4 w-80 flex flex-col items-center relative">
+      <div className="border border-neutral-300 rounded-lg p-1 md:p-4 w-25 md:w-55 flex flex-col items-center relative">
         {/* Trophy Icon */}
         <div className={`${getTrophyColor(rank)} w-10 h-10 rounded-xl flex items-center justify-center text-sm absolute -top-5`}>
           {getTrophyIcon(rank)}
         </div>
         
-        {/* XP to Earn */}
-        <p className="text-xs mb-2 mt-2 border-b border-neutral-300 px-24 p-1">
-          {rank === 1 ? 'Earn 1000XP' : rank === 2 ? 'Earn 600XP' : rank === 3 ? 'Earn 400XP' : ''}
-        </p>
-        
         {/* Stats */}
-        <div className='flex'>
-          <div className="flex flex-col items-center gap-1 mb-0.5 border-r border-neutral-300 px-4">
-            <span className="text-neutral-500 text-sm">Level</span>
-            <span className="font-bold text-sm">
+        <div className='flex mt-4'>
+          <div className="flex flex-col items-center gap-1 mb-0.5 md:border-r border-neutral-300 px-4">
+            <span className="text-neutral-500 text-sm hidden md:block">Level</span>
+            <span className="font-bold text-sm hidden md:block">
               {player.level}
             </span>
           </div>
-          <div className="flex flex-col items-center gap-1 mb-0.5 border-r border-neutral-300 px-8">
+          <div className="flex flex-col items-center gap-1 mb-0.5 md:border-r border-neutral-300 px-1 md:px-4 mt-1 md:mt-0">
             <span className="text-neutral-500 text-sm"><PawPrint className='w-3.5 h-3.5 text-orange-500 inline-block' /></span>
-            <span className="font-bold text-sm">
+            <span className="font-bold text-sm text-orange-500">
               {player.xp}
             </span>
           </div>
           <div className="flex flex-col items-center gap-1 mb-0.5 px-4">
-            <span className="text-neutral-500 text-sm">Streak</span>
-            <span className="font-bold text-sm">
+            <span className="text-neutral-500 text-sm hidden md:block">Streak</span>
+            <span className="font-bold text-sm hidden md:block">
               {player.streak}
             </span>
           </div>
+        </div>
+
+        {/* XP to Earn */}
+        <div className="mt-2 mb-2 md:mt-4">
+          <span className="text-[10px] sm:text-xs font-medium text-gray-700 bg-gray-100 px-3 py-1 rounded-full border border-neutral-300">
+            {rank === 1 ? 'Earn 1000XP' : rank === 2 ? 'Earn 600XP' : rank === 3 ? 'Earn 400XP' : ''}
+          </span>
         </div>
         
       </div>

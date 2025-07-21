@@ -26,8 +26,8 @@ const LeaderboardTable = ({ data }) => {
     const currentUserId = parseInt(localStorage.getItem("userId"));
 
   return (
-   <div className="bg-white rounded-2xl  shadow-md overflow-hidden mx-auto mt-12">
-      <table className="w-full text-left table-auto">
+   <div className="bg-white rounded-2xl mx-auto shadow-md overflow-x-auto mt-12">
+      <table className="text-left w-full table-auto">
         <thead className="bg-gray-100 text-gray-700">
           <tr className="text-sm">
             <th className="py-2 px-4 md:w-1/14 border-r w-1/6 border-neutral-300">Rank</th>

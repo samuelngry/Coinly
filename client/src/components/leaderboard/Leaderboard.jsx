@@ -35,7 +35,7 @@ const Leaderboard = () => {
   return (
     <div className='min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow justify-center'>
         <TopLeaderboard topThree={topThree} />
-        <LeaderboardTable data={others} />
+        <LeaderboardTable data={others} />        
     </div>
   )
 }
