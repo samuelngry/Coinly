@@ -39,27 +39,27 @@ const TopLeaderboard = ({ topThree }) => {
       <h3 className="font-medium text-sm mb-7">{player.username}</h3>
       
       {/* Card */}
-      <div className="border border-neutral-300 rounded-lg p-0.5 md:p-4 w-25 md:w-55 lg:w-80 flex flex-col items-center relative">
+      <div className="border border-neutral-300 rounded-lg p-0.5 md:p-4 w-full max-w-[120px] md:max-w-[220px] lg:max-w-[220px] min-w-[100px] flex flex-col items-center relative">
         {/* Trophy Icon */}
         <div className={`${getTrophyColor(rank)} w-10 h-10 rounded-xl flex items-center justify-center text-sm absolute -top-5`}>
           {getTrophyIcon(rank)}
         </div>
         
         {/* Stats */}
-        <div className='flex mt-4'>
-          <div className="flex flex-col items-center gap-1 mb-0.5 md:border-r border-neutral-300 md:px-4 lg:px-8">
+        <div className='flex justify mt-4'>
+          <div className="flex flex-col items-center gap-1 mb-0.5 md:border-r border-neutral-300 md:px-4 lg:px-6">
             <span className="text-neutral-500 text-sm hidden md:block">Level</span>
             <span className="font-bold text-sm hidden md:block">
               {player.level}
             </span>
           </div>
-          <div className="flex flex-col items-center gap-1 mb-0.5 md:border-r border-neutral-300 mx-auto px-1 md:px-4 lg:px-8 mt-1 md:mt-0">
+          <div className="flex flex-col items-center gap-1 mb-0.5 md:border-r border-neutral-300 mx-auto px-1 md:px-4 lg:px-6 mt-1 md:mt-0">
             <span className="text-neutral-500 text-sm"><PawPrint className='w-3.5 h-3.5 text-orange-500 inline-block' /></span>
             <span className="font-bold text-sm text-orange-500">
               {player.xp}
             </span>
           </div>
-          <div className="flex flex-col items-center gap-1 mb-0.5 md:px-4 lg:px-8">
+          <div className="flex flex-col items-center gap-1 mb-0.5 md:px-4 lg:px-6">
             <span className="text-neutral-500 text-sm hidden md:block">Streak</span>
             <span className="font-bold text-sm hidden md:block">
               {player.streak}
