@@ -38,9 +38,6 @@ const LeaderboardTable = ({ data, currentUserId, isLoading = false }) => {
                 <PawPrint className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-gray-700 mb-2">No Rankings Yet</h3>
                 <p className="text-gray-500">Start your journey to claim the top spot!</p>
-                <button className="mt-4 bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600 transition-colors">
-                    Start Questing!
-                </button>
             </div>
         );
     }
@@ -56,17 +53,6 @@ const LeaderboardTable = ({ data, currentUserId, isLoading = false }) => {
             default:
                 return <span className='text-sm md:text-base font-medium'>{rank}</span>;
         }
-    };
-
-    // Get trend indicator
-    const getTrendIndicator = (user) => {
-        const rankChange = user.rank_change || 0;
-        if (rankChange > 0) {
-            return <TrendingUp className="w-4 h-4 text-green-500" />;
-        } else if (rankChange < 0) {
-            return <TrendingDown className="w-4 h-4 text-red-500" />;
-        }
-        return <Minus className="w-4 h-4 text-gray-400" />;
     };
 
     // Calculate XP progress percentage
@@ -176,11 +162,7 @@ const LeaderboardTable = ({ data, currentUserId, isLoading = false }) => {
                             >
                                 <td className="py-3 px-4 border-r border-neutral-300">
                                     <div className="flex items-center gap-2">
-                                        {getTrophy(user.rank)}
-                                        {/* Trend indicator */}
-                                        <div className="hidden md:block">
-                                            {getTrendIndicator(user)}
-                                        </div>
+                                        {getTrophy(user.rank)}                                    
                                     </div>
                                 </td>
                                 <td className="py-3 px-4 border-r border-neutral-300">
@@ -191,10 +173,6 @@ const LeaderboardTable = ({ data, currentUserId, isLoading = false }) => {
                                                 alt="avatar"
                                                 className="w-8 h-8 rounded-full object-cover"
                                             />
-                                            {/* Online status indicator */}
-                                            {user.is_online && (
-                                                <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 rounded-full border border-white"></div>
-                                            )}
                                         </div>
                                         <div className="flex flex-col">
                                             <span className="truncate">

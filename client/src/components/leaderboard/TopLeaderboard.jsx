@@ -43,13 +43,13 @@ const TopLeaderboard = ({ topThree }) => {
         {/* Card */}
         <div className="border border-neutral-300 rounded-lg p-0.5 md:p-4 w-full max-w-[120px] md:max-w-[220px] lg:max-w-[220px] min-w-[100px] flex flex-col items-center relative">
           {/* Trophy Icon */}
-          <div className={`${getTrophyColor(rank)} w-10 h-10 rounded-xl flex items-center justify-center text-sm absolute -top-5`}>
+          <div className={`${getTrophyColor(rank)} w-9 h-9 md:w-10 md:h-10 rounded-xl flex items-center justify-center text-sm absolute -top-5`}>
             {getTrophyIcon(rank)}
           </div>
           
           {/* Stats */}
           <div className='flex justify mt-4'>
-            <div className="flex flex-col items-center gap-1 mb-0.5 md:border-r border-neutral-300 md:px-4 lg:px-6">
+            <div className="flex flex-col items-center gap-1 mb-0.5 md:border-r border-neutral-300 md:px-4 lg:px-5">
               <span className="text-neutral-500 text-sm hidden md:block">Level</span>
               <span className="font-bold text-sm hidden md:block">
                 {player.level}
@@ -67,7 +67,7 @@ const TopLeaderboard = ({ topThree }) => {
                 />
               </div>
             </div>
-            <div className="flex flex-col items-center gap-1 mb-0.5 md:px-4 lg:px-6">
+            <div className="flex flex-col items-center gap-1 mb-0.5 md:px-4 lg:px-5">
               <span className="text-neutral-500 text-sm hidden md:block">Streak</span>
               <span className="font-bold text-sm hidden md:block">
                 {player.streak}
