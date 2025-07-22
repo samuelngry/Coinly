@@ -65,23 +65,20 @@ async function generateDynamicQuests(userId) {
 
     try {
         // Create date for today at start of day
-        const today = new Date();
-        const singaporeNow = new Date(today.getTime() + (8 * 60 * 60 * 1000));
+        const nowSGT = new Date();
 
-        const todayStartSGT = new Date(singaporeNow.getFullYear(), singaporeNow.getMonth(), singaporeNow.getDate(), 0, 0, 0, 0);
-        const todayEndSGT = new Date(singaporeNow.getFullYear(), singaporeNow.getMonth(), singaporeNow.getDate(), 23, 59, 59, 999);
+        const todayStartSGT = new Date(nowSGT.getFullYear(), nowSGT.getMonth(), nowSGT.getDate(), 0, 0, 0, 0);
+        const todayEndSGT = new Date(nowSGT.getFullYear(), nowSGT.getMonth(), nowSGT.getDate(), 23, 59, 59, 999);
 
-        const todayStartUTC = new Date(todayStartSGT.getTime() - (8 * 60 * 60 * 1000));
-        const todayEndUTC = new Date(todayEndSGT.getTime() - (8 * 60 * 60 * 1000));
-
-        console.log("Checking for existing quests between:", todayStartUTC, "and", todayEndUTC);
-        console.log("Singapore date:", singaporeNow.toDateString());
+        console.log("Current SGT time:", nowSGT.toLocaleString());
+        console.log("Checking for existing quests between:", todayStartSGT, "and", todayEndSGT);
+        console.log("Singapore date:", nowSGT.toDateString());
 
         const existingQuests = await UserQuest.findAll({
             where: {
                 user_id: userId,
                 instance_date: {
-                    [Op.between]: [todayStartUTC, todayEndUTC]
+                    [Op.between]: [todayStartSGT, todayEndSGT]
                 },
                 status: {
                     [Op.in]: ['Pending', 'Completed']
@@ -93,20 +90,17 @@ async function generateDynamicQuests(userId) {
         const dailyQuestsCount = existingQuests.filter(q => q.type === 'daily').length;
         const bonusQuestsCount = existingQuests.filter(q => q.type === 'bonus').length;
 
+
         // Fix: Use consistent timezone and correct logic
         const lastGeneratedAt = user.last_generated_at ? new Date(user.last_generated_at) : null;
-        const lastGeneratedSGT = lastGeneratedAt
-            ? new Date(lastGeneratedAt.getTime() + (8 * 60 * 60 * 1000))  // Convert to SGT
-            : null;
 
-        const needsGeneration =
-        !lastGeneratedSGT ||
-        lastGeneratedSGT.getFullYear() !== singaporeNow.getFullYear() ||
-        lastGeneratedSGT.getMonth() !== singaporeNow.getMonth() ||
-        lastGeneratedSGT.getDate() !== singaporeNow.getDate();
-
+        const needsGeneration = !lastGeneratedAt ||
+            lastGeneratedAt.getFullYear() !== nowSGT.getFullYear() ||
+            lastGeneratedAt.getMonth() !== nowSGT.getMonth() ||
+            lastGeneratedAt.getDate() !== nowSGT.getDate();
+        
         console.log("Last generated at:", lastGeneratedAt);
-        console.log("Today start UTC:", todayStartUTC);
+        console.log("Today start SGT:", todayStartSGT);
         console.log("Needs generation:", needsGeneration);
         console.log("Daily quests count:", dailyQuestsCount);
         console.log("Bonus quests count:", bonusQuestsCount);
@@ -116,13 +110,13 @@ async function generateDynamicQuests(userId) {
 
             // Use atomic update with WHERE condition to prevent race conditions
             const [affectedRows] = await User.update(
-                { last_generated_at: todayStartUTC },
+                { last_generated_at: nowSGT },
                 { 
                     where: {
                         id: userId,
                         [Op.or]: [
                             { last_generated_at: null },
-                            { last_generated_at: { [Op.lt]: todayStartUTC } }
+                            { last_generated_at: { [Op.lt]: todayStartSGT } }
                         ]
                     }
                 }
@@ -136,7 +130,7 @@ async function generateDynamicQuests(userId) {
                     where: {
                         user_id: userId,
                         instance_date: {
-                            [Op.between]: [todayStartUTC, todayEndUTC]
+                            [Op.between]: [todayStartSGT, todayEndSGT]
                         },
                         status: {
                             [Op.in]: ['Pending', 'Completed']
@@ -156,7 +150,7 @@ async function generateDynamicQuests(userId) {
                     where: {
                         user_id: userId,
                         status: 'Completed',
-                        instance_date: { [Op.lt] : todayStartUTC }, // Use consistent date
+                        instance_date: { [Op.lt] : todayStartSGT }, // Use consistent date
                     },
                 }
             );
@@ -173,7 +167,7 @@ async function generateDynamicQuests(userId) {
                 console.log('Generated', bonus.length, 'bonus quests');
             }
 
-            console.log('Updated last_generated_at to:', todayStartUTC);
+            console.log('Updated last_generated_at to:', todayStartSGT);
         } else {
             console.log('No generation needed - already generated today or sufficient quests exist');
         }
