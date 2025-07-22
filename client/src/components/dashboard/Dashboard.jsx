@@ -299,8 +299,9 @@ const Dashboard = () => {
   const totalBonus = bonusQuests.length;
   const completedBonus = bonusQuests.filter(q => q.status === 'Completed').length;
 
-  const totalCustom = customQuests.length;
-  const completedCustom = customQuests.filter(q => q.status === 'Completed').length;
+  const activeCustomQuests = customQuests.filter(q => q.status != 'Expired');
+  const totalCustom = activeCustomQuests.length;
+  const completedCustom = activeCustomQuests.filter(q => q.status === 'Completed').length;
 
   const totalQuest = totalDaily + totalBonus + totalCustom;
   const completedQuest = completedDaily + completedBonus + completedCustom;

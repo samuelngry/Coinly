@@ -40,7 +40,7 @@ const PetStat = ({ data, total }) => {
             </div>
         </div>
         <div className='flex justify-center items-center mt-3'>
-            <ResponsiveContainer width="100%" height={chartHeight}>
+            <ResponsiveContainer width="100%" height={415}>
                 <LineChart data={data} margin={{ right: 30}}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="day" />
