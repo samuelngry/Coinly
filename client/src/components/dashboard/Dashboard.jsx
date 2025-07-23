@@ -325,6 +325,10 @@ const Dashboard = () => {
   const totalQuest = totalDaily + totalBonus + totalCustom;
   const completedQuest = completedDaily + completedBonus + completedCustom;
 
+  const totalBonusXp = bonusQuests
+    .filter(q => q.status === 'Completed')
+    .reduce((sum, q) => sum + (q.xp || 0), 0);
+
   useEffect(() => {
     if (completedBonus === totalBonus && totalBonus > 0 && !showBonusComplete) {
       setShowBonusComplete(true);
@@ -343,7 +347,7 @@ const Dashboard = () => {
   return (
     <div className='min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow justify-center'>
       {showBonusComplete && petName && (
-        <CompleteModal name={petName} onClose={() => setShowBonusComplete(false)} />
+        <CompleteModal name={petName} totalXp={totalBonusXp} onClose={() => setShowBonusComplete(false)} />
       )}
         <div className='sticky top-0 left-0 lg:px-60 bg-white backdrop-blur-md'>
           {showConfetti && <Confetti width={width} height={height} numberOfPieces={300} />}
