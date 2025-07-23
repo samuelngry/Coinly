@@ -6,6 +6,7 @@ import MainCards from './MainCards';
 import DailyQuests from './DailyQuests';
 import BonusQuests from './BonusQuests';
 import CustomQuests from './CustomQuests';
+import CompleteModal from './CompleteModal';
 import Confetti from 'react-confetti';
 import { useWindowSize } from '@react-hook/window-size';
 import toast from 'react-hot-toast';
@@ -22,6 +23,7 @@ const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showConfetti, setShowConfetti] = useState(false);
   const [width, height] = useWindowSize();
+  const [showBonusComplete, setShowBonusComplete] = useState(false);
 
   const getCustomQuests = async () => {
     try {
@@ -323,6 +325,13 @@ const Dashboard = () => {
   const totalQuest = totalDaily + totalBonus + totalCustom;
   const completedQuest = completedDaily + completedBonus + completedCustom;
 
+  useEffect(() => {
+    if (completedBonus === totalBonus && totalBonus > 0 && !showBonusComplete) {
+      setShowBonusComplete(true);
+    }
+  }, [completedBonus, totalBonus]);
+
+
   // useEffect(() => {
   //   // Trigger confetti when all daily and bonus quests are completed
   //   if (completedDaily === totalDaily && completedBonus === totalBonus && completedCustom === totalBonus && totalDaily > 0 && totalBonus > 0 && totalCustom > 0) {
@@ -333,6 +342,9 @@ const Dashboard = () => {
 
   return (
     <div className='min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow justify-center'>
+      {showBonusComplete && petName && (
+        <CompleteModal name={petName} onClose={() => setShowBonusComplete(false)} />
+      )}
         <div className='sticky top-0 left-0 lg:px-60 bg-white backdrop-blur-md'>
           {showConfetti && <Confetti width={width} height={height} numberOfPieces={300} />}
           <div className='py-2'>
