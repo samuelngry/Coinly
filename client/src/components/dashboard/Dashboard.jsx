@@ -267,12 +267,23 @@ const Dashboard = () => {
       setTimeout(() => setShowConfetti(false), 4000);
 
       if (type === "daily") {
-        setDailyQuests((prev) => prev.map((q) => q.id === id ? { ...q, status: "Completed" } : q ));
+        const updatedDaily = dailyQuests.map((q) => q.id === id ? { ...q, status: "Completed" } : q );
+        setDailyQuests(updatedDaily);
+
+        const completed = updatedDaily.filter(q => q.status === "Completed").length;
+        if (completed === updatedDaily.length) {
+          setShowDailyComplete(true);
+        }
       } else if (type === "bonus") {
-        setBonusQuests((prev) => prev.map((q) => q.id === id ? { ...q, status: "Completed" } : q ));
-      } else if (type === "custom") {
-        setCustomQuests((prev) => prev.map((q) => q.id === id ? {...q, status: "Completed" } : q ));
+        const updatedBonus = bonusQuests.map((q) => q.id === id ? { ...q, status: "Completed" } : q );
+        setBonusQuests(updatedBonus);
+
+        const completed = updatedBonus.filter(q => q.status === "Completed").length;
+        if (completed === updatedBonus.length) {
+          setShowBonusComplete(true);
+        }
       }
+
     } catch (err) {
       console.error("Failed to complete quest:", err);
     }
@@ -335,19 +346,6 @@ const Dashboard = () => {
   const totalDailyXp = dailyQuests
     .filter(q => q.status === 'Completed')
     .reduce((sum, q) => sum + (q.xp || 0), 0);
-
-  useEffect(() => {
-    if (completedBonus === totalBonus && totalBonus > 0 && !showBonusComplete) {
-      setShowBonusComplete(true);
-    }
-  }, [completedBonus, totalBonus]);
-
-  useEffect(() => {
-    if (completedDaily === totalDaily && totalDaily > 0 && !showDailyComplete) {
-      setShowDailyComplete(true);
-    }
-  }, [completedDaily, totalDaily]);
-
 
   // useEffect(() => {
   //   // Trigger confetti when all daily and bonus quests are completed

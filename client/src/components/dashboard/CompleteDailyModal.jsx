@@ -25,7 +25,7 @@ const CompleteDailyModal = ({ name, totalXp, onClose }) => {
             transition={{ type: "spring", stiffness: 120 }}
         />
         <h2 className="text-xl md:text-2xl font-bold text-orange-500 mb-2">Daily Quests Completed!</h2>
-        <p className="text-gray-700 mb-4">
+        <p className="text-gray-700 mb-4 text-sm">
           {name || "Your pet"} earned a golden treat! 🍬
         </p>
         <div className='border border-neutral-300 text-sm mb-6 p-4 rounded-xl text-neutral-500 flex justify-between'>
