@@ -148,7 +148,7 @@ const Dashboard = () => {
       toast.success("Quest added!");
     } catch (err) {
         console.error("Failed to add custom quest:", err);
-        toast.error("Failed to add custom quest");
+        toast.error("Failed to add quest");
     }
   };
 
@@ -179,8 +179,12 @@ const Dashboard = () => {
             : quest
         )
       );
+      toast("Quest updated!", {
+        icon: "✏️",
+      });
     } catch (err) {
       console.error("Failed to update custom quest:", err);
+      toast.error("Failed to update quest!");
     }
   };
 
@@ -210,7 +214,7 @@ const Dashboard = () => {
       });
     } catch (err) {
       console.error("Failed to delete custom quest:", err);
-      toast.error("Failed to delete custom quest!");
+      toast.error("Failed to delete quest!");
     }
   };
 
@@ -290,6 +294,10 @@ const Dashboard = () => {
       console.log("Pet name updated:", data);
 
       setPetName(data.newPetName);
+
+      toast("Pet name updated!", {
+        icon: "✏️",
+      });
     } catch (err) {
       console.error("Failed to update pet name:", err);
     }
