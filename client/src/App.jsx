@@ -8,10 +8,12 @@ import OnboardingPage from "./components/pages/OnboardingPage";
 import QuestsPage from "./components/pages/QuestsPage";
 import PetPage from "./components/pages/PetPage";
 import LeaderboardPage from "./components/pages/LeaderboardPage";
+import { Toaster } from 'react-hot-toast';
 
 const App = () => {
   return (
     <Router>
+      <Toaster position="top-center" reverseOrder={false} />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />

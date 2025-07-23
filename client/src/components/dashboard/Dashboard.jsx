@@ -8,6 +8,7 @@ import BonusQuests from './BonusQuests';
 import CustomQuests from './CustomQuests';
 import Confetti from 'react-confetti';
 import { useWindowSize } from '@react-hook/window-size';
+import toast from 'react-hot-toast';
 
 const Dashboard = () => {
   const [customQuests, setCustomQuests] = useState([]);
@@ -143,8 +144,11 @@ const Dashboard = () => {
       console.log("Custom Quest Added:", data.quest);
 
       setCustomQuests((prev) => [...prev, data.quest]);
+
+      toast.success("Quest added!");
     } catch (err) {
         console.error("Failed to add custom quest:", err);
+        toast.error("Failed to add custom quest");
     }
   };
 
@@ -200,8 +204,13 @@ const Dashboard = () => {
       console.log("Custom Quest Deleted:", data.quest);
 
       setCustomQuests((prev) => prev.filter((q) => q.id !== id));
+
+      toast("Quest deleted!", {
+        icon: "🗑️",
+      });
     } catch (err) {
       console.error("Failed to delete custom quest:", err);
+      toast.error("Failed to delete custom quest!");
     }
   };
 
