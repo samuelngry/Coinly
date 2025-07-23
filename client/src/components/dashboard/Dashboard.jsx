@@ -282,8 +282,9 @@ const Dashboard = () => {
         if (completed === updatedBonus.length) {
           setShowBonusComplete(true);
         }
+      } else if (type === "custom") {
+        setCustomQuests((prev) => prev.map((q) => q.id === id ? {...q, status: "Completed" } : q ));
       }
-
     } catch (err) {
       console.error("Failed to complete quest:", err);
     }
