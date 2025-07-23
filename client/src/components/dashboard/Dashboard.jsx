@@ -6,7 +6,8 @@ import MainCards from './MainCards';
 import DailyQuests from './DailyQuests';
 import BonusQuests from './BonusQuests';
 import CustomQuests from './CustomQuests';
-import CompleteModal from './CompleteModal';
+import CompleteBonusModal from './CompleteBonusModal';
+import CompleteDailyModal from './CompleteDailyModal';
 import Confetti from 'react-confetti';
 import { useWindowSize } from '@react-hook/window-size';
 import toast from 'react-hot-toast';
@@ -24,6 +25,8 @@ const Dashboard = () => {
   const [showConfetti, setShowConfetti] = useState(false);
   const [width, height] = useWindowSize();
   const [showBonusComplete, setShowBonusComplete] = useState(false);
+  const [showDailyComplete, setShowDailyComplete] = useState(false);
+
 
   const getCustomQuests = async () => {
     try {
@@ -329,11 +332,21 @@ const Dashboard = () => {
     .filter(q => q.status === 'Completed')
     .reduce((sum, q) => sum + (q.xp || 0), 0);
 
+  const totalDailyXp = dailyQuests
+    .filter(q => q.status === 'Completed')
+    .reduce((sum, q) => sum + (q.xp || 0), 0);
+
   useEffect(() => {
     if (completedBonus === totalBonus && totalBonus > 0 && !showBonusComplete) {
       setShowBonusComplete(true);
     }
   }, [completedBonus, totalBonus]);
+
+  useEffect(() => {
+    if (completedDaily === totalDaily && totalDaily > 0 && !showDailyComplete) {
+      setShowDailyComplete(true);
+    }
+  }, [completedDaily, totalDaily]);
 
 
   // useEffect(() => {
@@ -347,7 +360,10 @@ const Dashboard = () => {
   return (
     <div className='min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow justify-center'>
       {showBonusComplete && petName && (
-        <CompleteModal name={petName} totalXp={totalBonusXp} onClose={() => setShowBonusComplete(false)} />
+        <CompleteBonusModal name={petName} totalXp={totalBonusXp} onClose={() => setShowBonusComplete(false)} />
+      )}
+      {showDailyComplete && petName && (
+        <CompleteDailyModal name={petName} totalXp={totalDailyXp} onClose={() => setShowDailyComplete(false)} />
       )}
         <div className='sticky top-0 left-0 lg:px-60 bg-white backdrop-blur-md'>
           {showConfetti && <Confetti width={width} height={height} numberOfPieces={300} />}

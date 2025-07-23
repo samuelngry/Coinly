@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { PawPrint } from 'lucide-react';
 import petCompleteImage from '../../assets/petcomplete.png';
 
-const CompleteModal = ({ name, totalXp, onClose }) => {
+const CompleteBonusModal = ({ name, totalXp, onClose }) => {
   return (
     <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
       <Confetti width={window.innerWidth} height={window.innerHeight} numberOfPieces={200} />
@@ -36,4 +36,4 @@ const CompleteModal = ({ name, totalXp, onClose }) => {
   );
 };
 
-export default CompleteModal;
+export default CompleteBonusModal;
