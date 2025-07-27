@@ -1,19 +1,20 @@
+import React from 'react'
 import Sidebar from '../sidebar/Sidebar'
 import BottomNavbar from '../sidebar/BottomNavbar'
-import Quests from '../quests/Quests'
+import Journey from '../journey/Journey'
 
-const DashboardPage = () => {
+const JourneyPage = () => {
   return (
     <>
-      <div className='grid gap-4 p-4 lg:grid-cols-[220px_1fr] min-h-screen bg-white'>
+      <div className='grid gap-4 lg:p-4 lg:grid-cols-[220px_1fr] min-h-screen bg-white'>
         <div className='hidden lg:block'>
           <Sidebar />
         </div>
-        <Quests />
+        <Journey />
       </div>
       <BottomNavbar />
     </>
   )
 }
 
-export default DashboardPage
+export default JourneyPage

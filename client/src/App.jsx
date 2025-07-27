@@ -5,7 +5,7 @@ import LoginPage from "./components/pages/LoginPage";
 import SignupPage from "./components/pages/SignupPage";
 import DashboardPage from "./components/pages/DashboardPage";
 import OnboardingPage from "./components/pages/OnboardingPage";
-import QuestsPage from "./components/pages/QuestsPage";
+import JourneyPage from "./components/pages/JourneyPage";
 import PetPage from "./components/pages/PetPage";
 import LeaderboardPage from "./components/pages/LeaderboardPage";
 import { Toaster } from 'react-hot-toast';
@@ -19,7 +19,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<SignupPage />} />
         <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/quests" element={<QuestsPage />} />
+        <Route path="/journey" element={<JourneyPage />} />
         <Route path="/pet" element={<PetPage />} />
         <Route path="/onboard" element={<OnboardingPage />} />
         <Route path="/leaderboard" element={<LeaderboardPage />} />
