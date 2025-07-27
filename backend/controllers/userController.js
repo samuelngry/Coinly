@@ -279,6 +279,36 @@ ${pet.name}:`
     }
 };
 
+const getFallbackResponse = (message, userStats) => {
+    const msg = message.toLowerCase();
+    
+    if (msg.includes('hello') || msg.includes('hi')) {
+        return `Hey there! 🌟 I'm ${userStats.petName}! Level ${userStats.level} with ${userStats.currentStreak} day streak - amazing!`;
+    }
+    
+    if (msg.includes('help') || msg.includes('stuck') || msg.includes('motivation')) {
+        return `You've got this! 💪 You've completed ${userStats.totalQuests} quests already! Your ${userStats.currentStreak} day streak shows your strength!`;
+    }
+
+    if (msg.includes('progress') || msg.includes('level')) {
+        return `You're crushing it at level ${userStats.level}! 🎯 ${userStats.totalQuests} quests completed and ${userStats.xp} XP earned!`;
+    }
+
+    if (msg.includes('tired') || msg.includes('exhausted')) {
+        return `I understand! 💙 Remember your goals: ${userStats.goals}. Small steps count too! Rest if you need to.`;
+    }
+    
+    const general = [
+        `Woof! I'm ${userStats.petName} and I'm here for you! 🐾`,
+        `That's interesting! Your ${userStats.currentStreak} day streak shows you're dedicated! ⭐`,
+        `Level ${userStats.level} suits you! What's on your mind? 💙`,
+        `You're awesome with ${userStats.totalQuests} quests done! Keep it up! 🎯`
+    ];
+    
+    return general[Math.floor(Math.random() * general.length)];
+};
+
+
 module.exports = {
     getUserData,
     updateUsername,
