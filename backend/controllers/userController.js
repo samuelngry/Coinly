@@ -219,7 +219,7 @@ const chatWithPet = async (req, res) => {
 User Context:
     - Level: ${userStats.level}
     - XP: ${userStats.xp}
-    - Completed quests: ${userStats.totalQuests}
+    - Completed quests: ${userStats.totalQuests || 'Not found'}
     - Current streak: ${userStats.currentStreak} days
     - Pet mood: ${userStats.mood}
     - Goal: ${userStats.goal || 'Not set'}
@@ -231,6 +231,32 @@ Instructions: Be encouraging, use pet-like enthusiasm, keep under 60 words, refe
 
 User: ${message}
 ${pet.name}:`
+
+        const response = await hf.textGeneration({
+            model: 'microsoft/DiagloGPT-medium',
+            inputs: prompt,
+            parameters: {
+                max_new_tokens: 70,
+                temperature: 0.8,
+                do_sample: true,
+                pad_token_id: 50256
+            }
+        });
+
+        let petResponse = response.generated_text
+            .replace(prompt, '')
+            .trim()
+            .split('\n')[0];
+
+        if (!petResponse || petResponse.length < 3) {
+            petResponse = getFallbackResponse(message, userStats);
+        }
+
+        res.json({
+            message: petResponse,
+            timestamp: Date.now()
+        });
+
     } catch (err) {
         console.error("Pet chat error:", err);
 
