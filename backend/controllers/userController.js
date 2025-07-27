@@ -213,9 +213,27 @@ const chatWithPet = async (req, res) => {
             lifestyle: preferences ? preferences.lifestyle : null,
             categories: preferences ? preferences.categories : null
         };
+
+        const prompt = `You are ${userStats.petName}, a friendly pet virtual pet helping ${user.username} with their spending habits.
+        
+User Context:
+    - Level: ${userStats.level}
+    - XP: ${userStats.xp}
+    - Completed quests: ${userStats.totalQuests}
+    - Current streak: ${userStats.currentStreak} days
+    - Pet mood: ${userStats.mood}
+    - Goal: ${userStats.goal || 'Not set'}
+    - Struggle: ${userStats.struggle || 'Not specified'}
+    - Lifestyle: ${userStats.lifestyle || 'Not specified'}
+    - Categories: ${userStats.categories || 'Not specified'}
+
+Instructions: Be encouraging, use pet-like enthusiasm, keep under 60 words, reference their progress when relevant.
+
+User: ${message}
+${pet.name}:`
     } catch (err) {
         console.error("Pet chat error:", err);
-        
+
     }
 };
 
