@@ -200,12 +200,29 @@ const chatWithPet = async (req, res) => {
         const preferences = await UserPreference.findOne({
             where: { user_id: userId }
         });
+        
+        const userStats = {
+            level: pet.level,
+            totalQuests: completedQuests, // need to get
+            currentStreak: user.streak_count,
+            petName: pet.name,
+            mood: pet.mood,
+            xp: pet.xp,
+            goal: preferences ? preferences.goal : null,
+            struggle: preferences ? preferences.struggle : null,
+            lifestyle: preferences ? preferences.lifestyle : null,
+            categories: preferences ? preferences.categories : null
+        };
+    } catch (err) {
+        console.error("Pet chat error:", err);
+        
     }
-}
+};
 
 module.exports = {
     getUserData,
     updateUsername,
     updateAvatar,
-    savePreferences
+    savePreferences,
+    chatWithPet
 };
