@@ -4,6 +4,9 @@ const UserPreference = require("../models/UserPreference");
 const DailyCompletion = require("../models/DailyCompletion");
 const UserBadge = require("../models/UserBadge");
 const { Op } = require('sequelize');
+const { HfInference } = require('@huggingface/inference');
+
+const hf = new HfInference(process.env.HF_TOKEN);
 
 const getUserData = async (req, res) => {
     try {
@@ -173,6 +176,32 @@ const savePreferences = async (req, res) => {
         res.status(500).json({ error: err.message })
     }
 };
+
+const chatWithPet = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const { message } = req.body;
+
+        if (!message) {
+            return res.status(400).json({ error: 'Message is required! '});
+        }
+
+        const user = await User.findByPk(userId);
+        const pet = await Pets.findOne({ where: { user_id: userId } });
+
+        if (!pet) {
+            return res.status(404).json({ error: 'Pet not found' });
+        }
+
+        const completedQuests = await DailyCompletion.count({
+            where: { user_id: userId }
+        });
+
+        const preferences = await UserPreference.findOne({
+            where: { user_id: userId }
+        });
+    }
+}
 
 module.exports = {
     getUserData,
