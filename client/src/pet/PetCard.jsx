@@ -44,8 +44,7 @@ const PetCard = ({ name, level, mood, username, accountAge, avatarUrl, onAvatarU
           />
         </div>
         <div>
-          <h3 className='text-base md:text-xl font-semibold'>{name}</h3>
-          <span className='text-neutral-400 text-sm md:text-base'>Shiba Inu</span>
+          <h3 className='text-base md:text-xl font-semibold'>{username}</h3>
         </div>
       </div>
 
@@ -59,8 +58,8 @@ const PetCard = ({ name, level, mood, username, accountAge, avatarUrl, onAvatarU
           <span className='text-xs md:text-sm'>{mood}</span>
         </div>
         <div className='flex mt-1'>
-          <h4 className='w-24 text-xs md:text-sm'>OWNER</h4>
-          <span className='text-xs md:text-sm'>{username}</span>
+          <h4 className='w-24 text-xs md:text-sm'>PET</h4>
+          <span className='text-xs md:text-sm'>{name}</span>
         </div>
       </div>
     </div>
