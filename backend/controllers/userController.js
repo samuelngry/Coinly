@@ -260,6 +260,22 @@ ${pet.name}:`
     } catch (err) {
         console.error("Pet chat error:", err);
 
+        try {
+            const pet = await Pets.findOne({ where: { user_id: req.user.id } });
+            const petName = pet ? pet.name : 'Buddy';
+
+            res.json({
+                message: `Woof! I'm ${petName} and I'm having trouble thinking right now. Try again! 🐾`,
+                timestamp: Date.now(),
+                fallback: true
+            });
+        } catch (fallbackError) {
+            res.json({
+                message: "I'm having rouble right now. Try again!",
+                timestamp: Date.now(),
+                fallback: true
+            });
+        }
     }
 };
 
