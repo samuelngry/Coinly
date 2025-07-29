@@ -322,6 +322,40 @@ async function generateRecommendations(patterns, userPreference) {
     return recommendations;
 }
 
+async function generatePetInsights(patterns, pet, user) {
+    const insights = [];
+    
+    // Mood-based insights
+    if (pet) {
+        if (patterns.trend > 10) {
+            insights.push(`🎉 ${user.name || 'Hey there'}! I'm so proud - you've been crushing it lately! Your completion rate is up ${patterns.trend}%!`);
+        } else if (patterns.trend < -10) {
+            insights.push(`💪 ${user.name || 'Hey there'}, I noticed things have been tough lately. That's totally normal! Let's try some easier wins tomorrow.`);
+        }
+        
+        if (patterns.bestDay.rate > 85) {
+            insights.push(`🌟 You're absolutely amazing on ${patterns.bestDay.name}s! ${patterns.bestDay.rate}% success rate - that's incredible!`);
+        }
+        
+        if (patterns.peakTime) {
+            insights.push(`⏰ I've noticed you're most successful around ${patterns.peakTime}. Your natural rhythm is working for you!`);
+        }
+        
+        // Financial impact insight
+        if (patterns.completedQuests > 10) {
+            const estimatedSavings = Math.round(patterns.completedQuests * 3.5); // Rough estimate
+            insights.push(`💰 Quick math: You've completed ${patterns.completedQuests} quests! That's roughly $${estimatedSavings} in avoided impulse spending!`);
+        }
+        
+        // Default encouragement
+        if (insights.length === 0) {
+            insights.push(`🐕 ${user.name || 'Hey there'}! I'm analyzing your patterns to help you succeed. Keep going - every quest counts!`);
+        }
+    }
+    
+    return insights;
+}
+
 
 
 module.exports = {
