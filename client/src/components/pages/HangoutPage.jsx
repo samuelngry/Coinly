@@ -1,20 +1,20 @@
 import React from 'react'
 import Sidebar from '../sidebar/Sidebar'
 import BottomNavbar from '../sidebar/BottomNavbar'
-import League from '../league/League'
+import Hangout from '../hangout/Hangout'
 
-const LeaguePage = () => {
+const HangoutPage = () => {
   return (
     <>
       <div className='grid gap-4 lg:p-4 lg:grid-cols-[220px_1fr] min-h-screen bg-white'>
         <div className='hidden lg:block'>
           <Sidebar />
         </div>
-        <League />
+        <Hangout />
       </div>
       <BottomNavbar />
     </>
   )
 }
 
-export default LeaguePage
+export default HangoutPage

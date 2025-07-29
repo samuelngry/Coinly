@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^2.2.4",
+    "@huggingface/inference": "^4.5.3",
     "@material-tailwind/react": "^2.1.10",
     "@react-hook/window-size": "^3.1.1",
     "@rive-app/react-canvas": "^4.21.2",
