@@ -194,6 +194,77 @@ async function calculateUserPatterns(allQuests, now) {
     };
 }
 
+async function generatePredictions(patterns, userPreference) {
+    const predictions = [];
+    
+    // Predict worst day failures
+    if (patterns.worstDay.rate < 60 && patterns.worstDay.rate > 0) {
+        predictions.push({
+            type: "warning",
+            probability: Math.round(100 - patterns.worstDay.rate),
+            prediction: `Likely to struggle on ${patterns.worstDay.name}s`,
+            reason: `Your ${patterns.worstDay.name} success rate is only ${patterns.worstDay.rate}%`,
+            suggestion: `Try scheduling easier quests on ${patterns.worstDay.name}s or prep them the night before`,
+            impact: `Could prevent streak breaks`,
+            icon: "AlertTriangle"
+        });
+    }
+    
+    // Predict streak opportunities
+    if (patterns.bestDay.rate > 80) {
+        predictions.push({
+            type: "opportunity",
+            probability: patterns.bestDay.rate,
+            prediction: `Strong performance expected on ${patterns.bestDay.name}s`,
+            reason: `You have a ${patterns.bestDay.rate}% success rate on ${patterns.bestDay.name}s`,
+            suggestion: `Use ${patterns.bestDay.name}s for challenging quest chains or bonus goals`,
+            impact: `Perfect day to build momentum`,
+            icon: "TrendingUp"
+        });
+    }
+    
+    // Predict based on recent trend
+    if (patterns.trend < -15) {
+        predictions.push({
+            type: "warning",
+            probability: 75,
+            prediction: "Momentum is declining",
+            reason: `Your completion rate dropped ${Math.abs(patterns.trend)}% this week`,
+            suggestion: "Try easier quests for a few days to rebuild confidence",
+            impact: "Early intervention can prevent habit breakdown",
+            icon: "TrendingDown"
+        });
+    } else if (patterns.trend > 15) {
+        predictions.push({
+            type: "opportunity",
+            probability: 80,
+            prediction: "You're building strong momentum",
+            reason: `Your completion rate improved ${patterns.trend}% this week`,
+            suggestion: "Perfect time to tackle more challenging financial goals",
+            impact: "Strike while motivation is high!",
+            icon: "TrendingUp"
+        });
+    }
+    
+    // Category-specific predictions
+    if (patterns.categoryStats.food && patterns.categoryStats.food.total >= 5) {
+        const foodSuccessRate = Math.round((patterns.categoryStats.food.completed / patterns.categoryStats.food.total) * 100);
+        if (foodSuccessRate < 50) {
+            predictions.push({
+                type: "pattern",
+                probability: 70,
+                prediction: "Food spending likely to be challenging",
+                reason: `Only ${foodSuccessRate}% success rate on food-related quests`,
+                suggestion: "Focus on meal prep and grocery budgeting first",
+                impact: "Food habits impact 30-40% of discretionary spending",
+                icon: "Brain"
+            });
+        }
+    }
+    
+    return predictions;
+}
+
 
 module.exports = {
     getHabitRadarData
