@@ -356,7 +356,23 @@ async function generatePetInsights(patterns, pet, user) {
     return insights;
 }
 
-
+function extractQuestCategory(questText) {
+    const text = questText.toLowerCase();
+    
+    if (text.includes('cook') || text.includes('meal') || text.includes('delivery') || text.includes('food')) {
+        return 'food';
+    } else if (text.includes('transport') || text.includes('walk') || text.includes('bike') || text.includes('ride')) {
+        return 'transport';
+    } else if (text.includes('shop') || text.includes('buy') || text.includes('purchase')) {
+        return 'shopping';
+    } else if (text.includes('subscription') || text.includes('bill')) {
+        return 'subscriptions';
+    } else if (text.includes('save') || text.includes('emergency') || text.includes('debt')) {
+        return 'financial_goals';
+    }
+    
+    return 'general';
+}
 
 module.exports = {
     getHabitRadarData
