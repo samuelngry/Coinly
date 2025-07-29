@@ -58,6 +58,143 @@ const getHabitRadarData = async (req, res) => {
         }
 };
 
+async function calculateUserPatterns(allQuests, now) {
+    // Weekly success pattern
+    const weeklyPattern = Array(7).fill(0).map(() => ({ completed: 0, total: 0 }));
+    
+    // Daily completion rates
+    const dailyStats = {};
+    
+    // Quest type performance
+    const questTypeStats = {
+        daily: { completed: 0, total: 0 },
+        bonus: { completed: 0, total: 0 }
+    };
+
+    // Category performance
+    const categoryStats = {};
+    
+    // Time-based patterns
+    const hourlyCompletions = Array(24).fill(0);
+    
+    // Streak analysis
+    let currentStreak = 0;
+    let longestStreak = 0;
+    let streakBreaks = [];
+    
+    // Process each quest
+    allQuests.forEach(quest => {
+        const questDate = new Date(quest.instance_date);
+        const dayOfWeek = questDate.getDay(); // 0 = Sunday, 1 = Monday, etc.
+        const dateKey = questDate.toISOString().split('T')[0];
+        
+        // Weekly pattern
+        weeklyPattern[dayOfWeek].total++;
+        if (quest.status === 'Completed') {
+            weeklyPattern[dayOfWeek].completed++;
+            
+            // Time analysis
+            if (quest.completed_at) {
+                const completedHour = new Date(quest.completed_at).getHours();
+                hourlyCompletions[completedHour]++;
+            }
+        }
+        
+        // Daily stats
+        if (!dailyStats[dateKey]) {
+            dailyStats[dateKey] = { completed: 0, total: 0 };
+        }
+        dailyStats[dateKey].total++;
+        if (quest.status === 'Completed') {
+            dailyStats[dateKey].completed++;
+        }
+        
+        // Quest type stats
+        if (questTypeStats[quest.type]) {
+            questTypeStats[quest.type].total++;
+            if (quest.status === 'Completed') {
+                questTypeStats[quest.type].completed++;
+            }
+        }
+        
+        // Category analysis (extract from quest text)
+        const category = extractQuestCategory(quest.quest_text);
+        if (category) {
+            if (!categoryStats[category]) {
+                categoryStats[category] = { completed: 0, total: 0 };
+            }
+            categoryStats[category].total++;
+            if (quest.status === 'Completed') {
+                categoryStats[category].completed++;
+            }
+        }
+    });
+
+    // Calculate success rates
+    const weeklySuccessRates = weeklyPattern.map(day => 
+        day.total > 0 ? Math.round((day.completed / day.total) * 100) : 0
+    );
+    
+    // Find best and worst days
+    const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    let bestDay = { name: 'Monday', rate: 0 };
+    let worstDay = { name: 'Monday', rate: 100 };
+    
+    weeklySuccessRates.forEach((rate, index) => {
+        if (weeklyPattern[index].total >= 3) { // Only consider days with sufficient data
+            if (rate > bestDay.rate) {
+                bestDay = { name: dayNames[index], rate };
+            }
+            if (rate < worstDay.rate) {
+                worstDay = { name: dayNames[index], rate };
+            }
+        }
+    });
+    
+    // Find peak completion time
+    const peakHour = hourlyCompletions.indexOf(Math.max(...hourlyCompletions));
+    const peakTime = `${peakHour === 0 ? 12 : peakHour <= 12 ? peakHour : peakHour - 12}${peakHour < 12 ? ' AM' : ' PM'}`;
+    
+    // Calculate average quests per day
+    const totalDays = Object.keys(dailyStats).length;
+    const totalCompleted = Object.values(dailyStats).reduce((sum, day) => sum + day.completed, 0);
+    const avgQuestsPerDay = totalDays > 0 ? (totalCompleted / totalDays).toFixed(1) : 0;
+    
+    // Recent trend (last 7 days vs previous 7 days)
+    const sevenDaysAgo = new Date(now.getTime() - (7 * 24 * 60 * 60 * 1000));
+    const fourteenDaysAgo = new Date(now.getTime() - (14 * 24 * 60 * 60 * 1000));
+    
+    const recentQuests = allQuests.filter(q => new Date(q.instance_date) >= sevenDaysAgo);
+    const previousQuests = allQuests.filter(q => {
+        const date = new Date(q.instance_date);
+        return date >= fourteenDaysAgo && date < sevenDaysAgo;
+    });
+    
+    const recentCompletionRate = recentQuests.length > 0 ? 
+        (recentQuests.filter(q => q.status === 'Completed').length / recentQuests.length) * 100 : 0;
+    const previousCompletionRate = previousQuests.length > 0 ? 
+        (previousQuests.filter(q => q.status === 'Completed').length / previousQuests.length) * 100 : 0;
+    
+    const trend = recentCompletionRate - previousCompletionRate;
+
+    return {
+        weeklySuccessRates,
+        bestDay,
+        worstDay,
+        peakTime,
+        avgQuestsPerDay: parseFloat(avgQuestsPerDay),
+        questTypeStats,
+        categoryStats,
+        dailyStats,
+        trend: Math.round(trend),
+        totalQuests: allQuests.length,
+        completedQuests: allQuests.filter(q => q.status === 'Completed').length,
+        overallSuccessRate: allQuests.length > 0 ? 
+            Math.round((allQuests.filter(q => q.status === 'Completed').length / allQuests.length) * 100) : 0
+    };
+}
+
+
 module.exports = {
     getHabitRadarData
 };
