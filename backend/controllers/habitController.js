@@ -265,6 +265,64 @@ async function generatePredictions(patterns, userPreference) {
     return predictions;
 }
 
+async function generateRecommendations(patterns, userPreference) {
+    const recommendations = [];
+    
+    // Time-based recommendation
+    if (patterns.peakTime) {
+        recommendations.push({
+            type: "schedule",
+            title: "Optimize Your Peak Time",
+            description: `You complete most quests around ${patterns.peakTime}`,
+            action: "Schedule daily quests for this time",
+            impact: `Could boost success rate by 25-40%`,
+            priority: "high"
+        });
+    }
+    
+    // Weak day recommendation
+    if (patterns.worstDay.rate < 70 && patterns.worstDay.rate > 0) {
+        recommendations.push({
+            type: "intervention",
+            title: `${patterns.worstDay.name} Support`,
+            description: `Enable extra nudges and easier quests on ${patterns.worstDay.name}s`,
+            action: "Set up smart reminders",
+            impact: `Could improve ${patterns.worstDay.name} success by 35%`,
+            priority: "high"
+        });
+    }
+    
+    // Category-specific recommendations
+    Object.entries(patterns.categoryStats).forEach(([category, stats]) => {
+        if (stats.total >= 3) {
+            const successRate = Math.round((stats.completed / stats.total) * 100);
+            if (successRate < 60) {
+                recommendations.push({
+                    type: "category",
+                    title: `Improve ${category} Habits`,
+                    description: `Only ${successRate}% success rate in ${category} quests`,
+                    action: `Focus on easier ${category} challenges first`,
+                    impact: `Build confidence before tackling harder goals`,
+                    priority: "medium"
+                });
+            }
+        }
+    });
+    
+    // Streak protection
+    recommendations.push({
+        type: "protection",
+        title: "Streak Insurance",
+        description: "Protect your progress on predicted difficult days",
+        action: "Enable streak freeze option",
+        impact: "Maintain motivation through temporary setbacks",
+        priority: "medium"
+    });
+    
+    return recommendations;
+}
+
+
 
 module.exports = {
     getHabitRadarData
