@@ -27,6 +27,7 @@ const petRoutes = require("./routes/petRoutes");
 const customQuestRoutes = require("./routes/customQuestRoutes");
 const statsRoutes = require("./routes/statsRoutes");
 const leaderboardRoutes = require("./routes/leaderboardRoutes");
+const habitRoutes = require("./routes/habitRoutes");
 const db = require("./config/db");
 
 //app.use('/uploads', express.static('uploads'));
@@ -37,6 +38,7 @@ app.use("/api/pet", petRoutes);
 app.use("/api/custom", customQuestRoutes);
 app.use("/api/stats", statsRoutes);
 app.use("/api/leaderboard", leaderboardRoutes);
+app.use("/api/habit", habitRoutes);
 
 const PORT = process.env.PORT || 3000;
 
