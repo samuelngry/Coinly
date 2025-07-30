@@ -65,17 +65,17 @@ const completeQuests = async (req, res) => {
             return res.status(404).json({ error: 'Quest not found or already completed.' });
         }
 
-        const todayCompletion = new Date().toISOString().slice(0, 10);
+        const today = new Date().toISOString().slice(0, 10);
 
         try {
             await DailyCompletion.findOrCreate({
                 where: {
                     user_id: userId,
-                    date: todayCompletion,
+                    date: today,
                 },
                 defaults: {
                     user_id: userId,
-                    date: todayCompletion,
+                    date: today,
                 }
             });
         } catch (err) {
@@ -83,34 +83,53 @@ const completeQuests = async (req, res) => {
         }
         
         const user = await User.findOne({ where: { id: userId } });
-        let newStreak = 1;
+        const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
 
-        const now = new Date();
-        now.setHours(0, 0, 0, 0);
-
-        const yesterday = new Date(now);
-        yesterday.setDate(now.getDate() - 1);
-
-        const questsYesterday = await UserQuest.findAll({
-        where: {
-            user_id: userId,
-            status: 'Completed',
-            completed_at: {
-            [Op.gte]: yesterday,
-            [Op.lt]: now,
+        const questsCompletedToday = await UserQuest.count({
+            where: {
+                user_id: userId,
+                status: 'Completed',
+                completed_at: {
+                    [Op.gte]: new Date(today + 'T00:00:00'),
+                    [Op.lt]: new Date(today + 'T23:59:59')
+                },
             },
-        },
         });
 
-        if (questsYesterday.length > 0) {
-            newStreak = user.streak_count + 1;
-        } else if (user.streak_count > 0) {
-            newStreak = user.streak_count; // don't change if already updated today
-        } else {
-            newStreak = 1;
-        }
+        let newStreak = user.streak_count;
 
-        await user.update({ streak_count: newStreak });
+        if (questsCompletedToday === 1) {
+            const hasPreviousCompletions = await DailyCompletion.count({
+                where: {
+                    user_id: userId,
+                    date: { [Op.lt]: today }
+                }
+            });
+
+            // Check if user has a completion record for yesterday
+            const yesterdayCompletion = await DailyCompletion.findOne({
+                where: {
+                    user_id: userId,
+                    date: yesterday
+                }
+            });
+            
+            if (yesterdayCompletion) {
+                // User completed quests yesterday, increment streak
+                newStreak = user.streak_count + 1;
+                console.log('Streak updated successfully');
+            } else if (!hasPreviousCompletions) {
+                // First ever quest completion -> start streak to 1
+                newStreak = 1;
+                console.log('First quest completed, streak started');
+            } else {
+                // Missed yesterday -> reset streak
+                newStreak = 0;
+                console.log('Failed to update streak');
+            }
+
+            await user.update({ streak_count: newStreak });
+        }
 
         const completedQuest = await UserQuest.findOne({
             where: { id: questId, user_id: userId }
@@ -137,9 +156,9 @@ const completeQuests = async (req, res) => {
             leveledUp = true;
         }
 
-        const today = new Date();
+        const today_date = new Date();
         const petLastFed = new Date(pet.last_fed);
-        const diffTime = today - petLastFed;
+        const diffTime = today_date - petLastFed;
         const dayLastFed = Math.floor(diffTime / (1000 * 60 * 60 * 24));
         
         let petMood = pet.mood;
