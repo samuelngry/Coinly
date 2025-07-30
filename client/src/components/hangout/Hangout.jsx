@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TrendingUp, TrendingDown, AlertTriangle, Target, Calendar, Brain, Zap, Trophy, Clock, DollarSign, Activity, BarChart3 } from 'lucide-react';
+import { TrendingUp, TrendingDown, AlertTriangle, Target, Calendar, Brain, Flame, Trophy, Clock, DollarSign, Activity, BarChart3 } from 'lucide-react';
 
 const Hangout = () => {
   const [activeTab, setActiveTab] = useState('predictions');
@@ -59,7 +59,7 @@ const Hangout = () => {
 
   if (!data) {
     return (
-      <div className="min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50">
+      <div className="min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow flex items-center justify-center">
         <p className="text-gray-600">Failed to load habit data. Please try again.</p>
       </div>
     );
@@ -109,23 +109,22 @@ const Hangout = () => {
   };
 
   return (
-    <div className="min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow bg-gradient-to-br from-blue-50 to-purple-50 overflow-auto">
+    <div className="min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow overflow-auto">
       {/* Header */}
       <div className="text-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800 mb-2">
-          🎯 Habit Radar
+        <h1 className="text-base md:text-xl font-bold text-gray-800 mb-2">
+          🎯 Insights from your {data.patterns.totalQuests} completed quests
         </h1>
-        <p className="text-gray-600 text-sm">AI-powered insights from your {data.patterns.totalQuests} completed quests</p>
       </div>
 
       {/* Pet Companion Section */}
-      <div className="bg-white rounded-2xl p-4 mb-4 shadow-lg border-2 border-purple-200">
+      <div className="bg-white rounded-2xl p-4 mb-4 shadow-lg border-2 border-orange-200">
         <div className="flex items-center gap-3">
           <div className="text-3xl animate-bounce">🐕</div>
           <div className="flex-1">
-            <h3 className="font-semibold text-purple-800 mb-1 text-sm">Kinder's Analysis</h3>
-            <div className="bg-purple-100 p-2 rounded-lg relative min-h-[50px] flex items-center">
-              <p className="text-purple-800 transition-opacity duration-500 text-sm">
+            <h3 className="font-semibold text-orange-500 mb-1 text-sm">Kinder's Analysis</h3>
+            <div className="bg-orange-100 p-2 rounded-lg relative min-h-[50px] flex items-center">
+              <p className="text-orange-500 transition-opacity duration-500 text-sm">
                 {data.petInsights[currentInsight]}
               </p>
               <div className="absolute -left-2 top-4 w-0 h-0 border-t-6 border-t-transparent border-b-6 border-b-transparent border-r-6 border-r-purple-100"></div>
@@ -144,15 +143,15 @@ const Hangout = () => {
             color: data.patterns.overallSuccessRate >= 70 ? 'text-green-500' : 'text-yellow-500',
             trend: data.patterns.trend 
           },
-          { label: 'Current Streak', value: `${data.user.currentStreak} days`, icon: Zap, color: 'text-orange-500' },
+          { label: 'Current Streak', value: `${data.user.currentStreak} days`, icon: Flame, color: 'text-red-500' },
           { label: 'Best Day', value: data.patterns.bestDay.name, icon: Trophy, color: 'text-blue-500' },
           { label: 'Peak Time', value: data.patterns.peakTime, icon: Clock, color: 'text-purple-500' }
         ].map((metric, index) => {
           const Icon = metric.icon;
           return (
-            <div key={index} className="bg-white rounded-lg p-3 shadow-md text-center">
+            <div key={index} className="bg-white rounded-2xl border border-neutral-300 p-3 shadow-lg text-center">
               <Icon className={`w-5 h-5 ${metric.color} mx-auto mb-1`} />
-              <div className="text-sm font-semibold text-gray-800 flex items-center justify-center gap-1">
+              <div className="text-sm font-semibold flex items-center justify-center gap-1">
                 {metric.value}
                 {metric.trend !== undefined && (
                   <span className={`text-xs ${metric.trend >= 0 ? 'text-green-500' : 'text-red-500'}`}>
@@ -160,7 +159,7 @@ const Hangout = () => {
                   </span>
                 )}
               </div>
-              <div className="text-xs text-gray-500">{metric.label}</div>
+              <div className="text-xs text-neutral-400">{metric.label}</div>
             </div>
           );
         })}
@@ -180,7 +179,7 @@ const Hangout = () => {
               onClick={() => setActiveTab(tab.id)}
               className={`flex-1 flex items-center justify-center gap-2 py-2 px-3 rounded-md transition-all text-sm ${
                 activeTab === tab.id 
-                  ? 'bg-blue-500 text-white shadow-md' 
+                  ? 'bg-orange-500 text-white shadow-md' 
                   : 'text-gray-600 hover:bg-gray-50'
               }`}
             >
