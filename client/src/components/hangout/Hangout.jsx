@@ -57,4 +57,18 @@ const Hangout = () => {
     );
   }
 
+  if (!data) {
+    return (
+      <div className="min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50">
+        <p className="text-gray-600">Failed to load habit data. Please try again.</p>
+      </div>
+    );
+  }
+
+  const getSuccessColor = (rate) => {
+    if (rate >= 80) return "text-green-600 bg-green-100";
+    if (rate >= 60) return "text-yellow-600 bg-yellow-100";
+    return "text-red-600 bg-red-100";
+  };
+
 export default Hangout;
