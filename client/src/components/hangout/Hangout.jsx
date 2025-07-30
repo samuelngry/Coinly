@@ -1,5 +1,4 @@
-import React from 'react'
-import { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TrendingUp, TrendingDown, AlertTriangle, Target, Calendar, Brain, Zap, Trophy, Clock, DollarSign, Activity, BarChart3 } from 'lucide-react';
 
 const Hangout = () => {
@@ -22,27 +21,40 @@ const Hangout = () => {
         });
 
         if (!res.ok) {
-          throw new Error("Failed to fetch custom quests");
+          throw new Error("Failed to fetch habit radar data");
         }
 
-        const data = await res.json();
-        setData(data);
+        const result = await res.json();
+        setData(result);
         setLoading(false);
 
       } catch (err) {
-          console.error('Error fetching habit radar data:', err);
-          setLoading(false);
+        console.error('Error fetching habit radar data:', err);
+        setLoading(false);
       }
     };
 
     fetchData();
   }, []);
 
-  return (
-    <div className='min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow justify-center'>
-      
-    </div>
-  )
-};
+  useEffect(() => {
+    if (data?.petInsights) {
+      const interval = setInterval(() => {
+        setCurrentInsight(prev => (prev + 1) % data.petInsights.length);
+      }, 4000);
+      return () => clearInterval(interval);
+    }
+  }, [data]);
 
-export default Hangout
+  if (loading) {
+    return (
+      <div className="min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow flex items-center justify-center bg-gradient-to-br from-blue-50 to-purple-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
+          <p className="text-gray-600">Analysing your habits...</p>
+        </div>
+      </div>
+    );
+  }
+
+export default Hangout;
