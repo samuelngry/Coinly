@@ -8,6 +8,7 @@ import BonusQuests from './BonusQuests';
 import CustomQuests from './CustomQuests';
 import CompleteBonusModal from './CompleteBonusModal';
 import CompleteDailyModal from './CompleteDailyModal';
+import StreakModal from './StreakModel';
 import Confetti from 'react-confetti';
 import { useWindowSize } from '@react-hook/window-size';
 import toast from 'react-hot-toast';
@@ -26,7 +27,8 @@ const Dashboard = () => {
   const [width, height] = useWindowSize();
   const [showBonusComplete, setShowBonusComplete] = useState(false);
   const [showDailyComplete, setShowDailyComplete] = useState(false);
-
+  const [showStreakModal, setShowStreakModal] = useState(false);
+  const [prevStreak, setPrevStreak] = useState(null);
 
   const getCustomQuests = async () => {
     try {
@@ -68,6 +70,12 @@ const Dashboard = () => {
       }
 
       const data = await res.json();
+
+      if (prevStreak !== null && data.streak > prevStreak) {
+        setShowStreakModal(true);
+      }
+
+      setPrevStreak(data.streak);
       setXp(data.xp);
       setLevel(data.level);
       setStreak(data.streak);
@@ -258,6 +266,12 @@ const Dashboard = () => {
       const data = await res.json();
       console.log("Quests Completed:", data);
 
+      if (prevStreak !== null && data.streak > prevStreak) {
+        setShowStreakModal(true);
+      }
+
+      setPrevStreak(data.streak);
+
       setXp(data.xp);
       setLevel(data.level);
       setMood(data.mood);
@@ -363,6 +377,9 @@ const Dashboard = () => {
       )}
       {showDailyComplete && petName && (
         <CompleteDailyModal name={petName} totalXp={totalDailyXp} onClose={() => setShowDailyComplete(false)} />
+      )}
+      {showStreakModal && (
+        <StreakModal streak={streak} onClose={() => setShowStreakModal(false)} />
       )}
         <div className='sticky top-0 left-0 lg:px-60 bg-white backdrop-blur-md'>
           {showConfetti && <Confetti width={width} height={height} numberOfPieces={300} />}
