@@ -166,7 +166,7 @@ const Hangout = () => {
       </div>
 
       {/* Tab Navigation */}
-      <div className="flex bg-white rounded-lg p-1 mb-4 shadow-md">
+      <div className="flex bg-white rounded-lg p-1 mb-4 shadow-lg border border-neutral-300">
         {[
           { id: 'predictions', label: 'Predictions', icon: Brain },
           { id: 'patterns', label: 'Patterns', icon: BarChart3 },
@@ -194,7 +194,7 @@ const Hangout = () => {
       <div className="overflow-auto" style={{ maxHeight: 'calc(100vh - 400px)' }}>
         {activeTab === 'predictions' && (
           <div className="space-y-3">
-            <div className="bg-white rounded-lg p-4 shadow-md">
+            <div className="bg-white rounded-lg p-4 shadow-lg border border-neutral-300">
               <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
                 <Brain className="w-4 h-4" />
                 Predictive Insights
@@ -209,7 +209,7 @@ const Hangout = () => {
         {activeTab === 'patterns' && (
           <div className="space-y-4">
             {/* Weekly Pattern Chart */}
-            <div className="bg-white rounded-lg p-4 shadow-md">
+            <div className="bg-white rounded-lg p-4 shadow-lg border border-neutral-300">
               <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
                 Weekly Success Pattern
@@ -242,7 +242,7 @@ const Hangout = () => {
             </div>
 
             {/* Category Performance */}
-            <div className="bg-white rounded-lg p-4 shadow-md">
+            <div className="bg-white rounded-lg p-4 shadow-lg border border-neutral-300">
               <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
                 <Activity className="w-4 h-4" />
                 Category Performance
@@ -291,7 +291,7 @@ const Hangout = () => {
 
         {activeTab === 'recommendations' && (
           <div className="space-y-3">
-            <div className="bg-white rounded-lg p-4 shadow-md">
+            <div className="bg-white rounded-lg p-4 shadow-lg border border-neutral-300">
               <h2 className="text-lg font-semibold mb-3 flex items-center gap-2">
                 <Target className="w-4 h-4" />
                 Smart Action Plan
