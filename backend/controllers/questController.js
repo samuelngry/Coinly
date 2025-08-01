@@ -29,7 +29,6 @@ const completeQuests = async (req, res) => {
         console.log("User ID:", userId);
         console.log("Quest ID:", questId);
 
-        // Add this: Check if quest exists before updating
         const existingQuest = await UserQuest.findOne({
             where: {
                 id: questId,
@@ -124,7 +123,7 @@ const completeQuests = async (req, res) => {
                 console.log('First quest completed, streak started');
             } else {
                 newStreak = 1;
-                console.log('Failed to update streak');
+                console.log('Streak broken, reset to 1');
             }
 
             await user.update({ streak_count: newStreak });

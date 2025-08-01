@@ -5,9 +5,17 @@ const getWeeklyXP = async (req, res) => {
     try {
         const userId = req.user.id;
 
-        const today = new Date();
-        const startDate = new Date();
-        startDate.setDate(today.getDate() - 6);
+        const now = new Date();
+        
+        const today = new Date(now);
+        today.setHours(23, 59, 59, 999);
+
+        const startDate = new Date(now); 
+        startDate.setDate(now.getDate() - 6);
+        startDate.setHours(0, 0, 0, 0);
+
+        console.log('Date range:', startDate.toISOString(), 'to', today.toISOString());
+        console.log('Current date:', now.toISOString());
 
         const xpLogs = await UserQuest.findAll({
             where: {
@@ -27,22 +35,47 @@ const getWeeklyXP = async (req, res) => {
             raw: true
         });
 
-        // Format into fixed 7-day structure with 0 XP fallback
+        console.log('XP Logs found:', xpLogs);
+
         const daysMap = {};
+
         xpLogs.forEach(entry => {
             const date = new Date(entry.date);
-            daysMap[date.toDateString()] = parseInt(entry.totalXP);
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            const dateKey = `${year}-${month}-${day}`;
+            daysMap[dateKey] = parseInt(entry.totalXP) || 0;
         });
 
+        console.log('Days map:', daysMap);
+
         const result = [];
+        
+        const todayDate = new Date();
+        console.log('Today is:', todayDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }));
+        
         for (let i = 6; i >= 0; i--) {
-            const d = new Date();
-            d.setDate(d.getDate() - i);
+            const d = new Date(); 
+            d.setDate(d.getDate() - i); 
+            
+            // Use local date formatting to avoid timezone issues
+            const year = d.getFullYear();
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            const dateKey = `${year}-${month}-${day}`;
+
+            console.log(`Day ${6-i+1}: ${d.toLocaleDateString('en-US', { weekday: 'long' })} (${dateKey})`);
+
             result.push({
                 day: d.toLocaleDateString('en-US', { weekday: 'short' }).charAt(0), 
-                xp: daysMap[d.toDateString()] || 0
+                xp: daysMap[dateKey] || 0,
+                date: dateKey,
+                fullDay: d.toLocaleDateString('en-US', { weekday: 'long' }) 
             });
         }
+
+        console.log('Final result:', result);
 
         const totalXP = result.reduce((sum, day) => sum + day.xp, 0);
 
@@ -52,7 +85,6 @@ const getWeeklyXP = async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch weekly XP' });
     }
 };
-
 
 module.exports = {
     getWeeklyXP,
