@@ -123,8 +123,7 @@ const completeQuests = async (req, res) => {
                 newStreak = 1;
                 console.log('First quest completed, streak started');
             } else {
-                // Missed yesterday -> reset streak
-                newStreak = 0;
+                newStreak = 1;
                 console.log('Failed to update streak');
             }
 
