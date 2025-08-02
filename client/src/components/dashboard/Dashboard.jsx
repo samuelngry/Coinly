@@ -9,6 +9,7 @@ import CustomQuests from './CustomQuests';
 import CompleteBonusModal from './CompleteBonusModal';
 import CompleteDailyModal from './CompleteDailyModal';
 import StreakModal from './StreakModel';
+import LevelUpModal from './LevelUpModal';
 import Confetti from 'react-confetti';
 import { useWindowSize } from '@react-hook/window-size';
 import toast from 'react-hot-toast';
@@ -29,6 +30,8 @@ const Dashboard = () => {
   const [showDailyComplete, setShowDailyComplete] = useState(false);
   const [showStreakModal, setShowStreakModal] = useState(false);
   const [prevStreak, setPrevStreak] = useState(null);
+  const [showLevelUp, setShowLevelUp] = useState(false);
+  const [newLevel, setNewLevel] = useState(level);
 
   const getCustomQuests = async () => {
     try {
@@ -277,6 +280,11 @@ const Dashboard = () => {
       setMood(data.mood);
       setStreak(data.streak);
 
+      if (data.level > level) {
+        setNewLevel(data.level);
+        setShowLevelUp(true);
+      }
+
       setShowConfetti(true);
       setTimeout(() => setShowConfetti(false), 4000);
 
@@ -380,6 +388,9 @@ const Dashboard = () => {
       )}
       {showStreakModal && (
         <StreakModal streak={streak} onClose={() => setShowStreakModal(false)} />
+      )}
+      {showLevelUp && petName && (
+        <LevelUpModal name={petName} newLevel={newLevel} totalXp={xp} onClose={() => setShowLevelUp(false)} />
       )}
         <div className='sticky top-0 left-0 lg:px-60 bg-white backdrop-blur-md'>
           {showConfetti && <Confetti width={width} height={height} numberOfPieces={300} />}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { TrendingUp, TrendingDown, AlertTriangle, Target, Calendar, Brain, Flame, Trophy, Clock, DollarSign, Activity, BarChart3 } from 'lucide-react';
 
-const Hangout = () => {
+const Insights = () => {
   const [activeTab, setActiveTab] = useState('predictions');
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -113,7 +113,7 @@ const Hangout = () => {
       {/* Header */}
       <div className="text-center mb-6">
         <h1 className="text-base md:text-xl font-bold text-gray-800 mb-2">
-          🎯 Insights from your {data.patterns.totalQuests} completed quests
+          🎯 Insights from {data.patterns.totalQuests} total quests
         </h1>
       </div>
 
@@ -340,4 +340,4 @@ const Hangout = () => {
   );
 };
 
-export default Hangout;
+export default Insights;
