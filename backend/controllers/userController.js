@@ -91,6 +91,7 @@ const getUserData = async (req, res) => {
             level: pet.level,
             maxXp: maxXp,
             streak: user.streak_count,
+            longestStreak: user.longest_streak,
             mood: pet.mood,
             badges: badgesWithImages,
             recentBadge: badge,
