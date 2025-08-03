@@ -14,7 +14,7 @@ const generateQuests = async (req, res) => {
         const daily = quest.filter(q => q.type === 'daily');
         const bonus = quest.filter(q => q.type === 'bonus');
 
-        res.status(200).json({ message: "Daily and bonus quests generated successfully", daily, bonus });
+        res.status(200).json({ message: "Daily and bonus quesets generated successfully", daily, bonus });
     } catch (err) {
         console.error("Error in generateQuests:", err);
         res.status(500).json({ error: err.message });
@@ -46,21 +46,10 @@ const completeQuests = async (req, res) => {
             return res.status(400).json({ error: 'Quest already completed.' });
         }
 
-        const completionTime = new Date();
-        
-        const now = new Date();
-        const localDate = new Date(now.getTime() - (now.getTimezoneOffset() * 60000));
-        const today = localDate.toISOString().slice(0, 10); // YYYY-MM-DD format
-        
-        console.log("Completion time:", completionTime.toISOString());
-        console.log("Local today date:", today);
-
-        // Update quest with completion
         const [updatedRows] = await UserQuest.update(
             {
                 status: 'Completed', 
-                completed_at: completionTime,
-                instance_date: existingQuest.instance_date || today
+                completed_at: new Date(),
             },
             {
                 where: {
@@ -75,7 +64,8 @@ const completeQuests = async (req, res) => {
             return res.status(404).json({ error: 'Quest not found or already completed.' });
         }
 
-        // Create/update daily completion record
+        const today = new Date().toISOString().slice(0, 10);
+
         try {
             await DailyCompletion.findOrCreate({
                 where: {
@@ -87,44 +77,26 @@ const completeQuests = async (req, res) => {
                     date: today,
                 }
             });
-            console.log("Daily completion record created/found for:", today);
         } catch (err) {
             console.error('DailyCompletion error:', err);
         }
         
         const user = await User.findOne({ where: { id: userId } });
-        
-        const yesterday = new Date(localDate);
-        yesterday.setDate(yesterday.getDate() - 1);
-        const yesterdayStr = yesterday.toISOString().slice(0, 10);
-        
-        console.log("Yesterday date:", yesterdayStr);
-
-        const todayStart = new Date(today + 'T00:00:00.000Z');
-        const todayEnd = new Date(today + 'T23:59:59.999Z');
-        
-        const timezoneOffset = now.getTimezoneOffset() * 60000;
-        const localTodayStart = new Date(todayStart.getTime() - timezoneOffset);
-        const localTodayEnd = new Date(todayEnd.getTime() - timezoneOffset);
-
-        console.log("Counting quests between:", localTodayStart.toISOString(), "and", localTodayEnd.toISOString());
+        const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
 
         const questsCompletedToday = await UserQuest.count({
             where: {
                 user_id: userId,
                 status: 'Completed',
                 completed_at: {
-                    [Op.gte]: localTodayStart,
-                    [Op.lte]: localTodayEnd
+                    [Op.gte]: new Date(today + 'T00:00:00'),
+                    [Op.lt]: new Date(today + 'T23:59:59')
                 },
             },
         });
 
-        console.log("Quests completed today:", questsCompletedToday);
-
         let newStreak = user.streak_count;
 
-        // Only update streak on first quest completion of the day
         if (questsCompletedToday === 1) {
             const hasPreviousCompletions = await DailyCompletion.count({
                 where: {
@@ -133,43 +105,35 @@ const completeQuests = async (req, res) => {
                 }
             });
 
-            console.log("Has previous completions:", hasPreviousCompletions);
-
             // Check if user has a completion record for yesterday
             const yesterdayCompletion = await DailyCompletion.findOne({
                 where: {
                     user_id: userId,
-                    date: yesterdayStr
+                    date: yesterday
                 }
             });
-            
-            console.log("Yesterday completion found:", !!yesterdayCompletion);
             
             if (yesterdayCompletion) {
                 // User completed quests yesterday, increment streak
                 newStreak = user.streak_count + 1;
-                console.log('Streak updated successfully from', user.streak_count, 'to', newStreak);
+                console.log('Streak updated successfully');
             } else if (!hasPreviousCompletions) {
                 // First ever quest completion -> start streak to 1
                 newStreak = 1;
                 console.log('First quest completed, streak started');
             } else {
-                // Had previous completions but not yesterday -> streak broken
                 newStreak = 1;
                 console.log('Streak broken, reset to 1');
             }
 
             await user.update({ streak_count: newStreak });
-            console.log('User streak updated in database');
         }
 
-        // Get the completed quest with updated data
         const completedQuest = await UserQuest.findOne({
             where: { id: questId, user_id: userId }
         });
 
         const xpReward = completedQuest.xp || 0;
-        console.log("XP reward for this quest:", xpReward);
 
         const pet = await Pets.findOne({ where: { user_id: userId } });
 
@@ -177,15 +141,12 @@ const completeQuests = async (req, res) => {
             return res.status(404).json({ error: 'Pet not found.' });
         }
 
-        console.log("Pet before update:", { xp: pet.xp, level: pet.level, total_xp: pet.total_xp });
-
         let levelUpXp = 100 + (pet.level - 1) * 50;
         let petXp = pet.xp + xpReward;
         let totalXp = (pet.total_xp || 0) + xpReward;
         let petLevel = pet.level;
         let leveledUp = false;
 
-        // Handle level ups
         while (petXp >= levelUpXp) {
             petLevel += 1;
             petXp -= levelUpXp;
@@ -193,10 +154,9 @@ const completeQuests = async (req, res) => {
             leveledUp = true;
         }
 
-        console.log("Pet after calculation:", { xp: petXp, level: petLevel, total_xp: totalXp, leveledUp });
-
+        const today_date = new Date();
         const petLastFed = new Date(pet.last_fed);
-        const diffTime = completionTime - petLastFed;
+        const diffTime = today_date - petLastFed;
         const dayLastFed = Math.floor(diffTime / (1000 * 60 * 60 * 24));
         
         let petMood = pet.mood;
@@ -213,31 +173,15 @@ const completeQuests = async (req, res) => {
             petMood = 'Angry';
         } 
 
-        console.log("Pet mood calculation:", { dayLastFed, oldMood: pet.mood, newMood: petMood });
-
         await pet.update({
             xp: petXp,
             level: petLevel,
-            last_fed: completionTime, 
+            last_fed: new Date(),
             mood: petMood,
             total_xp: totalXp
         });
 
-        console.log("Quest completion successful!");
-
-        res.status(200).json({ 
-            xp: petXp, 
-            maxXp: levelUpXp, 
-            level: petLevel, 
-            mood: petMood, 
-            streak: newStreak,
-            debug: {
-                questsCompletedToday,
-                completionTime: completionTime.toISOString(),
-                localDate: today,
-                xpReward
-            }
-        });
+        res.status(200).json({ xp: petXp, maxXp: levelUpXp, level: petLevel, mood: petMood, streak: newStreak });
     } catch (err) {
         console.error("Error in completeQuests:", err);
         res.status(500).json({ error: err.message });

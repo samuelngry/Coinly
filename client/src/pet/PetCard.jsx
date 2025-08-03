@@ -24,7 +24,7 @@ const PetCard = ({ name, level, mood, username, accountAge, avatarUrl, onAvatarU
       <div className='flex items-center gap-6 px-6 pt-6 mb-5'>
         <div className='relative'>
           <img
-            src={`http://localhost:3000${avatarUrl}` || defaultIcon}
+            src={avatarUrl ? `http://localhost:3000${avatarUrl}` : defaultIcon }
             alt="avatar"
             className='w-24 h-24 md:w-40 md:h-40 rounded-full object-cover border border-neutral-300'
           />

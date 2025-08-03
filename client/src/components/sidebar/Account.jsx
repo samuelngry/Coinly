@@ -5,7 +5,7 @@ const Account = ({ username, avatarUrl }) => {
     <div className="border-b mb-4 pb-4 mt-2 border-neutral-300 mr-4">
       <button className="flex p-0.5 hover:bg-neutral-300 rounded transition-colors relative gap-2 w-full items-center">
         <img
-            src={`http://localhost:3000${avatarUrl}` || defaultIcon}
+            src={avatarUrl ? `http://localhost:3000${avatarUrl}` : defaultIcon }
             alt="Avatar"
             className="w-10 h-10 rounded-full shrink-0"
         />
