@@ -5,7 +5,7 @@ import PetStat from './PetStat';
 import PetBadge from './PetBadge';
 import PetMotivation from './PetMotivation';
 
-const Pet = ({ userData, onAvatarUpload, onUserDataUpdate }) => {
+const Pet = ({ userData = {}, onAvatarUpload, onUserDataUpdate }) => {
     const [petName, setPetName] = useState("");
     const [levelUpXp, setLevelUpXp] = useState(0);
     const [weeklyXPData, setWeeklyXPData] = useState([]);
@@ -54,17 +54,19 @@ const Pet = ({ userData, onAvatarUpload, onUserDataUpdate }) => {
 
             setLevelUpXp(data.maxXp);
 
-            // Update the shared user data through the parent
-            onUserDataUpdate({
-                xp: data.xp,
-                level: data.level,
-                streak: data.streak,
-                mood: data.mood,
-                username: data.username,
-                accountAge: data.accountAge,
-                avatarUrl: data.avatar_url,
-                badges: data.badges
-            });
+            // Update the shared user data through the parent if function exists
+            if (onUserDataUpdate) {
+                onUserDataUpdate({
+                    xp: data.xp,
+                    level: data.level,
+                    streak: data.streak,
+                    mood: data.mood,
+                    username: data.username,
+                    accountAge: data.accountAge,
+                    avatarUrl: data.avatar_url,
+                    badges: data.badges
+                });
+            }
 
         } catch (err) {
             console.error("Failed to fetch user data:", err);
@@ -122,21 +124,21 @@ const Pet = ({ userData, onAvatarUpload, onUserDataUpdate }) => {
                     </div>
                     <PetCard 
                         name={petName} 
-                        level={userData.level} 
-                        mood={userData.mood} 
-                        username={userData.username} 
-                        accountAge={userData.accountAge} 
-                        avatarUrl={userData.avatarUrl} 
+                        level={userData.level || 1} 
+                        mood={userData.mood || ''} 
+                        username={userData.username || ''} 
+                        accountAge={userData.accountAge || 0} 
+                        avatarUrl={userData.avatarUrl || ''} 
                         onAvatarUpload={onAvatarUpload} 
                     />
-                    <StreakCard streak={userData.streak} />
+                    <StreakCard streak={userData.streak || 0} />
                 </div>
                 <div className='md:col-span-2 space-y-6'>
                     <PetStat data={weeklyXPData} total={totalXP} />
                 </div>
             </div>
             <div>
-                <PetMotivation xp={userData.xp} level={userData.level} levelXp={levelUpXp} />
+                <PetMotivation xp={userData.xp || 0} level={userData.level || 1} levelXp={levelUpXp} />
                 <PetBadge badge={userData.badges} />
             </div>
         </div>    

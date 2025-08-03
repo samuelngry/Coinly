@@ -4,7 +4,7 @@ import Search from './Search'
 import RouteSelect from './RouteSelect'
 import SidebarFooter from './SidebarFooter'
 
-const Sidebar = ({ username, avatarUrl }) => {
+const Sidebar = ({ username = '', avatarUrl = '' }) => {
   return (
     <div>
         <div className='fixed left-4 top-4 h-screen w-56 flex flex-col'>
