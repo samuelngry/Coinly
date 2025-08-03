@@ -60,12 +60,6 @@ const TopLeaderboard = ({ topThree }) => {
               <span className="font-bold text-sm text-orange-500">
                 {player.xp}
               </span>
-              <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
-                <div 
-                  className="bg-orange-500 h-2 rounded-full transition-all duration-300" 
-                  style={{width: `${player.xp/player.total_xp}`}}
-                />
-              </div>
             </div>
             <div className="flex flex-col items-center gap-1 mb-0.5 md:px-4 lg:px-5">
               <span className="text-neutral-500 text-sm hidden md:block">Streak</span>
@@ -73,13 +67,6 @@ const TopLeaderboard = ({ topThree }) => {
                 {player.streak}
               </span>
             </div>
-          </div>
-
-          {/* XP to Earn */}
-          <div className="mt-2 mb-2 md:mt-4">
-            <span className="text-[10px] sm:text-xs font-medium text-gray-700 bg-gray-100 px-3 py-1 rounded-full border border-neutral-300 hover:bg-orange-100 hover:text-orange-600 transition-colors">
-              {rank === 1 ? 'Earn 800XP' : rank === 2 ? 'Earn 600XP' : rank === 3 ? 'Earn 400XP' : ''}
-            </span>
           </div>
           
         </div>
