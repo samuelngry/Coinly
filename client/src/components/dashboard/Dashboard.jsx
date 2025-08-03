@@ -370,14 +370,6 @@ const Dashboard = () => {
     .filter(q => q.status === 'Completed')
     .reduce((sum, q) => sum + (q.xp || 0), 0);
 
-  // useEffect(() => {
-  //   // Trigger confetti when all daily and bonus quests are completed
-  //   if (completedDaily === totalDaily && completedBonus === totalBonus && completedCustom === totalBonus && totalDaily > 0 && totalBonus > 0 && totalCustom > 0) {
-  //     setShowConfetti(true);
-  //     setTimeout(() => setShowConfetti(false), 4000); // Confetti for 4 seconds
-  //   }
-  // }, [completedDaily, completedBonus, completedCustom, totalDaily, totalBonus, totalCustom]);
-
   return (
     <div className='min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow justify-center'>
       {showBonusComplete && petName && (

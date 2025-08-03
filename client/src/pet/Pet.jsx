@@ -54,7 +54,6 @@ const Pet = ({ userData = {}, onAvatarUpload, onUserDataUpdate }) => {
 
             setLevelUpXp(data.maxXp);
 
-            // Update the shared user data through the parent if function exists
             if (onUserDataUpdate) {
                 onUserDataUpdate({
                     xp: data.xp,
@@ -80,11 +79,8 @@ const Pet = ({ userData = {}, onAvatarUpload, onUserDataUpdate }) => {
 
     useEffect(() => {
         getPetName();
-        // Only fetch user data if we don't have it yet
-        if (!userData.username) {
-            getUserData();
-        }
-    }, [userData.username]);
+        getUserData();
+    }, []);
 
     useEffect(() => {
         const fetchWeeklyXP = async () => {
@@ -131,7 +127,7 @@ const Pet = ({ userData = {}, onAvatarUpload, onUserDataUpdate }) => {
                         avatarUrl={userData.avatarUrl || ''} 
                         onAvatarUpload={onAvatarUpload} 
                     />
-                    <StreakCard streak={userData.streak || 0} />
+                    <StreakCard streak={userData.streak || 0} longestStreak={userData.longestStreak || 0} />
                 </div>
                 <div className='md:col-span-2 space-y-6'>
                     <PetStat data={weeklyXPData} total={totalXP} />

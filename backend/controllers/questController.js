@@ -96,7 +96,7 @@ const completeQuests = async (req, res) => {
         });
 
         let newStreak = user.streak_count;
-        let newLongestStreak = user.longest_streak || 0;
+        let newLongestStreak = user.longest_streak;
 
         if (questsCompletedToday === 1) {
             const hasPreviousCompletions = await DailyCompletion.count({

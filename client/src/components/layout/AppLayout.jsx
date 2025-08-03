@@ -9,6 +9,7 @@ const AppLayout = ({ children, className = 'bg-white' }) => {
     xp: 0,
     level: 1,
     streak: 0,
+    longestStreak: 0,
     mood: '',
     accountAge: 0,
     badges: null
@@ -38,6 +39,7 @@ const AppLayout = ({ children, className = 'bg-white' }) => {
         xp: data.xp,
         level: data.level,
         streak: data.streak,
+        longestStreak: data.longestStreak,
         mood: data.mood,
         accountAge: data.accountAge,
         badges: data.badges

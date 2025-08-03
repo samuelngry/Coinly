@@ -12,6 +12,13 @@ const getUserData = async (req, res) => {
 
         const user = await User.findByPk(userId);
 
+        console.log('User data from DB:', {
+            id: user.id,
+            username: user.username,
+            streak_count: user.streak_count,
+            longest_streak: user.longest_streak
+        });
+
         const pet = await Pets.findOne({ where: { user_id: userId } });
         if (!pet) {
             return res.status(404).json({ error: 'User data not found' });
