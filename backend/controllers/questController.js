@@ -96,6 +96,7 @@ const completeQuests = async (req, res) => {
         });
 
         let newStreak = user.streak_count;
+        let newLongestStreak = user.longest_streak || 0;
 
         if (questsCompletedToday === 1) {
             const hasPreviousCompletions = await DailyCompletion.count({
@@ -126,7 +127,12 @@ const completeQuests = async (req, res) => {
                 console.log('Streak broken, reset to 1');
             }
 
-            await user.update({ streak_count: newStreak });
+            if (newStreak > newLongestStreak) {
+                newLongestStreak = newStreak;
+                console.log('New longest streak achieved:', newLongestStreak);
+            }
+
+            await user.update({ streak_count: newStreak, longest_streak: newLongestStreak});
         }
 
         const completedQuest = await UserQuest.findOne({
@@ -181,7 +187,7 @@ const completeQuests = async (req, res) => {
             total_xp: totalXp
         });
 
-        res.status(200).json({ xp: petXp, maxXp: levelUpXp, level: petLevel, mood: petMood, streak: newStreak });
+        res.status(200).json({ xp: petXp, maxXp: levelUpXp, level: petLevel, mood: petMood, streak: newStreak, longestSreak: newLongestStreak });
     } catch (err) {
         console.error("Error in completeQuests:", err);
         res.status(500).json({ error: err.message });
