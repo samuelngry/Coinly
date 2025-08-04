@@ -74,6 +74,13 @@ const Dashboard = () => {
 
       const data = await res.json();
 
+      const today = new Date().toISOString().slice(0, 10);
+            if (data.last_completed_date !== today) {
+          setStreak(0);
+      } else {
+          setStreak(data.streak);
+      }
+
       if (prevStreak !== null && data.streak > prevStreak) {
         setShowStreakModal(true);
       }
@@ -81,7 +88,6 @@ const Dashboard = () => {
       setPrevStreak(data.streak);
       setXp(data.xp);
       setLevel(data.level);
-      setStreak(data.streak);
       setMood(data.mood);
     } catch (err) {
       console.error("Failed to fetch user data:", err);

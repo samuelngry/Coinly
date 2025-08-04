@@ -122,10 +122,8 @@ async function generateDynamicQuests(userId) {
                 }
             );
 
-            // Only proceed if this call successfully updated the timestamp
             if (affectedRows === 0) {
                 console.log('Another process already generating quests, fetching existing ones...');
-                // Refetch existing quests in case they were created by the other process
                 const updatedQuests = await UserQuest.findAll({
                     where: {
                         user_id: userId,
@@ -150,7 +148,7 @@ async function generateDynamicQuests(userId) {
                     where: {
                         user_id: userId,
                         status: 'Completed',
-                        instance_date: { [Op.lt] : todayStartSGT }, // Use consistent date
+                        instance_date: { [Op.lt] : todayStartSGT }, 
                     },
                 }
             );

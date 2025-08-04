@@ -14,7 +14,23 @@ const generateQuests = async (req, res) => {
         const daily = quest.filter(q => q.type === 'daily');
         const bonus = quest.filter(q => q.type === 'bonus');
 
-        res.status(200).json({ message: "Daily and bonus quesets generated successfully", daily, bonus });
+        const latestCompletion = await UserQuest.findOne({
+            where: {
+                user_id: userId,
+                status: 'Completed'
+            },
+            order: [['completed_at', 'DESC']]
+        });
+
+        res.status(200).json({ 
+            message: "Daily and bonus quests generated successfully", 
+            daily, 
+            bonus,
+            last_completed_date: latestCompletion
+                ? latestCompletion.completed_at.toISOString().slice(0, 10)
+                : null
+        });
+        
     } catch (err) {
         console.error("Error in generateQuests:", err);
         res.status(500).json({ error: err.message });
@@ -187,7 +203,26 @@ const completeQuests = async (req, res) => {
             total_xp: totalXp
         });
 
-        res.status(200).json({ xp: petXp, maxXp: levelUpXp, level: petLevel, mood: petMood, streak: newStreak, longestSreak: newLongestStreak });
+        const latestCompletion = await UserQuest.findOne({
+            where: {
+                user_id: userId,
+                status: 'Completed'
+            },
+            order: [['completed_at', 'DESC']]
+        });
+
+        res.status(200).json({ 
+            xp: petXp, 
+            maxXp: levelUpXp, 
+            level: petLevel, 
+            mood: petMood, 
+            streak: newStreak, 
+            longestSreak: newLongestStreak,
+            last_completed_date: latestCompletion
+                ? latestCompletion.completed_at.toISOString().slice(0, 10)
+                : null
+        });
+
     } catch (err) {
         console.error("Error in completeQuests:", err);
         res.status(500).json({ error: err.message });
