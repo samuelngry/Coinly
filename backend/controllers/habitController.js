@@ -204,7 +204,7 @@ async function generatePredictions(patterns, userPreference) {
             probability: Math.round(100 - patterns.worstDay.rate),
             prediction: `Likely to struggle on ${patterns.worstDay.name}s`,
             reason: `Your ${patterns.worstDay.name} success rate is only ${patterns.worstDay.rate}%`,
-            suggestion: `Try scheduling easier quests on ${patterns.worstDay.name}s or prep them the night before`,
+            suggestion: `Try completing easier quests on ${patterns.worstDay.name}s`,
             impact: `Could prevent streak breaks`,
             icon: "AlertTriangle"
         });
@@ -217,7 +217,7 @@ async function generatePredictions(patterns, userPreference) {
             probability: patterns.bestDay.rate,
             prediction: `Strong performance expected on ${patterns.bestDay.name}s`,
             reason: `You have a ${patterns.bestDay.rate}% success rate on ${patterns.bestDay.name}s`,
-            suggestion: `Use ${patterns.bestDay.name}s for challenging quest chains or bonus goals`,
+            suggestion: `Use ${patterns.bestDay.name}s for challenging quests or personal goals`,
             impact: `Perfect day to build momentum`,
             icon: "TrendingUp"
         });
@@ -230,7 +230,7 @@ async function generatePredictions(patterns, userPreference) {
             probability: 75,
             prediction: "Momentum is declining",
             reason: `Your completion rate dropped ${Math.abs(patterns.trend)}% this week`,
-            suggestion: "Try easier quests for a few days to rebuild confidence",
+            suggestion: "Try easier quests for a few days to rebuild momentum",
             impact: "Early intervention can prevent habit breakdown",
             icon: "TrendingDown"
         });
@@ -240,7 +240,7 @@ async function generatePredictions(patterns, userPreference) {
             probability: 80,
             prediction: "You're building strong momentum",
             reason: `Your completion rate improved ${patterns.trend}% this week`,
-            suggestion: "Perfect time to tackle more challenging financial goals",
+            suggestion: "Perfect time to tackle more challenging quests",
             impact: "Strike while motivation is high!",
             icon: "TrendingUp"
         });
@@ -272,9 +272,9 @@ async function generateRecommendations(patterns, userPreference) {
     if (patterns.peakTime) {
         recommendations.push({
             type: "schedule",
-            title: "Optimize Your Peak Time",
+            title: "Optimise Your Peak Time",
             description: `You complete most quests around ${patterns.peakTime}`,
-            action: "Schedule daily quests for this time",
+            action: "Complete daily quests during this time",
             impact: `Could boost success rate by 25-40%`,
             priority: "high"
         });
@@ -285,7 +285,7 @@ async function generateRecommendations(patterns, userPreference) {
         recommendations.push({
             type: "intervention",
             title: `${patterns.worstDay.name} Support`,
-            description: `Enable extra nudges and easier quests on ${patterns.worstDay.name}s`,
+            description: `Complete easier quests on ${patterns.worstDay.name}s`,
             action: "Set up smart reminders",
             impact: `Could improve ${patterns.worstDay.name} success by 35%`,
             priority: "high"
@@ -301,22 +301,12 @@ async function generateRecommendations(patterns, userPreference) {
                     type: "category",
                     title: `Improve ${category} Habits`,
                     description: `Only ${successRate}% success rate in ${category} quests`,
-                    action: `Focus on easier ${category} challenges first`,
-                    impact: `Build confidence before tackling harder goals`,
+                    action: `Focus on easier ${category} quests first`,
+                    impact: `Build confidence before tackling harder quests`,
                     priority: "medium"
                 });
             }
         }
-    });
-    
-    // Streak protection
-    recommendations.push({
-        type: "protection",
-        title: "Streak Insurance",
-        description: "Protect your progress on predicted difficult days",
-        action: "Enable streak freeze option",
-        impact: "Maintain motivation through temporary setbacks",
-        priority: "medium"
     });
     
     return recommendations;
@@ -334,22 +324,16 @@ async function generatePetInsights(patterns, pet, user) {
         }
         
         if (patterns.bestDay.rate > 85) {
-            insights.push(`🌟 You're absolutely amazing on ${patterns.bestDay.name}s! ${patterns.bestDay.rate}% success rate - that's incredible!`);
+            insights.push(`🌟 You're doing amazing on ${patterns.bestDay.name}s! ${patterns.bestDay.rate}% success rate - that's incredible!`);
         }
         
         if (patterns.peakTime) {
             insights.push(`⏰ I've noticed you're most successful around ${patterns.peakTime}. Your natural rhythm is working for you!`);
         }
         
-        // Financial impact insight
-        if (patterns.completedQuests > 10) {
-            const estimatedSavings = Math.round(patterns.completedQuests * 3.5); // Rough estimate
-            insights.push(`💰 Quick math: You've completed ${patterns.completedQuests} quests! That's roughly $${estimatedSavings} in avoided impulse spending!`);
-        }
-        
         // Default encouragement
         if (insights.length === 0) {
-            insights.push(`🐕 ${user.name || 'Hey there'}! I'm analyzing your patterns to help you succeed. Keep going - every quest counts!`);
+            insights.push(`🐕 ${user.name || 'Hey there'}! I'm watching your patterns to help you succeed. Keep going - every quest counts!`);
         }
     }
     
