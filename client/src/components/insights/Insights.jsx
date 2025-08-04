@@ -111,12 +111,6 @@ const Insights = () => {
 
   return (
     <div className="min-h-screen p-6 mb-12 lg:mb-0 rounded-lg shadow overflow-auto">
-      {/* Header */}
-      <div className="text-center mb-6">
-        <h1 className="text-base md:text-xl font-bold text-gray-800 mb-2">
-          🎯 Insights from {data.patterns.totalQuests} total quests
-        </h1>
-      </div>
 
       {/* Pet Companion Section */}
       <div className="bg-white rounded-2xl p-4 mb-4 shadow-lg border-2 border-orange-200">
