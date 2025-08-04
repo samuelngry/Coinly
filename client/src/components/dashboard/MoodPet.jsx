@@ -79,17 +79,12 @@ const MoodPet = ( { mood } ) => {
     return (
         <div className='flex flex-col items-center gap-6 p-1'>
             {/* Pet Animation */}
-            <div className='relative'>
+            <div className='relative '>
                 <motion.img
                     key={mood}
                     src={currentConfig.image}
                     alt={`${mood} pet`}
-                    style={{ 
-                        width: 275, 
-                        height: 275,
-                        borderRadius: '20px',
-                        objectFit: 'cover'
-                    }}
+                    className="w-[240px] h-[240px] lg:w-[290px] lg:h-[290px] rounded-[20px] object-cover"
                     animate={currentConfig.animation}
                     transition={currentConfig.transition}
                     whileHover={{ 
