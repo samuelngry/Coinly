@@ -13,7 +13,7 @@ const SignupPage = () => {
           const parsedUser = JSON.parse(user);
 
           if (parsedUser.onboarding_completed) {
-              navigate('/dashboard');
+              navigate('/home');
           } else {
               navigate('/onboard');
           }

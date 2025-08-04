@@ -55,11 +55,6 @@ const LeaderboardTable = ({ data, currentUserId, isLoading = false }) => {
         }
     };
 
-    // Calculate XP progress percentage
-    const getXPProgress = (currentXP, totalXP) => {
-        return Math.min((currentXP / totalXP) * 100, 100);
-    };
-
     // Filter and sort data
     const filteredAndSortedData = data
         .filter(user => 
@@ -194,15 +189,6 @@ const LeaderboardTable = ({ data, currentUserId, isLoading = false }) => {
                                 <td className="py-3 px-4 font-medium text-orange-500 md:border-r md:border-neutral-300">
                                     <div className="flex flex-col">
                                         <span>{user.xp.toLocaleString()}</span>
-                                        {/* XP progress bar */}
-                                        {user.total_xp && (
-                                            <div className="w-full bg-gray-200 rounded-full h-1 mt-1">
-                                                <div 
-                                                    className="bg-orange-500 h-1 rounded-full transition-all duration-300" 
-                                                    style={{width: `${getXPProgress(user.xp, user.total_xp)}%`}}
-                                                />
-                                            </div>
-                                        )}
                                     </div>
                                 </td>
                                 <td className="py-3 px-4 hidden md:table-cell">

@@ -17,7 +17,7 @@ const DashboardPage = () => {
     const user = JSON.parse(localStorage.getItem('user'));
 
     if (user && user.onboarding_completed) {
-      navigate('/dashboard');
+      navigate('/home');
     } else {
       navigate('/onboard');
     }
