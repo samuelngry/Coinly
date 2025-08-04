@@ -94,7 +94,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                     ...user, 
                     onboarding_completed: true,
                 }));
-                navigate('/dashboard');
+                navigate('/home');
             })
             .catch(err => {
                 console.error("Error saving preferences:", err);

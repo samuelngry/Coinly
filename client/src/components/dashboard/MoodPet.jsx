@@ -114,7 +114,6 @@ const MoodPet = ( { mood } ) => {
                     whileTap={{ scale: 0.95 }}
                 />
                 
-                {/* Mood indicator glow effect */}
                 <motion.div
                     className="absolute inset-0 rounded-full opacity-20 -z-10"
                     style={{ 
