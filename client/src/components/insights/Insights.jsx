@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TrendingUp, TrendingDown, AlertTriangle, Target, Calendar, Brain, Flame, Trophy, Clock, DollarSign, Activity, BarChart3 } from 'lucide-react';
+import analysisImage from '../../assets/analysis.png';
 
 const Insights = () => {
   const [activeTab, setActiveTab] = useState('predictions');
@@ -120,9 +121,9 @@ const Insights = () => {
       {/* Pet Companion Section */}
       <div className="bg-white rounded-2xl p-4 mb-4 shadow-lg border-2 border-orange-200">
         <div className="flex items-center gap-3">
-          <div className="text-3xl animate-bounce">🐕</div>
+          <img src={analysisImage} className="h-30 w-30" />
           <div className="flex-1">
-            <h3 className="font-semibold text-orange-500 mb-1 text-sm">Kinder's Analysis</h3>
+            <h3 className="font-semibold text-orange-500 mb-1 text-sm">{data.name}'s Insights</h3>
             <div className="bg-orange-100 p-2 rounded-lg relative min-h-[50px] flex items-center">
               <p className="text-orange-500 transition-opacity duration-500 text-sm">
                 {data.petInsights[currentInsight]}

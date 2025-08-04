@@ -208,6 +208,8 @@ const completeQuests = async (req, res) => {
             petMood = 'Angry';
         } 
 
+        petMood = 'Happy';
+
         await pet.update({
             xp: petXp,
             level: petLevel,
