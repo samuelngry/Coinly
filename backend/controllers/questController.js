@@ -117,14 +117,14 @@ const completeQuests = async (req, res) => {
             if (yesterdayCompletion) {
                 // User completed quests yesterday, increment streak
                 newStreak = user.streak_count + 1;
-                console.log('Streak updated successfully');
+                console.log('Streak continued, new count:', newStreak);
             } else if (!hasPreviousCompletions) {
                 // First ever quest completion -> start streak to 1
                 newStreak = 1;
                 console.log('First quest completed, streak started');
             } else {
                 newStreak = 1;
-                console.log('Streak broken, reset to 1');
+                console.log('Streak broken, reset to 1 (completed today)');
             }
 
             if (newStreak > newLongestStreak) {
