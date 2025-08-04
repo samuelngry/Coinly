@@ -99,22 +99,6 @@ const MoodPet = ( { mood } ) => {
                     whileTap={{ scale: 0.95 }}
                 />
                 
-                <motion.div
-                    className="absolute inset-0 rounded-full opacity-20 -z-10"
-                    style={{ 
-                        backgroundColor: currentConfig.color,
-                        filter: 'blur(20px)',
-                        transform: 'scale(1.1)'
-                    }}
-                    animate={{
-                        opacity: [0.1, 0.25, 0.1],
-                    }}
-                    transition={{
-                        duration: 2.5,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                    }}
-                />
             </div>
 
         </div>

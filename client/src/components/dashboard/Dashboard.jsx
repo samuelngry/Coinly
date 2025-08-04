@@ -385,13 +385,13 @@ const Dashboard = () => {
       {showLevelUp && petName && (
         <LevelUpModal name={petName} newLevel={newLevel} totalXp={xp} onClose={() => setShowLevelUp(false)} />
       )}
-        <div className='sticky top-0 left-0 lg:px-2 bg-white backdrop-blur-md'>
+        <div className='sticky top-0 left-0 lg:px-1 backdrop-blur-md'>
           {showConfetti && <Confetti width={width} height={height} numberOfPieces={300} />}
           <div className='py-2'>
             <LevelBar xp={xp} level={level} />
+            <MoodPet mood={mood} />
           </div>
         </div>
-        <MoodPet mood={mood} />
         <PetName name={petName} onComplete={handlePetNameChange} />
         <MainCards streak={streak} completedCount={completedQuest} totalCount={totalQuest}/>
         <DailyQuests quests={dailyQuests} onComplete={handleCompleteQuest} completedCount={completedDaily} totalCount={totalDaily} />
