@@ -74,13 +74,6 @@ const Dashboard = () => {
 
       const data = await res.json();
 
-      const today = new Date().toISOString().slice(0, 10);
-            if (data.last_completed_date !== today) {
-          setStreak(0);
-      } else {
-          setStreak(data.streak);
-      }
-
       if (prevStreak !== null && data.streak > prevStreak) {
         setShowStreakModal(true);
       }
@@ -88,6 +81,7 @@ const Dashboard = () => {
       setPrevStreak(data.streak);
       setXp(data.xp);
       setLevel(data.level);
+      setStreak(data.streak);
       setMood(data.mood);
     } catch (err) {
       console.error("Failed to fetch user data:", err);
@@ -391,7 +385,7 @@ const Dashboard = () => {
       {showLevelUp && petName && (
         <LevelUpModal name={petName} newLevel={newLevel} totalXp={xp} onClose={() => setShowLevelUp(false)} />
       )}
-        <div className='sticky top-0 left-0 lg:px-1 bg-white backdrop-blur-md'>
+        <div className='sticky top-0 left-0 lg:px-2 bg-white backdrop-blur-md'>
           {showConfetti && <Confetti width={width} height={height} numberOfPieces={300} />}
           <div className='py-2'>
             <LevelBar xp={xp} level={level} />

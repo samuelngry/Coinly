@@ -10,9 +10,24 @@ const generateQuests = async (req, res) => {
         const userId = req.user.id;
 
         const quest = await generateDynamicQuests(userId);
+        const pet = await Pets.findOne({ where: { user_id: userId } });
 
         const daily = quest.filter(q => q.type === 'daily');
         const bonus = quest.filter(q => q.type === 'bonus');
+
+        const today = new Date();
+        const lastFed = new Date(pet.last_fed);
+        const diffDays = Math.floor((today - lastFed) / (1000 * 60 * 60 * 24));
+
+        let recalculatedMood;
+        if (diffDays === 0) recalculatedMood = "Happy";
+        else if (diffDays === 1) recalculatedMood = "Neutral";
+        else if (diffDays === 2) recalculatedMood = "Sad";
+        else recalculatedMood = "Angry";
+
+        if (recalculatedMood !== pet.mood) {
+            await pet.update({ mood: recalculatedMood });
+        }
 
         const latestCompletion = await UserQuest.findOne({
             where: {
@@ -26,11 +41,11 @@ const generateQuests = async (req, res) => {
             message: "Daily and bonus quests generated successfully", 
             daily, 
             bonus,
+            mood: recalculatedMood,
             last_completed_date: latestCompletion
                 ? latestCompletion.completed_at.toISOString().slice(0, 10)
                 : null
         });
-        
     } catch (err) {
         console.error("Error in generateQuests:", err);
         res.status(500).json({ error: err.message });
@@ -183,9 +198,7 @@ const completeQuests = async (req, res) => {
         
         let petMood = pet.mood;
 
-        if (leveledUp) {
-            petMood = 'Excited';
-        } else if (dayLastFed === 0) {
+        if (dayLastFed === 0) {
             petMood = 'Happy';
         } else if (dayLastFed === 1) {
             petMood = 'Neutral';

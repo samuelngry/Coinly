@@ -1,4 +1,3 @@
-import excitedPuppy from '../../assets/excited.png';
 import happyPuppy from '../../assets/happy.png';
 import neutralPuppy from '../../assets/neutral.png';
 import sadPuppy from '../../assets/sad.png';
@@ -8,20 +7,6 @@ import { motion } from 'framer-motion';
 const MoodPet = ( { mood } ) => {
 
     const moodConfig = {
-        Excited: {
-            image: excitedPuppy, 
-            animation: {
-                scale: [1, 1.08, 1, 1.06, 1],
-                rotate: [0, -4, 4, -2, 2, 0],
-                y: [0, -12, -5, -10, 0],
-            },
-            transition: {
-                duration: 1,
-                repeat: Infinity,
-                ease: "easeInOut"
-            },
-            color: "#FFD700"
-        },
         Happy: {
             image: happyPuppy,
             animation: {
