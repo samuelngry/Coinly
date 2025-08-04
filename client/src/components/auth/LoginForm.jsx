@@ -29,7 +29,7 @@ const LoginForm = () => {
       if (!user.onboarding_completed) {
         navigate('/onboard');
       } else {
-        navigate('/dashboard');
+        navigate('/home');
       }
     } catch (err) {
       console.error("Login error:", err);

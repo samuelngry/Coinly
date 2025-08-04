@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import RivePet from './RivePet';
+import MoodPet from './MoodPet';
 import LevelBar from './LevelBar';
 import PetName from './PetName';
 import MainCards from './MainCards';
@@ -82,6 +82,7 @@ const Dashboard = () => {
       setXp(data.xp);
       setLevel(data.level);
       setStreak(data.streak);
+      setMood(data.mood);
     } catch (err) {
       console.error("Failed to fetch user data:", err);
     }
@@ -390,7 +391,7 @@ const Dashboard = () => {
             <LevelBar xp={xp} level={level} />
           </div>
         </div>
-        <RivePet />
+        <MoodPet mood={mood} />
         <PetName name={petName} onComplete={handlePetNameChange} />
         <MainCards streak={streak} completedCount={completedQuest} totalCount={totalQuest}/>
         <DailyQuests quests={dailyQuests} onComplete={handleCompleteQuest} completedCount={completedDaily} totalCount={totalDaily} />

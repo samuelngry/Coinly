@@ -3,10 +3,10 @@ import { FiHome, FiFlag, FiStar, FiAward } from 'react-icons/fi'
 import { NavLink } from 'react-router-dom'
 
 const routes = [
-    { to: '/dashboard', icon: <FiHome />, color: 'text-blue-500' },
-    { to: '/quests', icon: <FiFlag />, color: 'text-emerald-500' },
-    { to: '/pet', icon: <FiStar />, color: 'text-yellow-500' },
+    { to: '/home', icon: <FiHome />, color: 'text-blue-500' },
+    { to: '/insights', icon: <FiFlag />, color: 'text-emerald-500' },
     { to: '/leaderboard', icon: <FiAward />, color: 'text-purple-500' }, 
+    { to: '/pet', icon: <FiStar />, color: 'text-yellow-500' },
 ]
 
 const BottomNavbar = () => {
