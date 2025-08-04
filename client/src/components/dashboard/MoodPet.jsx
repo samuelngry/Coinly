@@ -91,7 +91,50 @@ const MoodPet = ( { mood } ) => {
         );
     }
 
-    
+    return (
+        <div className='flex flex-col items-center gap-6 p-1'>
+            {/* Pet Animation */}
+            <div className='relative'>
+                <motion.img
+                    key={mood}
+                    src={currentConfig.image}
+                    alt={`${mood} pet`}
+                    style={{ 
+                        width: 275, 
+                        height: 275,
+                        borderRadius: '20px',
+                        objectFit: 'cover'
+                    }}
+                    animate={currentConfig.animation}
+                    transition={currentConfig.transition}
+                    whileHover={{ 
+                        scale: 1.08,
+                        transition: { duration: 0.3 }
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                />
+                
+                {/* Mood indicator glow effect */}
+                <motion.div
+                    className="absolute inset-0 rounded-full opacity-20 -z-10"
+                    style={{ 
+                        backgroundColor: currentConfig.color,
+                        filter: 'blur(20px)',
+                        transform: 'scale(1.1)'
+                    }}
+                    animate={{
+                        opacity: [0.1, 0.25, 0.1],
+                    }}
+                    transition={{
+                        duration: 2.5,
+                        repeat: Infinity,
+                        ease: "easeInOut"
+                    }}
+                />
+            </div>
+
+        </div>
+    );
 };
 
 export default MoodPet;
