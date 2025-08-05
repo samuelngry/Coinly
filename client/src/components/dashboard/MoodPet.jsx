@@ -84,7 +84,7 @@ const MoodPet = ( { mood } ) => {
                     key={mood}
                     src={currentConfig.image}
                     alt={`${mood} pet`}
-                    className="w-[240px] h-[240px] lg:w-[290px] lg:h-[290px] rounded-[20px] object-cover"
+                    className="w-[240px] h-[240px] md:w-[290px] md:h-[290px] rounded-[20px] object-cover"
                     animate={currentConfig.animation}
                     transition={currentConfig.transition}
                     whileHover={{ 

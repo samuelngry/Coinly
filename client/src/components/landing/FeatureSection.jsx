@@ -6,7 +6,7 @@ import featureImage3 from "../../assets/feature3.png"
 const FeatureSection = () => {
   return (
     <div className="flex flex-col mt-35 items-center">
-      <h1 className="text-2xl sm:text-3xl lg:text-6xl tracking-wide text-center">Your money’s new favorite game.</h1>
+      <h1 className="text-2xl sm:text-3xl lg:text-6xl tracking-wide text-center">How</h1>
       <p className="text-sm sm:text-md lg:text-lg mt-3 text-center mb-10">
          Save with quests, pets, and progress that feels good.
       </p>
@@ -27,7 +27,6 @@ const FeatureSection = () => {
             title="XP & Streaks"
             description="Earn XP, build streaks, and unlock rewards — all without stressing about the numbers. Progress has never felt this good."
         />
-
       </div>
     </div>
   )
