@@ -37,7 +37,7 @@ const Dashboard = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch("http://localhost:3000/api/custom", {
+      const res = await fetch("https://coinly-backend.onrender.com/api/custom", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -60,7 +60,7 @@ const Dashboard = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch("http://localhost:3000/api/users", {
+      const res = await fetch("https://coinly-backend.onrender.com/api/users", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -92,7 +92,7 @@ const Dashboard = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch("http://localhost:3000/api/pet", {
+      const res = await fetch("https://coinly-backend.onrender.com/api/pet", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -115,7 +115,7 @@ const Dashboard = () => {
     try {
         const token = localStorage.getItem("token");
 
-        const res = await fetch("http://localhost:3000/api/quests", {
+        const res = await fetch("https://coinly-backend.onrender.com/api/quests", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -144,7 +144,7 @@ const Dashboard = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch("http://localhost:3000/api/custom", {
+      const res = await fetch("https://coinly-backend.onrender.com/api/custom", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -173,7 +173,7 @@ const Dashboard = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch(`http://localhost:3000/api/custom/${id}`, {
+      const res = await fetch(`https://coinly-backend.onrender.com/api/custom/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -209,7 +209,7 @@ const Dashboard = () => {
     try {
       const token = localStorage.getItem("token");
       
-      const res = await fetch(`http://localhost:3000/api/custom/${id}`, {
+      const res = await fetch(`https://coinly-backend.onrender.com/api/custom/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -243,11 +243,11 @@ const Dashboard = () => {
 
       // Determine the URL and body based on the quest type
       if (type === "daily" || type === "bonus") {
-        url = `http://localhost:3000/api/quests/${id}/complete`;
+        url = `https://coinly-backend.onrender.com/api/quests/${id}/complete`;
         body = {};
       } else if (type === "custom") {
         // Handle custom quest completion
-        url = `http://localhost:3000/api/custom/${id}/complete`;
+        url = `https://coinly-backend.onrender.com/api/custom/${id}/complete`;
         body = {};  // You can add any additional data if needed
       } else {
         throw new Error("Invalid quest type");
@@ -317,7 +317,7 @@ const Dashboard = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch(`http://localhost:3000/api/pet/edit`, {
+      const res = await fetch(`https://coinly-backend.onrender.com/api/pet/edit`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

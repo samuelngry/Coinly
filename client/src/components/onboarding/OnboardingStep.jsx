@@ -69,7 +69,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                 categories: Array.isArray(answers.categories) ? answers.categories : [answers.categories]
             };
 
-            fetch("http://localhost:3000/api/users/preferences", {
+            fetch("https://coinly-backend.onrender.com/api/users/preferences", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

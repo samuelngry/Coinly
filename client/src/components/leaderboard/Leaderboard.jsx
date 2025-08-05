@@ -11,7 +11,7 @@ const Leaderboard = () => {
         const fetchLeaderboard = async () => {
             const token = localStorage.getItem("token");
 
-            const res = await fetch("http://localhost:3000/api/leaderboard", {
+            const res = await fetch("https://coinly-backend.onrender.com/api/leaderboard", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

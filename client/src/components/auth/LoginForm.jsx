@@ -15,7 +15,7 @@ const LoginForm = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post('/api/auth/login', {
+      const res = await axios.post('https://coinly-backend.onrender.com/api/auth/login', {
         username,
         password
       });

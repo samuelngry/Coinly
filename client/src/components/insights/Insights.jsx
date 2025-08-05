@@ -13,7 +13,7 @@ const Insights = () => {
       try {
         const token = localStorage.getItem("token");
 
-        const res = await fetch("http://localhost:3000/api/habit", {
+        const res = await fetch("https://coinly-backend.onrender.com/api/habit", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

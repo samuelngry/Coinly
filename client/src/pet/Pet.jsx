@@ -15,7 +15,7 @@ const Pet = ({ userData = {}, onAvatarUpload, onUserDataUpdate }) => {
         try {
             const token = localStorage.getItem("token");
 
-            const res = await fetch("http://localhost:3000/api/pet", {
+            const res = await fetch("https://coinly-backend.onrender.com/api/pet", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -38,7 +38,7 @@ const Pet = ({ userData = {}, onAvatarUpload, onUserDataUpdate }) => {
         try {
             const token = localStorage.getItem("token");
 
-            const res = await fetch("http://localhost:3000/api/users", {
+            const res = await fetch("https://coinly-backend.onrender.com/api/users", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -86,7 +86,7 @@ const Pet = ({ userData = {}, onAvatarUpload, onUserDataUpdate }) => {
         const fetchWeeklyXP = async () => {
             try {
                 const token = localStorage.getItem("token");
-                const res = await fetch("http://localhost:3000/api/stats/weekly-xp", {
+                const res = await fetch("https://coinly-backend.onrender.com/api/stats/weekly-xp", {
                     headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,

@@ -24,7 +24,7 @@ const SignupForm = () => {
 
             console.log('Sending sign-up request with data:', userData);
 
-            const res = await axios.post('http://localhost:3000/api/auth/register', userData, {
+            const res = await axios.post('https://coinly-backend.onrender.com/api/auth/register', userData, {
                 headers: {
                     'Content-Type': 'application/json',
                 },

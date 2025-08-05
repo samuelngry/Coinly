@@ -19,7 +19,7 @@ const AppLayout = ({ children, className = 'bg-white' }) => {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch("http://localhost:3000/api/users", {
+      const res = await fetch("https://coinly-backend.onrender.com/api/users", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -56,7 +56,7 @@ const AppLayout = ({ children, className = 'bg-white' }) => {
     formData.append('avatar', file);
 
     try {
-      const res = await fetch("http://localhost:3000/api/users/avatar", {
+      const res = await fetch("https://coinly-backend.onrender.com/api/users/avatar", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
