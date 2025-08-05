@@ -19,7 +19,11 @@ const LoginForm = () => {
         username,
         password
       },
-      { withCredentials: true }
+      {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true,
+      }
+
     );
 
       const { token, user } = res.data;
