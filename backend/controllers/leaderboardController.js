@@ -1,7 +1,5 @@
 const { User, Pets } = require("../models");
 
-const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
-
 const getLeaderboard = async (req, res) => {
     try {
 
@@ -19,12 +17,14 @@ const getLeaderboard = async (req, res) => {
             ],
             limit: 20,
         });
+        
+        const baseURL = process.env.BASE_URL || `${req.protocol}://${req.get('host')}`;
 
         const leaderboard = users.map((user, index) => ({
             id: user.id,
             rank: index + 1,
             username: user.username,
-            avatar_url: user.avatar_url ? `${BASE_URL}${user.avatar_url}` : null,
+            avatar_url: user.avatar_url ? `${baseURL}${user.avatar_url}` : null,
             xp: user.Pet?.total_xp || 0,
             level: user.Pet?.level || 1,
             streak: user.streak_count,
