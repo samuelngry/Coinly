@@ -1,5 +1,6 @@
 const { User, Pets } = require("../models");
-const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
+const BASE_URL = process.env.BASE_URL || 'http://localhost:3000';
 
 const getLeaderboard = async (req, res) => {
     try {
@@ -23,7 +24,7 @@ const getLeaderboard = async (req, res) => {
             id: user.id,
             rank: index + 1,
             username: user.username,
-            avatar_url: user.avatar_url ? `${API_BASE}${user.avatar_url}` : null,
+            avatar_url: user.avatar_url ? `${BASE_URL}${user.avatar_url}` : null,
             xp: user.Pet?.total_xp || 0,
             level: user.Pet?.level || 1,
             streak: user.streak_count,
