@@ -7,7 +7,7 @@ const sequelize = require("./config/db");
 const app = express();
 
 app.use(cors({
-  origin: 'https://coinly-kappa.vercel.app/',
+  origin: 'https://coinly-kappa.vercel.app',
   credentials: true,
 }))
 
