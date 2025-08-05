@@ -16,6 +16,10 @@ app.use(express.json());
 app.use('/badges', express.static(path.join(__dirname, 'public/badges')));
 app.use('/avatars', express.static(path.join(__dirname, 'public/avatars')));
 
+app.get('/', (req, res) => {
+  res.send('Backend is running');
+});
+
 // Test route
 app.get('/test-cors', (req, res) => {
   res.json({ message: 'CORS is working!' });
@@ -29,7 +33,6 @@ const customQuestRoutes = require("./routes/customQuestRoutes");
 const statsRoutes = require("./routes/statsRoutes");
 const leaderboardRoutes = require("./routes/leaderboardRoutes");
 const habitRoutes = require("./routes/habitRoutes");
-
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
