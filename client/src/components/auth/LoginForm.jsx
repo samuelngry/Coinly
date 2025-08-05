@@ -4,6 +4,7 @@ import loginImage from '../../assets/pets.jpeg'
 import logo from "../../assets/logo.png"
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 const LoginForm = () => {
   const [username, setUsername] = React.useState('');
@@ -15,7 +16,7 @@ const LoginForm = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post('https://coinly-backend.onrender.com/api/auth/login', {
+      const res = await axios.post(`${API_BASE}/api/auth/login`, {
         username,
         password
       },
