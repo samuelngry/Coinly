@@ -7,7 +7,7 @@ const sequelize = require("./config/db");
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: 'https://coinly-kappa.vercel.app/',
   credentials: true,
 }))
 
@@ -31,7 +31,6 @@ const leaderboardRoutes = require("./routes/leaderboardRoutes");
 const habitRoutes = require("./routes/habitRoutes");
 
 
-//app.use('/uploads', express.static('uploads'));
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/quests", questRoutes);
