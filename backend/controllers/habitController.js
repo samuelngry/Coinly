@@ -49,7 +49,8 @@ const getHabitRadarData = async (req, res) => {
                 patterns,
                 predictions,
                 recommendations,
-                petInsights
+                petInsights,
+                name: pet.name
             });
 
         } catch (err) {
