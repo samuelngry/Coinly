@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Sidebar from '../sidebar/Sidebar'
 import BottomNavbar from '../sidebar/BottomNavbar'
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 const AppLayout = ({ children, className = 'bg-white' }) => {
   const [userData, setUserData] = useState({
@@ -19,7 +20,7 @@ const AppLayout = ({ children, className = 'bg-white' }) => {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch("https://coinly-backend.onrender.com/api/users", {
+      const res = await fetch(`${API_BASE}/api/users`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -56,7 +57,7 @@ const AppLayout = ({ children, className = 'bg-white' }) => {
     formData.append('avatar', file);
 
     try {
-      const res = await fetch("https://coinly-backend.onrender.com/api/users/avatar", {
+      const res = await fetch(`${API_BASE}/api/users/avatar`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

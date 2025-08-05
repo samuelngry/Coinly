@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import TopLeaderboard from './TopLeaderboard';
 import LeaderboardTable from './LeaderboardTable';
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 const Leaderboard = () => {
     const [leaderboard, setLeaderboard] = useState([]);
@@ -11,7 +12,7 @@ const Leaderboard = () => {
         const fetchLeaderboard = async () => {
             const token = localStorage.getItem("token");
 
-            const res = await fetch("https://coinly-backend.onrender.com/api/leaderboard", {
+            const res = await fetch(`${API_BASE}/api/leaderboard`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

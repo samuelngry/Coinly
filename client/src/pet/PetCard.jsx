@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { FaPen } from 'react-icons/fa';
 import defaultIcon from '../assets/default.png'
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 const PetCard = ({ name, level, mood, username, accountAge, avatarUrl, onAvatarUpload }) => {
   const fileInputRef = useRef();
@@ -24,7 +25,7 @@ const PetCard = ({ name, level, mood, username, accountAge, avatarUrl, onAvatarU
       <div className='flex items-center gap-6 px-6 pt-6 mb-5'>
         <div className='relative'>
           <img
-            src={avatarUrl ? `https://coinly-backend.onrender.com${avatarUrl}` : defaultIcon }
+            src={avatarUrl ? `${API_BASE}${avatarUrl}` : defaultIcon }
             alt="avatar"
             className='w-24 h-24 md:w-40 md:h-40 rounded-full object-cover border border-neutral-300'
           />

@@ -19,6 +19,7 @@ import billsImage from '../../assets/bills.png';
 import subscriptionImage from '../../assets/subscription.png';
 import salesImage from '../../assets/sales.png';
 import welcomeImage from '../../assets/welcome.png';
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
     const [selectedCategories, setSelectedCategories] = useState([]);
@@ -69,7 +70,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
                 categories: Array.isArray(answers.categories) ? answers.categories : [answers.categories]
             };
 
-            fetch("https://coinly-backend.onrender.com/api/users/preferences", {
+            fetch(`${API_BASE}/api/users/preferences`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

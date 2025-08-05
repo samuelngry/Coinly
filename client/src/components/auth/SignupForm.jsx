@@ -4,6 +4,7 @@ import logo from '../../assets/logo.png'
 import { useNavigate } from 'react-router-dom'
 import signupImage from '../../assets/pet.jpg'
 import { Link } from 'react-router-dom'
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 const SignupForm = () => {
     const [username, setUsername] = React.useState('');
@@ -24,7 +25,7 @@ const SignupForm = () => {
 
             console.log('Sending sign-up request with data:', userData);
 
-            const res = await axios.post('https://coinly-backend.onrender.com/api/auth/register', userData, {
+            const res = await axios.post(`${API_BASE}/api/auth/register`, userData, {
                 headers: {
                     'Content-Type': 'application/json',
                 },

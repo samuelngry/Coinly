@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { TrendingUp, TrendingDown, AlertTriangle, Target, Calendar, Brain, Flame, Trophy, Clock, DollarSign, Activity, BarChart3 } from 'lucide-react';
 import analysisImage from '../../assets/analysis.png';
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 const Insights = () => {
   const [activeTab, setActiveTab] = useState('predictions');
@@ -13,7 +14,7 @@ const Insights = () => {
       try {
         const token = localStorage.getItem("token");
 
-        const res = await fetch("https://coinly-backend.onrender.com/api/habit", {
+        const res = await fetch(`${API_BASE}/api/habit`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

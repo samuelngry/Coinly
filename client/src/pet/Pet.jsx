@@ -4,6 +4,7 @@ import StreakCard from './StreakCard';
 import PetStat from './PetStat';
 import PetBadge from './PetBadge';
 import PetMotivation from './PetMotivation';
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 const Pet = ({ userData = {}, onAvatarUpload, onUserDataUpdate }) => {
     const [petName, setPetName] = useState("");
@@ -15,7 +16,7 @@ const Pet = ({ userData = {}, onAvatarUpload, onUserDataUpdate }) => {
         try {
             const token = localStorage.getItem("token");
 
-            const res = await fetch("https://coinly-backend.onrender.com/api/pet", {
+            const res = await fetch(`${API_BASE}/api/pet`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -38,7 +39,7 @@ const Pet = ({ userData = {}, onAvatarUpload, onUserDataUpdate }) => {
         try {
             const token = localStorage.getItem("token");
 
-            const res = await fetch("https://coinly-backend.onrender.com/api/users", {
+            const res = await fetch(`${API_BASE}/api/users`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -86,7 +87,7 @@ const Pet = ({ userData = {}, onAvatarUpload, onUserDataUpdate }) => {
         const fetchWeeklyXP = async () => {
             try {
                 const token = localStorage.getItem("token");
-                const res = await fetch("https://coinly-backend.onrender.com/api/stats/weekly-xp", {
+                const res = await fetch(`${API_BASE}/api/stats/weekly-xp`, {
                     headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
