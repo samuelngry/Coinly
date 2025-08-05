@@ -9,6 +9,7 @@ const app = express();
 const allowedOrigins = [
   'https://coinly-kappa.vercel.app',
   'https://coinlyquest.com',
+  'https://www.coinlyquest.com',
   'http://localhost:5173',
   'http://localhost:3000'
 ];
