@@ -20,13 +20,7 @@ const Navbar = () => {
                             <img className="h-15 w-15 mr-2" src={logo} alt="logo" />
                         </Link>
                     </div>
-                    <ul className="hidden lg:flex ml-14 space-x-12">
-                        {navItems.map((item, index) => (
-                            <li key={index}>
-                                <a href={item.href}>{item.label}</a>
-                            </li>
-                        ))}
-                    </ul>
+                    
                     <div className="hidden lg:flex justify-center space-x-12 items-center">
                         <a href="/login" className="py-2 px-3 border rounded-md">
                             Sign In
@@ -43,13 +37,7 @@ const Navbar = () => {
                 </div>
                 {mobileDrawerOpen && (
                     <div className="fixed right-0 z-20 bg-neutral-100 w-full p-3 flex flex-col justify-center items-center lg:hidden">
-                        <ul>
-                            {navItems.map((item, index) => (
-                                <li key={index} className="py-4">
-                                    <a href={item.href}>{item.label}</a>
-                                </li>
-                            ))}
-                        </ul>
+                        
                         <div className="flex space-x-6 p-3">
                             <a href='/login' className="py-2 px-3 border rounded-md">
                                 Sign In
