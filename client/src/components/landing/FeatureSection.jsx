@@ -1,22 +1,16 @@
-import featureImage1 from "../../assets/feature1.png";
+import featureImage1 from "../../assets/feat1.png";
 import featureImage2 from "../../assets/feature2.png";
-import featureImage3 from "../../assets/feature3.png";
+import featureImage3 from "../../assets/feat3.png";
 
 const features = [
   {
     image: featureImage1,
-    title: "Game Your Savings",
-    description:
-      "Take on daily and bonus quests that make saving money feel like a game you can’t stop playing.",
-  },
-  {
-    image: featureImage2,
     title: "Raise Your Pet",
     description:
       "Every quest you complete keeps your pet happy, healthy, and evolving. Neglect your savings, and your pet might just pout at you.",
   },
   {
-    image: featureImage3,
+    image: featureImage2,
     title: "Climb the Ranks",
     description:
       "Earn XP, keep your streak alive, and climb the leaderboard. Saving isn’t just a habit anymore — it’s a competition you can win.",
@@ -60,7 +54,7 @@ const FeatureSection = () => {
                 <img
                   src={feature.image}
                   alt={feature.title}
-                  className="w-80 h-80 lg:w-96 lg:h-96 object-contain drop-shadow-lg hover:scale-105 transition-transform duration-300"
+                  className="w-110 h-110 lg:w-120 lg:h-120 object-contain drop-shadow-lg hover:scale-105 transition-transform duration-300"
                 />
               </div>
             </div>
