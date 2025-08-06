@@ -1,35 +1,74 @@
-import FeatureCard from "./FeatureCard"
-import featureImage1 from "../../assets/feature1.png"
-import featureImage2 from "../../assets/feature2.png"
-import featureImage3 from "../../assets/feature3.png"
+import featureImage1 from "../../assets/feature1.png";
+import featureImage2 from "../../assets/feature2.png";
+import featureImage3 from "../../assets/feature3.png";
+
+const features = [
+  {
+    image: featureImage1,
+    title: "Game Your Savings",
+    description:
+      "Take on daily and bonus quests that make saving money feel like a game you can’t stop playing.",
+  },
+  {
+    image: featureImage2,
+    title: "Raise Your Pet",
+    description:
+      "Every quest you complete keeps your pet happy, healthy, and evolving. Neglect your savings, and your pet might just pout at you.",
+  },
+  {
+    image: featureImage3,
+    title: "Climb the Ranks",
+    description:
+      "Earn XP, keep your streak alive, and climb the leaderboard. Saving isn’t just a habit anymore — it’s a competition you can win.",
+  },
+  {
+    image: featureImage3,
+    title: "Progress, Made Fun",
+    description:
+      "See where you shine and where to grow, straight from your pet.",
+  },
+];
 
 const FeatureSection = () => {
   return (
-    <div className="flex flex-col mt-35 items-center">
-      <h1 className="text-2xl sm:text-3xl lg:text-6xl tracking-wide text-center">How</h1>
-      <p className="text-sm sm:text-md lg:text-lg mt-3 text-center mb-10">
-         Save with quests, pets, and progress that feels good.
-      </p>
+    <div className="max-w-6xl mx-auto px-6 py-35">
+      <h1 className="text-xl sm:text-3xl lg:text-5xl tracking-wide text-center mb-20">
+        How Coinly Works
+      </h1>
 
-      <div className="flex flex-col lg:flex-row justify-center items-center gap-6">
-        <FeatureCard
-            image={featureImage1}
-            title="Quests, Not Budgets"
-            description="Forget spreadsheets. Save with fun, bite-sized quests that actually feel doable — and even a little addictive."
-        />
-        <FeatureCard
-            image={featureImage2}
-            title="Meet Your Coin Pet"
-            description="Your savings buddy! Every completed quest keeps it growing strong. It’s cute. It’s needy. It’s yours."
-        />
-        <FeatureCard
-            image={featureImage3}
-            title="XP & Streaks"
-            description="Earn XP, build streaks, and unlock rewards — all without stressing about the numbers. Progress has never felt this good."
-        />
+      <div className="space-y-20">
+        {features.map((feature, index) => (
+          <div
+            key={index}
+            className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-16 ${
+              index % 2 !== 0 ? "lg:flex-row-reverse" : ""
+            }`}
+          >
+            {/* Text Content */}
+            <div className="flex-1 text-center lg:text-left max-w-lg">
+              <h2 className="text-2xl lg:text-4xl font-bold mb-6 text-orange-500">
+                {feature.title}
+              </h2>
+              <p className="text-neutral-500 text-md lg:text-md leading-relaxed">
+                {feature.description}
+              </p>
+            </div>
+
+            {/* Image Content */}
+            <div className="flex-1 flex justify-center">
+              <div className="relative">
+                <img
+                  src={feature.image}
+                  alt={feature.title}
+                  className="w-80 h-80 lg:w-96 lg:h-96 object-contain drop-shadow-lg hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default FeatureSection
+export default FeatureSection;
