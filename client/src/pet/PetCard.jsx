@@ -6,6 +6,20 @@ const API_BASE = import.meta.env.VITE_API_BASE_URL;
 const PetCard = ({ name, level, mood, username, accountAge, avatarUrl, onAvatarUpload }) => {
   const fileInputRef = useRef();
 
+  const getAvatarUrl = (path) => {
+      if (!path) return defaultIcon;
+      
+      if (path.startsWith('http')) return path;
+      
+      // Construct Supabase Storage URL manually
+      // Replace 'your-project-id' with your actual Supabase project ID
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://your-project-id.supabase.co';
+      
+      const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+      
+      return `${supabaseUrl}/storage/v1/object/public/${cleanPath}`;
+  };
+
   const handleEditClick = () => {
     fileInputRef.current.click();
   };
@@ -25,7 +39,7 @@ const PetCard = ({ name, level, mood, username, accountAge, avatarUrl, onAvatarU
       <div className='flex items-center gap-6 px-6 pt-6 mb-5'>
         <div className='relative'>
           <img
-            src={avatarUrl ? `${API_BASE}${avatarUrl}` : defaultIcon }
+            src={getAvatarUrl(avatarUrl) }
             alt="avatar"
             className='w-24 h-24 md:w-40 md:h-40 rounded-full object-cover border border-neutral-300'
           />

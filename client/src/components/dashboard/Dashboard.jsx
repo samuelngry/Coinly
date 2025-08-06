@@ -389,9 +389,9 @@ const Dashboard = () => {
           {showConfetti && <Confetti width={width} height={height} numberOfPieces={300} />}
           <div className='py-2'>
             <LevelBar xp={xp} level={level} />
-            <MoodPet mood={mood} />
           </div>
         </div>
+        <MoodPet mood={mood} />
         <PetName name={petName} onComplete={handlePetNameChange} />
         <MainCards streak={streak} completedCount={completedQuest} totalCount={totalQuest}/>
         <DailyQuests quests={dailyQuests} onComplete={handleCompleteQuest} completedCount={completedDaily} totalCount={totalDaily} />

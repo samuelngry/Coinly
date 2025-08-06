@@ -112,7 +112,6 @@ const completeQuests = async (req, res) => {
             return res.status(404).json({ error: 'Quest not found or already completed.' });
         }
 
-        // Use proper date handling for consistency
         const now = new Date();
         const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
         const todayStr = today.toISOString().slice(0, 10);
