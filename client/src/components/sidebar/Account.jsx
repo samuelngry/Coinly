@@ -4,19 +4,12 @@ const API_BASE = import.meta.env.VITE_API_BASE_URL;
 const Account = ({ username, avatarUrl }) => {
   const getAvatarUrl = (path) => {
       if (!path) return defaultIcon;
-      
       if (path.startsWith('http')) return path;
       
-      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-      
-      if (!supabaseUrl) {
-          console.warn('VITE_SUPABASE_URL not found in environment variables');
-          return defaultIcon;
-      }
-      
+      const supabaseUrl = 'https://kfacbvnkbvuzoledhuds.supabase.co';
       const cleanPath = path.startsWith('/') ? path.slice(1) : path;
       
-      return `${supabaseUrl}/storage/v1/object/public/${cleanPath}`;
+      return `${supabaseUrl}/storage/v1/object/public/${cleanPath}`;  
   };
 
   return (
@@ -26,6 +19,9 @@ const Account = ({ username, avatarUrl }) => {
             src={getAvatarUrl(avatarUrl)}
             alt="Avatar"
             className="w-10 h-10 rounded-full shrink-0"
+            onError={(e) => {
+                e.target.src = defaultIcon;
+            }}
         />
         <div className="text-start">
             <span className="text-sm font-semibold block">{username}</span>

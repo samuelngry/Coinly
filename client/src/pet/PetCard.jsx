@@ -6,30 +6,14 @@ const API_BASE = import.meta.env.VITE_API_BASE_URL;
 const PetCard = ({ name, level, mood, username, accountAge, avatarUrl, onAvatarUpload }) => {
   const fileInputRef = useRef();
 
-  // Add these debug lines
-  console.log('=== PetCard Debug ===');
-  console.log('avatarUrl prop received:', avatarUrl);
-  console.log('VITE_SUPABASE_URL:', import.meta.env.VITE_SUPABASE_URL);
-
   const getAvatarUrl = (path) => {
-      console.log('getAvatarUrl called with path:', path);
+      if (!path) return defaultIcon;
+      if (path.startsWith('http')) return path;
       
-      if (!path) {
-          console.log('No path, returning defaultIcon');
-          return defaultIcon;
-      }
-      
-      if (path.startsWith('http')) {
-          console.log('Path is full URL, returning as-is:', path);
-          return path;
-      }
-      
-      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+      const supabaseUrl = 'https://kfacbvnkbvuzoledhuds.supabase.co';
       const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-      const finalUrl = `${supabaseUrl}/storage/v1/object/public/${cleanPath}`;
       
-      console.log('Constructed Supabase URL:', finalUrl);
-      return finalUrl;
+      return `${supabaseUrl}/storage/v1/object/public/${cleanPath}`;
   };
 
   const handleEditClick = () => {
@@ -54,6 +38,10 @@ const PetCard = ({ name, level, mood, username, accountAge, avatarUrl, onAvatarU
             src={getAvatarUrl(avatarUrl) }
             alt="avatar"
             className='w-24 h-24 md:w-40 md:h-40 rounded-full object-cover border border-neutral-300'
+            onError={(e) => {
+                console.log('Avatar not found, using default icon');
+                e.target.src = defaultIcon;
+            }}
           />
           <button
             onClick={handleEditClick}
