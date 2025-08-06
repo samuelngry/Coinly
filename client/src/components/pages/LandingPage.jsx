@@ -34,7 +34,6 @@ const LandingPage = () => {
         <div className="max-w-6xl mx-auto pt-4 lg:pt-30 px-6">
           <HeroSection />
           <FeatureSection />
-          <Playbook />
           <Testimonials />
         </div>
         <Cta />

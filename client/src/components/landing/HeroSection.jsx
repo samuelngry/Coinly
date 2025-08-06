@@ -19,7 +19,7 @@ const HeroSection = () => {
             />
         </div>
         <div className="flex flex-col text-center">
-            <h1 className="text-xl sm:text-2xl lg:text-4xl text-center tracking-wide">
+            <h1 className="text-xl sm:text-2xl lg:text-4xl font-bold text-center tracking-wide">
               Build better money habits, one
               <strong className="bg-gradient-to-r from-orange-500 to-orange-800 text-transparent bg-clip-text">
                   {" "}

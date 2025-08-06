@@ -6,7 +6,7 @@ import personImage3 from "../../assets/timothy.jpeg"
 const Testimonials = () => {
   return (
     <div className="flex flex-col mt-35 items-center">
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl text-center tracking-wide">
+        <h1 className="text-xl sm:text-2xl lg:text-4xl font-bold text-center tracking-wide">
             What Our Users Are Saying
         </h1>
         
