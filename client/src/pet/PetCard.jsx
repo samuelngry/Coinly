@@ -7,13 +7,36 @@ const PetCard = ({ name, level, mood, username, accountAge, avatarUrl, onAvatarU
   const fileInputRef = useRef();
 
   const getAvatarUrl = (path) => {
-      if (!path) return defaultIcon;
-      if (path.startsWith('http')) return path;
-      
-      const supabaseUrl = 'https://kfacbvnkbvuzoledhuds.supabase.co';
-      const cleanPath = path.startsWith('/') ? path.slice(1) : path;
-      
-      return `${supabaseUrl}/storage/v1/object/public/${cleanPath}`;
+      console.log('Avatar path received:', path);
+          
+            if (!path) {
+                console.log('No path provided, using default');
+                return defaultIcon;
+            }
+            
+            if (path.startsWith('http')) {
+                console.log('Using full HTTP URL');
+                return path;
+            }
+            
+            const supabaseUrl = 'https://kfacbvnkbvuzoledhuds.supabase.co';
+            
+            let cleanPath = path;
+            
+            if (path.startsWith('/avatars/')) {
+                cleanPath = path.slice(1); 
+            }
+            else if (path.startsWith('/')) {
+                cleanPath = `avatars${path}`; 
+            }
+            else if (!path.startsWith('avatars/')) {
+                cleanPath = `avatars/${path}`;
+            }
+            
+            const fullUrl = `${supabaseUrl}/storage/v1/object/public/${cleanPath}`;
+            console.log('Generated avatar URL:', fullUrl);
+            
+            return fullUrl;
   };
 
   const handleEditClick = () => {
@@ -38,10 +61,6 @@ const PetCard = ({ name, level, mood, username, accountAge, avatarUrl, onAvatarU
             src={getAvatarUrl(avatarUrl) }
             alt="avatar"
             className='w-24 h-24 md:w-40 md:h-40 rounded-full object-cover border border-neutral-300'
-            onError={(e) => {
-                console.log('Avatar not found, using default icon');
-                e.target.src = defaultIcon;
-            }}
           />
           <button
             onClick={handleEditClick}

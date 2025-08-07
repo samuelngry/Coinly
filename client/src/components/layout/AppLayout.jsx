@@ -65,16 +65,24 @@ const AppLayout = ({ children, className = 'bg-white' }) => {
         body: formData,
       });
 
-      if (!res.ok) throw new Error("Failed to upload avatar");
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.error || "Failed to upload avatar");
+      }
 
       const data = await res.json();
+      console.log('Upload response:', data);
       
       setUserData(prev => ({
         ...prev,
         avatarUrl: data.avatar_url
       }));
+
+      await getUserData();
+      
     } catch (err) {
       console.error("Upload error:", err);
+      alert(`Avatar upload failed: ${err.message}`);
     }
   };
 

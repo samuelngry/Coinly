@@ -37,7 +37,6 @@ const Navbar = () => {
                 </div>
                 {mobileDrawerOpen && (
                     <div className="fixed right-0 z-20 bg-neutral-100 w-full p-3 flex flex-col justify-center items-center lg:hidden">
-                        
                         <div className="flex space-x-6 p-3">
                             <a href='/login' className="py-2 px-3 border rounded-md">
                                 Sign In

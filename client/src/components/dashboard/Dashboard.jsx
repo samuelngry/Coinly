@@ -385,11 +385,9 @@ const Dashboard = () => {
       {showLevelUp && petName && (
         <LevelUpModal name={petName} newLevel={newLevel} totalXp={xp} onClose={() => setShowLevelUp(false)} />
       )}
-        <div className='sticky top-0 left-0 lg:px-1 backdrop-blur-md'>
+        <div className='sticky top-0 left-0 z-50 bg-white/70 backdrop-blur-md px-4 py-2 shadow-md'>
           {showConfetti && <Confetti width={width} height={height} numberOfPieces={300} />}
-          <div className='py-2'>
-            <LevelBar xp={xp} level={level} />
-          </div>
+          <LevelBar xp={xp} level={level} />
         </div>
         <MoodPet mood={mood} />
         <PetName name={petName} onComplete={handlePetNameChange} />
