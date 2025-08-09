@@ -14,7 +14,7 @@ const register = async (req, res) => {
         const { username, password } = req.body;
 
         const existingUser = await User.findOne({ where: { username } });
-        if (existingUser) return res.status(400).json({ error: "Username taken." });
+        if (existingUser) return res.status(400).json({ error: "Username taken" });
 
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = await User.create({ 
@@ -63,10 +63,10 @@ const login = async (req, res) => {
         const { username, password } = req.body;
 
         const user = await User.findOne({ where: { username } });
-        if (!user) return res.status(401).json({ error: "Authentication failed." });
+        if (!user) return res.status(401).json({ error: "User not found" });
 
         const passwordMatch = await bcrypt.compare(password, user.password);
-        if (!passwordMatch) return res.status(401).json({ error: "Authentication failed." });
+        if (!passwordMatch) return res.status(401).json({ error: "Wrong password" });
 
         const token = createToken(user.id);
 
