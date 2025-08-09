@@ -147,36 +147,34 @@ const updateAvatar = async (req, res) => {
 
         const fileExtension = req.file.originalname.split('.').pop();
         const fileName = `user_${userId}_${Date.now()}.${fileExtension}`;
-        const supabaseFilePath = `avatars/${fileName}`;
+        const supabaseFilePath = fileName; 
         
         console.log('🔍 Generated filename:', fileName);
         console.log('🔍 Supabase path:', supabaseFilePath);
 
-        // ADD THIS: Log the actual upload attempt
-        console.log('🔍 Starting Supabase upload...');
         const { data, error } = await supabase.storage
-            .from('avatars')
+            .from('avatars') 
             .upload(supabaseFilePath, req.file.buffer, {
                 contentType: req.file.mimetype,
                 upsert: true
             });
 
-        console.log('🔍 Supabase response:', { data, error }); // ADD THIS
+        console.log('🔍 Supabase response:', { data, error });
 
         if (error) {
             console.error('🔍 Supabase upload failed:', error);
             return res.status(500).json({ error: 'Upload failed', details: error.message });
         }
 
-        console.log('🔍 Upload successful, updating database...'); // ADD THIS
-        await User.update({ avatar_url: supabaseFilePath }, { where: { id: userId } });
+        const dbAvatarPath = `avatars/${fileName}`; 
+        await User.update({ avatar_url: dbAvatarPath }, { where: { id: userId } });
         
-        console.log('🔍 Database updated, sending response...'); // ADD THIS
-        console.log('🔍 Response avatar_url:', supabaseFilePath); // ADD THIS
+        console.log('🔍 Database updated with path:', dbAvatarPath);
+        console.log('🔍 Response avatar_url:', dbAvatarPath);
 
         res.status(200).json({ 
             message: "Avatar uploaded successfully", 
-            avatar_url: supabaseFilePath  // Make sure this matches the log above
+            avatar_url: dbAvatarPath
         });
 
     } catch (err) {
@@ -184,6 +182,7 @@ const updateAvatar = async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 };
+
 const savePreferences = async (req, res) => {
     try {
         const userId = req.user.id;
