@@ -1,5 +1,5 @@
 import featureImage1 from "../../assets/feat1.png";
-import featureImage2 from "../../assets/feature2.png";
+import featureImage2 from "../../assets/feat2.png";
 import featureImage3 from "../../assets/feat3.png";
 
 const features = [
