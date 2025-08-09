@@ -18,8 +18,8 @@ const getLeaderboard = async (req, res) => {
             limit: 20,
         });
 
-        const supabaseUrl = process.env.SUPABASE_URL || 'https://your-project-id.supabase.co';
-        
+        const supabaseUrl = process.env.SUPABASE_URL || 'https://kfacbvnkbvuzoledhuds.supabase.co';
+
         const leaderboard = users.map((user, index) => {
             let avatarUrl = null;
             

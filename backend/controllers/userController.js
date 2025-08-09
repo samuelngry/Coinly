@@ -5,6 +5,12 @@ const DailyCompletion = require("../models/DailyCompletion");
 const UserBadge = require("../models/UserBadge");
 const { Op } = require('sequelize');
 const { HfInference } = require('@huggingface/inference');
+const { createClient } = require('@supabase/supabase-js');
+
+const supabase = createClient(
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_SERVICE_KEY 
+);
 
 const getUserData = async (req, res) => {
     try {
@@ -133,12 +139,39 @@ const updateUsername = async (req, res) => {
 const updateAvatar = async (req, res) => {
     try {
         const userId = req.user.id;
+        
+        if (!req.file) {
+            return res.status(400).json({ error: "No file uploaded" });
+        }
 
-        const avatarUrl = `/avatars/${req.file.filename}`;
+        const fileExtension = req.file.originalname.split('.').pop();
+        const fileName = `user_${userId}_${Date.now()}.${fileExtension}`; 
+        const supabaseFilePath = `avatars/${fileName}`; 
+        
+        console.log('🔍 Generated filename:', fileName);
+        console.log('🔍 Supabase path:', supabaseFilePath);
 
-        await User.update({ avatar_url: avatarUrl }, { where: { id: userId } });
-        res.status(200).json({ message: "Avatar changed successfully", avatar_url: avatarUrl});
+        const { data, error } = await supabase.storage
+            .from('avatars')
+            .upload(supabaseFilePath, req.file.buffer, {
+                contentType: req.file.mimetype,
+                upsert: true
+            });
+
+        if (error) {
+            console.error('Supabase error:', error);
+            return res.status(500).json({ error: 'Upload failed' });
+        }
+
+        await User.update({ avatar_url: supabaseFilePath }, { where: { id: userId } });
+
+        res.status(200).json({ 
+            message: "Avatar uploaded successfully", 
+            avatar_url: supabaseFilePath 
+        });
+
     } catch (err) {
+        console.error('Upload error:', err);
         res.status(500).json({ error: err.message });
     }
 };

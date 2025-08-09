@@ -52,39 +52,70 @@ const AppLayout = ({ children, className = 'bg-white' }) => {
   };
 
   const handleAvatarUpload = async (file) => {
+    console.log('🔍 Frontend Upload Started');
+    console.log('🔍 File details:', {
+        name: file?.name,
+        size: file?.size,
+        type: file?.type
+    });
+    console.log('🔍 API_BASE:', API_BASE);
+
     const token = localStorage.getItem("token");
+    console.log('🔍 Token exists:', !!token);
+
+    if (!token) {
+        console.error('❌ No auth token found');
+        alert('Please log in again');
+        return;
+    }
+
+    if (!file) {
+        console.error('❌ No file provided');
+        return;
+    }
+
     const formData = new FormData();
     formData.append('avatar', file);
+    console.log('🔍 FormData created');
+
+    const uploadUrl = `${API_BASE}/api/users/avatar`;
+    console.log('🔍 Upload URL:', uploadUrl);
 
     try {
-      const res = await fetch(`${API_BASE}/api/users/avatar`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
+        console.log('🔍 Sending fetch request...');
+        
+        const res = await fetch(uploadUrl, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            body: formData,
+        });
 
-      if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.error || "Failed to upload avatar");
-      }
+        console.log('🔍 Response received:', {
+            status: res.status,
+            ok: res.ok
+        });
 
-      const data = await res.json();
-      console.log('Upload response:', data);
-      
-      setUserData(prev => ({
-        ...prev,
-        avatarUrl: data.avatar_url
-      }));
+        const data = await res.json();
+        console.log('🔍 Response data:', data);
 
-      await getUserData();
-      
+        if (!res.ok) {
+            throw new Error(data.error || "Failed to upload avatar");
+        }
+
+        setUserData(prev => ({
+            ...prev,
+            avatarUrl: data.public_url || data.avatar_url
+        }));
+
+        await getUserData();
+
     } catch (err) {
-      console.error("Upload error:", err);
-      alert(`Avatar upload failed: ${err.message}`);
+        console.error("❌ Upload error:", err);
+        alert(`Avatar upload failed: ${err.message}`);
     }
-  };
+};
 
   const updateUserData = (newData) => {
     setUserData(prev => ({

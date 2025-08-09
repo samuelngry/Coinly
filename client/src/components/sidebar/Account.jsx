@@ -3,7 +3,7 @@ const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 const Account = ({ username, avatarUrl }) => {
   const getAvatarUrl = (path) => {
-      console.log('Avatar path received:', path); // Debug log
+      console.log('Avatar path received:', path);
     
       if (!path) {
           console.log('No path provided, using default');

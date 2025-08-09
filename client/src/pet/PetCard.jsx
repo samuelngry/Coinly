@@ -7,37 +7,34 @@ const PetCard = ({ name, level, mood, username, accountAge, avatarUrl, onAvatarU
   const fileInputRef = useRef();
 
   const getAvatarUrl = (path) => {
-      console.log('Avatar path received:', path);
-          
-            if (!path) {
-                console.log('No path provided, using default');
-                return defaultIcon;
-            }
-            
-            if (path.startsWith('http')) {
-                console.log('Using full HTTP URL');
-                return path;
-            }
-            
-            const supabaseUrl = 'https://kfacbvnkbvuzoledhuds.supabase.co';
-            
-            let cleanPath = path;
-            
-            if (path.startsWith('/avatars/')) {
-                cleanPath = path.slice(1); 
-            }
-            else if (path.startsWith('/')) {
-                cleanPath = `avatars${path}`; 
-            }
-            else if (!path.startsWith('avatars/')) {
-                cleanPath = `avatars/${path}`;
-            }
-            
-            const fullUrl = `${supabaseUrl}/storage/v1/object/public/${cleanPath}`;
-            console.log('Generated avatar URL:', fullUrl);
-            
-            return fullUrl;
-  };
+    console.log('Avatar path received:', path);
+
+    // If no path, use default
+    if (!path) {
+        console.log('No path provided, using default');
+        return defaultIcon;
+    }
+
+    // If already a full HTTP URL, use as-is
+    if (path.startsWith('http')) {
+        console.log('Using full HTTP URL');
+        return path;
+    }
+
+    // Construct Supabase public URL
+    const supabaseUrl = 'https://kfacbvnkbvuzoledhuds.supabase.co';
+    
+    // Remove leading slash if present
+    const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+    
+    // Ensure path starts with 'avatars/'
+    const finalPath = cleanPath.startsWith('avatars/') ? cleanPath : `avatars/${cleanPath}`;
+    
+    const fullUrl = `${supabaseUrl}/storage/v1/object/public/${finalPath}`;
+    console.log('Generated avatar URL:', fullUrl);
+
+    return fullUrl;
+};
 
   const handleEditClick = () => {
     fileInputRef.current.click();
