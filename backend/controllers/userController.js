@@ -139,18 +139,21 @@ const updateUsername = async (req, res) => {
 const updateAvatar = async (req, res) => {
     try {
         const userId = req.user.id;
+        console.log('🔍 Backend: Upload started for user:', userId);
         
         if (!req.file) {
             return res.status(400).json({ error: "No file uploaded" });
         }
 
         const fileExtension = req.file.originalname.split('.').pop();
-        const fileName = `user_${userId}_${Date.now()}.${fileExtension}`; 
-        const supabaseFilePath = `avatars/${fileName}`; 
+        const fileName = `user_${userId}_${Date.now()}.${fileExtension}`;
+        const supabaseFilePath = `avatars/${fileName}`;
         
         console.log('🔍 Generated filename:', fileName);
         console.log('🔍 Supabase path:', supabaseFilePath);
 
+        // ADD THIS: Log the actual upload attempt
+        console.log('🔍 Starting Supabase upload...');
         const { data, error } = await supabase.storage
             .from('avatars')
             .upload(supabaseFilePath, req.file.buffer, {
@@ -158,24 +161,29 @@ const updateAvatar = async (req, res) => {
                 upsert: true
             });
 
+        console.log('🔍 Supabase response:', { data, error }); // ADD THIS
+
         if (error) {
-            console.error('Supabase error:', error);
-            return res.status(500).json({ error: 'Upload failed' });
+            console.error('🔍 Supabase upload failed:', error);
+            return res.status(500).json({ error: 'Upload failed', details: error.message });
         }
 
+        console.log('🔍 Upload successful, updating database...'); // ADD THIS
         await User.update({ avatar_url: supabaseFilePath }, { where: { id: userId } });
+        
+        console.log('🔍 Database updated, sending response...'); // ADD THIS
+        console.log('🔍 Response avatar_url:', supabaseFilePath); // ADD THIS
 
         res.status(200).json({ 
             message: "Avatar uploaded successfully", 
-            avatar_url: supabaseFilePath 
+            avatar_url: supabaseFilePath  // Make sure this matches the log above
         });
 
     } catch (err) {
-        console.error('Upload error:', err);
+        console.error('🔍 Backend error:', err);
         res.status(500).json({ error: err.message });
     }
 };
-
 const savePreferences = async (req, res) => {
     try {
         const userId = req.user.id;
