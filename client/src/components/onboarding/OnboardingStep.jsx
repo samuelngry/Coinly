@@ -176,7 +176,7 @@ const OnboardingStep = ({ step, setStep, answers, setAnswers }) => {
     if (step === 2) {
         return (
             <div className='flex flex-col items-center justify-center mt-10 lg:mt-30'>
-                <h1 className='font-semibold text-lg text-center'>How do you feel about your money right now?</h1>
+                <h1 className='font-semibold text-lg text-center'>How do you struggle the most with right now?</h1>
                 <span className='text-neutral-500 mb-4 text-sm'>
                 {selectedStruggle.length === 0
                     ? 'Select 1'
