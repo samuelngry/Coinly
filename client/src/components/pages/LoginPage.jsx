@@ -21,7 +21,7 @@ const LoginPage = () => {
     }, [navigate])
     
     return (
-        <div style={{ backgroundColor: 'var(--old-lace)' }}>
+        <div>
             <LoginForm />
         </div>
     );

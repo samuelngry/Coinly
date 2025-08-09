@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios'
-import loginImage from '../../assets/pets.jpeg'
+import loginImage from '../../assets/login.png'
 import logo from "../../assets/logo.png"
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'

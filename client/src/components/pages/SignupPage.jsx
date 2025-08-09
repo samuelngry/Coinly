@@ -21,7 +21,7 @@ const SignupPage = () => {
   }, [navigate])
 
   return (
-    <div style={{ backgroundColor: 'var(--old-lace)' }}>
+    <div>
       <SignupForm />
     </div>
   )

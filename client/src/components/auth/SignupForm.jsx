@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import logo from '../../assets/logo.png'
 import { useNavigate } from 'react-router-dom'
-import signupImage from '../../assets/pet.jpg'
+import signupImage from '../../assets/login.png'
 import { Link } from 'react-router-dom'
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
