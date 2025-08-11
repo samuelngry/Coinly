@@ -1,24 +1,106 @@
-name: CI/CD Pipeline
+name: CI
 
 on:
-    push:
-        branches:
-            - main
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-    build:
-        runs-on: ubuntu-latest
+  # Detect which folders changed so we don't build both every time
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      frontend: ${{ steps.filter.outputs.frontend }}
+      backend:  ${{ steps.filter.outputs.backend }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            frontend:
+              - 'client/**'
+              - '.github/workflows/**'
+            backend:
+              - 'backend/**'
+              - 'server/**'
+              - '.github/workflows/**'
 
-        steps:
-            - uses: actions/checkout@v2
-            - uses: actions/setup-node@v2
-              with:
-                node-version: '23'
-            - run: npm ci
-            # - run: npm test
-            - run: npm run build
+  frontend:
+    needs: changes
+    if: needs.changes.outputs.frontend == 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: client
+    steps:
+      - uses: actions/checkout@v4
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: client/package-lock.json
 
-            
-       
-          
+      - name: Install deps (frontend)
+        run: npm ci
+
+      - name: Build (frontend)
+        run: npm run build
+
+      - name: Upload frontend dist
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-dist
+          path: client/dist
+
+  backend:
+    needs: changes
+    if: needs.changes.outputs.backend == 'true'
+    runs-on: ubuntu-latest
+    # set the correct dir name: 'backend' or 'server'
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install deps (backend)
+        run: npm ci
+
+      # Optional: provide minimal env for build-only steps
+      - name: Build / typecheck (backend)
+        run: |
+          if [ -f package.json ] && jq -re '.scripts.build?' package.json > /dev/null; then
+            npm run build
+          else
+            echo "No backend build script; skipping."
+          fi
+
+  deploy:
+    needs: [frontend, backend, changes]
+    if: always() && (needs.changes.result == 'success') && (needs.frontend.result == 'success' || needs.backend.result == 'success')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Vercel deploy (frontend) 🔔
+        if: ${{ needs.changes.outputs.frontend == 'true' && secrets.VERCEL_DEPLOY_HOOK }}
+        run: curl -X POST "$VERCEL_DEPLOY_HOOK"
+        env:
+          VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+
+      - name: Trigger Render deploy (backend) 🔔
+        if: ${{ needs.changes.outputs.backend == 'true' && secrets.RENDER_DEPLOY_HOOK }}
+        run: curl -X POST "$RENDER_DEPLOY_HOOK"
+        env:
+          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
