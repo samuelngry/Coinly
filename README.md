@@ -47,7 +47,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src="client/src/assets/feat1.png" alt="Quest Screenshot" width="500">
+<p align='center'>
+  <img src="client/src/assets/feat1.png" alt="Quest Screenshot" width="400" >
+</p>
 
 **Live Demo:** [coinlyquest.com](https://coinlyquest.com)
 
@@ -134,10 +136,14 @@ Once the application is running locally:
 ### Screenshots
 
 **Pet Insights**
-<img src="client/src/assets/feat3.png" alt="Pet Insights Screenshot" width="500">
+<p align='center'>
+  <img src="client/src/assets/feat3.png" alt="Pet Insights Screenshot" width="400">
+</p>
 
 **Leaderboard**
-<img src="client/src/assets/feat2.png" alt="Leaderboard Screenshot" width="500">
+<p align='center'>
+  <img src="client/src/assets/feat2.png" alt="Leaderboard Screenshot" width="400">
+</p>
 
 ---
 
