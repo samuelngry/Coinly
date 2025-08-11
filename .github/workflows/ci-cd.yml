@@ -63,7 +63,6 @@ jobs:
     needs: changes
     if: needs.changes.outputs.backend == 'true'
     runs-on: ubuntu-latest
-    # set the correct dir name: 'backend' or 'server'
     defaults:
       run:
         working-directory: backend
@@ -79,7 +78,6 @@ jobs:
       - name: Install deps (backend)
         run: npm ci
 
-      # Optional: provide minimal env for build-only steps
       - name: Build / typecheck (backend)
         run: |
           if [ -f package.json ] && jq -re '.scripts.build?' package.json > /dev/null; then
