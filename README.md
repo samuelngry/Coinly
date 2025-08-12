@@ -97,6 +97,10 @@ Make sure you have the following installed:
      ```js
      cd ../server && npm install
      ```
+4. Set up the database
+   ```sh
+   createdb coinly
+   ```
 4. Create a '.env' file in the 'server' directory with your configuration
    ```sh
    PORT=5000
