@@ -10,8 +10,8 @@
 <h3 align="center">Coinly</h3>
 
   <p align="center">
-    <strong>Coinly</strong> is a fun and interactive gamified web app that helps you build better money habits — one quest at a time.
-  Turn personal finance into an engaging adventure with <strong>daily, bonus, and custom quests</strong>, streaks, XP, leaderboards, and a pet companion that grows as you progress.
+    <strong>Coinly</strong> transforms personal finance into a fun, interactive adventure that helps you build better finance habits — one quest at a time.
+  Complete <strong>daily, bonus, and custom quests</strong> to earn XP, clim leaderboards, maintain streaks, and watch your intelligent pet companion grow while offering insights along your financial journey.
   </p>
 </div>
 
