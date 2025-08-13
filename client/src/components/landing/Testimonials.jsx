@@ -14,12 +14,12 @@ const Testimonials = () => {
             <TestimonialCard 
                 icon={personImage1}
                 name="Jean Ng"
-                description="I never thought saving money could feel like a game, but Coinly totally changed that. I check in daily just to feed my coin pet and somehow I've saved over $200 without even trying!"
+                description="I used Coinly for a month and the daily quests nudged me to cut small impulse buys. The streaks keep me honest, and the Pet Insights made it obvious where my money leaks were."
             />
             <TestimonialCard 
                 icon={personImage2}
                 name="Gwyn Heidi"
-                description="Saving used to feel like a chore, but now it's the most fun part of my day. The quests are weirdly satisfying and my coin pet? Adorable. 10/10 would recommend to anyone!"
+                description="Saving used to feel like a chore, but now it's the most fun part of my day. The quests are weirdly satisfying and my pet? Adorable!"
             />
             <TestimonialCard 
                 icon={personImage3}

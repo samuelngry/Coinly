@@ -26,7 +26,7 @@ const features = [
 const FeatureSection = () => {
   return (
     <div className="max-w-6xl mx-auto px-6 mt-35">
-      <h1 className="text-3xl lg:text-4xl tracking-wide font-bold text-center mb-20">
+      <h1 className="text-xl sm:text-2xl lg:text-4xl tracking-wide font-bold text-center mb-20">
         How Coinly Works
       </h1>
 
